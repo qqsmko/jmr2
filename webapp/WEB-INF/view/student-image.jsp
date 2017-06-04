@@ -31,7 +31,7 @@
 <article class="page-container">
 	<form class="form form-horizontal" id="form-article-add">
 		<div class="row cl">
-			<label class="form-label col-xs-12 col-sm-6"><span class="c-red"><h3>请在对准摄像头（图片上传有问题，未实现，请直接下一步）</h3></span></label>
+			<label class="form-label col-xs-12 col-sm-6"><span class="c-red"><h3>请在对准摄像头</h3></span></label>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-12 col-sm-6"><button onClick="getMockData();" type="button">模拟照相</button></span></label>
@@ -43,7 +43,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>相片：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<div>空</div><img src="">
+				<div id="imgtxt">空</div><img src="">
 			</div>
 		</div>
 		<div class="row cl">
@@ -133,9 +133,8 @@ $(function(){
 });
 
 function getMockData(){
-	//$("#form-article-add").cardnum.value = '203203199303030303';
-	document.getElementById("cardnum").value='203203199303030303';
-	document.getElementById("studentname").value='小明';
+	alert("clicked!");
+	document.getElementById("imgtxt").value=' '
 }
 
 function article_save_submit(){

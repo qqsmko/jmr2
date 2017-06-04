@@ -29,8 +29,8 @@
 					<li><a data-href="attendance-list.html" data-title="考勤管理" href="javascript:void(0)">考勤管理</a></li>
 					<li><a data-href="completion-set.html" data-title="结业管理" href="javascript:void(0)">结业管理</a></li>
 					<li><a data-href="ledger-list.html" data-title="台账管理" href="javascript:void(0)">台账管理</a></li>
-					<li><a data-href="ledger-application.html" data-title="台账申请" href="javascript:void(0)">台账申请</a></li>
-					<li><a data-href="blank.html" data-title="开发中" href="javascript:void(0)">(*)Ukey签字</a></li>
+					<!-- <li><a data-href="ledger-application.html" data-title="台账申请" href="javascript:void(0)">台账申请</a></li> -->
+					<li><a data-href="ukey-check.html" data-title="Ukey签字" href="javascript:void(0)">Ukey签字</a></li>
 			</ul>
 		</dd>
 	</dl>
@@ -44,14 +44,14 @@
 					<!-- <li><a data-href="blank.html" data-title="开发中" href="javascript:void(0)">培训机构信息管理</a></li> -->
 					<li><a data-href="attendance-list.html" data-title="考勤检查" href="javascript:void(0)">考勤检查</a></li>
 					<li><a data-href="completion-check.html?checkstate=1" data-title="培训抽查" href="javascript:void(0)">开班检查</a></li>
-					<li><a data-href="completion-check.html?checkstate=2" data-title="培训抽查" href="javascript:void(0)">过程检查</a></li>
+					<li><a data-href="completion-check.html?checkstate=2" data-title="过程检查" href="javascript:void(0)">过程检查</a></li>
 					<li><a data-href="completion-check.html?checkstate=3" data-title="结业检查" href="javascript:void(0)">结业检查</a></li>
 					<li><a data-href="ledger-list.html" data-title="台账审核" href="javascript:void(0)">台账审核</a></li>
-					<li><a data-href="blank.html" data-title="开发中" href="javascript:void(0)">(*)Ukey签字</a></li>
-					<li><a data-href="blank.html" data-title="开发中" href="javascript:void(0)">(*)Ukey管理</a></li>
+					<li><a data-href="ukey-check-plus.html" data-title="Ukey签字" href="javascript:void(0)">Ukey签字</a></li>
+					<li><a data-href="ukey-list.html" data-title="Ukey管理" href="javascript:void(0)">Ukey管理</a></li>
 					<li><a data-href="blank.html" data-title="开发中" href="javascript:void(0)">(*)培训电子地图</a></li>
-					<li><a data-href="blank.html" data-title="开发中" href="javascript:void(0)">(*)视频网点管理</a></li>
-					<li><a data-href="blank.html" data-title="开发中" href="javascript:void(0)">(*)视频查看</a></li>
+					<li><a data-href="video-branch-list.html" data-title="视频网点管理" href="javascript:void(0)">视频网点管理</a></li>
+					<li><a data-href="video-list.html" data-title="视频查看" href="javascript:void(0)">视频查看</a></li>
 			</ul>
 		</dd>
 	</dl>

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix='fmt' %>  
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -22,119 +25,35 @@
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>Ukey管理</title>
+<title>视频查看</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 培训检查 <span class="c-gray en">&gt;</span> 检查结果 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 视频管理 <span class="c-gray en">&gt;</span> 视频网点管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"><span class="l">学生信息对照</span> <!-- <span class="r">共有数据：<strong>88</strong> 条</span> --> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加用户" data-href="student-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新建网点</a></span></span> <!-- <span class="r">共有数据：<strong>88</strong> 条</span> --> </div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
+				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="80">ID</th>
-				<th width="100">学生姓名</th>
-				<th width="100">数据库照片</th>
-				<th width="100">现场检查照片</th>
-				<th width="20">学生信息验证</th>
-				<th width="20">机构负责人</th>
+				<th width="100">视频网点名称</th>
+				<th width="100">网点所在区域</th>
+				<th width="40">网点所属机构</th>
+				<th width="100">操作</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr class="text-c">
-				<td>1</td>
-				<td>小王</td>
-				<td><img src="img/personimg.jpg"  alt="pimg" height="100" width="80"/></td>
-				<td><img src="img/personimg.jpg"  alt="pimg" height="100" width="80"/></td>
-				<td><span class="label label-success radius">已验证</span></td>
-				<td>王老师</td>
+				<td><input type="checkbox" value="1" name="items"></td>
+				<td width="80">1</td>
+				<td width="100">荆门学校检查点</td>
+				<td width="100">荆门市</td>
+				<td width="40">荆门学校</td>
+				<td width="100"><a title="编辑" href="javascript:;" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a><a title="删除" href="javascript:;" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 			</tr>
 		</tbody>
 	</table>
-	</div>
-	</br>
-	</br>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"><span class="l">机构负责人信息</span> <!-- <span class="r">共有数据：<strong>88</strong> 条</span> --> </div>
-	<div class="mt-20">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">负责人姓名：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="王老师" placeholder="" id="fingernum" name="fingernum" readonly="true">
-			</div>
-		</div>
-	</div>
-	<div class="mt-20">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">手机号：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="13800000000" placeholder="" id="fingernum" name="fingernum" readonly="true">
-			</div>
-		</div>
-	</div>
-	<div class="mt-20">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">配合检查时间：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="2017-5-22 14:00:25" placeholder="" id="fingernum" name="fingernum" readonly="true">
-			</div>
-		</div>
-	</div>
-	<div class="mt-20">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">审核信息：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<textarea name="abstract" cols="" rows="" class="textarea" readonly="true" dragonfly="true">本人确认检查过程中的信息没有虚假、遗漏、和伪造。</textarea>
-			</div>
-		</div>
-	</div>
-	<div class="mt-20">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">Ukey签名：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-			<img src="img/timg.jpg"  alt="timg" height="100" width="150"/>
-			</div>
-		</div>
-	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"><span class="l">人社科负责人信息</span> <!-- <span class="r">共有数据：<strong>88</strong> 条</span> --> </div>
-	<div class="mt-20">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">负责人姓名：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="刘干事" placeholder="" id="fingernum" name="fingernum" readonly="true">
-			</div>
-		</div>
-	</div>
-	<div class="mt-20">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">手机号：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="13800000000" placeholder="" id="fingernum" name="fingernum" readonly="true">
-			</div>
-		</div>
-	</div>
-	<div class="mt-20">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">审核确认时间：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="2017-5-22 18:00:25" placeholder="" id="fingernum" name="fingernum" readonly="true">
-			</div>
-		</div>
-	</div>
-	<div class="mt-20">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">审核信息：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<textarea name="abstract" cols="" rows="" class="textarea" readonly="true" dragonfly="true">已监督此次编辑检查，审核通过</textarea>
-			</div>
-		</div>
-	</div>
-	<div class="mt-20">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">Ukey签名：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-			<img src="img/timg.jpg"  alt="timg" height="100" width="150"/>
-			</div>
-		</div>
 	</div>
 </div>
 <!--_footer 作为公共模版分离出去-->

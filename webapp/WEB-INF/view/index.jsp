@@ -12,7 +12,7 @@
 
 	<jsp:include page="nav_.jsp">
 		<jsp:param name="nav_name" value="荆州人社局公共就业信息化系统" />
-		<jsp:param name="nav_version" value="V0.8" />
+		<jsp:param name="nav_version" value="V0.9" />
 	</jsp:include>
 
 	<jsp:include page="left_.jsp" />

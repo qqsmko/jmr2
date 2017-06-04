@@ -59,5 +59,6 @@
 <mvc:annotation-driven />
 <mvc:resources mapping="/lib/**" location="/web-resources/lib/" />
 <mvc:resources mapping="/static/**" location="/web-resources/static/" />
+<mvc:resources mapping="/img/**" location="/web-resources/img/" />
 
 </beans>

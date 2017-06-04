@@ -100,7 +100,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">负责人姓名：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="刘干事" placeholder="" id="fingernum" name="fingernum" readonly="true">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="fingernum" name="fingernum">
 			</div>
 		</div>
 	</div>
@@ -108,15 +108,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">手机号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="13800000000" placeholder="" id="fingernum" name="fingernum" readonly="true">
-			</div>
-		</div>
-	</div>
-	<div class="mt-20">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">审核确认时间：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="2017-5-22 18:00:25" placeholder="" id="fingernum" name="fingernum" readonly="true">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="fingernum" name="fingernum">
 			</div>
 		</div>
 	</div>
@@ -124,7 +116,8 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">审核信息：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<textarea name="abstract" cols="" rows="" class="textarea" readonly="true" dragonfly="true">已监督此次编辑检查，审核通过</textarea>
+				<textarea name="abstract" cols="" rows="" class="textarea"  placeholder="已监督此次编辑检查，审核通过。" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)"></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
 			</div>
 		</div>
 	</div>
@@ -135,6 +128,9 @@
 			<img src="img/timg.jpg"  alt="timg" height="100" width="150"/>
 			</div>
 		</div>
+	</div>
+	<div class="mt-20">
+	<button onClick="article_save_submit();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 提交</button>
 	</div>
 </div>
 <!--_footer 作为公共模版分离出去-->
