@@ -8,8 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jmr.IDao.ClassMapper;
-import com.jmr.model.Class;
+import com.jmr.dao.ClassMapper;
 import com.jmr.model.Class;
 import com.jmr.service.IClassService;
 

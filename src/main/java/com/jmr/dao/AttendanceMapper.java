@@ -1,4 +1,4 @@
-package com.jmr.IDao;
+package com.jmr.dao;
 
 import java.util.List;
 

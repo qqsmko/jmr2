@@ -1,4 +1,4 @@
-package com.jmr.IDao;
+package com.jmr.dao;
 
 import com.jmr.model.Region;
 import java.util.List;

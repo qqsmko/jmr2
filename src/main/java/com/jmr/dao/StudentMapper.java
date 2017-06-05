@@ -1,4 +1,4 @@
-package com.jmr.IDao;
+package com.jmr.dao;
 
 import com.jmr.model.Student;
 import java.util.List;

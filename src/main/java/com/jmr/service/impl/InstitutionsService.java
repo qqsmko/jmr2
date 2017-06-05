@@ -3,12 +3,11 @@ package com.jmr.service.impl;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jmr.IDao.InstitutionsMapper;
+import com.jmr.dao.InstitutionsMapper;
 import com.jmr.model.Institutions;
 import com.jmr.service.IInstitutionsService;
 

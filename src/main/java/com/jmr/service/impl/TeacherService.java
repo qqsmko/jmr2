@@ -1,8 +1,5 @@
 package com.jmr.service.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jmr.IDao.TeacherMapper;
+import com.jmr.dao.TeacherMapper;
 import com.jmr.model.Teacher;
 import com.jmr.service.ITeacherService;
 

@@ -8,7 +8,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jmr.IDao.StudentMapper;
+import com.jmr.dao.StudentMapper;
 import com.jmr.service.IStudentService;
 import com.jmr.model.Student;
 
