@@ -37,11 +37,19 @@ public class AccountAuthorityCache extends ForwardingCache<String, AccountAuthor
     @Autowired
     private TblRoleAuthorityDao roleAuthorityDao;
 
-    private SingleCache singleCache = new SingleCache();
+    private Cache<String, AccountAuthority> singleCache;
+
+    public AccountAuthorityCache() {
+        singleCache = new SingleCache().get();
+    }
+
+    public AccountAuthorityCache(Cache<String, AccountAuthority> singleCache) {
+        this.singleCache = singleCache;
+    }
 
     @Override
     protected Cache<String, AccountAuthority> delegate() {
-        return singleCache.get();
+        return singleCache;
     }
 
     /**
@@ -50,9 +58,10 @@ public class AccountAuthorityCache extends ForwardingCache<String, AccountAuthor
      * @param userName
      * @return
      */
-    private AccountAuthority doLoad(String userName){
+    private AccountAuthority loadFromDatabase(String userName){
         TblAccount account = accountDao.selectByUserName(userName);
-        if (account == null){
+        if (account == null || !account.isEnable()){
+            // TODO add log
             return null;
         }
 
@@ -62,6 +71,10 @@ public class AccountAuthorityCache extends ForwardingCache<String, AccountAuthor
         }
 
         TblRole role = roleDao.selectByRoleId(userRoleList.get(0).getRoleId());
+        if (role == null || !role.isEnable()){
+            // TODO add log
+            return null;
+        }
 
         List<TblRoleAuthority> roleAuthorities = roleAuthorityDao.selectByRoleId(role.getRoleId());
         if (CollectionUtils.isEmpty(roleAuthorities)){
@@ -85,7 +98,7 @@ public class AccountAuthorityCache extends ForwardingCache<String, AccountAuthor
                 .build(new CacheLoader<String, AccountAuthority>() {
                     @Override
                     public AccountAuthority load(String s) throws Exception {
-                        return doLoad(s);
+                        return loadFromDatabase(s);
                     }
                 });
 
