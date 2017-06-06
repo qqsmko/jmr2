@@ -39,7 +39,7 @@ public class Account {
     /**
      * 账号是否可使用
      */
-    private boolean isUsed;
+    private boolean isEnable;
     /**
      * 账号是否已锁定
      */
@@ -113,12 +113,12 @@ public class Account {
         this.loginIp = loginIp;
     }
 
-    public boolean isUsed() {
-        return isUsed;
+    public boolean isEnable() {
+        return isEnable;
     }
 
-    public void setUsed(boolean used) {
-        isUsed = used;
+    public void setEnable(boolean enable) {
+        isEnable = enable;
     }
 
     public boolean isIdLocked() {

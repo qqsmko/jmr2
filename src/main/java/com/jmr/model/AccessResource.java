@@ -39,7 +39,7 @@ public class AccessResource {
     /**
      * 资源是否可用
      */
-    private boolean isUsed;
+    private boolean isEnable;
     /**
      * 创建时间
      */
@@ -106,12 +106,12 @@ public class AccessResource {
         this.priority = priority;
     }
 
-    public boolean isUsed() {
-        return isUsed;
+    public boolean isEnable() {
+        return isEnable;
     }
 
-    public void setUsed(boolean used) {
-        isUsed = used;
+    public void setEnable(boolean enable) {
+        isEnable = enable;
     }
 
     public Date getCreateTime() {

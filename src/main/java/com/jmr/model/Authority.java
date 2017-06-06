@@ -31,7 +31,7 @@ public class Authority {
     /**
      * 是否可使用
      */
-    private boolean isUsed;
+    private boolean isEnable;
     /**
      * 创建时间
      */
@@ -81,12 +81,12 @@ public class Authority {
         this.promptMessage = promptMessage;
     }
 
-    public boolean isUsed() {
-        return isUsed;
+    public boolean isEnable() {
+        return isEnable;
     }
 
-    public void setUsed(boolean used) {
-        isUsed = used;
+    public void setEnable(boolean enable) {
+        isEnable = enable;
     }
 
     public Date getCreateTime() {
