@@ -7,7 +7,7 @@ import java.util.Date;
  *
  * Created by youtao.wan on 2017/6/5.
  */
-public class Authority {
+public class TblAuthority {
     /**
      * 主键Id
      */
@@ -17,7 +17,8 @@ public class Authority {
      */
     private String authorityId;
     /**
-     * 权限名称
+     * 权限名称(AUTH_*)
+     * 约定以AUTH_起始
      */
     private String authorityName;
     /**
@@ -31,7 +32,7 @@ public class Authority {
     /**
      * 是否可使用
      */
-    private boolean isEnable;
+    private boolean enable;
     /**
      * 创建时间
      */
@@ -82,11 +83,11 @@ public class Authority {
     }
 
     public boolean isEnable() {
-        return isEnable;
+        return enable;
     }
 
     public void setEnable(boolean enable) {
-        isEnable = enable;
+        this.enable = enable;
     }
 
     public Date getCreateTime() {

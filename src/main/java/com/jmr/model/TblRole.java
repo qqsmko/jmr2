@@ -7,7 +7,7 @@ import java.util.Date;
  *
  * Created by youtao.wan on 2017/6/5.
  */
-public class Role {
+public class TblRole {
     /**
      * 主键Id
      */
@@ -26,9 +26,14 @@ public class Role {
      */
     private String roleDesc;
     /**
+     * 角色优先级
+     * 值越大优先级越低
+     */
+    private Integer priority;
+    /**
      * 角色是否可用
      */
-    private boolean isUsed;
+    private boolean enable;
     /**
      * 角色创建时间
      */
@@ -70,12 +75,12 @@ public class Role {
         this.roleDesc = roleDesc;
     }
 
-    public boolean isUsed() {
-        return isUsed;
+    public boolean isEnable() {
+        return enable;
     }
 
-    public void setUsed(boolean used) {
-        isUsed = used;
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 
     public Date getCreateTime() {
@@ -92,5 +97,13 @@ public class Role {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
     }
 }

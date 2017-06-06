@@ -5,7 +5,7 @@ package com.jmr.model;
  *
  * Created by youtao.wan on 2017/6/5.
  */
-public class UserRole {
+public class TblUserRole {
     private Long id;
 
     private String userId;

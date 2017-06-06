@@ -7,7 +7,7 @@ import java.util.Date;
  *
  * Created by youtao.wan on 2017/6/5.
  */
-public class AccessResource {
+public class TblAccessResource {
     /**
      * 主键Id
      */
@@ -33,13 +33,9 @@ public class AccessResource {
      */
     private String resourcePath;
     /**
-     * 优先级
-     */
-    private Integer priority;
-    /**
      * 资源是否可用
      */
-    private boolean isEnable;
+    private boolean enable;
     /**
      * 创建时间
      */
@@ -98,20 +94,12 @@ public class AccessResource {
         this.resourcePath = resourcePath;
     }
 
-    public Integer getPriority() {
-        return priority;
-    }
-
-    public void setPriority(Integer priority) {
-        this.priority = priority;
-    }
-
     public boolean isEnable() {
-        return isEnable;
+        return enable;
     }
 
     public void setEnable(boolean enable) {
-        isEnable = enable;
+        this.enable = enable;
     }
 
     public Date getCreateTime() {

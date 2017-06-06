@@ -7,7 +7,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring/training-manager.xml</param-value>
+        <param-value>classpath:spring/application.xml</param-value>
     </context-param>
 
     <!-- 编码过滤器 -->

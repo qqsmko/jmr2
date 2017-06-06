@@ -1,17 +1,18 @@
 package com.jmr.model;
 
 /**
- * 权限管理-角色权限关联实体
+ * 权限控制-权限资源关联实体
  *
  * Created by youtao.wan on 2017/6/5.
  */
-public class RoleAuthority {
+public class TblAuthorityResource {
 
     private Long id;
 
-    private String roleId;
-
     private String authorityId;
+
+    private String resourceId;
+
 
     public Long getId() {
         return id;
@@ -21,19 +22,19 @@ public class RoleAuthority {
         this.id = id;
     }
 
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
-    }
-
     public String getAuthorityId() {
         return authorityId;
     }
 
     public void setAuthorityId(String authorityId) {
         this.authorityId = authorityId;
+    }
+
+    public String getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(String resourceId) {
+        this.resourceId = resourceId;
     }
 }

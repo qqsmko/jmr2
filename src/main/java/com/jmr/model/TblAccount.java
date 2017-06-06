@@ -7,7 +7,7 @@ import java.util.Date;
  *
  * Created by youtao.wan on 2017/6/5.
  */
-public class Account {
+public class TblAccount {
     /**
      * 主键Id
      */
@@ -39,7 +39,7 @@ public class Account {
     /**
      * 账号是否可使用
      */
-    private boolean isEnable;
+    private boolean enable;
     /**
      * 账号是否已锁定
      */
@@ -114,11 +114,11 @@ public class Account {
     }
 
     public boolean isEnable() {
-        return isEnable;
+        return enable;
     }
 
     public void setEnable(boolean enable) {
-        isEnable = enable;
+        this.enable = enable;
     }
 
     public boolean isIdLocked() {
