@@ -43,7 +43,7 @@ public class TblAccount {
     /**
      * 账号是否已锁定
      */
-    private boolean idLocked;
+    private boolean isLocked;
     /**
      * 账号是否已过期
      */
@@ -121,12 +121,12 @@ public class TblAccount {
         this.enable = enable;
     }
 
-    public boolean isIdLocked() {
-        return idLocked;
+    public boolean isLocked() {
+        return isLocked;
     }
 
-    public void setIdLocked(boolean idLocked) {
-        this.idLocked = idLocked;
+    public void setLocked(boolean locked) {
+        this.isLocked = locked;
     }
 
     public boolean isExpired() {
