@@ -1,9 +1,7 @@
 package com.jmr.security;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Sets;
 import com.jmr.dao.TblAccessResourceDao;
 import com.jmr.dao.TblAuthorityDao;
 import com.jmr.dao.TblAuthorityResourceDao;
