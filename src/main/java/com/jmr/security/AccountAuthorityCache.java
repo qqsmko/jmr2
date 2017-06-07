@@ -6,7 +6,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.jmr.dao.*;
 import com.jmr.model.*;
-import com.jmr.util.AccountAuthority;
+import com.jmr.util.AccountAuthorities;
+import com.jmr.util.RoleAuthorities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * Created by youtao.wan on 2017/6/6.
  */
 @Component
-public class AccountAuthorityCache extends ForwardingCache<String, AccountAuthority>{
+public class AccountAuthorityCache extends ForwardingCache<String, AccountAuthorities>{
 
     @Autowired
     private TblAccountDao accountDao;
@@ -37,28 +38,28 @@ public class AccountAuthorityCache extends ForwardingCache<String, AccountAuthor
     @Autowired
     private TblRoleAuthorityDao roleAuthorityDao;
 
-    private Cache<String, AccountAuthority> singleCache;
+    private Cache<String, AccountAuthorities> singleCache;
 
     public AccountAuthorityCache() {
         singleCache = new SingleCache().get();
     }
 
-    public AccountAuthorityCache(Cache<String, AccountAuthority> singleCache) {
+    public AccountAuthorityCache(Cache<String, AccountAuthorities> singleCache) {
         this.singleCache = singleCache;
     }
 
     @Override
-    protected Cache<String, AccountAuthority> delegate() {
+    protected Cache<String, AccountAuthorities> delegate() {
         return singleCache;
     }
 
     /**
-     * 从db中加载用户的账户、角色、权限信息
+     * 从db中加载用户的权限信息
      *
      * @param userName
      * @return
      */
-    private AccountAuthority loadFromDatabase(String userName){
+    private AccountAuthorities loadAccountAuthorities(String userName){
         TblAccount account = accountDao.selectByUserName(userName);
         if (account == null || !account.isEnable()){
             // TODO add log
@@ -70,40 +71,57 @@ public class AccountAuthorityCache extends ForwardingCache<String, AccountAuthor
             return null;
         }
 
-        TblRole role = roleDao.selectByRoleId(userRoleList.get(0).getRoleId());
+        List<RoleAuthorities> roleAuthoritiesList = Lists.newArrayListWithExpectedSize(userRoleList.size());
+        for (TblUserRole it: userRoleList){
+            RoleAuthorities roleAuthorities = loadRoleAuthorities(it.getRoleId());
+            if (roleAuthorities != null){
+                roleAuthoritiesList.add(roleAuthorities);
+            }
+        }
+
+        return new AccountAuthorities(account, roleAuthoritiesList);
+    }
+
+    /**
+     * 从db中加载角色的权限信息
+     *
+     * @param roleId
+     * @return
+     */
+    private RoleAuthorities loadRoleAuthorities(String roleId){
+        TblRole role = roleDao.selectByRoleId(roleId);
         if (role == null || !role.isEnable()){
-            // TODO add log
             return null;
         }
 
-        List<TblRoleAuthority> roleAuthorities = roleAuthorityDao.selectByRoleId(role.getRoleId());
-        if (CollectionUtils.isEmpty(roleAuthorities)){
-            return new AccountAuthority(account, role, ImmutableList.<TblAuthority>of());
+        List<TblRoleAuthority> roleAuthorityList = roleAuthorityDao.selectByRoleId(roleId);
+        if (CollectionUtils.isEmpty(roleAuthorityList)){
+            return new RoleAuthorities(role, ImmutableList.<TblAuthority>of());
         }
 
-        List<TblAuthority> authorities = Lists.newArrayListWithExpectedSize(roleAuthorities.size());
-        for (TblRoleAuthority it: roleAuthorities){
+        List<TblAuthority> authorityList = Lists.newArrayListWithExpectedSize(roleAuthorityList.size());
+        for (TblRoleAuthority it: roleAuthorityList){
             TblAuthority authority = authorityDao.selectByAuthorityId(it.getAuthorityId());
-            if (authority != null){
-                authorities.add(authority);
+            if (authority != null && authority.isEnable()){
+                authorityList.add(authority);
             }
         }
-        return new AccountAuthority(account, role, authorities);
+        return new RoleAuthorities(role, authorityList);
     }
 
-    class SingleCache implements Supplier<Cache<String, AccountAuthority>>{
+    class SingleCache implements Supplier<Cache<String, AccountAuthorities>>{
 
-        private LoadingCache<String, AccountAuthority> cache = CacheBuilder.newBuilder()
+        private LoadingCache<String, AccountAuthorities> cache = CacheBuilder.newBuilder()
                 .maximumSize(100).expireAfterAccess(30, TimeUnit.MINUTES)
-                .build(new CacheLoader<String, AccountAuthority>() {
+                .build(new CacheLoader<String, AccountAuthorities>() {
                     @Override
-                    public AccountAuthority load(String s) throws Exception {
-                        return loadFromDatabase(s);
+                    public AccountAuthorities load(String s) throws Exception {
+                        return loadAccountAuthorities(s);
                     }
                 });
 
         @Override
-        public Cache<String, AccountAuthority> get() {
+        public Cache<String, AccountAuthorities> get() {
             return cache;
         }
     }

@@ -2,10 +2,12 @@ package com.jmr.security;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.jmr.model.TblAccount;
 import com.jmr.model.TblAuthority;
-import com.jmr.util.AccountAuthority;
+import com.jmr.util.AccountAuthorities;
+import com.jmr.util.RoleAuthorities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -33,18 +36,14 @@ public class AccountSecuritySevice implements UserDetailsService{
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Preconditions.checkArgument(Strings.isNullOrEmpty(userName), "登录账号名为空");
 
-        AccountAuthority accountAuthority = cache.getIfPresent(userName);
-        if (accountAuthority == null){
+        AccountAuthorities accountAuthorities = cache.getIfPresent(userName);
+        if (accountAuthorities == null){
             throw new UsernameNotFoundException(userName + "不存在");
         }
 
-        List<TblAuthority> tblAuthorityList = accountAuthority.getAuthorities();
-        List<GrantedAuthority> authorities = Lists.newArrayListWithExpectedSize(tblAuthorityList.size());
-        for (TblAuthority it: tblAuthorityList){
-            authorities.add(new SimpleGrantedAuthority(it.getAuthorityName()));
-        }
+        List<GrantedAuthority> authorities = loadAuthorities(accountAuthorities);
 
-        TblAccount account = accountAuthority.getAccount();
+        TblAccount account = accountAuthorities.getAccount();
 
         // 是否过期
         boolean isExpired = account.isExpired() || new Date().compareTo(account.getDeadLine()) == -1;
@@ -57,5 +56,25 @@ public class AccountSecuritySevice implements UserDetailsService{
                 account.isLocked(),
                 authorities);
         return userDetails;
+    }
+
+    private List<GrantedAuthority> loadAuthorities(AccountAuthorities accountAuthorities){
+        List<RoleAuthorities> roleAuthoritiesList = accountAuthorities.getRoleAuthorities();
+        if (CollectionUtils.isEmpty(roleAuthoritiesList)){
+            return ImmutableList.of();
+        }
+
+        List<GrantedAuthority> authorityList = Lists.newArrayList();
+        for (RoleAuthorities it: roleAuthoritiesList){
+            if (CollectionUtils.isEmpty(it.getAuthorities())){
+                continue;
+            }
+
+            for (TblAuthority authority : it.getAuthorities()){
+                authorityList.add(new SimpleGrantedAuthority(authority.getAuthorityName()));
+            }
+        }
+
+        return authorityList;
     }
 }
