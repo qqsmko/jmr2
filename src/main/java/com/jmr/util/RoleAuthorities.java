@@ -6,6 +6,8 @@ import com.jmr.model.TblRole;
 import java.util.List;
 
 /**
+ * 角色权限
+ *
  * Created by youtao.wan on 2017/6/7.
  */
 public class RoleAuthorities {

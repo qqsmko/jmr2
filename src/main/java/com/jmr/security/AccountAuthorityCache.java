@@ -8,10 +8,10 @@ import com.jmr.dao.*;
 import com.jmr.model.*;
 import com.jmr.util.AccountAuthorities;
 import com.jmr.util.RoleAuthorities;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -23,19 +23,19 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class AccountAuthorityCache extends ForwardingCache<String, AccountAuthorities>{
 
-    @Autowired
+    @Resource
     private TblAccountDao accountDao;
 
-    @Autowired
+    @Resource
     private TblRoleDao roleDao;
 
-    @Autowired
+    @Resource
     private TblAuthorityDao authorityDao;
 
-    @Autowired
+    @Resource
     private TblUserRoleDao userRoleDao;
 
-    @Autowired
+    @Resource
     private TblRoleAuthorityDao roleAuthorityDao;
 
     private Cache<String, AccountAuthorities> singleCache;

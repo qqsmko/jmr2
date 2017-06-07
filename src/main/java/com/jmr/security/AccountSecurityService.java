@@ -8,28 +8,26 @@ import com.jmr.model.TblAccount;
 import com.jmr.model.TblAuthority;
 import com.jmr.util.AccountAuthorities;
 import com.jmr.util.RoleAuthorities;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
 /**
- * 账号信息的定义与验证
+ * 账号信息和账号权限信息加载
  *
  * Created by youtao.wan on 2017/6/6.
  */
-@Service
-public class AccountSecuritySevice implements UserDetailsService{
+public class AccountSecurityService implements UserDetailsService{
 
-    @Autowired
+    @Resource
     private AccountAuthorityCache cache;
 
     @Override
@@ -46,7 +44,7 @@ public class AccountSecuritySevice implements UserDetailsService{
         TblAccount account = accountAuthorities.getAccount();
 
         // 是否过期
-        boolean isExpired = account.isExpired() || new Date().compareTo(account.getDeadLine()) == -1;
+        boolean isExpired = account.isExpired() || new Date().compareTo(account.getDeadLine()) == 1;
 
         UserDetails userDetails = new User(account.getUserName(),
                 account.getPassword(),
@@ -58,6 +56,12 @@ public class AccountSecuritySevice implements UserDetailsService{
         return userDetails;
     }
 
+    /**
+     * 加载用户的所有权限
+     *
+     * @param accountAuthorities
+     * @return
+     */
     private List<GrantedAuthority> loadAuthorities(AccountAuthorities accountAuthorities){
         List<RoleAuthorities> roleAuthoritiesList = accountAuthorities.getRoleAuthorities();
         if (CollectionUtils.isEmpty(roleAuthoritiesList)){
