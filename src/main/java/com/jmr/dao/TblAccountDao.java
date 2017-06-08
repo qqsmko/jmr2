@@ -3,6 +3,8 @@ package com.jmr.dao;
 import com.jmr.model.TblAccount;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
+
 /**
  * Created by youtao.wan on 2017/6/6.
  */
@@ -15,6 +17,16 @@ public interface TblAccountDao {
      */
     TblAccount selectByUserName(String userName);
 
+
+    /**
+     * 更新账号的登录信息
+     *
+     * @param userName
+     * @param loginIp
+     * @param loginTime
+     * @return
+     */
+    int updateLoginInfo(@Param("userName") String userName, @Param("loginIp") String loginIp, @Param("loginTime") Date loginTime);
     /**
      * 更新账号锁定状态
      *

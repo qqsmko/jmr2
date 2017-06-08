@@ -1,5 +1,6 @@
 package com.jmr.security.listener;
 
+import com.jmr.dao.TblAccountDao;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
@@ -7,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 /**
@@ -18,16 +20,20 @@ import java.util.Date;
 @Component
 public class LoginSuccessEventListener implements ApplicationListener<AuthenticationSuccessEvent>{
 
+    @Resource
+    private TblAccountDao accountDao;
+
     public void onApplicationEvent(AuthenticationSuccessEvent authenticationSuccessEvent){
         // 此处的类型转化需要看源码
         Authentication authentication = authenticationSuccessEvent.getAuthentication();
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken)authentication;
         WebAuthenticationDetails webAuthenticationDetails = (WebAuthenticationDetails)token.getDetails();
-        String loginIp = webAuthenticationDetails.getRemoteAddress();
 
-        Date loginTime = new Date();
+        String loginIp = webAuthenticationDetails.getRemoteAddress();
         String userName = authentication.getName();
+        Date loginTime = new Date();
 
         //TODO 更新账号的登录时间和登录Ip
+        accountDao.updateLoginInfo(userName, loginIp, loginTime);
     }
 }

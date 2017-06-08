@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jmr.dao.TblAccountDao">
-<resultMap id="resultMap" type="com.jmr.model.TblAccount">
+<resultMap id="resultMap" type="TblAccount">
     <id column="id" property="id" jdbcType="INTEGER"/>
     <result column="user_id" property="userId" jdbcType="VARCHAR"/>
     <result column="account" property="account" jdbcType="VARCHAR"/>
@@ -25,24 +25,30 @@
         SELECT
         <include refid="columnList"/>
         FROM tbl_account
-        where user_name = #{userName}
+        where account = #{userName}
     </select>
+
+    <update id="updateLoginInfo">
+        UPDATE tbl_account
+        SET login_ip = #{loginIp}, login_time = #{loginTime}
+        where account = #{userName}
+    </update>
 
     <update id="updateLockedStatus">
         UPDATE tbl_account
         SET is_locked = #{isLocked}
-        WHERE user_name = #{userName}
+        WHERE account = #{userName}
     </update>
 
     <update id="updateEnableStatus">
         UPDATE tbl_account
         SET enable = #{enable}
-        WHERE user_name = #{userName}
+        WHERE account = #{userName}
     </update>
 
     <update id="updateEnableStatus">
         UPDATE tbl_account
         SET is_expired = #{isExpired}
-        WHERE user_name = #{userName}
+        WHERE account = #{userName}
     </update>
 </mapper>

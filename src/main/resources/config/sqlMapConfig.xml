@@ -13,6 +13,7 @@
         <setting name="defaultExecutorType" value="SIMPLE" />
         <setting name="defaultStatementTimeout" value="25000" />
     </settings>
+
     <typeAliases>
         <typeAlias alias="TblAccessResource" type="com.jmr.model.TblAccessResource"/>
         <typeAlias alias="TblAccount" type="com.jmr.model.TblAccount"/>
