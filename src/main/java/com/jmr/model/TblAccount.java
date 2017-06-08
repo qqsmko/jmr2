@@ -13,11 +13,11 @@ public class TblAccount {
      */
     private Long id;
     /**
-     * 用户Id(唯一键)
+     * 用户Id
      */
     private String userId;
     /**
-     * 用户名
+     * 用户名(唯一键)
      */
     private String account;
     /**
