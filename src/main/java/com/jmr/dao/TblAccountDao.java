@@ -13,4 +13,31 @@ public interface TblAccountDao {
      * @return
      */
     TblAccount selectByUserName(String userName);
+
+    /**
+     * 更新账号锁定状态
+     *
+     * @param userName
+     * @param isLocked
+     * @return
+     */
+    int updateLockedStatus(String userName, boolean isLocked);
+
+    /**
+     * 更新账号可用状态
+     *
+     * @param userName
+     * @param enable
+     * @return
+     */
+    int updateEnableStatus(String userName, boolean enable);
+
+    /**
+     * 更新账号过期状态
+     *
+     * @param userName
+     * @param isExpired
+     * @return
+     */
+    int updateExpiredStatus(String userName, boolean isExpired);
 }

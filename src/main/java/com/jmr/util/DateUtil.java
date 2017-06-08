@@ -14,6 +14,22 @@ import java.util.Date;
 public class DateUtil {
     private static Log log = LogFactory.getLog(DateUtil.class);
 
+    public static boolean isBeforeNow(Date date){
+        return isBeforeDate(date, new Date());
+    }
+
+    public static boolean isAfterNow(Date date){
+        return !isBeforeNow(date);
+    }
+
+    public static boolean isBeforeDate(Date d1, Date d2){
+        return d1.compareTo(d2) == -1;
+    }
+
+    public static boolean isAfterDate(Date d1, Date d2){
+        return !isBeforeDate(d1, d2);
+    }
+
     public static Date parse(String source) {
         String pattern = "";
         switch(source.length()) {

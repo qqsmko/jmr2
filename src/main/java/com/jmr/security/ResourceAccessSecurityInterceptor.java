@@ -23,6 +23,7 @@ public class ResourceAccessSecurityInterceptor extends AbstractSecurityIntercept
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         FilterInvocation invocation = new FilterInvocation(servletRequest, servletResponse, filterChain);
 
+        // 资源访问的权限校验
         InterceptorStatusToken token = super.beforeInvocation(invocation);
 
         try {

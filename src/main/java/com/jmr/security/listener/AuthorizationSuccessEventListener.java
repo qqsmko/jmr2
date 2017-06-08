@@ -20,17 +20,27 @@ public class AuthorizationSuccessEventListener implements ApplicationListener<Au
 
     @Override
     public void onApplicationEvent(AuthorizedEvent authorizedEvent) {
+        // 1.解析资源访问路径
         FilterInvocation invocation = (FilterInvocation) authorizedEvent.getSource();
         String url = invocation.getRequestUrl();
-        String userName = authorizedEvent.getAuthentication().getName();
+        int index = url.indexOf("?");
+        if (index != -1) {
+            url = url.substring(0, index);
+        }
+
+        // 2.解析访问资源权限
         String authorityName = "";
         Collection<ConfigAttribute> collection = authorizedEvent.getConfigAttributes();
         if (!CollectionUtils.isEmpty(collection)){
             for (ConfigAttribute it: collection){
                 authorityName = it.getAttribute();
+                break;
             }
         }
 
-        // TODO {userName} 对 {url} 执行了 {authorityName}操作
+        // 3.获取用户名
+        String userName = authorizedEvent.getAuthentication().getName();
+
+        // TODO {userName} 对 {url} 执行了 {authorityName}操作记录
     }
 }

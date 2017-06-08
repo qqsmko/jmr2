@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  * 账号登录成功监听器
- * 修改登录时间
+ * 修改登录时间,登录Ip
  *
  * Created by youtao.wan on 2017/6/8.
  */
