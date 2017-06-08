@@ -27,8 +27,9 @@ public class ResourceAccessSecurityInterceptor extends AbstractSecurityIntercept
 
         try {
             invocation.getChain().doFilter(invocation.getRequest(), invocation.getResponse());
-        }finally {
             super.afterInvocation(token, null);
+        }finally {
+            super.finallyInvocation(token);
         }
     }
 

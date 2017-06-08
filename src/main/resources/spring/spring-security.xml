@@ -48,5 +48,6 @@
         <b:property name="authenticationManager" ref="authenticationManager"/>
         <b:property name="accessDecisionManager" ref="resourceAccessDecisionService"/>
         <b:property name="resourceAuthorityPreloadingService" ref="resourceAuthorityPreloadingService"/>
+        <b:property name="publishAuthorizationSuccess" value="true"/>
     </b:bean>
 </b:beans>
