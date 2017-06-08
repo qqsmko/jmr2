@@ -34,4 +34,5 @@ Thumbs.db
  *.tar
  *.tar.gz
 
-webapp/web-resources/lib
+webapp/web-resources/lib/
+webapp/WEB-INF/classes/
