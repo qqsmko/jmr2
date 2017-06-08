@@ -46,6 +46,6 @@ public class ResourceAccessDecisionService implements AccessDecisionManager{
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return true;
+        return aClass.isAssignableFrom(ConfigAttribute.class);
     }
 }
