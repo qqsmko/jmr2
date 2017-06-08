@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface TblUserRoleDao {
 
-    List<TblUserRole> selectByUserId(String UserId);
+    List<TblUserRole> selectByUserId(String userId);
 }

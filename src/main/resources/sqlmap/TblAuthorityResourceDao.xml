@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="com.jmr.dao.TblAuthorityResourceDao">
+    <resultMap id="resultMap" type="com.jmr.model.TblAuthorityResource">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="authority_id" property="authorityId" jdbcType="VARCHAR"/>
+        <result column="resource_id" property="resourceId" jdbcType="VARCHAR"/>
+    </resultMap>
 
+    <sql id="columnList">
+        id, authority_id, resource_id
+    </sql>
+
+    <select id="selectByResourceId" resultMap="resultMap">
+        SELECT
+        <include refid="columnList"/>
+        WHERE resource_id = #{resourceId}
+    </select>
+
+    <select id="selectByAuthorityId" resultMap="resultMap">
+        SELECT
+        <include refid="columnList"/>
+        WHERE authority_id = #{authorityId}
+    </select>
 </mapper>

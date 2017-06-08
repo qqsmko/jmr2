@@ -50,9 +50,9 @@ public class LoginFailureEventListener implements ApplicationListener<Authentica
                     lockAccount(userName);
                 }
                 cycleStatisticsValue += 1;
-                indicatorStatisticsDao.updateCycleStatisticsValue(ACCOUNT_INDICATOR, userName, cycleStatisticsValue);
+                indicatorStatisticsDao.updateCycleStatisticsValueAndTime(ACCOUNT_INDICATOR, userName, cycleStatisticsValue);
             }else {
-                indicatorStatisticsDao.updateCycleStatisticsValue(ACCOUNT_INDICATOR, userName, 0, new Date());
+                indicatorStatisticsDao.updateCycleStatisticsValueAndTime(ACCOUNT_INDICATOR, userName, 0, new Date());
             }
         }
     }

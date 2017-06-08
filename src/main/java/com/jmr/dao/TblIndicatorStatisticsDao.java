@@ -1,6 +1,8 @@
 package com.jmr.dao;
 
 import com.jmr.model.TblIndicatorStatistics;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.security.access.method.P;
 
 import java.util.Date;
 
@@ -16,8 +18,14 @@ public interface TblIndicatorStatisticsDao {
      * @param indicatorName
      * @return
      */
-    TblIndicatorStatistics selectByTypeAndName(String indicatorType, String indicatorName);
+    TblIndicatorStatistics selectByTypeAndName(@Param("indicatorType") String indicatorType, @Param("indicatorName") String indicatorName);
 
+    /**
+     * 插入指标信息
+     *
+     * @param indicatorStatistics
+     * @return
+     */
     int insert(TblIndicatorStatistics indicatorStatistics);
 
     /**
@@ -28,7 +36,7 @@ public interface TblIndicatorStatisticsDao {
      * @param newStatisticsValue
      * @return
      */
-    int updateCycleStatisticsValue(String indicatorType, String indicatorName, int newStatisticsValue);
+    int updateCycleStatisticsValueAndTime(@Param("indicatorType") String indicatorType, @Param("indicatorName")String indicatorName, @Param("newStatisticsValue")int newStatisticsValue);
 
     /**
      * 更新指标周期统计值
@@ -38,5 +46,5 @@ public interface TblIndicatorStatisticsDao {
      * @param newStatisticsValue
      * @return
      */
-    int updateCycleStatisticsValue(String indicatorType, String indicatorName, int newStatisticsValue, Date updateTime);
+    int updateCycleStatisticsValueAndTime(@Param("indicatorType") String indicatorType, @Param("indicatorName")String indicatorName, @Param("newStatisticsValue")int newStatisticsValue, @Param("updateTime") Date updateTime);
 }

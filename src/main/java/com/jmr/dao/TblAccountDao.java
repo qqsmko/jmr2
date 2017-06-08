@@ -1,6 +1,7 @@
 package com.jmr.dao;
 
 import com.jmr.model.TblAccount;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * Created by youtao.wan on 2017/6/6.
@@ -21,7 +22,7 @@ public interface TblAccountDao {
      * @param isLocked
      * @return
      */
-    int updateLockedStatus(String userName, boolean isLocked);
+    int updateLockedStatus(@Param("userName") String userName, @Param("isLocked") boolean isLocked);
 
     /**
      * 更新账号可用状态
@@ -30,7 +31,7 @@ public interface TblAccountDao {
      * @param enable
      * @return
      */
-    int updateEnableStatus(String userName, boolean enable);
+    int updateEnableStatus(@Param("userName")String userName, @Param("enable")boolean enable);
 
     /**
      * 更新账号过期状态
@@ -39,5 +40,5 @@ public interface TblAccountDao {
      * @param isExpired
      * @return
      */
-    int updateExpiredStatus(String userName, boolean isExpired);
+    int updateExpiredStatus(@Param("userName")String userName, @Param("isExpired")boolean isExpired);
 }

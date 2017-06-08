@@ -19,7 +19,7 @@ public class TblAccount {
     /**
      * 用户名
      */
-    private String userName;
+    private String account;
     /**
      * 密码(加密)
      */
@@ -73,12 +73,12 @@ public class TblAccount {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getPassword() {

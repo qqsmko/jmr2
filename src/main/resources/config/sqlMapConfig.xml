@@ -13,4 +13,14 @@
         <setting name="defaultExecutorType" value="SIMPLE" />
         <setting name="defaultStatementTimeout" value="25000" />
     </settings>
+    <typeAliases>
+        <typeAlias alias="TblAccessResource" type="com.jmr.model.TblAccessResource"/>
+        <typeAlias alias="TblAccount" type="com.jmr.model.TblAccount"/>
+        <typeAlias alias="TblAuthority" type="com.jmr.model.TblAuthority"/>
+        <typeAlias alias="TblAuthorityResource" type="com.jmr.model.TblAuthorityResource"/>
+        <typeAlias alias="TblIndicatorStatistics" type="com.jmr.model.TblIndicatorStatistics"/>
+        <typeAlias alias="TblRole" type="com.jmr.model.TblRole"/>
+        <typeAlias alias="TblRoleAuthority" type="com.jmr.model.TblRoleAuthority"/>
+        <typeAlias alias="TblUserRole" type="com.jmr.model.TblUserRole"/>
+    </typeAliases>
 </configuration>

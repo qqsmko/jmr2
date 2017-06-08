@@ -46,7 +46,7 @@ public class AccountSecurityService implements UserDetailsService{
         // 是否过期
         boolean isExpired = account.isExpired() || new Date().compareTo(account.getDeadLine()) == 1;
 
-        UserDetails userDetails = new User(account.getUserName(),
+        UserDetails userDetails = new User(account.getAccount(),
                 account.getPassword(),
                 account.isEnable(),
                 isExpired,
