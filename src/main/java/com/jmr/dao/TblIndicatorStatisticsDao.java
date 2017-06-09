@@ -36,7 +36,7 @@ public interface TblIndicatorStatisticsDao {
      * @param newStatisticsValue
      * @return
      */
-    int updateCycleStatisticsValueAndTime(@Param("indicatorType") String indicatorType, @Param("indicatorName")String indicatorName, @Param("newStatisticsValue")int newStatisticsValue);
+    int updateCycleStatisticsValue(@Param("indicatorType") String indicatorType, @Param("indicatorName")String indicatorName, @Param("newStatisticsValue")int newStatisticsValue);
 
     /**
      * 更新指标周期统计值

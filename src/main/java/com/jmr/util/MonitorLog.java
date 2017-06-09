@@ -4,7 +4,8 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 
 /**
- * 监控日志
+ * 1.监控日志
+ * 2.规范日志格式，便于日志分析
  *
  * Created by youtao.wan on 2017/6/9.
  */

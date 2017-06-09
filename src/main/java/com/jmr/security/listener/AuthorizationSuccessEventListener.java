@@ -9,6 +9,8 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Collection;
 
+import static com.jmr.util.MonitorNames.*;
+
 /**
  * 用户访问资源授权成功事件监听器
  * 可在此处添加操作日志

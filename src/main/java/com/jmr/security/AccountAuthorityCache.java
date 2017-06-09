@@ -7,13 +7,18 @@ import com.google.common.collect.Lists;
 import com.jmr.dao.*;
 import com.jmr.model.*;
 import com.jmr.util.AccountAuthorities;
+import com.jmr.util.MonitorLog;
 import com.jmr.util.RoleAuthorities;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static com.jmr.util.MonitorNames.*;
 
 /**
  * 账户权限缓存
@@ -22,6 +27,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class AccountAuthorityCache extends ForwardingCache<String, AccountAuthorities>{
+
+    private static final Logger log = LoggerFactory.getLogger(AccountAuthorityCache.class);
 
     @Resource
     private TblAccountDao accountDao;
@@ -62,7 +69,7 @@ public class AccountAuthorityCache extends ForwardingCache<String, AccountAuthor
     private AccountAuthorities loadAccountAuthorities(String userName){
         TblAccount account = accountDao.selectByUserName(userName);
         if (account == null || !account.isEnable()){
-            // TODO add log
+            MonitorLog.error(log, BUSI_SECURITY, PROCESS_CACHE, NODE_LOADING, EVENT_LOAD_FAIL, String.format("Account【%s】不存在或不可用", userName), userName);
             return null;
         }
 
@@ -91,6 +98,7 @@ public class AccountAuthorityCache extends ForwardingCache<String, AccountAuthor
     private RoleAuthorities loadRoleAuthorities(String roleId){
         TblRole role = roleDao.selectByRoleId(roleId);
         if (role == null || !role.isEnable()){
+            MonitorLog.info(log, BUSI_SECURITY, PROCESS_CACHE, NODE_LOADING, EVENT_LOAD_FAIL, String.format("Role【%s】不存在或不可用", roleId), roleId);
             return null;
         }
 

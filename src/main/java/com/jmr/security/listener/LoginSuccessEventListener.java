@@ -1,6 +1,10 @@
 package com.jmr.security.listener;
 
 import com.jmr.dao.TblAccountDao;
+import com.jmr.util.DateUtil;
+import com.jmr.util.MonitorLog;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
@@ -11,6 +15,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.Date;
 
+import static com.jmr.util.MonitorNames.*;
+
 /**
  * 账号登录成功监听器
  * 修改登录时间,登录Ip
@@ -19,6 +25,8 @@ import java.util.Date;
  */
 @Component
 public class LoginSuccessEventListener implements ApplicationListener<AuthenticationSuccessEvent>{
+
+    private static final Logger log = LoggerFactory.getLogger(LoginSuccessEventListener.class);
 
     @Resource
     private TblAccountDao accountDao;
@@ -33,7 +41,10 @@ public class LoginSuccessEventListener implements ApplicationListener<Authentica
         String userName = authentication.getName();
         Date loginTime = new Date();
 
-        //TODO 更新账号的登录时间和登录Ip
+        //更新登录时间和登录IP
         accountDao.updateLoginInfo(userName, loginIp, loginTime);
+
+        String timeStamp = DateUtil.toString(loginTime, "yyyyMMddHHmmss");
+        MonitorLog.info(log, BUSI_SECURITY, PROCESS_LOGIN, NODE_AUTHENTICATION, EVENT_AUTHENTICATION_SUCCESS, String.format("loginAccount【%s】, loginIp【%s】在%s登录成功，", userName, loginIp,timeStamp), timeStamp);
     }
 }

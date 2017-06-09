@@ -30,7 +30,7 @@ public class LoginFailEventListener implements ApplicationListener<Authenticatio
 
     private static final String ACCOUNT_INDICATOR = "login_fail";
 
-    private static final String ACCOUNT_INDICATOR_CYCLETIME = "1d";
+    private static final String ACCOUNT_INDICATOR_CYCLE_TIME = "1d";
 
     private static final int ACCOUNT_LOGIN_FAIL_LIMIT = 3;
 
@@ -52,19 +52,19 @@ public class LoginFailEventListener implements ApplicationListener<Authenticatio
             initLoginFailIndicator(userName);
 
         }else {
-            String timeStamp = DateUtil.toString(new Date(), "yyyy-mm-dd");
+            String timeStamp = DateUtil.toString(new Date(), "yyyy-MM-dd");
 
             int cycleStatisticsValue = indicatorStatistics.getCycleStatisticsValue();
             if (indicatorStatistics.isCycle()){
                 // 账号在一个周期内连续3次登录失败，直接锁定账号
                 if (cycleStatisticsValue > ACCOUNT_LOGIN_FAIL_LIMIT){
                     lockAccount(userName);
-                    MonitorLog.error(log, SECURITY, LOGIN, AUTHENTICATION, "authenticationFailure", String.format("%s在%s连续三次登录失败，锁定账号", userName, timeStamp), userName);
+                    MonitorLog.error(log, BUSI_SECURITY, PROCESS_LOGIN, NODE_AUTHENTICATION, EVENT_AUTHENTICATION_FAIL, String.format("%s在%s连续三次登录失败，锁定账号", userName, timeStamp), DateUtil.toString(new Date(), "yyyyMMddHHmmss"));
                 }
 
                 cycleStatisticsValue += 1;
-                indicatorStatisticsDao.updateCycleStatisticsValueAndTime(ACCOUNT_INDICATOR, userName, cycleStatisticsValue);
-                MonitorLog.error(log, SECURITY, LOGIN, AUTHENTICATION, "authenticationFailure", String.format("%s在%s第%d次登录失败", userName, timeStamp, cycleStatisticsValue), userName);
+                indicatorStatisticsDao.updateCycleStatisticsValue(ACCOUNT_INDICATOR, userName, cycleStatisticsValue);
+                MonitorLog.error(log, BUSI_SECURITY, PROCESS_LOGIN, NODE_AUTHENTICATION, EVENT_AUTHENTICATION_FAIL, String.format("%s在%s第%d次登录失败", userName, timeStamp, cycleStatisticsValue), DateUtil.toString(new Date(), "yyyyMMddHHmmss"));
             }else {
                 indicatorStatisticsDao.updateCycleStatisticsValueAndTime(ACCOUNT_INDICATOR, userName, 0, new Date());
             }
@@ -92,14 +92,14 @@ public class LoginFailEventListener implements ApplicationListener<Authenticatio
         TblIndicatorStatistics indicatorStatistics = new TblIndicatorStatistics();
         indicatorStatistics.setIndicatorType(ACCOUNT_INDICATOR);
         indicatorStatistics.setIndicatorName(userName);
-        indicatorStatistics.setCycleTime(ACCOUNT_INDICATOR_CYCLETIME);
+        indicatorStatistics.setCycleTime(ACCOUNT_INDICATOR_CYCLE_TIME);
         indicatorStatistics.setCycleStatisticsValue(1);
         indicatorStatistics.setUpdateTime(new Date());
 
         indicatorStatisticsDao.insert(indicatorStatistics);
 
         // 打印日志
-        String timeStamp = DateUtil.toString(new Date(), "yyyy-mm-dd");
-        MonitorLog.error(log, SECURITY, LOGIN, AUTHENTICATION, "authenticationFailure", String.format("%s在%s第1次登录失败", userName, timeStamp), userName);
+        String timeStamp = DateUtil.toString(new Date(), "yyyy-MM-dd");
+        MonitorLog.error(log, BUSI_SECURITY, PROCESS_LOGIN, NODE_AUTHENTICATION, EVENT_AUTHENTICATION_FAIL, String.format("%s在%s第1次登录失败", userName, timeStamp), DateUtil.toString(new Date(), "yyyyMMddHHmmss"));
     }
 }
