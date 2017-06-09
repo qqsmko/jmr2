@@ -3,6 +3,8 @@ package com.jmr.security;
 import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
 import org.springframework.security.access.intercept.InterceptorStatusToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 
@@ -36,7 +38,7 @@ public class ResourceAccessSecurityInterceptor extends AbstractSecurityIntercept
 
     @Override
     public Class<?> getSecureObjectClass() {
-        return FilterInvocation.class;
+        return UsernamePasswordAuthenticationToken.class;
     }
 
     @Override

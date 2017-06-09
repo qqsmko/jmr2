@@ -2,6 +2,7 @@ package com.jmr.security;
 
 import com.google.common.collect.Sets;
 import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.util.AntPathMatcher;
@@ -49,13 +50,12 @@ public class ResourceAuthorityPreloadingService implements FilterInvocationSecur
         Set<String> allResource = cache.getAllResource();
         for (String path : allResource) {
             configAttributes.addAll(cache.getAuthorities(path));
-
         }
         return configAttributes;
     }
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return true;
+        return aClass.isAssignableFrom(Authentication.class);
     }
 }
