@@ -14,12 +14,14 @@
     <select id="selectByResourceId" resultMap="resultMap">
         SELECT
         <include refid="columnList"/>
+        FROM tbl_authority_resource
         WHERE resource_id = #{resourceId}
     </select>
 
     <select id="selectByAuthorityId" resultMap="resultMap">
         SELECT
         <include refid="columnList"/>
+        FROM tbl_authority_resource
         WHERE authority_id = #{authorityId}
     </select>
 </mapper>

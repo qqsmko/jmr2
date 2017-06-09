@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 import com.jmr.model.TblAccount;
 import com.jmr.model.TblAuthority;
 import com.jmr.util.AccountAuthorities;
+import com.jmr.util.DateUtil;
 import com.jmr.util.RoleAuthorities;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -44,7 +45,7 @@ public class AccountSecurityService implements UserDetailsService{
         TblAccount account = accountAuthorities.getAccount();
 
         // 是否过期
-        boolean isExpired = account.isExpired() || new Date().compareTo(account.getDeadLine()) == 1;
+        boolean isExpired = account.isExpired() || DateUtil.isBeforeNow(account.getDeadLine());
 
         UserDetails userDetails = new User(account.getAccount(),
                 account.getPassword(),
