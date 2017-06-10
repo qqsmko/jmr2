@@ -45,6 +45,6 @@ public class LoginSuccessEventListener implements ApplicationListener<Authentica
         accountDao.updateLoginInfo(userName, loginIp, loginTime);
 
         String timeStamp = DateUtil.toString(loginTime, "yyyyMMddHHmmss");
-        MonitorLog.info(log, BUSI_SECURITY, PROCESS_LOGIN, NODE_AUTHENTICATION, EVENT_AUTHENTICATION_SUCCESS, String.format("loginAccount【%s】, loginIp【%s】在%s登录成功，", userName, loginIp,timeStamp), timeStamp);
+        MonitorLog.info(log, BUSI_SECURITY, PROCESS_LOGIN, NODE_AUTHENTICATION, EVENT_AUTHENTICATION_SUCCESS, String.format("loginAccount【%s】, loginIp【%s】在%s登录成功，", userName, loginIp, timeStamp), timeStamp);
     }
 }

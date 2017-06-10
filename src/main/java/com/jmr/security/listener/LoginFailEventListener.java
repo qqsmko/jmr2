@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -34,6 +35,8 @@ public class LoginFailEventListener implements ApplicationListener<Authenticatio
 
     private static final int ACCOUNT_LOGIN_FAIL_LIMIT = 3;
 
+    private static final int ACCOUNT_LOGIN_FAIL_INDICATOR_INIT_VALUE = 1;
+
     @Resource
     private TblIndicatorStatisticsDao indicatorStatisticsDao;
 
@@ -45,28 +48,28 @@ public class LoginFailEventListener implements ApplicationListener<Authenticatio
 
     @Override
     public void onApplicationEvent(AuthenticationFailureBadCredentialsEvent authenticationFailureBadCredentialsEvent) {
+        AuthenticationException exception = authenticationFailureBadCredentialsEvent.getException();
         String userName = authenticationFailureBadCredentialsEvent.getAuthentication().getName();
 
+        String timeStamp = DateUtil.toString(new Date(), "yyyy-MM-dd");
         TblIndicatorStatistics indicatorStatistics = indicatorStatisticsDao.selectByTypeAndName(ACCOUNT_INDICATOR, userName);
         if (indicatorStatistics == null){
             initLoginFailIndicator(userName);
-
+            MonitorLog.error(log, BUSI_SECURITY, PROCESS_LOGIN, NODE_AUTHENTICATION, EVENT_AUTHENTICATION_FAIL, String.format("%s在%s第1次登录失败", userName, timeStamp), DateUtil.toString(new Date(), "yyyyMMddHHmmss"), exception);
         }else {
-            String timeStamp = DateUtil.toString(new Date(), "yyyy-MM-dd");
-
-            int cycleStatisticsValue = indicatorStatistics.getCycleStatisticsValue();
             if (indicatorStatistics.isCycle()){
+                int cycleStatisticsValue = indicatorStatistics.getCycleStatisticsValue();
                 // 账号在一个周期内连续3次登录失败，直接锁定账号
                 if (cycleStatisticsValue > ACCOUNT_LOGIN_FAIL_LIMIT){
                     lockAccount(userName);
-                    MonitorLog.error(log, BUSI_SECURITY, PROCESS_LOGIN, NODE_AUTHENTICATION, EVENT_AUTHENTICATION_FAIL, String.format("%s在%s连续三次登录失败，锁定账号", userName, timeStamp), DateUtil.toString(new Date(), "yyyyMMddHHmmss"));
+                    MonitorLog.error(log, BUSI_SECURITY, PROCESS_LOGIN, NODE_AUTHENTICATION, EVENT_AUTHENTICATION_FAIL, String.format("%s在%s连续三次登录失败，锁定账号", userName, timeStamp), DateUtil.toString(new Date(), "yyyyMMddHHmmss"), exception);
                 }
 
                 cycleStatisticsValue += 1;
                 indicatorStatisticsDao.updateCycleStatisticsValue(ACCOUNT_INDICATOR, userName, cycleStatisticsValue);
-                MonitorLog.error(log, BUSI_SECURITY, PROCESS_LOGIN, NODE_AUTHENTICATION, EVENT_AUTHENTICATION_FAIL, String.format("%s在%s第%d次登录失败", userName, timeStamp, cycleStatisticsValue), DateUtil.toString(new Date(), "yyyyMMddHHmmss"));
+                MonitorLog.error(log, BUSI_SECURITY, PROCESS_LOGIN, NODE_AUTHENTICATION, EVENT_AUTHENTICATION_FAIL, String.format("%s在%s第%d次登录失败", userName, timeStamp, cycleStatisticsValue), DateUtil.toString(new Date(), "yyyyMMddHHmmss"), exception);
             }else {
-                indicatorStatisticsDao.updateCycleStatisticsValueAndTime(ACCOUNT_INDICATOR, userName, 0, new Date());
+                indicatorStatisticsDao.updateCycleStatisticsValueAndTime(ACCOUNT_INDICATOR, userName, ACCOUNT_LOGIN_FAIL_INDICATOR_INIT_VALUE, new Date());
             }
         }
     }
@@ -88,18 +91,14 @@ public class LoginFailEventListener implements ApplicationListener<Authenticatio
      *
      * @param userName
      */
-    private void initLoginFailIndicator(String userName){
+    private void initLoginFailIndicator(String userName) {
         TblIndicatorStatistics indicatorStatistics = new TblIndicatorStatistics();
         indicatorStatistics.setIndicatorType(ACCOUNT_INDICATOR);
         indicatorStatistics.setIndicatorName(userName);
         indicatorStatistics.setCycleTime(ACCOUNT_INDICATOR_CYCLE_TIME);
-        indicatorStatistics.setCycleStatisticsValue(1);
+        indicatorStatistics.setCycleStatisticsValue(ACCOUNT_LOGIN_FAIL_INDICATOR_INIT_VALUE);
         indicatorStatistics.setUpdateTime(new Date());
 
         indicatorStatisticsDao.insert(indicatorStatistics);
-
-        // 打印日志
-        String timeStamp = DateUtil.toString(new Date(), "yyyy-MM-dd");
-        MonitorLog.error(log, BUSI_SECURITY, PROCESS_LOGIN, NODE_AUTHENTICATION, EVENT_AUTHENTICATION_FAIL, String.format("%s在%s第1次登录失败", userName, timeStamp), DateUtil.toString(new Date(), "yyyyMMddHHmmss"));
     }
 }

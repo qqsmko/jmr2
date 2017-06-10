@@ -120,7 +120,7 @@ public class AccountAuthorityCache extends ForwardingCache<String, AccountAuthor
     class SingleCache implements Supplier<Cache<String, AccountAuthorities>>{
 
         private LoadingCache<String, AccountAuthorities> cache = CacheBuilder.newBuilder()
-                .maximumSize(100).expireAfterAccess(30, TimeUnit.MINUTES)
+                .maximumSize(1000).expireAfterAccess(30, TimeUnit.MINUTES)
                 .build(new CacheLoader<String, AccountAuthorities>() {
                     @Override
                     public AccountAuthorities load(String s) throws Exception {
