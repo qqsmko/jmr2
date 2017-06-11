@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jmr.IDao.StudentInfoMapper">
+  <resultMap id="BaseResultMap" type="com.jmr.model.StudentInfo">
+    <id column="student_id" jdbcType="INTEGER" property="studentId" />
+    <id column="card_id" jdbcType="INTEGER" property="cardId" />
+    <id column="fingerprint_id" jdbcType="INTEGER" property="fingerprintId" />
+    <id column="avatar_id" jdbcType="INTEGER" property="avatarId" />
+    <result column="responsible" jdbcType="VARCHAR" property="responsible" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    student_id, card_id, fingerprint_id, avatar_id, responsible, telephone, is_delete, 
+    create_by, create_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.jmr.model.StudentInfoKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_student_info
+    where student_id = #{studentId,jdbcType=INTEGER}
+      and card_id = #{cardId,jdbcType=INTEGER}
+      and fingerprint_id = #{fingerprintId,jdbcType=INTEGER}
+      and avatar_id = #{avatarId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.jmr.model.StudentInfoKey">
+    delete from t_student_info
+    where student_id = #{studentId,jdbcType=INTEGER}
+      and card_id = #{cardId,jdbcType=INTEGER}
+      and fingerprint_id = #{fingerprintId,jdbcType=INTEGER}
+      and avatar_id = #{avatarId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.StudentInfo">
+    insert into t_student_info (student_id, card_id, fingerprint_id, 
+      avatar_id, responsible, telephone, 
+      is_delete, create_by, create_at
+      )
+    values (#{studentId,jdbcType=INTEGER}, #{cardId,jdbcType=INTEGER}, #{fingerprintId,jdbcType=INTEGER}, 
+      #{avatarId,jdbcType=INTEGER}, #{responsible,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.StudentInfo">
+    insert into t_student_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="studentId != null">
+        student_id,
+      </if>
+      <if test="cardId != null">
+        card_id,
+      </if>
+      <if test="fingerprintId != null">
+        fingerprint_id,
+      </if>
+      <if test="avatarId != null">
+        avatar_id,
+      </if>
+      <if test="responsible != null">
+        responsible,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="studentId != null">
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=INTEGER},
+      </if>
+      <if test="fingerprintId != null">
+        #{fingerprintId,jdbcType=INTEGER},
+      </if>
+      <if test="avatarId != null">
+        #{avatarId,jdbcType=INTEGER},
+      </if>
+      <if test="responsible != null">
+        #{responsible,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.StudentInfo">
+    update t_student_info
+    <set>
+      <if test="responsible != null">
+        responsible = #{responsible,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where student_id = #{studentId,jdbcType=INTEGER}
+      and card_id = #{cardId,jdbcType=INTEGER}
+      and fingerprint_id = #{fingerprintId,jdbcType=INTEGER}
+      and avatar_id = #{avatarId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.StudentInfo">
+    update t_student_info
+    set responsible = #{responsible,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where student_id = #{studentId,jdbcType=INTEGER}
+      and card_id = #{cardId,jdbcType=INTEGER}
+      and fingerprint_id = #{fingerprintId,jdbcType=INTEGER}
+      and avatar_id = #{avatarId,jdbcType=INTEGER}
+  </update>
+</mapper>

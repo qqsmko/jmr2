@@ -2,41 +2,25 @@ package com.jmr.model;
 
 import java.util.Date;
 
-public class Attendance {
-    private Integer id;
-
-    private Integer deviceid;
-
-    private String carno;
+public class Attendance extends AttendanceKey {
+    private Integer attendanceType;
 
     private Date datatime;
 
-    private Integer studentid;
+    private Integer attendanceState;
 
-    private String fingernum;
+    private Integer isDelete;
 
-    public Integer getId() {
-        return id;
+    private String createBy;
+
+    private Date createAt;
+
+    public Integer getAttendanceType() {
+        return attendanceType;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getDeviceid() {
-        return deviceid;
-    }
-
-    public void setDeviceid(Integer deviceid) {
-        this.deviceid = deviceid;
-    }
-
-    public String getCarno() {
-        return carno;
-    }
-
-    public void setCarno(String carno) {
-        this.carno = carno == null ? null : carno.trim();
+    public void setAttendanceType(Integer attendanceType) {
+        this.attendanceType = attendanceType;
     }
 
     public Date getDatatime() {
@@ -47,19 +31,35 @@ public class Attendance {
         this.datatime = datatime;
     }
 
-    public Integer getStudentid() {
-        return studentid;
+    public Integer getAttendanceState() {
+        return attendanceState;
     }
 
-    public void setStudentid(Integer studentid) {
-        this.studentid = studentid;
+    public void setAttendanceState(Integer attendanceState) {
+        this.attendanceState = attendanceState;
     }
 
-    public String getFingernum() {
-        return fingernum;
+    public Integer getIsDelete() {
+        return isDelete;
     }
 
-    public void setFingernum(String fingernum) {
-        this.fingernum = fingernum == null ? null : fingernum.trim();
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy == null ? null : createBy.trim();
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 }

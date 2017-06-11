@@ -4,46 +4,34 @@ Navicat PGSQL Data Transfer
 Source Server         : postgresql
 Source Server Version : 90602
 Source Host           : localhost:5432
-Source Database       : postgres
+Source Database       : jmr
 Source Schema         : public
 
 Target Server Type    : PGSQL
 Target Server Version : 90602
 File Encoding         : 65001
 
-Date: 2017-05-31 23:11:24
+Date: 2017-06-11 23:29:49
 */
 
 
 -- ----------------------------
--- Sequence structure for t_attendance_id_seq
+-- Sequence structure for t_ukey_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."t_attendance_id_seq";
-CREATE SEQUENCE "public"."t_attendance_id_seq"
+DROP SEQUENCE IF EXISTS "public"."t_ukey_id_seq";
+CREATE SEQUENCE "public"."t_ukey_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 5
+ START 1
  CACHE 1;
-SELECT setval('"public"."t_attendance_id_seq"', 5, true);
+SELECT setval('"public"."t_ukey_id_seq"', 1, true);
 
 -- ----------------------------
--- Sequence structure for t_class_classid_seq
+-- Sequence structure for tbl_accessResource_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."t_class_classid_seq";
-CREATE SEQUENCE "public"."t_class_classid_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 10
- CACHE 1;
-SELECT setval('"public"."t_class_classid_seq"', 10, true);
-
--- ----------------------------
--- Sequence structure for t_classseries_classseriesid_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."t_classseries_classseriesid_seq";
-CREATE SEQUENCE "public"."t_classseries_classseriesid_seq"
+DROP SEQUENCE IF EXISTS "public"."tbl_accessResource_id_seq";
+CREATE SEQUENCE "public"."tbl_accessResource_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
@@ -51,119 +39,181 @@ CREATE SEQUENCE "public"."t_classseries_classseriesid_seq"
  CACHE 1;
 
 -- ----------------------------
--- Sequence structure for t_device_deviceid_seq
+-- Sequence structure for tbl_account_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."t_device_deviceid_seq";
-CREATE SEQUENCE "public"."t_device_deviceid_seq"
+DROP SEQUENCE IF EXISTS "public"."tbl_account_id_seq";
+CREATE SEQUENCE "public"."tbl_account_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 3
+ START 1
  CACHE 1;
-SELECT setval('"public"."t_device_deviceid_seq"', 3, true);
 
 -- ----------------------------
--- Sequence structure for t_institutions_institutionsid_seq
+-- Sequence structure for tbl_account_role_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."t_institutions_institutionsid_seq";
-CREATE SEQUENCE "public"."t_institutions_institutionsid_seq"
+DROP SEQUENCE IF EXISTS "public"."tbl_account_role_id_seq";
+CREATE SEQUENCE "public"."tbl_account_role_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 45
+ START 1
  CACHE 1;
-SELECT setval('"public"."t_institutions_institutionsid_seq"', 45, true);
 
 -- ----------------------------
--- Sequence structure for t_institutions_regionid_seq
+-- Sequence structure for tbl_authority_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."t_institutions_regionid_seq";
-CREATE SEQUENCE "public"."t_institutions_regionid_seq"
+DROP SEQUENCE IF EXISTS "public"."tbl_authority_id_seq";
+CREATE SEQUENCE "public"."tbl_authority_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 12
+ START 1
  CACHE 1;
-SELECT setval('"public"."t_institutions_regionid_seq"', 12, true);
 
 -- ----------------------------
--- Sequence structure for t_region_regionid_seq
+-- Sequence structure for tbl_authority_resource_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."t_region_regionid_seq";
-CREATE SEQUENCE "public"."t_region_regionid_seq"
+DROP SEQUENCE IF EXISTS "public"."tbl_authority_resource_id_seq";
+CREATE SEQUENCE "public"."tbl_authority_resource_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 10
+ START 1
  CACHE 1;
-SELECT setval('"public"."t_region_regionid_seq"', 10, true);
 
 -- ----------------------------
--- Sequence structure for T_Student_StudentID_seq
+-- Sequence structure for tbl_indicator_statistics_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."T_Student_StudentID_seq";
-CREATE SEQUENCE "public"."T_Student_StudentID_seq"
+DROP SEQUENCE IF EXISTS "public"."tbl_indicator_statistics_id_seq";
+CREATE SEQUENCE "public"."tbl_indicator_statistics_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 22
+ START 1
  CACHE 1;
-SELECT setval('"public"."T_Student_StudentID_seq"', 22, true);
 
 -- ----------------------------
--- Sequence structure for t_teacher_teacherid_seq
+-- Sequence structure for tbl_role_authority_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."t_teacher_teacherid_seq";
-CREATE SEQUENCE "public"."t_teacher_teacherid_seq"
+DROP SEQUENCE IF EXISTS "public"."tbl_role_authority_id_seq";
+CREATE SEQUENCE "public"."tbl_role_authority_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 12
+ START 1
  CACHE 1;
-SELECT setval('"public"."t_teacher_teacherid_seq"', 12, true);
+
+-- ----------------------------
+-- Sequence structure for tbl_role_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."tbl_role_id_seq";
+CREATE SEQUENCE "public"."tbl_role_id_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
 
 -- ----------------------------
 -- Table structure for t_attendance
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_attendance";
 CREATE TABLE "public"."t_attendance" (
-"id" int4 DEFAULT nextval('t_attendance_id_seq'::regclass) NOT NULL,
-"deviceid" int4,
-"carno" varchar(20) COLLATE "default",
-"datatime" timestamp(6),
-"studentid" int4,
-"fingernum" varchar(40) COLLATE "default"
+"attendance_id" int4 NOT NULL,
+"deviceid" int4 NOT NULL,
+"detail_id" int4 NOT NULL,
+"attendance_type" int4 NOT NULL,
+"datatime" timestamp(6) NOT NULL,
+"attendance_state" int4 NOT NULL,
+"is_delete" int4 NOT NULL,
+"create_by" varchar(20) COLLATE "default" NOT NULL,
+"create_at" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+COMMENT ON COLUMN "public"."t_attendance"."attendance_type" IS '打卡类型';
+COMMENT ON COLUMN "public"."t_attendance"."datatime" IS '打卡时间';
+COMMENT ON COLUMN "public"."t_attendance"."attendance_state" IS '打卡状态（迟到，早退，正常）';
+
+-- ----------------------------
+-- Records of t_attendance
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_attendance_detail
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_attendance_detail";
+CREATE TABLE "public"."t_attendance_detail" (
+"detail_id" int4 NOT NULL,
+"fingerprint_id" int4,
+"avatar_id" int4,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
 )
 WITH (OIDS=FALSE)
 
 ;
 
 -- ----------------------------
--- Records of t_attendance
+-- Records of t_attendance_detail
 -- ----------------------------
-INSERT INTO "public"."t_attendance" VALUES ('1', '1', '#999', '2017-04-25 16:00:00', '4', 'be9ab23ca267191418842c71870233d9
-');
-INSERT INTO "public"."t_attendance" VALUES ('2', '2', '#333', '2015-06-07 13:24:35', '21', '8573353bb134fee2bfcc6c7179d554bd
-');
-INSERT INTO "public"."t_attendance" VALUES ('3', '3', '#999', '2017-05-11 18:58:41', '19', '198babbd51abef173d2a368cfe2458c9
-');
-INSERT INTO "public"."t_attendance" VALUES ('4', '3', '#446', '2017-05-31 00:56:39.141', '19', '720af60d4bb9ee7c795c951c893199a7');
-INSERT INTO "public"."t_attendance" VALUES ('5', '3', '#446', '2017-05-31 00:57:14.674', '22', '720af60d4bb9ee7c795c951c893199a7');
+
+-- ----------------------------
+-- Table structure for t_attendance_statistics
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_attendance_statistics";
+CREATE TABLE "public"."t_attendance_statistics" (
+"statistics_id" int4 NOT NULL,
+"statistics_name" varchar(255) COLLATE "default",
+"statisics_value" varchar(255) COLLATE "default",
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_attendance_statistics
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_avatar
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_avatar";
+CREATE TABLE "public"."t_avatar" (
+"avatar_id" int4 NOT NULL,
+"avatar_img" varchar(50) COLLATE "default",
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_avatar
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for t_class
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_class";
 CREATE TABLE "public"."t_class" (
-"classid" int4 DEFAULT nextval('t_class_classid_seq'::regclass) NOT NULL,
-"classseriesid" int4,
-"classname" varchar(50) COLLATE "default",
-"applynumber" int4,
-"startdate" date,
-"enddate" date,
-"remark" text COLLATE "default",
-"applyperson" varchar(20) COLLATE "default",
-"applystate" int4 DEFAULT 1
+"class_id" int4 NOT NULL,
+"class_name" varchar(255) COLLATE "default",
+"student_count" int4,
+"state" int4,
+"responsible" varchar(20) COLLATE "default",
+"telephone" varchar(20) COLLATE "default",
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
 )
 WITH (OIDS=FALSE)
 
@@ -172,49 +222,239 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_class
 -- ----------------------------
-INSERT INTO "public"."t_class" VALUES ('1', '327355', '蓝翔1班', '87', '2017-03-15', '2017-04-16', '这里写备注', '王老师', '1');
-INSERT INTO "public"."t_class" VALUES ('2', '381755', '计算机4班', '22', '2017-04-11', '2018-05-06', null, '刘老师', '5');
-INSERT INTO "public"."t_class" VALUES ('3', '381755', '123', '123', '2017-05-01', '2017-05-17', '123', '123', '1');
-INSERT INTO "public"."t_class" VALUES ('4', '381755', '3245', '454', '2017-05-16', '2017-05-18', '214123412', 'kjjkh', '1');
-INSERT INTO "public"."t_class" VALUES ('5', '327355', 'sadf', '33333', '2017-05-10', '2017-05-09', 's fgsdefg', 'ds g', '2');
-INSERT INTO "public"."t_class" VALUES ('6', '327355', '12312', '21321', '2017-05-15', '2017-05-17', 'dwedwq', 'qwer12', '1');
-INSERT INTO "public"."t_class" VALUES ('7', '381755', '2', '20', '2017-05-16', '2017-05-31', '123', '李老师', '1');
-INSERT INTO "public"."t_class" VALUES ('8', '327355', '画画2班', '20', '2017-05-10', '2017-05-08', '无', '刘老师', '3');
-INSERT INTO "public"."t_class" VALUES ('9', null, '挖掘机3班', '123', '2017-05-08', '2017-05-15', '123', '123', '3');
-INSERT INTO "public"."t_class" VALUES ('10', null, '测试9班', '123', '2017-05-08', '2017-05-15', '123', '123', '4');
+INSERT INTO "public"."t_class" VALUES ('575288', '市场价格调查1班', '32', '0', '小王', '17733333333', '0', 'test', '2017-06-06 13:23:09');
+INSERT INTO "public"."t_class" VALUES ('575289', '市场价格调查2班', '18', '0', '小李', '18833333333', '0', 'test', '2017-06-07 13:23:13');
+INSERT INTO "public"."t_class" VALUES ('575290', '市场价格调查3班', '6', '0', '小猪', '19933333333', '0', 'test', '2017-06-15 13:23:17');
 
 -- ----------------------------
--- Table structure for t_classseries
+-- Table structure for t_class_class_series
 -- ----------------------------
-DROP TABLE IF EXISTS "public"."t_classseries";
-CREATE TABLE "public"."t_classseries" (
-"classseriesid" int4 DEFAULT nextval('t_classseries_classseriesid_seq'::regclass) NOT NULL,
-"courseid" int4,
-"classseriesname" varchar(50) COLLATE "default",
-"coursetype" int4,
-"times" int4,
-"state" int4,
-"isdeleted" int4 DEFAULT 0
+DROP TABLE IF EXISTS "public"."t_class_class_series";
+CREATE TABLE "public"."t_class_class_series" (
+"class_series_id" int4 NOT NULL,
+"class_id" int4 NOT NULL,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
 )
 WITH (OIDS=FALSE)
 
 ;
 
 -- ----------------------------
--- Records of t_classseries
+-- Records of t_class_class_series
 -- ----------------------------
-INSERT INTO "public"."t_classseries" VALUES ('327355', '342', '挖掘技术', '1', '3', '1', '0');
-INSERT INTO "public"."t_classseries" VALUES ('381755', '512', '现场模拟', '2', '72', '2', '0');
+INSERT INTO "public"."t_class_class_series" VALUES ('769024', '575288', '0', 'test', '2017-06-14 12:19:55');
+INSERT INTO "public"."t_class_class_series" VALUES ('769024', '575289', '0', 'test', '2017-06-14 12:20:21');
+INSERT INTO "public"."t_class_class_series" VALUES ('769024', '575290', '0', 'test', '2017-06-19 12:20:49');
+
+-- ----------------------------
+-- Table structure for t_class_series
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_class_series";
+CREATE TABLE "public"."t_class_series" (
+"class_series_id" int4 NOT NULL,
+"class_series_name" varchar(255) COLLATE "default",
+"classes_count" int4,
+"start_time" date,
+"end_time" date,
+"state" int4,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_class_series
+-- ----------------------------
+INSERT INTO "public"."t_class_series" VALUES ('769024', '市场价格调查', '3', '2017-04-27', '2017-07-14', '0', '0', 'test', '2017-06-14 12:18:42');
+
+-- ----------------------------
+-- Table structure for t_class_series_completion
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_class_series_completion";
+CREATE TABLE "public"."t_class_series_completion" (
+"class_series_id" int4 NOT NULL,
+"class_series_name" varchar(255) COLLATE "default",
+"classes_count" int4,
+"start_time" date,
+"end_time" date,
+"state" int4,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_class_series_completion
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_class_series_course
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_class_series_course";
+CREATE TABLE "public"."t_class_series_course" (
+"class_series_id" int4 NOT NULL,
+"course_id" int4 NOT NULL,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_class_series_course
+-- ----------------------------
+INSERT INTO "public"."t_class_series_course" VALUES ('229677', '328765', '0', 'test', '2017-06-12 12:19:10');
+
+-- ----------------------------
+-- Table structure for t_class_series_verifyed
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_class_series_verifyed";
+CREATE TABLE "public"."t_class_series_verifyed" (
+"class_series_id" int4 NOT NULL,
+"class_series_name" varchar(255) COLLATE "default",
+"classes_count" int4,
+"start_time" date,
+"end_time" date,
+"state" int4,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_class_series_verifyed
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_class_student
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_class_student";
+CREATE TABLE "public"."t_class_student" (
+"student_id" int4 NOT NULL,
+"class_id" int4 NOT NULL,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_class_student
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_class_teacher
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_class_teacher";
+CREATE TABLE "public"."t_class_teacher" (
+"teacher_id" int4 NOT NULL,
+"class_id" int4 NOT NULL,
+"is_head" int4,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_class_teacher
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_class_verify
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_class_verify";
+CREATE TABLE "public"."t_class_verify" (
+"class_series_id" int4 NOT NULL,
+"apply_name" varchar(255) COLLATE "default",
+"telephone" varchar(255) COLLATE "default",
+"apply_state" varchar(255) COLLATE "default",
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_class_verify
+-- ----------------------------
+INSERT INTO "public"."t_class_verify" VALUES ('769024', '马老师', '18866663333', '0', '0', 'test', '2017-04-19 14:29:03');
+
+-- ----------------------------
+-- Table structure for t_course
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_course";
+CREATE TABLE "public"."t_course" (
+"course_id" int4 NOT NULL,
+"course_name" varchar(255) COLLATE "default",
+"major_name" varchar(255) COLLATE "default",
+"describe" varchar(255) COLLATE "default",
+"study_time" int4,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_course
+-- ----------------------------
+INSERT INTO "public"."t_course" VALUES ('328765', '市场价格调查', '市场学', '调查市场的价格', '48', '0', 'test', '2017-05-04 12:15:37');
+
+-- ----------------------------
+-- Table structure for t_course_institutions
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_course_institutions";
+CREATE TABLE "public"."t_course_institutions" (
+"institutions_id" int4 NOT NULL,
+"course_id" int4 NOT NULL,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_course_institutions
+-- ----------------------------
+INSERT INTO "public"."t_course_institutions" VALUES ('229677', '328765', null, 'test', '2017-06-14 12:17:22');
 
 -- ----------------------------
 -- Table structure for t_device
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_device";
 CREATE TABLE "public"."t_device" (
-"deviceid" int4 DEFAULT nextval('t_device_deviceid_seq'::regclass) NOT NULL,
-"institutionsid" int4,
-"devicecode" varchar(20) COLLATE "default",
-"description" text COLLATE "default"
+"device_id" int4 NOT NULL,
+"device_code" varchar(255) COLLATE "default",
+"description" varchar(255) COLLATE "default",
+"buy_time" date,
+"state" int4,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
 )
 WITH (OIDS=FALSE)
 
@@ -223,112 +463,251 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_device
 -- ----------------------------
-INSERT INTO "public"."t_device" VALUES ('1', '1', '#333', '打卡器');
-INSERT INTO "public"."t_device" VALUES ('2', '1', '#444', '台式机');
-INSERT INTO "public"."t_device" VALUES ('3', '2', '#123', '笔记本');
+
+-- ----------------------------
+-- Table structure for t_device_institutions
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_device_institutions";
+CREATE TABLE "public"."t_device_institutions" (
+"device_id" int4 NOT NULL,
+"institutions_id" int4 NOT NULL,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_device_institutions
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_fingerprint
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_fingerprint";
+CREATE TABLE "public"."t_fingerprint" (
+"fingerprint_id" int4 NOT NULL,
+"fingerprint_img" varchar(50) COLLATE "default",
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_fingerprint
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_idcard
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_idcard";
+CREATE TABLE "public"."t_idcard" (
+"card_id" varchar(32) COLLATE "default" NOT NULL,
+"card_name" varchar(20) COLLATE "default",
+"gender" int4,
+"nation" varchar(20) COLLATE "default",
+"birthday" date,
+"address" varchar(50) COLLATE "default",
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_idcard
+-- ----------------------------
+INSERT INTO "public"."t_idcard" VALUES ('420103892813989899', '刘老师', '2', '壮族', '2011-05-19', '北京海淀区牡丹园108号', '0', 'test', '2016-02-18 16:02:16');
+INSERT INTO "public"."t_idcard" VALUES ('420107199406031123', '迪丽热巴', '2', '维吾尔族', '2014-06-20', '北京海淀区牡丹园88号', '0', 'test', '2017-04-11 05:00:06');
+INSERT INTO "public"."t_idcard" VALUES ('420107199408217719', '王力宏', '1', '汉族', '2017-05-03', '北京海淀区牡丹园20号', '0', 'test', '2017-05-10 15:54:46');
+INSERT INTO "public"."t_idcard" VALUES ('420108199506063316', '马云', '1', '汉族', '2017-04-12', '北京海淀区牡丹园6号', '0', 'test', '2017-05-09 15:53:36');
+INSERT INTO "public"."t_idcard" VALUES ('420331637817283871', '王老师', '1', '汉族', '2017-06-06', '北京海淀区牡丹园88号', '0', 'test', '2017-04-12 16:01:24');
+
+-- ----------------------------
+-- Table structure for t_idcard_latest
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_idcard_latest";
+CREATE TABLE "public"."t_idcard_latest" (
+"card_id" varchar(32) COLLATE "default" NOT NULL,
+"latest_class" timestamp(6),
+"is_ok" int4,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_idcard_latest
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for t_institutions
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_institutions";
 CREATE TABLE "public"."t_institutions" (
-"institutionsid" int4 DEFAULT nextval('t_institutions_institutionsid_seq'::regclass) NOT NULL,
-"regionid" int4 DEFAULT nextval('t_institutions_regionid_seq'::regclass) NOT NULL,
-"institutionsname" varchar(50) COLLATE "default",
-"institutionscode" varchar(20) COLLATE "default",
+"institutions_id" int4 NOT NULL,
+"institutions_name" varchar(50) COLLATE "default",
 "responsible" varchar(20) COLLATE "default",
-"telephone" varchar(18) COLLATE "default",
+"telephone" varchar(20) COLLATE "default",
 "address" varchar(50) COLLATE "default",
-"employeecount" int4,
-"applydate" timestamp(6),
-"approvaldate" timestamp(6),
-"state" int4,
-"isdeleted" int4 DEFAULT 0,
-"applyemail" varchar(30) COLLATE "default"
+"employee_count" int4,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
 )
 WITH (OIDS=FALSE)
 
 ;
-COMMENT ON COLUMN "public"."t_institutions"."applyemail" IS '申请人邮箱';
 
 -- ----------------------------
 -- Records of t_institutions
 -- ----------------------------
-INSERT INTO "public"."t_institutions" VALUES ('1', '2', '武汉学院', '#123', '马老师', '027-87654321', '武汉路10号', '80', '2015-07-03 16:00:00', null, '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('2', '1', '荆门专业学校', '#345', '王老师', '18877776666', '荆门路10号', '40', '2016-04-03 23:59:59', '2016-04-04 15:47:23', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('3', '10', '测试用2', '#2222', '测试', '19999999999', '测试路10号', '99', '2017-03-28 10:19:57', null, '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('4', '10', '测试用', '#2222', '测试', '19999999999', '测试路10号', '99', '2017-03-28 10:19:57', null, '1', '1', null);
-INSERT INTO "public"."t_institutions" VALUES ('5', '10', '测试用', '#2222', '测试', '19999999999', '测试路10号', '99', '2017-03-28 10:19:57', null, '1', '1', null);
-INSERT INTO "public"."t_institutions" VALUES ('6', '10', '测试用', '#2222', '测试', '19999999999', '测试路10号', '99', '2017-03-28 10:19:57', null, '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('7', '10', '测试用', '#2222', '测试', '19999999999', '测试路10号', '99', '2017-03-28 10:19:57', null, '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('8', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('9', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('10', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('11', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('12', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('13', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('14', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('15', '10', '321321', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('16', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('17', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('18', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('19', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('20', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('21', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('22', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('23', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('24', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('25', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '1', null);
-INSERT INTO "public"."t_institutions" VALUES ('26', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('27', '10', '测试用', '#233', '李老师', '19999999999', '占地方', '98', '2017-08-08 16:00:44', '2017-08-08 16:00:44', '1', '1', null);
-INSERT INTO "public"."t_institutions" VALUES ('29', '2', '你好机构', null, '你好', null, '武汉市10号', '10', null, null, null, '1', null);
-INSERT INTO "public"."t_institutions" VALUES ('30', '2', '你好机构', null, '你好', null, '武汉市10号', '10', null, null, null, '1', null);
-INSERT INTO "public"."t_institutions" VALUES ('31', '2', '你好机构', null, '你好', null, '武汉市10号', '10', null, null, null, '1', null);
-INSERT INTO "public"."t_institutions" VALUES ('33', '10', '你好机构', null, '你好', null, '武汉市10号', '15', null, null, '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('34', '10', '你好机构', null, '你好', null, '武汉市10号', '15', null, null, '2', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('35', '10', '蓝翔', null, 'cc', null, '兰翔路10号', '322', null, null, '2', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('36', '1', '123', null, 'cc', null, '123', '123', null, null, '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('37', '1', '123', null, 'cc', null, '123', '123', null, null, '1', '0', null);
-INSERT INTO "public"."t_institutions" VALUES ('38', '1', '123', null, 'cc', null, '123', '123', null, null, '2', '1', 'ceshi2123.com');
+INSERT INTO "public"."t_institutions" VALUES ('229677', '通过机构', '阿米', '19463331233', '鸭子路10号', '113', '0', 'test', '2017-06-05 10:54:18');
 
 -- ----------------------------
--- Table structure for t_region
+-- Table structure for t_institutions_apply
 -- ----------------------------
-DROP TABLE IF EXISTS "public"."t_region";
-CREATE TABLE "public"."t_region" (
-"regionid" int4 DEFAULT nextval('t_region_regionid_seq'::regclass) NOT NULL,
-"regionname" varchar(50) COLLATE "default",
-"parentregion" int4,
-"isdeleted" int4 DEFAULT 0
+DROP TABLE IF EXISTS "public"."t_institutions_apply";
+CREATE TABLE "public"."t_institutions_apply" (
+"apply_email" varchar(30) COLLATE "default" NOT NULL,
+"apply_name" varchar(20) COLLATE "default",
+"telephone" varchar(20) COLLATE "default",
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
 )
 WITH (OIDS=FALSE)
 
 ;
 
 -- ----------------------------
--- Records of t_region
+-- Records of t_institutions_apply
 -- ----------------------------
-INSERT INTO "public"."t_region" VALUES ('1', '荆门', null, '0');
-INSERT INTO "public"."t_region" VALUES ('2', '武汉', null, '0');
-INSERT INTO "public"."t_region" VALUES ('10', 'ceshi', '333', '1');
+INSERT INTO "public"."t_institutions_apply" VALUES ('ff@123.com', '豆豆', '32144443333', '0', 'test', '2017-06-14 01:14:37');
+INSERT INTO "public"."t_institutions_apply" VALUES ('test@123.com', '小王', '13499998888', '0', 'test', '2017-06-07 16:18:16');
+
+-- ----------------------------
+-- Table structure for t_institutions_filed
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_institutions_filed";
+CREATE TABLE "public"."t_institutions_filed" (
+"institutions_id" int4 NOT NULL,
+"institutions_name" varchar(50) COLLATE "default",
+"responsible" varchar(20) COLLATE "default",
+"telephone" varchar(20) COLLATE "default",
+"address" varchar(50) COLLATE "default",
+"employee_count" int4,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_institutions_filed
+-- ----------------------------
+INSERT INTO "public"."t_institutions_filed" VALUES ('765322', '归档机构', '小3', '13812341234', '归档路10号', '333', '0', '小米', '2017-06-02 10:52:34');
+
+-- ----------------------------
+-- Table structure for t_institutions_prepare
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_institutions_prepare";
+CREATE TABLE "public"."t_institutions_prepare" (
+"institutions_id" int4 NOT NULL,
+"institutions_name" varchar(50) COLLATE "default",
+"responsible" varchar(20) COLLATE "default",
+"telephone" varchar(20) COLLATE "default",
+"address" varchar(50) COLLATE "default",
+"employee_count" int4,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_institutions_prepare
+-- ----------------------------
+INSERT INTO "public"."t_institutions_prepare" VALUES ('188426', '测试机构', '王老师', '12300000000', '测试路10号', '30', '0', 'test', '2017-06-07 16:18:16');
+INSERT INTO "public"."t_institutions_prepare" VALUES ('321142', '测试机构2', '小老师', '32311112222', '小猫路10号', '24', '0', 'test', '2017-06-06 01:13:51');
+
+-- ----------------------------
+-- Table structure for t_institutions_verify
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_institutions_verify";
+CREATE TABLE "public"."t_institutions_verify" (
+"apply_email" varchar(30) COLLATE "default" NOT NULL,
+"institutions_id" int4 NOT NULL,
+"approval_date" timestamp(6),
+"is_delete" int4 NOT NULL,
+"create_by" varchar(20) COLLATE "default" NOT NULL,
+"create_at" timestamp(6) NOT NULL,
+"apply_date" timestamp(6) NOT NULL,
+"apply_state" int4 NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+COMMENT ON COLUMN "public"."t_institutions_verify"."apply_email" IS '申请人邮箱';
+COMMENT ON COLUMN "public"."t_institutions_verify"."institutions_id" IS '机构id';
+COMMENT ON COLUMN "public"."t_institutions_verify"."apply_date" IS '申请时间';
+COMMENT ON COLUMN "public"."t_institutions_verify"."apply_state" IS '申请状态(0申请中 1已通过 2不通过)';
+
+-- ----------------------------
+-- Records of t_institutions_verify
+-- ----------------------------
+INSERT INTO "public"."t_institutions_verify" VALUES ('ff@123.com', '321142', null, '0', 'test', '2017-06-13 01:17:24', '2017-06-24 01:17:28', '0');
+INSERT INTO "public"."t_institutions_verify" VALUES ('test@123.com', '188426', '2017-06-11 11:04:20.698', '0', 'test', '2017-06-07 16:18:16', '2017-06-07 16:18:16', '1');
+
+-- ----------------------------
+-- Table structure for t_operation_record
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_operation_record";
+CREATE TABLE "public"."t_operation_record" (
+"record_id" int4 NOT NULL,
+"record_time" timestamp(6) NOT NULL,
+"record_type" int4 NOT NULL,
+"table_name" varchar(255) COLLATE "default" NOT NULL,
+"is_delete" int4 NOT NULL,
+"create_by" varchar(20) COLLATE "default" NOT NULL,
+"create_at" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_operation_record
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for t_student
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_student";
 CREATE TABLE "public"."t_student" (
-"studentid" int4 DEFAULT nextval('"T_Student_StudentID_seq"'::regclass) NOT NULL,
-"name" varchar(20) COLLATE "default",
-"gender" int2,
-"birthday" date,
-"telephone" varchar(18) COLLATE "default",
+"student_id" int4 NOT NULL,
+"telephone" varchar(20) COLLATE "default",
 "email" varchar(30) COLLATE "default",
-"address" varchar(50) COLLATE "default",
-"nation" varchar(20) COLLATE "default",
 "education" int4,
-"insuredstate" int4,
+"insured_state" int4,
 "state" int4,
-"isdeleted" int4 DEFAULT 0
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
 )
 WITH (OIDS=FALSE)
 
@@ -337,20 +716,43 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_student
 -- ----------------------------
-INSERT INTO "public"."t_student" VALUES ('1', '张三', '1', '1995-05-05', '13800001111', 'zhangsan@123.com', '张家庄', '汉族', '1', '2', '2', '0');
-INSERT INTO "public"."t_student" VALUES ('4', '王少女', '2', '1996-06-06', '13911110000', 'wang@321.com', '王家湾10号', '汉族', '2', '1', '1', '0');
-INSERT INTO "public"."t_student" VALUES ('19', '测试', '1', '2017-05-24', '13261713023', 'buptai@126.com', '王家湾10号', '333', '1', '1', '1', '0');
-INSERT INTO "public"."t_student" VALUES ('21', '123', '1', '2017-05-01', '13261713023', '704095787@qq.com', '王家湾10号', '333', '1', '1', '1', '0');
-INSERT INTO "public"."t_student" VALUES ('22', '测试', '1', '2017-05-10', '13422223333', 'gg@123.com', 'hhh', 'jjj', '1', '1', '1', '0');
+
+-- ----------------------------
+-- Table structure for t_student_info
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_student_info";
+CREATE TABLE "public"."t_student_info" (
+"student_id" int4 NOT NULL,
+"card_id" varchar(32) COLLATE "default" NOT NULL,
+"fingerprint_id" int4 NOT NULL,
+"avatar_id" int4 NOT NULL,
+"responsible" varchar(20) COLLATE "default",
+"telephone" varchar(20) COLLATE "default",
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_student_info
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for t_teacher
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_teacher";
 CREATE TABLE "public"."t_teacher" (
-"teacherid" int4 DEFAULT nextval('t_teacher_teacherid_seq'::regclass) NOT NULL,
-"name" varchar(50) COLLATE "default",
-"isdeleted" int4 DEFAULT 0
+"teacher_id" int4 NOT NULL,
+"telephone" varchar(20) COLLATE "default",
+"email" varchar(30) COLLATE "default",
+"education" int4,
+"state" int4,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
 )
 WITH (OIDS=FALSE)
 
@@ -359,83 +761,600 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_teacher
 -- ----------------------------
-INSERT INTO "public"."t_teacher" VALUES ('1', '王老师', '0');
-INSERT INTO "public"."t_teacher" VALUES ('2', '李老师', '0');
-INSERT INTO "public"."t_teacher" VALUES ('9', 'ccc', '1');
-INSERT INTO "public"."t_teacher" VALUES ('10', 'ccc', '0');
-INSERT INTO "public"."t_teacher" VALUES ('11', 'fff', '1');
-INSERT INTO "public"."t_teacher" VALUES ('12', '李老师', '0');
+INSERT INTO "public"."t_teacher" VALUES ('371890', '13877774444', 'test@abc.com', '1', '0', '0', 'test', '2015-05-13 16:13:49');
+INSERT INTO "public"."t_teacher" VALUES ('728391', '14912536712', 'good@ddc.net', '2', '0', '0', 'test', '2013-03-11 16:14:41');
+
+-- ----------------------------
+-- Table structure for t_teacher_info
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_teacher_info";
+CREATE TABLE "public"."t_teacher_info" (
+"teacher_id" int4 NOT NULL,
+"card_id" varchar(32) COLLATE "default" NOT NULL,
+"responsible" varchar(20) COLLATE "default",
+"telephone" varchar(20) COLLATE "default",
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_teacher_info
+-- ----------------------------
+INSERT INTO "public"."t_teacher_info" VALUES ('371890', '420331637817283871', '审核员', '13766663333', '0', 'test', '2017-06-06 16:20:07');
+INSERT INTO "public"."t_teacher_info" VALUES ('728391', '420103892813989899', 'check', '13966627789', '0', 'good', '2017-04-13 16:20:46');
+
+-- ----------------------------
+-- Table structure for t_ukey
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_ukey";
+CREATE TABLE "public"."t_ukey" (
+"id" int4 DEFAULT nextval('t_ukey_id_seq'::regclass) NOT NULL,
+"ukey_id" varchar(128) COLLATE "default" NOT NULL,
+"responsible" varchar(32) COLLATE "default" NOT NULL,
+"telephone" varchar(32) COLLATE "default" NOT NULL,
+"is_delete" int4 NOT NULL,
+"create_by" varchar(20) COLLATE "default" NOT NULL,
+"create_at" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_ukey
+-- ----------------------------
+INSERT INTO "public"."t_ukey" VALUES ('1', '912ec803b2ce49e4a541068d495ab570', '刘测试', '19933227766', '0', 'test', '2017-06-06 14:50:43');
+
+-- ----------------------------
+-- Table structure for t_update_record
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_update_record";
+CREATE TABLE "public"."t_update_record" (
+"record_id" int4 NOT NULL,
+"record_time" timestamp(6),
+"table_name" varchar(255) COLLATE "default",
+"field_name" varchar(255) COLLATE "default",
+"old_value" varchar(255) COLLATE "default",
+"new_value" varchar(255) COLLATE "default",
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_update_record
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_verify_record
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_verify_record";
+CREATE TABLE "public"."t_verify_record" (
+"record_id" int4 NOT NULL,
+"responsible" varchar(255) COLLATE "default",
+"telephone" varchar(255) COLLATE "default",
+"verify_type" int4,
+"record_time" timestamp(6),
+"record_content" varchar(255) COLLATE "default",
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_verify_record
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_accessResource
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."tbl_accessResource";
+CREATE TABLE "public"."tbl_accessResource" (
+"id" int4 DEFAULT nextval('"tbl_accessResource_id_seq"'::regclass) NOT NULL,
+"resource_id" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"resource_name" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"resource_desc" varchar(50) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"resource_path" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"ebable" int2 DEFAULT 1 NOT NULL,
+"create_time" timestamp(6) NOT NULL,
+"update_time" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+COMMENT ON TABLE "public"."tbl_accessResource" IS '访问资源表';
+COMMENT ON COLUMN "public"."tbl_accessResource"."id" IS '主键';
+COMMENT ON COLUMN "public"."tbl_accessResource"."resource_id" IS '资源Id';
+COMMENT ON COLUMN "public"."tbl_accessResource"."resource_name" IS '资源名称';
+COMMENT ON COLUMN "public"."tbl_accessResource"."resource_desc" IS '资源描述';
+COMMENT ON COLUMN "public"."tbl_accessResource"."resource_path" IS '资源路径';
+COMMENT ON COLUMN "public"."tbl_accessResource"."ebable" IS '资源是否可用，0=不可用，1=可用';
+COMMENT ON COLUMN "public"."tbl_accessResource"."create_time" IS '创建时间';
+COMMENT ON COLUMN "public"."tbl_accessResource"."update_time" IS '更新时间';
+
+-- ----------------------------
+-- Records of tbl_accessResource
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_account
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."tbl_account";
+CREATE TABLE "public"."tbl_account" (
+"id" int4 DEFAULT nextval('tbl_account_id_seq'::regclass) NOT NULL,
+"user_id" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"account" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"password" varchar(128) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"login_ip" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"login_time" timestamp(6) NOT NULL,
+"enable" int2 DEFAULT 1 NOT NULL,
+"is_locked" int2 DEFAULT 0 NOT NULL,
+"is_expired" int2 DEFAULT 0 NOT NULL,
+"deadLine" timestamp(6) DEFAULT '2030-01-01 00:00:00'::timestamp without time zone NOT NULL,
+"create_time" timestamp(6) NOT NULL,
+"update_time" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+COMMENT ON TABLE "public"."tbl_account" IS '账号信息表';
+COMMENT ON COLUMN "public"."tbl_account"."id" IS '主键';
+COMMENT ON COLUMN "public"."tbl_account"."user_id" IS '用户Id';
+COMMENT ON COLUMN "public"."tbl_account"."account" IS '账号';
+COMMENT ON COLUMN "public"."tbl_account"."password" IS '密码(密文)';
+COMMENT ON COLUMN "public"."tbl_account"."login_ip" IS '最近一次登录Ip';
+COMMENT ON COLUMN "public"."tbl_account"."login_time" IS '最近一次登录时间';
+COMMENT ON COLUMN "public"."tbl_account"."enable" IS '账号是否可用，0=不可用，1=可用';
+COMMENT ON COLUMN "public"."tbl_account"."is_locked" IS '账号是否锁定，0=未锁定，1=锁定';
+COMMENT ON COLUMN "public"."tbl_account"."is_expired" IS '账号是否过期，0=未过期，1=过期';
+COMMENT ON COLUMN "public"."tbl_account"."deadLine" IS '过期时间';
+COMMENT ON COLUMN "public"."tbl_account"."create_time" IS '创建时间';
+COMMENT ON COLUMN "public"."tbl_account"."update_time" IS '更新时间';
+
+-- ----------------------------
+-- Records of tbl_account
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_account_role
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."tbl_account_role";
+CREATE TABLE "public"."tbl_account_role" (
+"id" int4 DEFAULT nextval('tbl_account_role_id_seq'::regclass) NOT NULL,
+"role_id" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"user_id" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+COMMENT ON TABLE "public"."tbl_account_role" IS '账号角色关联表';
+COMMENT ON COLUMN "public"."tbl_account_role"."id" IS '主键';
+COMMENT ON COLUMN "public"."tbl_account_role"."role_id" IS '角色Id';
+COMMENT ON COLUMN "public"."tbl_account_role"."user_id" IS '用户Id';
+
+-- ----------------------------
+-- Records of tbl_account_role
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_authority
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."tbl_authority";
+CREATE TABLE "public"."tbl_authority" (
+"id" int4 DEFAULT nextval('tbl_authority_id_seq'::regclass) NOT NULL,
+"authority_id" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"authority_name" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"authority_desc" varchar(50) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"prompt_message" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"enable" int2 DEFAULT 1 NOT NULL,
+"create_time" timestamp(6) NOT NULL,
+"update_time" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+COMMENT ON TABLE "public"."tbl_authority" IS '权限记录表';
+COMMENT ON COLUMN "public"."tbl_authority"."id" IS '主键';
+COMMENT ON COLUMN "public"."tbl_authority"."authority_id" IS '权限Id';
+COMMENT ON COLUMN "public"."tbl_authority"."authority_name" IS '权限名称，约定以AUTH_起始';
+COMMENT ON COLUMN "public"."tbl_authority"."authority_desc" IS '权限描述';
+COMMENT ON COLUMN "public"."tbl_authority"."prompt_message" IS '提示信息';
+COMMENT ON COLUMN "public"."tbl_authority"."enable" IS '资源是否可用，0=不可用，1=可用';
+COMMENT ON COLUMN "public"."tbl_authority"."create_time" IS '创建时间';
+COMMENT ON COLUMN "public"."tbl_authority"."update_time" IS '更新时间';
+
+-- ----------------------------
+-- Records of tbl_authority
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_authority_resource
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."tbl_authority_resource";
+CREATE TABLE "public"."tbl_authority_resource" (
+"id" int4 DEFAULT nextval('tbl_authority_resource_id_seq'::regclass) NOT NULL,
+"authority_id" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"resource_id" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+COMMENT ON TABLE "public"."tbl_authority_resource" IS '权限资源关联表';
+COMMENT ON COLUMN "public"."tbl_authority_resource"."id" IS '主键';
+COMMENT ON COLUMN "public"."tbl_authority_resource"."authority_id" IS '权限Id';
+COMMENT ON COLUMN "public"."tbl_authority_resource"."resource_id" IS '权限Id';
+
+-- ----------------------------
+-- Records of tbl_authority_resource
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_indicator_statistics
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."tbl_indicator_statistics";
+CREATE TABLE "public"."tbl_indicator_statistics" (
+"id" int4 DEFAULT nextval('tbl_indicator_statistics_id_seq'::regclass) NOT NULL,
+"indicator_type" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"indicator_name" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"cycle_time" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"cycle_Statistics_value" int4 NOT NULL,
+"update_time" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+COMMENT ON TABLE "public"."tbl_indicator_statistics" IS '指标统计记录表';
+COMMENT ON COLUMN "public"."tbl_indicator_statistics"."id" IS '主键';
+COMMENT ON COLUMN "public"."tbl_indicator_statistics"."indicator_type" IS '指标类型';
+COMMENT ON COLUMN "public"."tbl_indicator_statistics"."indicator_name" IS '指标名称';
+COMMENT ON COLUMN "public"."tbl_indicator_statistics"."cycle_time" IS '周期 n+(m,h,d,M,y), n为数字';
+COMMENT ON COLUMN "public"."tbl_indicator_statistics"."cycle_Statistics_value" IS '周期统计值';
+COMMENT ON COLUMN "public"."tbl_indicator_statistics"."update_time" IS '更新时间';
+
+-- ----------------------------
+-- Records of tbl_indicator_statistics
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_role
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."tbl_role";
+CREATE TABLE "public"."tbl_role" (
+"id" int4 DEFAULT nextval('tbl_role_id_seq'::regclass) NOT NULL,
+"role_id" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"role_name" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"role_desc" varchar(50) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"priority" int2 DEFAULT 100 NOT NULL,
+"enable" int2 DEFAULT 1 NOT NULL,
+"create_time" timestamp(6) NOT NULL,
+"update_time" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+COMMENT ON TABLE "public"."tbl_role" IS '角色记录表';
+COMMENT ON COLUMN "public"."tbl_role"."id" IS '主键';
+COMMENT ON COLUMN "public"."tbl_role"."role_id" IS '角色Id';
+COMMENT ON COLUMN "public"."tbl_role"."role_name" IS '角色名称，约定以ROLE_起始';
+COMMENT ON COLUMN "public"."tbl_role"."role_desc" IS '角色描述';
+COMMENT ON COLUMN "public"."tbl_role"."priority" IS '优先级,值越小优先级越大';
+COMMENT ON COLUMN "public"."tbl_role"."enable" IS '角色是否可用，0=不可用，1=可用';
+COMMENT ON COLUMN "public"."tbl_role"."create_time" IS '创建时间';
+COMMENT ON COLUMN "public"."tbl_role"."update_time" IS '更新时间';
+
+-- ----------------------------
+-- Records of tbl_role
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_role_authority
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."tbl_role_authority";
+CREATE TABLE "public"."tbl_role_authority" (
+"id" int4 DEFAULT nextval('tbl_role_authority_id_seq'::regclass) NOT NULL,
+"role_id" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL,
+"authority_id" varchar(32) COLLATE "default" DEFAULT ''::character varying NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+COMMENT ON TABLE "public"."tbl_role_authority" IS '角色权限关联表';
+COMMENT ON COLUMN "public"."tbl_role_authority"."id" IS '主键';
+COMMENT ON COLUMN "public"."tbl_role_authority"."role_id" IS '角色Id';
+COMMENT ON COLUMN "public"."tbl_role_authority"."authority_id" IS '权限Id';
+
+-- ----------------------------
+-- Records of tbl_role_authority
+-- ----------------------------
 
 -- ----------------------------
 -- Alter Sequences Owned By 
 -- ----------------------------
-ALTER SEQUENCE "public"."t_attendance_id_seq" OWNED BY "t_attendance"."id";
-ALTER SEQUENCE "public"."t_class_classid_seq" OWNED BY "t_class"."classid";
-ALTER SEQUENCE "public"."t_classseries_classseriesid_seq" OWNED BY "t_classseries"."classseriesid";
-ALTER SEQUENCE "public"."t_device_deviceid_seq" OWNED BY "t_device"."deviceid";
-ALTER SEQUENCE "public"."t_institutions_institutionsid_seq" OWNED BY "t_institutions"."institutionsid";
-ALTER SEQUENCE "public"."t_institutions_regionid_seq" OWNED BY "t_institutions"."regionid";
-ALTER SEQUENCE "public"."t_region_regionid_seq" OWNED BY "t_region"."regionid";
-ALTER SEQUENCE "public"."T_Student_StudentID_seq" OWNED BY "t_student"."studentid";
-ALTER SEQUENCE "public"."t_teacher_teacherid_seq" OWNED BY "t_teacher"."teacherid";
+ALTER SEQUENCE "public"."t_ukey_id_seq" OWNED BY "t_ukey"."id";
+ALTER SEQUENCE "public"."tbl_accessResource_id_seq" OWNED BY "tbl_accessResource"."id";
+ALTER SEQUENCE "public"."tbl_account_id_seq" OWNED BY "tbl_account"."id";
+ALTER SEQUENCE "public"."tbl_account_role_id_seq" OWNED BY "tbl_account_role"."id";
+ALTER SEQUENCE "public"."tbl_authority_id_seq" OWNED BY "tbl_authority"."id";
+ALTER SEQUENCE "public"."tbl_authority_resource_id_seq" OWNED BY "tbl_authority_resource"."id";
+ALTER SEQUENCE "public"."tbl_indicator_statistics_id_seq" OWNED BY "tbl_indicator_statistics"."id";
+ALTER SEQUENCE "public"."tbl_role_authority_id_seq" OWNED BY "tbl_role_authority"."id";
+ALTER SEQUENCE "public"."tbl_role_id_seq" OWNED BY "tbl_role"."id";
 
 -- ----------------------------
 -- Primary Key structure for table t_attendance
 -- ----------------------------
-ALTER TABLE "public"."t_attendance" ADD PRIMARY KEY ("id");
+ALTER TABLE "public"."t_attendance" ADD PRIMARY KEY ("attendance_id", "deviceid", "detail_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_attendance_detail
+-- ----------------------------
+ALTER TABLE "public"."t_attendance_detail" ADD PRIMARY KEY ("detail_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_attendance_statistics
+-- ----------------------------
+ALTER TABLE "public"."t_attendance_statistics" ADD PRIMARY KEY ("statistics_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_avatar
+-- ----------------------------
+ALTER TABLE "public"."t_avatar" ADD PRIMARY KEY ("avatar_id");
 
 -- ----------------------------
 -- Primary Key structure for table t_class
 -- ----------------------------
-ALTER TABLE "public"."t_class" ADD PRIMARY KEY ("classid");
+ALTER TABLE "public"."t_class" ADD PRIMARY KEY ("class_id");
 
 -- ----------------------------
--- Primary Key structure for table t_classseries
+-- Primary Key structure for table t_class_class_series
 -- ----------------------------
-ALTER TABLE "public"."t_classseries" ADD PRIMARY KEY ("classseriesid");
+ALTER TABLE "public"."t_class_class_series" ADD PRIMARY KEY ("class_series_id", "class_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_class_series
+-- ----------------------------
+ALTER TABLE "public"."t_class_series" ADD PRIMARY KEY ("class_series_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_class_series_completion
+-- ----------------------------
+ALTER TABLE "public"."t_class_series_completion" ADD PRIMARY KEY ("class_series_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_class_series_course
+-- ----------------------------
+ALTER TABLE "public"."t_class_series_course" ADD PRIMARY KEY ("class_series_id", "course_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_class_series_verifyed
+-- ----------------------------
+ALTER TABLE "public"."t_class_series_verifyed" ADD PRIMARY KEY ("class_series_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_class_student
+-- ----------------------------
+ALTER TABLE "public"."t_class_student" ADD PRIMARY KEY ("student_id", "class_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_class_teacher
+-- ----------------------------
+ALTER TABLE "public"."t_class_teacher" ADD PRIMARY KEY ("teacher_id", "class_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_class_verify
+-- ----------------------------
+ALTER TABLE "public"."t_class_verify" ADD PRIMARY KEY ("class_series_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_course
+-- ----------------------------
+ALTER TABLE "public"."t_course" ADD PRIMARY KEY ("course_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_course_institutions
+-- ----------------------------
+ALTER TABLE "public"."t_course_institutions" ADD PRIMARY KEY ("institutions_id", "course_id");
 
 -- ----------------------------
 -- Primary Key structure for table t_device
 -- ----------------------------
-ALTER TABLE "public"."t_device" ADD PRIMARY KEY ("deviceid");
+ALTER TABLE "public"."t_device" ADD PRIMARY KEY ("device_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_device_institutions
+-- ----------------------------
+ALTER TABLE "public"."t_device_institutions" ADD PRIMARY KEY ("device_id", "institutions_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_fingerprint
+-- ----------------------------
+ALTER TABLE "public"."t_fingerprint" ADD PRIMARY KEY ("fingerprint_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_idcard
+-- ----------------------------
+ALTER TABLE "public"."t_idcard" ADD PRIMARY KEY ("card_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_idcard_latest
+-- ----------------------------
+ALTER TABLE "public"."t_idcard_latest" ADD PRIMARY KEY ("card_id");
 
 -- ----------------------------
 -- Primary Key structure for table t_institutions
 -- ----------------------------
-ALTER TABLE "public"."t_institutions" ADD PRIMARY KEY ("institutionsid");
+ALTER TABLE "public"."t_institutions" ADD PRIMARY KEY ("institutions_id");
 
 -- ----------------------------
--- Primary Key structure for table t_region
+-- Primary Key structure for table t_institutions_apply
 -- ----------------------------
-ALTER TABLE "public"."t_region" ADD PRIMARY KEY ("regionid");
+ALTER TABLE "public"."t_institutions_apply" ADD PRIMARY KEY ("apply_email");
+
+-- ----------------------------
+-- Primary Key structure for table t_institutions_filed
+-- ----------------------------
+ALTER TABLE "public"."t_institutions_filed" ADD PRIMARY KEY ("institutions_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_institutions_prepare
+-- ----------------------------
+ALTER TABLE "public"."t_institutions_prepare" ADD PRIMARY KEY ("institutions_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_institutions_verify
+-- ----------------------------
+ALTER TABLE "public"."t_institutions_verify" ADD PRIMARY KEY ("apply_email", "institutions_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_operation_record
+-- ----------------------------
+ALTER TABLE "public"."t_operation_record" ADD PRIMARY KEY ("record_id");
 
 -- ----------------------------
 -- Primary Key structure for table t_student
 -- ----------------------------
-ALTER TABLE "public"."t_student" ADD PRIMARY KEY ("studentid");
+ALTER TABLE "public"."t_student" ADD PRIMARY KEY ("student_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_student_info
+-- ----------------------------
+ALTER TABLE "public"."t_student_info" ADD PRIMARY KEY ("student_id", "card_id", "fingerprint_id", "avatar_id");
 
 -- ----------------------------
 -- Primary Key structure for table t_teacher
 -- ----------------------------
-ALTER TABLE "public"."t_teacher" ADD PRIMARY KEY ("teacherid");
+ALTER TABLE "public"."t_teacher" ADD PRIMARY KEY ("teacher_id");
 
 -- ----------------------------
--- Foreign Key structure for table "public"."t_attendance"
+-- Primary Key structure for table t_teacher_info
 -- ----------------------------
-ALTER TABLE "public"."t_attendance" ADD FOREIGN KEY ("studentid") REFERENCES "public"."t_student" ("studentid") ON DELETE SET NULL ON UPDATE CASCADE;
-ALTER TABLE "public"."t_attendance" ADD FOREIGN KEY ("deviceid") REFERENCES "public"."t_device" ("deviceid") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "public"."t_teacher_info" ADD PRIMARY KEY ("teacher_id", "card_id");
 
 -- ----------------------------
--- Foreign Key structure for table "public"."t_class"
+-- Primary Key structure for table t_ukey
 -- ----------------------------
-ALTER TABLE "public"."t_class" ADD FOREIGN KEY ("classseriesid") REFERENCES "public"."t_classseries" ("classseriesid") ON DELETE CASCADE ON UPDATE SET NULL;
+ALTER TABLE "public"."t_ukey" ADD PRIMARY KEY ("id");
 
 -- ----------------------------
--- Foreign Key structure for table "public"."t_device"
+-- Primary Key structure for table t_update_record
 -- ----------------------------
-ALTER TABLE "public"."t_device" ADD FOREIGN KEY ("institutionsid") REFERENCES "public"."t_institutions" ("institutionsid") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "public"."t_update_record" ADD PRIMARY KEY ("record_id");
 
 -- ----------------------------
--- Foreign Key structure for table "public"."t_institutions"
+-- Primary Key structure for table t_verify_record
 -- ----------------------------
-ALTER TABLE "public"."t_institutions" ADD FOREIGN KEY ("regionid") REFERENCES "public"."t_region" ("regionid") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "public"."t_verify_record" ADD PRIMARY KEY ("record_id");
+
+-- ----------------------------
+-- Uniques structure for table tbl_accessResource
+-- ----------------------------
+ALTER TABLE "public"."tbl_accessResource" ADD UNIQUE ("resource_id");
+
+-- ----------------------------
+-- Primary Key structure for table tbl_accessResource
+-- ----------------------------
+ALTER TABLE "public"."tbl_accessResource" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Indexes structure for table tbl_account
+-- ----------------------------
+CREATE INDEX "idx_user_id" ON "public"."tbl_account" USING btree ("user_id");
+
+-- ----------------------------
+-- Uniques structure for table tbl_account
+-- ----------------------------
+ALTER TABLE "public"."tbl_account" ADD UNIQUE ("account");
+
+-- ----------------------------
+-- Primary Key structure for table tbl_account
+-- ----------------------------
+ALTER TABLE "public"."tbl_account" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Indexes structure for table tbl_account_role
+-- ----------------------------
+CREATE INDEX "tbl_account_role_role_id_idx" ON "public"."tbl_account_role" USING btree ("role_id");
+CREATE INDEX "tbl_account_role_user_id_idx" ON "public"."tbl_account_role" USING btree ("user_id");
+
+-- ----------------------------
+-- Primary Key structure for table tbl_account_role
+-- ----------------------------
+ALTER TABLE "public"."tbl_account_role" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Indexes structure for table tbl_authority
+-- ----------------------------
+CREATE INDEX "idx_authority_id" ON "public"."tbl_authority" USING btree ("authority_id");
+
+-- ----------------------------
+-- Uniques structure for table tbl_authority
+-- ----------------------------
+ALTER TABLE "public"."tbl_authority" ADD UNIQUE ("authority_name");
+
+-- ----------------------------
+-- Primary Key structure for table tbl_authority
+-- ----------------------------
+ALTER TABLE "public"."tbl_authority" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Indexes structure for table tbl_authority_resource
+-- ----------------------------
+CREATE INDEX "tbl_authority_resource_authority_id_idx" ON "public"."tbl_authority_resource" USING btree ("authority_id");
+CREATE INDEX "tbl_authority_resource_resource_id_idx" ON "public"."tbl_authority_resource" USING btree ("resource_id");
+
+-- ----------------------------
+-- Primary Key structure for table tbl_authority_resource
+-- ----------------------------
+ALTER TABLE "public"."tbl_authority_resource" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Uniques structure for table tbl_indicator_statistics
+-- ----------------------------
+ALTER TABLE "public"."tbl_indicator_statistics" ADD UNIQUE ("indicator_type", "indicator_name");
+
+-- ----------------------------
+-- Primary Key structure for table tbl_indicator_statistics
+-- ----------------------------
+ALTER TABLE "public"."tbl_indicator_statistics" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Indexes structure for table tbl_role
+-- ----------------------------
+CREATE INDEX "tbl_role_role_id_idx" ON "public"."tbl_role" USING btree ("role_id");
+
+-- ----------------------------
+-- Uniques structure for table tbl_role
+-- ----------------------------
+ALTER TABLE "public"."tbl_role" ADD UNIQUE ("role_name");
+
+-- ----------------------------
+-- Primary Key structure for table tbl_role
+-- ----------------------------
+ALTER TABLE "public"."tbl_role" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Indexes structure for table tbl_role_authority
+-- ----------------------------
+CREATE INDEX "tbl_role_authority_role_id_idx" ON "public"."tbl_role_authority" USING btree ("role_id");
+CREATE INDEX "tbl_role_authority_authority_id_idx" ON "public"."tbl_role_authority" USING btree ("authority_id");
+
+-- ----------------------------
+-- Primary Key structure for table tbl_role_authority
+-- ----------------------------
+ALTER TABLE "public"."tbl_role_authority" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Foreign Key structure for table "public"."t_institutions_verify"
+-- ----------------------------
+ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("institutions_id") REFERENCES "public"."t_institutions_prepare" ("institutions_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("apply_email") REFERENCES "public"."t_institutions_apply" ("apply_email") ON DELETE NO ACTION ON UPDATE NO ACTION;

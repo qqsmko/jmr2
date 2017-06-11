@@ -3,93 +3,93 @@ package com.jmr.model;
 import java.util.Date;
 
 public class Class {
-    private Integer classid;
+    private Integer classId;
 
-    private Integer classseriesid;
+    private String className;
 
-    private String classname;
+    private Integer studentCount;
 
-    private Integer applynumber;
+    private Integer state;
 
-    private Date startdate;
+    private String responsible;
 
-    private Date enddate;
+    private String telephone;
 
-    private String remark;
+    private Integer isDelete;
 
-    private String applyperson;
+    private String createBy;
 
-    private Integer applystate;
-    
-    public Integer getClassid() {
-        return classid;
+    private Date createAt;
+
+    public Integer getClassId() {
+        return classId;
     }
 
-    public void setClassid(Integer classid) {
-        this.classid = classid;
+    public void setClassId(Integer classId) {
+        this.classId = classId;
     }
 
-    public Integer getClassseriesid() {
-        return classseriesid;
+    public String getClassName() {
+        return className;
     }
 
-    public void setClassseriesid(Integer classseriesid) {
-        this.classseriesid = classseriesid;
+    public void setClassName(String className) {
+        this.className = className == null ? null : className.trim();
     }
 
-    public String getClassname() {
-        return classname;
+    public Integer getStudentCount() {
+        return studentCount;
     }
 
-    public void setClassname(String classname) {
-        this.classname = classname == null ? null : classname.trim();
+    public void setStudentCount(Integer studentCount) {
+        this.studentCount = studentCount;
     }
 
-    public Integer getApplynumber() {
-        return applynumber;
+    public Integer getState() {
+        return state;
     }
 
-    public void setApplynumber(Integer applynumber) {
-        this.applynumber = applynumber;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
-    public Date getStartdate() {
-        return startdate;
+    public String getResponsible() {
+        return responsible;
     }
 
-    public void setStartdate(Date startdate) {
-        this.startdate = startdate;
+    public void setResponsible(String responsible) {
+        this.responsible = responsible == null ? null : responsible.trim();
     }
 
-    public Date getEnddate() {
-        return enddate;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setEnddate(Date enddate) {
-        this.enddate = enddate;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone == null ? null : telephone.trim();
     }
 
-    public String getRemark() {
-        return remark;
+    public Integer getIsDelete() {
+        return isDelete;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
     }
 
-    public String getApplyperson() {
-        return applyperson;
+    public String getCreateBy() {
+        return createBy;
     }
 
-    public void setApplyperson(String applyperson) {
-        this.applyperson = applyperson == null ? null : applyperson.trim();
-    }
-    
-    public Integer getApplystate() {
-        return applystate;
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy == null ? null : createBy.trim();
     }
 
-    public void setApplystate(Integer applystate) {
-        this.applystate = applystate;
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 }

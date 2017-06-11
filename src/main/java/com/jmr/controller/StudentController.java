@@ -1,6 +1,7 @@
 package com.jmr.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +23,9 @@ import com.jmr.service.IClassService;
 @RequestMapping("")
 public class StudentController {
 	@Autowired
-	IStudentService t;
-	@Autowired
-	IClassService classService;
+	IStudentService studentService;
+//	@Autowired
+//	IClassService classService;
 	
 	@RequestMapping(value="student-list",method=RequestMethod.GET)
     public ModelAndView listStudent(){
@@ -67,6 +68,19 @@ public class StudentController {
         mav.setViewName("student-idcard");
         return mav;
     }
+	
+	@RequestMapping(value="student-idcard-list",method=RequestMethod.GET)
+    public ModelAndView doStudentIdcardListGET(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("student-idcard-list");
+        return mav;
+    }
+	
+	@RequestMapping(value="student-idcard-list/data-source",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+		return studentService.getIdCardData(draw,start,length);
+	}
 	
 	@RequestMapping(value="student-list",method=RequestMethod.POST)
 	@ResponseBody

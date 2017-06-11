@@ -3,58 +3,30 @@ package com.jmr.model;
 import java.util.Date;
 
 public class Student {
-    private Integer studentid;
-
-    private String name;
-
-    private Short gender;
-
-    private Date birthday;
+    private Integer studentId;
 
     private String telephone;
 
     private String email;
 
-    private String address;
-
-    private String nation;
-
     private Integer education;
 
-    private Integer insuredstate;
+    private Integer insuredState;
 
     private Integer state;
 
-    public Integer getStudentid() {
-        return studentid;
+    private Integer isDelete;
+
+    private String createBy;
+
+    private Date createAt;
+
+    public Integer getStudentId() {
+        return studentId;
     }
 
-    public void setStudentid(Integer studentid) {
-        this.studentid = studentid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public Short getGender() {
-        return gender;
-    }
-
-    public void setGender(Short gender) {
-        this.gender = gender;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
     public String getTelephone() {
@@ -73,22 +45,6 @@ public class Student {
         this.email = email == null ? null : email.trim();
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
-
-    public String getNation() {
-        return nation;
-    }
-
-    public void setNation(String nation) {
-        this.nation = nation == null ? null : nation.trim();
-    }
-
     public Integer getEducation() {
         return education;
     }
@@ -97,12 +53,12 @@ public class Student {
         this.education = education;
     }
 
-    public Integer getInsuredstate() {
-        return insuredstate;
+    public Integer getInsuredState() {
+        return insuredState;
     }
 
-    public void setInsuredstate(Integer insuredstate) {
-        this.insuredstate = insuredstate;
+    public void setInsuredState(Integer insuredState) {
+        this.insuredState = insuredState;
     }
 
     public Integer getState() {
@@ -111,5 +67,29 @@ public class Student {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy == null ? null : createBy.trim();
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 }

@@ -15,7 +15,7 @@
 	
 	<div class="page-container">
 
-		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加机构" data-href="student-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加机构</a></span></span> <!-- <span class="r">共有数据：<strong>88</strong> 条</span> --> </div>
+		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a><!--  <a class="btn btn-primary radius" data-title="添加机构" data-href="student-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加机构</a> --></span></span> <!-- <span class="r">共有数据：<strong>88</strong> 条</span> --> </div>
 		<div class="mt-20">
 		<table class="table table-border table-bordered table-hover table-bg table-sort">
 			<thead>
@@ -23,35 +23,18 @@
 					<th width="25"><input type="checkbox" name="" value=""></th>
 					<th width="">机构编码</th>
 					<th width="">机构名称</th>
-					<th width="">所属区县</th>
+					<!-- <th width="">所属区县</th> -->
 					<th width="">机构负责人</th>
 					<th width="">机构地址</th>
 					<th width="">教职工人数</th>
-					<th width="">批准时间</th>
+					<!-- <th width="">批准时间</th> -->
 					<th width="">上级主管部门</th>
 					<th width="">机构教师信息</th>
 					<th width="">机构开设专业</th>
-					<th width="">机构状态</th>
 					<th width="100">操作</th>
 				</tr>
 			</thead>
-			<tbody>
-				<!-- <c:forEach items="${sl}" var="s" varStatus="st">
-					<tr class="text-c">
-						<td><input type="checkbox" value="${s.institutionsid}" name="items"></td>
-						<td>${s.institutionsid}</td>
-						<td>${s.institutionsname}</td>
-						<td>${s.regionid}</td>
-						<td>${s.responsible}</td>
-						<td>${s.address}</td>
-						<td>${s.employeecount}</td>
-						<td><fmt:formatDate value="${s.applydate}" pattern="yyyy年MM月dd日 HH:mm:ss"/></td>
-						<td>荆门市人社局</td>
-						<td><u style="cursor:pointer" class="text-primary" onclick="member_show('','student-show.html?id=${s.institutionsid}','10001','360','400')">点击查看</u></td>
-						<td><u style="cursor:pointer" class="text-primary" onclick="member_show('','student-show.html?id=${s.institutionsid}','10001','360','400')">点击查看</u></td>
-						<td class="td-manage"><c:if test="${s.state==1}"><a style="text-decoration:none" onClick="member_stop(this,${s.institutionsid})" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a></c:if><c:if test="${s.state==2}"><a style="text-decoration:none" onClick="member_start(this,${s.institutionsid})" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a></c:if> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','institutions-update.html?id=${s.institutionsid}','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a><a title="删除" href="javascript:;" onclick="member_del(this,${s.institutionsid})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-					</tr>
-				</c:forEach> -->			
+			<tbody>		
 				</tbody>
 		</table>
 		</div>
@@ -76,18 +59,18 @@
 			},
 			"columns":[
 				{
-					"data":"institutionsid",
+					"data":"institutionsId",
 					"render":function(data, type, row, meta) {
             			return '<td><input type="checkbox" value="'+data+'" name="items"></td>'
         			}
 				},
-		        {"data":"institutionsid"},
-		        {"data":"institutionsname"},
-		        {"data":"regionid"},
+		        {"data":"institutionsId"},
+		        {"data":"institutionsName"},
+		        //{"data":"region_id"},
 		        {"data":"responsible"},
 		        {"data":"address"},
-		        {"data":"employeecount"},
-		        {"data":"applydate"},
+		        {"data":"employeeCount"},
+		        // {"data":"applyDate"},
 		        {
 		        	"render":function(data, type, row, meta) {
             			return '荆门市人社局'
@@ -104,22 +87,9 @@
         			}
         		},
         		{
-        			"data":"state",
-		        	"render":function(data, type, row, meta) {
-            			if(data == 1){
-            				return '<span class="label label-success radius">审核通过</span>'
-            			}else{
-            				return '<span class="label label-danger radius">待审核</span>'
-            			}
-        			}
-		        	// "render":function(data, type, row, meta) {
-           //  			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'institutions-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>'
-        			// }
-        		},
-        		{
         			"data":"institutionsid",
 		        	"render":function(data, type, row, meta) {
-            			return '<a onClick="member_stop(this,'+data+')">待审核</a> <a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'institutions-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>'
+            			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'institutions-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
         			}
         		}
 	    	]

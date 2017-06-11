@@ -13,18 +13,18 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("")
 public class ClassSeriesController {
-	@Autowired
+	//@Autowired
 	//IClassSeriesService t;
 	
-	@RequestMapping("class-series-list")
-    public ModelAndView listStudent(){
-        ModelAndView mav = new ModelAndView();
-        //List<t_class-series> sl = t.list();
-        
-        // 放入转发参数
-        //mav.addObject("sl", sl);
-        // 放入jsp路径
-        mav.setViewName("class-series-list");
-        return mav;
-    }
+//	@RequestMapping("class-series-list")
+//    public ModelAndView listStudent(){
+//        ModelAndView mav = new ModelAndView();
+//        //List<t_class-series> sl = t.list();
+//        
+//        // 放入转发参数
+//        //mav.addObject("sl", sl);
+//        // 放入jsp路径
+//        mav.setViewName("class-series-list");
+//        return mav;
+//    }
 }

@@ -1,26 +1,35 @@
 package com.jmr.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-import java.util.Date;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jmr.IDao.StudentMapper;
+import com.jmr.IDao.IdcardMapper;
+import com.jmr.model.Idcard;
 import com.jmr.service.IStudentService;
-import com.jmr.model.Student;
 
 @Service
-public class StudentService implements IStudentService {
+public class StudentService implements IStudentService{
 
 	@Autowired
     StudentMapper t;
+	@Autowired
+	IdcardMapper idcardMapper;
 	
-	public List<Student> list(){
-        return t.selectAll();
-    };
+	public Map<String,Object> getIdCardData(int draw,int start,int length){
+		int totalNum = idcardMapper.selectCount();
+		List<Idcard> data = idcardMapper.selectByPage(start, length);
+		Map<String,Object> ansMap = new HashMap<String,Object>();
+    	ansMap.put("draw",draw);
+    	ansMap.put("recordsTotal",totalNum);
+		ansMap.put("recordsFiltered",totalNum);
+		ansMap.put("data",data);
+    	return ansMap;
+	}
+	
     
     public Student getOne(int num){
     	return t.selectByPrimaryKey(num);

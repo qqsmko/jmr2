@@ -24,35 +24,35 @@ public class InstitutionsController {
 	@Autowired
 	IInstitutionsService institutionsService;
 	
-	@RequestMapping(value="institutions-list",method=RequestMethod.GET)
-    public ModelAndView doListGET(){
-        ModelAndView mav = new ModelAndView();
-        List<Institutions> sl = institutionsService.list();
-        
-        // 放入转发参数
-        mav.addObject("sl", sl);
-        // 放入jsp路径
-        mav.setViewName("institutions-list");
-        return mav;
-    }
-	
-	@RequestMapping(value="institutions-list",method=RequestMethod.POST)
-	@ResponseBody
-	public String doListPOST(@RequestParam int id){
-		System.out.println(id);
-		institutionsService.setOnesState(id, 1);
-        return "{\"success\":true}";
-    }
-	
-	@RequestMapping("institutions-check")
-    public ModelAndView institutionsCheck(){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("institutions-check");
-        return mav;
-    }
-	
-	@RequestMapping("institutions-new")
-    public ModelAndView institutionsNew(){
+//	@RequestMapping(value="institutions-list",method=RequestMethod.GET)
+//    public ModelAndView doListGET(){
+//        ModelAndView mav = new ModelAndView();
+//        List<Institutions> sl = institutionsService.list();
+//        
+//        // 放入转发参数
+//        mav.addObject("sl", sl);
+//        // 放入jsp路径
+//        mav.setViewName("institutions-list");
+//        return mav;
+//    }
+//	
+//	@RequestMapping(value="institutions-list",method=RequestMethod.POST)
+//	@ResponseBody
+//	public String doListPOST(@RequestParam int id){
+//		System.out.println(id);
+//		institutionsService.setOnesState(id, 1);
+//        return "{\"success\":true}";
+//    }
+//	
+//	@RequestMapping("institutions-check")
+//    public ModelAndView institutionsCheck(){
+//        ModelAndView mav = new ModelAndView();
+//        mav.setViewName("institutions-check");
+//        return mav;
+//    }
+//	
+	@RequestMapping(value="institutions-new",method=RequestMethod.GET)
+    public ModelAndView doInstitutionsNew(){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("institutions-new");
         return mav;
@@ -60,10 +60,65 @@ public class InstitutionsController {
 	
 	@RequestMapping(value="institutions-new/submit",method=RequestMethod.POST)
 	@ResponseBody
-	public String institutionsNewPOST(@RequestBody Institutions institutions){
-        institutionsService.insertOne(institutions);
-        return "{\"success\":true}";
+	public String doInstitutionsNewPOST(@RequestBody Map<String, Object> institution){
+        institutionsService.newInstitutionsApply(institution);
+		return "{\"success\":true}";
     }
+	
+	@RequestMapping(value="institutions-new-list",method=RequestMethod.GET)
+	public ModelAndView doNewListGET(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("institutions-new-list");
+		return mav;
+	}
+	
+	@RequestMapping(value="institutions-new-list",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doNewListGET(@RequestParam int id){
+		return institutionsService.InstitutionConfirm(id);
+	}
+	
+	@RequestMapping(value="institutions-new-list/delete",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doNewListDelete(@RequestParam int id){
+		return institutionsService.InstitutionReject(id);
+	}
+	
+	@RequestMapping(value="institutions-new-list/deleteall",method=RequestMethod.POST)
+	@ResponseBody
+	public String doNewListDeleteAll(@RequestParam (value = "ids[]",required = false,defaultValue = "") String[] ids){
+		int lens = ids.length;
+		for(int i=0;i<lens;i++){
+			try {
+			    int b = Integer.valueOf(ids[i]).intValue();
+			    institutionsService.InstitutionReject(b);
+			} catch (NumberFormatException e) {
+			    e.printStackTrace();
+			    return "{\"success\":false}";
+			}
+		}
+		return "{\"success\":true}";
+	}
+	
+	@RequestMapping(value="institutions-new-list/data-source",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doNewListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+		return institutionsService.getApplyData(draw,start,length);
+	}
+	
+	@RequestMapping(value="institutions-list",method=RequestMethod.GET)
+	public ModelAndView doListGET(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("institutions-list");
+		return mav;
+	}
+	
+	@RequestMapping(value="institutions-list/data-source",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+		return institutionsService.getInstitutionsData(draw,start,length);
+	}
+	
 	
 	@RequestMapping(value="institutions-list/delete",method=RequestMethod.POST)
 	@ResponseBody
@@ -107,15 +162,15 @@ public class InstitutionsController {
 		return institutions;
 	}
 	
-	@RequestMapping(value="institutions-list/data-source-test",method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String,Object> doDataPOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-		return institutionsService.getData(draw,start,length);
-	}
-	
-	@RequestMapping(value="institutions-list/data-source",method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String,Object> doDataTestPOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-		return institutionsService.getData(draw,start,length);
-	}
+//	@RequestMapping(value="institutions-list/data-source-test",method=RequestMethod.POST)
+//	@ResponseBody
+//	public Map<String,Object> doDataPOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+//		return institutionsService.getData(draw,start,length);
+//	}
+//	
+//	@RequestMapping(value="institutions-list/data-source",method=RequestMethod.POST)
+//	@ResponseBody
+//	public Map<String,Object> doDataTestPOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+//		return institutionsService.getData(draw,start,length);
+//	}
 }

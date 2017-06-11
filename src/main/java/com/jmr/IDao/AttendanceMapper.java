@@ -1,19 +1,16 @@
 package com.jmr.IDao;
 
-import java.util.List;
-
 import com.jmr.model.Attendance;
+import com.jmr.model.AttendanceKey;
 
 public interface AttendanceMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(AttendanceKey key);
 
     int insert(Attendance record);
 
     int insertSelective(Attendance record);
 
-    Attendance selectByPrimaryKey(Integer id);
-    
-    List<Attendance> selectAll();
+    Attendance selectByPrimaryKey(AttendanceKey key);
 
     int updateByPrimaryKeySelective(Attendance record);
 

@@ -2,151 +2,164 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jmr.IDao.ClassMapper">
   <resultMap id="BaseResultMap" type="com.jmr.model.Class">
-    <id column="classid" jdbcType="INTEGER" property="classid" />
-    <result column="classseriesid" jdbcType="INTEGER" property="classseriesid" />
-    <result column="classname" jdbcType="VARCHAR" property="classname" />
-    <result column="applynumber" jdbcType="INTEGER" property="applynumber" />
-    <result column="startdate" jdbcType="DATE" property="startdate" />
-    <result column="enddate" jdbcType="DATE" property="enddate" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="applyperson" jdbcType="VARCHAR" property="applyperson" />
-    <result column="applystate" jdbcType="VARCHAR" property="applystate" />
+    <id column="class_id" jdbcType="INTEGER" property="classId" />
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
+    <result column="student_count" jdbcType="INTEGER" property="studentCount" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="responsible" jdbcType="VARCHAR" property="responsible" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    classid, classseriesid, classname, applynumber, startdate, enddate, remark, applyperson, applystate
+    class_id, class_name, student_count, state, responsible, telephone, is_delete, create_by, 
+    create_at
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_class
-    where classid = #{classid,jdbcType=INTEGER}
+    where class_id = #{classId,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPage" parameterType="int" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_class
+    where is_delete = 0
+    <if test="start!=null and length!=null">
+    	limit #{length} offset #{start}
+    </if>
   </select>
-  <select id="selectApplication" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPageSQL" parameterType="int">
     select 
-    <include refid="Base_Column_List" />
-    from t_class
-    where applystate >= 2
+    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_class_series.class_series_name 
+    from (t_class LEFT JOIN t_class_class_series ON t_class.class_id = t_class_class_series.class_id) LEFT JOIN t_class_series on t_class_class_series.class_series_id = t_class_series.class_series_id;
+    where t_class.is_delete = 0
+    <if test="start!=null and length!=null">
+    	limit #{length} offset #{start}
+    </if>
   </select>
-  <select id="selectFinishied" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+  <select id="selectCount" resultType="int">
+    select count(*)
     from t_class
-    where applystate >= 3
+    where is_delete = 0
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_class
-    where classid = #{classid,jdbcType=INTEGER}
+    where class_id = #{classId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.jmr.model.Class">
-    insert into t_class (classid, classseriesid, classname, 
-      applynumber, startdate, enddate, 
-      remark, applyperson)
-    values (#{classid,jdbcType=INTEGER}, #{classseriesid,jdbcType=INTEGER}, #{classname,jdbcType=VARCHAR}, 
-      #{applynumber,jdbcType=INTEGER}, #{startdate,jdbcType=DATE}, #{enddate,jdbcType=DATE}, 
-      #{remark,jdbcType=VARCHAR}, #{applyperson,jdbcType=VARCHAR})
+    insert into t_class (class_id, class_name, student_count, 
+      state, responsible, telephone, 
+      is_delete, create_by, create_at
+      )
+    values (#{classId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{studentCount,jdbcType=INTEGER}, 
+      #{state,jdbcType=INTEGER}, #{responsible,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jmr.model.Class">
     insert into t_class
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="classid != null">
-        classid,
+      <if test="classId != null">
+        class_id,
       </if>
-      <if test="classseriesid != null">
-        classseriesid,
+      <if test="className != null">
+        class_name,
       </if>
-      <if test="classname != null">
-        classname,
+      <if test="studentCount != null">
+        student_count,
       </if>
-      <if test="applynumber != null">
-        applynumber,
+      <if test="state != null">
+        state,
       </if>
-      <if test="startdate != null">
-        startdate,
+      <if test="responsible != null">
+        responsible,
       </if>
-      <if test="enddate != null">
-        enddate,
+      <if test="telephone != null">
+        telephone,
       </if>
-      <if test="remark != null">
-        remark,
+      <if test="isDelete != null">
+        is_delete,
       </if>
-      <if test="applyperson != null">
-        applyperson,
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createAt != null">
+        create_at,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="classid != null">
-        #{classid,jdbcType=INTEGER},
+      <if test="classId != null">
+        #{classId,jdbcType=INTEGER},
       </if>
-      <if test="classseriesid != null">
-        #{classseriesid,jdbcType=INTEGER},
+      <if test="className != null">
+        #{className,jdbcType=VARCHAR},
       </if>
-      <if test="classname != null">
-        #{classname,jdbcType=VARCHAR},
+      <if test="studentCount != null">
+        #{studentCount,jdbcType=INTEGER},
       </if>
-      <if test="applynumber != null">
-        #{applynumber,jdbcType=INTEGER},
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
       </if>
-      <if test="startdate != null">
-        #{startdate,jdbcType=DATE},
+      <if test="responsible != null">
+        #{responsible,jdbcType=VARCHAR},
       </if>
-      <if test="enddate != null">
-        #{enddate,jdbcType=DATE},
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
       </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
       </if>
-      <if test="applyperson != null">
-        #{applyperson,jdbcType=VARCHAR},
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.Class">
     update t_class
     <set>
-      <if test="classseriesid != null">
-        classseriesid = #{classseriesid,jdbcType=INTEGER},
+      <if test="className != null">
+        class_name = #{className,jdbcType=VARCHAR},
       </if>
-      <if test="classname != null">
-        classname = #{classname,jdbcType=VARCHAR},
+      <if test="studentCount != null">
+        student_count = #{studentCount,jdbcType=INTEGER},
       </if>
-      <if test="applynumber != null">
-        applynumber = #{applynumber,jdbcType=INTEGER},
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
       </if>
-      <if test="startdate != null">
-        startdate = #{startdate,jdbcType=DATE},
+      <if test="responsible != null">
+        responsible = #{responsible,jdbcType=VARCHAR},
       </if>
-      <if test="enddate != null">
-        enddate = #{enddate,jdbcType=DATE},
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
       </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
       </if>
-      <if test="applyperson != null">
-        applyperson = #{applyperson,jdbcType=VARCHAR},
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where classid = #{classid,jdbcType=INTEGER}
+    where class_id = #{classId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jmr.model.Class">
     update t_class
-    set classseriesid = #{classseriesid,jdbcType=INTEGER},
-      classname = #{classname,jdbcType=VARCHAR},
-      applynumber = #{applynumber,jdbcType=INTEGER},
-      startdate = #{startdate,jdbcType=DATE},
-      enddate = #{enddate,jdbcType=DATE},
-      remark = #{remark,jdbcType=VARCHAR},
-      applyperson = #{applyperson,jdbcType=VARCHAR}
-    where classid = #{classid,jdbcType=INTEGER}
-  </update>
-  <update id="updateState" parameterType="com.jmr.model.Class">
-    update t_class
-    set
-      applystate = #{applystate,jdbcType=INTEGER}
-    where classid = #{classid,jdbcType=INTEGER}
+    set class_name = #{className,jdbcType=VARCHAR},
+      student_count = #{studentCount,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      responsible = #{responsible,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where class_id = #{classId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -36,35 +36,17 @@
 		<thead>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
-				<th width="80">id</th>
-				<th width="100">所属班次</th>
+				<th width="80">班级编号</th>
 				<th width="">班级名称</th>
-				<th width="80">申请人数</th>
-				<th width="80">开班时间</th>
-				<th width="80">结束时间</th>
-				<th width="">备注</th>
-				<!--  <th width="80">培训计划</th> -->
-				<th width="80">申请人</th>
+				<th width="100">所属班次</th>
+				<th width="80">班级人数</th>
+				<th width="80">班级负责人</th>
+				<th width="80">负责人手机</th>
+				<th width="80">本班学生详情</th>
+				<th width="80">本班教师详情</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
-		<tbody>
-			<c:forEach items="${sl}" var="s" varStatus="st">
-				<tr class="text-c">
-					<td><input type="checkbox" value="1" name=""></td>
-					<td>${s.classid}</td>
-					<td>${s.classseriesid}</td>
-					<td>${s.classname}</td>
-					<td>${s.applynumber}</td>
-					<td><fmt:formatDate value="${s.startdate}" pattern="yyyy年MM月dd日"/></td>
-					<td><fmt:formatDate value="${s.enddate}" pattern="yyyy年MM月dd日"/></td>
-					<td>${s.remark}</td>
-					<!-- <td><u style="cursor:pointer" class="text-primary" onclick="member_show('张三','class-show.html','10001','360','400')">编辑</u></td> -->
-					<td>${s.applyperson}</td>
-					<td class="td-manage"><a title="编辑" href="javascript:;" onclick="member_edit('编辑','class-update.html?id=${s.classid}','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <!-- <a style="text-decoration:none" class="ml-5" onClick="change_password('修改密码','change-password.html','10001','600','270')" href="javascript:;" title="修改密码"><i class="Hui-iconfont">&#xe63f;</i></a> --> <a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-				</tr>
-			</c:forEach>
-		</tbody>
 	</table>
 	</div>
 </div>
@@ -84,10 +66,43 @@ $(function(){
 	$('.table-sort').dataTable({
 		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
-		"aoColumnDefs": [
-		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-		  {"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
-		]
+		"searching": false,
+		"ordering": false,
+		"serverSide": true,
+		"ajax": {
+			"url":"class-list/data-source",
+			"type":"POST",
+		},
+		"columns":[
+			{
+				"data":"classId",
+				"render":function(data, type, row, meta) {
+        			return '<td><input type="checkbox" value="'+data+'" name="items"></td>'
+    			}
+			},
+	        {"data":"classId"},
+	        {"data":"className"},
+	        {"data":"classSeriesName"},
+	        {"data":"studentCount"},
+	        {"data":"responsible"},
+	        {"data":"telephone"},
+	        {
+	        	"render":function(data, type, row, meta) {
+        			return '点击查看'
+    			}
+    		},
+	        {
+	        	"render":function(data, type, row, meta) {
+        			return '点击查看'
+    			}
+    		},
+    		{
+    			"data":"institutionsid",
+	        	"render":function(data, type, row, meta) {
+        			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'institutions-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
+    			}
+    		}
+    	]
 	});
 	
 });

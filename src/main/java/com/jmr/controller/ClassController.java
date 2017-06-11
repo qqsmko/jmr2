@@ -1,6 +1,12 @@
 package com.jmr.controller;
 
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +26,46 @@ import com.jmr.service.IClassService;
 @RequestMapping("")
 public class ClassController {
 	@Autowired
-	IClassService t;
+	IClassService classService;
+	
+	@RequestMapping(value="class-list/data-source",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doClassListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+		return classService.getClassesData(draw, start, length);
+	}
+	
+	@RequestMapping(value="class-series-list/data-source",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doClassSeriesListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+		return classService.getClassSeriesData(draw, start, length);
+	}
+	
+	@RequestMapping(value="course-list/data-source",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doCourseListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+		return classService.getCourseData(draw, start, length);
+	}
+	
+	@RequestMapping(value="class-list",method=RequestMethod.GET)
+	public ModelAndView doClassListGET(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("class-list");
+	    return mav;
+	}
+	
+	@RequestMapping(value="class-series-list",method=RequestMethod.GET)
+	public ModelAndView doClassSeriesListGET(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("class-series-list");
+	    return mav;
+	}
+	
+	@RequestMapping(value="course-list",method=RequestMethod.GET)
+	public ModelAndView doCourseListGET(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("course-list");
+	    return mav;
+	}
 	
 	@RequestMapping(value="class-list",method=RequestMethod.GET)
     public ModelAndView listClass(){
@@ -155,4 +200,34 @@ public class ClassController {
 		t.insertOne(classname, applynumber, startdate, enddate, remark, applyperson);
 		return "{\"success\":true}";
 	}
+	
+	public static Map<String, Object> transBean2Map(Object obj) {  
+		  
+        if(obj == null){  
+            return null;  
+        }          
+        Map<String, Object> map = new HashMap<String, Object>();  
+        try {  
+            BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());  
+            PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();  
+            for (PropertyDescriptor property : propertyDescriptors) {  
+                String key = property.getName();  
+  
+                // 过滤class属性  
+                if (!key.equals("class")) {  
+                    // 得到property对应的getter方法  
+                    Method getter = property.getReadMethod();  
+                    Object value = getter.invoke(obj);  
+  
+                    map.put(key, value);  
+                }  
+  
+            }  
+        } catch (Exception e) {  
+            System.out.println("transBean2Map Error " + e);  
+        }  
+  
+        return map;  
+  
+    }  
 }

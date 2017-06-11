@@ -11,8 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.jmr.model.Class;
 import com.jmr.service.IClassService;
 
-//import com.jmr.model.t_completion;
-//import com.jmr.service.ICompletionService;
+import com.jmr.model.t_completion;
+import com.jmr.service.ICompletionService;
 
 @Controller
 @RequestMapping("")

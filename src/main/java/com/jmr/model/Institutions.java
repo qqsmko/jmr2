@@ -2,16 +2,10 @@ package com.jmr.model;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class Institutions {
-    private Integer institutionsid;
+    private Integer institutionsId;
 
-    private Integer regionid;
-
-    private String institutionsname;
-
-    private String institutionscode;
+    private String institutionsName;
 
     private String responsible;
 
@@ -19,46 +13,28 @@ public class Institutions {
 
     private String address;
 
-    private Integer employeecount;
+    private Integer employeeCount;
 
-    private Date applydate;
+    private Integer isDelete;
 
-    private Date approvaldate;
+    private String createBy;
 
-    private Integer state;
+    private Date createAt;
 
-    private String applyemail;
-    
-    public Integer getInstitutionsid() {
-        return institutionsid;
+    public Integer getInstitutionsId() {
+        return institutionsId;
     }
 
-    public void setInstitutionsid(Integer institutionsid) {
-        this.institutionsid = institutionsid;
+    public void setInstitutionsId(Integer institutionsId) {
+        this.institutionsId = institutionsId;
     }
 
-    public Integer getRegionid() {
-        return regionid;
+    public String getInstitutionsName() {
+        return institutionsName;
     }
 
-    public void setRegionid(Integer regionid) {
-        this.regionid = regionid;
-    }
-
-    public String getInstitutionsname() {
-        return institutionsname;
-    }
-
-    public void setInstitutionsname(String institutionsname) {
-        this.institutionsname = institutionsname == null ? null : institutionsname.trim();
-    }
-
-    public String getInstitutionscode() {
-        return institutionscode;
-    }
-
-    public void setInstitutionscode(String institutionscode) {
-        this.institutionscode = institutionscode == null ? null : institutionscode.trim();
+    public void setInstitutionsName(String institutionsName) {
+        this.institutionsName = institutionsName == null ? null : institutionsName.trim();
     }
 
     public String getResponsible() {
@@ -85,44 +61,35 @@ public class Institutions {
         this.address = address == null ? null : address.trim();
     }
 
-    public Integer getEmployeecount() {
-        return employeecount;
+    public Integer getEmployeeCount() {
+        return employeeCount;
     }
 
-    public void setEmployeecount(Integer employeecount) {
-        this.employeecount = employeecount;
+    public void setEmployeeCount(Integer employeeCount) {
+        this.employeeCount = employeeCount;
     }
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    public Date getApplydate() {
-        return applydate;
+    public Integer getIsDelete() {
+        return isDelete;
     }
 
-    public void setApplydate(Date applydate) {
-        this.applydate = applydate;
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
     }
 
-    public Date getApprovaldate() {
-        return approvaldate;
+    public String getCreateBy() {
+        return createBy;
     }
 
-    public void setApprovaldate(Date approvaldate) {
-        this.approvaldate = approvaldate;
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy == null ? null : createBy.trim();
     }
 
-    public Integer getState() {
-        return state;
+    public Date getCreateAt() {
+        return createAt;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
-    }
-    
-    public void setApplyemail(String applyemail){
-    	this.applyemail = applyemail;
-    }
-    
-    public String getApplyemail(){
-    	return applyemail;
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 }
