@@ -105,7 +105,14 @@ public class ClassService implements IClassService {
 	}
 	
 	public Map<String,Object> getClassesDataTest(int draw,int start,int length){
-    	return classMapper.selectByPageSQL(start, length);
+		int totalNum = classMapper.selectCount();
+		List<Map<String,Object>> data = classMapper.selectByPageSQL(start, length);
+		Map<String,Object> ansMap = new HashMap<String,Object>();
+		ansMap.put("draw",draw);
+    	ansMap.put("recordsTotal",totalNum);
+		ansMap.put("recordsFiltered",totalNum);
+		ansMap.put("data",data);
+    	return ansMap;
 	}
 	
 	public Map<String,Object> getClassSeriesVerifyData(int draw,int start,int length){

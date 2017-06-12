@@ -18,7 +18,7 @@ public interface ClassMapper {
     
     List<Class> selectByPage(@Param("start")int start,@Param("length")int length);
     
-    Map<String, Object> selectByPageSQL(@Param("start")int start,@Param("length")int length);
+    List<Map<String, Object>> selectByPageSQL(@Param("start")int start,@Param("length")int length);
     
     int selectCount();
 

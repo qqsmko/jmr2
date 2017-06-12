@@ -43,15 +43,39 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>身份证号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="cardnum" name="cardnum" readonly="true">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="cardId" name="cardId" readonly="true">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>学生姓名：</label>
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>姓名：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="studentname" name="studentname" readonly="true">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="cardName" name="cardName" readonly="true">
 			</div>
 		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>性别：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="gender" name="gender" readonly="true">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>民族：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="nation" name="nation" readonly="true">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>生日：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="birthday" name="birthday" readonly="true">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>地址：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="address" name="address" readonly="true">
+			</div>
+		</div>		
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
 				<button onClick="article_save_submit();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 确认信息并下一步</button>
@@ -140,15 +164,19 @@ $(function(){
 
 function getMockData(){
 	//$("#form-article-add").cardnum.value = '203203199303030303';
-	document.getElementById("cardnum").value='203203199303030303';
-	document.getElementById("studentname").value='小明';
+	document.getElementById("cardId").value='420108199506063316';
+	document.getElementById("cardName").value='马云';
+	document.getElementById("gender").value='男';
+	document.getElementById("nation").value='汉族';
+	document.getElementById("birthday").value='1986-08-08';
+	document.getElementById("address").value='北京海淀区牡丹园6号';
 }
 
 function article_save_submit(){
 	//alert('dianji!');
 	var data = $("#form-article-add").serializeObject(); //自动将form表单封装成json  
     alert(JSON.stringify(data));
-    if(data.cardnum!=null && data.studentname!=null){
+    if(data.cardId!=null){
 		window.location.href="student-fingerprint"
 	}else{
 		alert("没有读取到数据，请重试！");

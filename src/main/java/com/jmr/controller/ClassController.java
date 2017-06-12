@@ -31,8 +31,14 @@ public class ClassController {
 	@RequestMapping(value="class-list/data-source",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> doClassListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-		return classService.getClassesData(draw, start, length);
+		return classService.getClassesDataTest(draw, start, length);
 	}
+	
+//	@RequestMapping(value="class-list/test",method=RequestMethod.POST)
+//	@ResponseBody
+//	public Map<String,Object> doClassListDataSourc(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+//		return classService.getClassesDataTest(draw, start, length);
+//	}
 	
 	@RequestMapping(value="class-series-list/data-source",method=RequestMethod.POST)
 	@ResponseBody

@@ -2,8 +2,10 @@ package com.jmr.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Idcard {
-    private Integer cardId;
+    private String cardId;
 
     private String cardName;
 
@@ -21,12 +23,12 @@ public class Idcard {
 
     private Date createAt;
 
-    public Integer getCardId() {
+    public String getCardId() {
         return cardId;
     }
 
-    public void setCardId(Integer cardId) {
-        this.cardId = cardId;
+    public void setCardId(String cardId) {
+        this.cardId = cardId == null ? null : cardId.trim();
     }
 
     public String getCardName() {
@@ -53,6 +55,7 @@ public class Idcard {
         this.nation = nation == null ? null : nation.trim();
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public Date getBirthday() {
         return birthday;
     }

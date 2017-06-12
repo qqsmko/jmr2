@@ -28,22 +28,20 @@
 <title>用户管理</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 培训机构 <span class="c-gray en">&gt;</span> 培训班级管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 学员登记 <span class="c-gray en">&gt;</span> 身份证管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加用户" data-href="class-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加班级</a></span></span> <span class="r">共有数据：<strong>88</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加用户" data-href="class-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增身份证</a></span></span></div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
-				<th width="80">班级编号</th>
-				<th width="">班级名称</th>
-				<th width="100">所属班次</th>
-				<th width="80">班级人数</th>
-				<th width="80">班级负责人</th>
-				<th width="80">负责人手机</th>
-				<th width="80">本班学生详情</th>
-				<th width="80">本班教师详情</th>
+				<th width="80">身份证号</th>
+				<th width="">姓名</th>
+				<th width="100">性别</th>
+				<th width="80">民族</th>
+				<th width="80">生日</th>
+				<th width="80">地址</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
@@ -70,32 +68,33 @@ $(function(){
 		"ordering": false,
 		"serverSide": true,
 		"ajax": {
-			"url":"class-list/data-source",
+			"url":"student-idcard-list/data-source",
 			"type":"POST",
 		},
 		"columns":[
 			{
-				"data":"class_id",
+				"data":"cardId",
 				"render":function(data, type, row, meta) {
         			return '<td><input type="checkbox" value="'+data+'" name="items"></td>'
     			}
 			},
-	        {"data":"class_id"},
-	        {"data":"class_name"},
-	        {"data":"class_series_name"},
-	        {"data":"student_count"},
-	        {"data":"responsible"},
-	        {"data":"telephone"},
+			{"data":"cardId"},
+	        {"data":"cardName"},
 	        {
-	        	"render":function(data, type, row, meta) {
-        			return '点击查看'
+				"data":"gender",
+				"render":function(data, type, row, meta) {
+        			if(data == 1){
+        				return '<td>男</td>'
+        			}else if(data ==2){
+        				return '<td>女</td>'
+        			}else{
+        				return '<td>错误</td>'
+        			}
     			}
-    		},
-	        {
-	        	"render":function(data, type, row, meta) {
-        			return '点击查看'
-    			}
-    		},
+			},
+	        {"data":"nation"},
+	        {"data":"birthday"},
+	        {"data":"address"},
     		{
     			"data":"institutionsid",
 	        	"render":function(data, type, row, meta) {

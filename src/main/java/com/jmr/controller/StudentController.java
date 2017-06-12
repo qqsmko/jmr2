@@ -47,41 +47,41 @@ public class StudentController {
 //        mav.setViewName("student-classinfo");
 //        return mav;
 //    }
-//	
-//	@RequestMapping(value="student-fingerprint",method=RequestMethod.GET)
-//    public ModelAndView doStudentFingerPrintGET(){
-//        ModelAndView mav = new ModelAndView();
-//        mav.setViewName("student-fingerprint");
-//        return mav;
-//    }
-//	
-//	@RequestMapping(value="student-image",method=RequestMethod.GET)
-//    public ModelAndView doStudentImageGET(){
-//        ModelAndView mav = new ModelAndView();
-//        mav.setViewName("student-image");
-//        return mav;
-//    }
-//	
-//	@RequestMapping(value="student-idcard",method=RequestMethod.GET)
-//    public ModelAndView doStudentIdcardGET(){
-//        ModelAndView mav = new ModelAndView();
-//        mav.setViewName("student-idcard");
-//        return mav;
-//    }
-//	
-//	@RequestMapping(value="student-idcard-list",method=RequestMethod.GET)
-//    public ModelAndView doStudentIdcardListGET(){
-//        ModelAndView mav = new ModelAndView();
-//        mav.setViewName("student-idcard-list");
-//        return mav;
-//    }
-//	
-//	@RequestMapping(value="student-idcard-list/data-source",method=RequestMethod.POST)
-//	@ResponseBody
-//	public Map<String,Object> doListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-//		return studentService.getIdCardData(draw,start,length);
-//	}
-//	
+	
+	@RequestMapping(value="student-fingerprint",method=RequestMethod.GET)
+    public ModelAndView doStudentFingerPrintGET(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("student-fingerprint");
+        return mav;
+    }
+	
+	@RequestMapping(value="student-image",method=RequestMethod.GET)
+    public ModelAndView doStudentImageGET(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("student-image");
+        return mav;
+    }
+	
+	@RequestMapping(value="student-idcard",method=RequestMethod.GET)
+    public ModelAndView doStudentIdcardGET(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("student-idcard");
+        return mav;
+    }
+	
+	@RequestMapping(value="student-idcard-list",method=RequestMethod.GET)
+    public ModelAndView doStudentIdcardListGET(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("student-idcard-list");
+        return mav;
+    }
+	
+	@RequestMapping(value="student-idcard-list/data-source",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+		return studentService.getIdCardData(draw,start,length);
+	}
+	
 //	@RequestMapping(value="student-list",method=RequestMethod.POST)
 //	@ResponseBody
 //	public String doPost(HttpServletRequest request, HttpServletResponse response){

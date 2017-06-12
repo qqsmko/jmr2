@@ -2,6 +2,8 @@ package com.jmr.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ClassSeries {
     private Integer classSeriesId;
 
@@ -45,6 +47,7 @@ public class ClassSeries {
         this.classesCount = classesCount;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public Date getStartTime() {
         return startTime;
     }
@@ -53,6 +56,7 @@ public class ClassSeries {
         this.startTime = startTime;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public Date getEndTime() {
         return endTime;
     }

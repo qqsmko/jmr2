@@ -2,6 +2,8 @@ package com.jmr.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class InstitutionsVerify extends InstitutionsVerifyKey {
     private Date approvalDate;
 
@@ -15,6 +17,7 @@ public class InstitutionsVerify extends InstitutionsVerifyKey {
 
     private Integer applyState;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getApprovalDate() {
         return approvalDate;
     }
@@ -47,6 +50,7 @@ public class InstitutionsVerify extends InstitutionsVerifyKey {
         this.createAt = createAt;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getApplyDate() {
         return applyDate;
     }
