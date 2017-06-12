@@ -2,11 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/cc/workspace/jmr_test_10/webapp/WEB-INF/lib/commons-dbcp-1.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/cc/workspace/jmr_test_10/webapp/WEB-INF/lib/commons-dbcp2-2.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/cc/workspace/jmr_test_10/webapp/WEB-INF/lib/commons-logging-1.2.jar"/>
@@ -46,5 +41,6 @@
 	<classpathentry kind="lib" path="C:/Users/cc/workspace/jmr_test_10/webapp/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/cc/workspace/jmr_test_10/webapp/WEB-INF/lib/taglibs-standard-jstlel-1.2.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/cc/workspace/jmr_test_10/webapp/WEB-INF/lib/taglibs-standard-spec-1.2.5.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>

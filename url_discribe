@@ -1,0 +1,44 @@
+网址					说明				角色			备注
+attendance-get			考勤打卡			机构老师
+attendance-list			考勤表				机构老师		
+class-add				新增班级			机构老师		只能看到自己机构的
+class-application-plus	开班审核			管理部门
+class-application 		开班审核查看		机构老师		同上
+class-list 				班级信息 			机构老师		同上
+class-list/data-source	班级信息json数据	机构老师		只能看到自己机构的
+class-series-list		班次信息			机构老师		只能看到自己机构的
+class-list/data-source	班次信息json数据	机构老师		只能看到自己机构的
+course-list				课程信息 			机构老师		只能看到自己机构的
+course-list/data-source	课程信息jason数据 	机构老师		只能看到自己机构的
+class-list/delete		删除班级 			机构老师		只能看到自己机构的
+class-list/deleteall	批量删除 			机构老师		只能看到自己机构的
+completion-set			结业管理			机构老师		只能看到自己机构的
+completion-check		过程检查			管理部门
+completion-checking		详细检查页面		管理部门
+completion-detail		对照学生信息		管理部门
+completion-info			已完成检查信息		管理部门
+institutions-new		机构申请 			机构老师
+institutions-new/submit	机构申请提交 		机构老师
+institutions-new-list	机构申请审核 		管理部门
+institutions-list 		机构管理 			管理部门
+institutions-update		机构信息更新 		管理部门
+ledger-application		台账申请 			机构老师		只能看到自己机构的
+ledger-list				台账管理 			机构老师		只能看到自己机构的
+login					登录界面 			全部
+student-add				新增学生			机构老师		只能看到自己机构的
+student-classinfo		学生选班			机构老师
+student-fingerprint		学生采集指纹		机构老师
+student-idcard			学生采集身份证		机构老师
+student-image			学生采集头像		机构老师
+student-list			学生管理			机构老师		只能看到自己机构的
+student-show			学生详情			机构老师		只能看到自己机构的
+student-update			学生信息更新		机构老师		只能看到自己机构的
+teacher-add				新增教师			机构老师		只能看到自己机构的
+teacher-list			教师管理			机构老师		只能看到自己机构的
+teacher-update			教师信息更新		机构老师		只能看到自己机构的
+ukey-check-plus			检查Ukey签字		管理部门
+ukey-check 				检查Ukey签字		机构老师
+ukey-list				Ukey管理			管理部门
+video-branch-list		视频网点管理		管理部门
+video-list 				机构视频管理		管理部门
+welcome					欢迎页				全部

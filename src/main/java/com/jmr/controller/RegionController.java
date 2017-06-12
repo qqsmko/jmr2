@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 //import com.jmr.model.Region;
-//import com.jmr.model.Region;
-import com.jmr.service.IRegionService;
+//import com.jmr.service.IRegionService;
 
 @Controller
 @RequestMapping("")

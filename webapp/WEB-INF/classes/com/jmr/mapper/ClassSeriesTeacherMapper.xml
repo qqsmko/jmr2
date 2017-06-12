@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jmr.IDao.ClassSeriesTeacherMapper">
+  <resultMap id="BaseResultMap" type="com.jmr.model.ClassSeriesTeacher">
+    <id column="teacher_id" jdbcType="INTEGER" property="teacherId" />
+    <id column="class_id" jdbcType="INTEGER" property="classId" />
+    <result column="is_head" jdbcType="INTEGER" property="isHead" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    teacher_id, class_id, is_head, is_delete, create_by, create_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.jmr.model.ClassSeriesTeacherKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_class_teacher
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+      and class_id = #{classId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPage" parameterType="int" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_class_teacher
+    where is_delete = 0
+    <if test="start!=null and length!=null">
+    	limit #{length} offset #{start}
+    </if>
+  </select>
+  <select id="selectCount" resultType="int">
+    select count(*)
+    from t_class_teacher
+    where is_delete = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.jmr.model.ClassSeriesTeacherKey">
+    delete from t_class_teacher
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+      and class_id = #{classId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.ClassSeriesTeacher">
+    insert into t_class_teacher (teacher_id, class_id, is_head, 
+      is_delete, create_by, create_at
+      )
+    values (#{teacherId,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, #{isHead,jdbcType=INTEGER}, 
+      #{isDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.ClassSeriesTeacher">
+    insert into t_class_teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+      <if test="classId != null">
+        class_id,
+      </if>
+      <if test="isHead != null">
+        is_head,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="classId != null">
+        #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="isHead != null">
+        #{isHead,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.ClassSeriesTeacher">
+    update t_class_teacher
+    <set>
+      <if test="isHead != null">
+        is_head = #{isHead,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+      and class_id = #{classId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.ClassSeriesTeacher">
+    update t_class_teacher
+    set is_head = #{isHead,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+      and class_id = #{classId,jdbcType=INTEGER}
+  </update>
+</mapper>

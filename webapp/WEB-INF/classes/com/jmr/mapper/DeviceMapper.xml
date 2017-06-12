@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jmr.IDao.DeviceMapper">
+  <resultMap id="BaseResultMap" type="com.jmr.model.Device">
+    <id column="device_id" jdbcType="INTEGER" property="deviceId" />
+    <result column="device_code" jdbcType="VARCHAR" property="deviceCode" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="buy_time" jdbcType="DATE" property="buyTime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    device_id, device_code, description, buy_time, state, is_delete, create_by, create_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_device
+    where device_id = #{deviceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_device
+    where device_id = #{deviceId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.Device">
+    insert into t_device (device_id, device_code, description, 
+      buy_time, state, is_delete, 
+      create_by, create_at)
+    values (#{deviceId,jdbcType=INTEGER}, #{deviceCode,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{buyTime,jdbcType=DATE}, #{state,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.Device">
+    insert into t_device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="deviceCode != null">
+        device_code,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="buyTime != null">
+        buy_time,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceCode != null">
+        #{deviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null">
+        #{buyTime,jdbcType=DATE},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.Device">
+    update t_device
+    <set>
+      <if test="deviceCode != null">
+        device_code = #{deviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null">
+        buy_time = #{buyTime,jdbcType=DATE},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where device_id = #{deviceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.Device">
+    update t_device
+    set device_code = #{deviceCode,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      buy_time = #{buyTime,jdbcType=DATE},
+      state = #{state,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where device_id = #{deviceId,jdbcType=INTEGER}
+  </update>
+</mapper>

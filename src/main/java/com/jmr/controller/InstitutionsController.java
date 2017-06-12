@@ -78,89 +78,89 @@ public class InstitutionsController {
 		return institutionsService.InstitutionConfirm(id);
 	}
 	
-	@RequestMapping(value="institutions-new-list/delete",method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String,Object> doNewListDelete(@RequestParam int id){
-		return institutionsService.InstitutionReject(id);
-	}
-	
-	@RequestMapping(value="institutions-new-list/deleteall",method=RequestMethod.POST)
-	@ResponseBody
-	public String doNewListDeleteAll(@RequestParam (value = "ids[]",required = false,defaultValue = "") String[] ids){
-		int lens = ids.length;
-		for(int i=0;i<lens;i++){
-			try {
-			    int b = Integer.valueOf(ids[i]).intValue();
-			    institutionsService.InstitutionReject(b);
-			} catch (NumberFormatException e) {
-			    e.printStackTrace();
-			    return "{\"success\":false}";
-			}
-		}
-		return "{\"success\":true}";
-	}
-	
-	@RequestMapping(value="institutions-new-list/data-source",method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String,Object> doNewListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-		return institutionsService.getApplyData(draw,start,length);
-	}
-	
-	@RequestMapping(value="institutions-list",method=RequestMethod.GET)
-	public ModelAndView doListGET(){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("institutions-list");
-		return mav;
-	}
-	
-	@RequestMapping(value="institutions-list/data-source",method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String,Object> doListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-		return institutionsService.getInstitutionsData(draw,start,length);
-	}
-	
-	
-	@RequestMapping(value="institutions-list/delete",method=RequestMethod.POST)
-	@ResponseBody
-	public String doDelete(@RequestParam int id){
-		institutionsService.deleteOne(id);
-		return "{\"success\":true}";
-	}
-	
-	@RequestMapping(value="institutions-list/deleteall",method=RequestMethod.POST)
-	@ResponseBody
-	public String doDeleteAll(@RequestParam (value = "ids[]",required = false,defaultValue = "") String[] ids){
-		int lens = ids.length;
-		for(int i=0;i<lens;i++){
-			try {
-			    int b = Integer.valueOf(ids[i]).intValue();
-			    institutionsService.deleteOne(b);
-			} catch (NumberFormatException e) {
-			    e.printStackTrace();
-			    return "{\"success\":false}";
-			}
-		}
-		return "{\"success\":true}";
-	}
-	
-	@RequestMapping(value="institutions-update",method=RequestMethod.GET)
-    public ModelAndView doUpdateGET(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView mav = new ModelAndView();
-		
-		String id = request.getParameter("id");
-		mav.addObject("id",id);
-		
-        // ����jsp·��
-        mav.setViewName("institutions-update");
-        return mav;
-	}
-	
-	@RequestMapping(value="institutions-update/submit",method=RequestMethod.POST)
-	@ResponseBody
-	public Institutions doUpdatePOST(@RequestBody Institutions institutions){
-		institutionsService.updateOne(institutions);
-		return institutions;
-	}
+//	@RequestMapping(value="institutions-new-list/delete",method=RequestMethod.POST)
+//	@ResponseBody
+//	public Map<String,Object> doNewListDelete(@RequestParam int id){
+//		return institutionsService.InstitutionReject(id);
+//	}
+//	
+//	@RequestMapping(value="institutions-new-list/deleteall",method=RequestMethod.POST)
+//	@ResponseBody
+//	public String doNewListDeleteAll(@RequestParam (value = "ids[]",required = false,defaultValue = "") String[] ids){
+//		int lens = ids.length;
+//		for(int i=0;i<lens;i++){
+//			try {
+//			    int b = Integer.valueOf(ids[i]).intValue();
+//			    institutionsService.InstitutionReject(b);
+//			} catch (NumberFormatException e) {
+//			    e.printStackTrace();
+//			    return "{\"success\":false}";
+//			}
+//		}
+//		return "{\"success\":true}";
+//	}
+//	
+//	@RequestMapping(value="institutions-new-list/data-source",method=RequestMethod.POST)
+//	@ResponseBody
+//	public Map<String,Object> doNewListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+//		return institutionsService.getApplyData(draw,start,length);
+//	}
+//	
+//	@RequestMapping(value="institutions-list",method=RequestMethod.GET)
+//	public ModelAndView doListGET(){
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("institutions-list");
+//		return mav;
+//	}
+//	
+//	@RequestMapping(value="institutions-list/data-source",method=RequestMethod.POST)
+//	@ResponseBody
+//	public Map<String,Object> doListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+//		return institutionsService.getInstitutionsData(draw,start,length);
+//	}
+//	
+//	
+//	@RequestMapping(value="institutions-list/delete",method=RequestMethod.POST)
+//	@ResponseBody
+//	public String doDelete(@RequestParam int id){
+//		institutionsService.deleteOne(id);
+//		return "{\"success\":true}";
+//	}
+//	
+//	@RequestMapping(value="institutions-list/deleteall",method=RequestMethod.POST)
+//	@ResponseBody
+//	public String doDeleteAll(@RequestParam (value = "ids[]",required = false,defaultValue = "") String[] ids){
+//		int lens = ids.length;
+//		for(int i=0;i<lens;i++){
+//			try {
+//			    int b = Integer.valueOf(ids[i]).intValue();
+//			    institutionsService.deleteOne(b);
+//			} catch (NumberFormatException e) {
+//			    e.printStackTrace();
+//			    return "{\"success\":false}";
+//			}
+//		}
+//		return "{\"success\":true}";
+//	}
+//	
+//	@RequestMapping(value="institutions-update",method=RequestMethod.GET)
+//    public ModelAndView doUpdateGET(HttpServletRequest request, HttpServletResponse response){
+//		ModelAndView mav = new ModelAndView();
+//		
+//		String id = request.getParameter("id");
+//		mav.addObject("id",id);
+//		
+//        // ����jsp·��
+//        mav.setViewName("institutions-update");
+//        return mav;
+//	}
+//	
+//	@RequestMapping(value="institutions-update/submit",method=RequestMethod.POST)
+//	@ResponseBody
+//	public Institutions doUpdatePOST(@RequestBody Institutions institutions){
+//		institutionsService.updateOne(institutions);
+//		return institutions;
+//	}
 	
 //	@RequestMapping(value="institutions-list/data-source-test",method=RequestMethod.POST)
 //	@ResponseBody

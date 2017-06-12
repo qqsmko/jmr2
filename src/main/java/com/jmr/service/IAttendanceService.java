@@ -6,6 +6,6 @@ import com.jmr.model.Attendance;
 
 public interface IAttendanceService {
 
-	List<Attendance> list();
-	void insertOne(Attendance attendance);
+//	List<Attendance> list();
+//	void insertOne(Attendance attendance);
 }

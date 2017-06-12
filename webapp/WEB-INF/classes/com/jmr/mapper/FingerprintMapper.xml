@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jmr.IDao.FingerprintMapper">
+  <resultMap id="BaseResultMap" type="com.jmr.model.Fingerprint">
+    <id column="fingerprint_id" jdbcType="INTEGER" property="fingerprintId" />
+    <result column="fingerprint_img" jdbcType="VARCHAR" property="fingerprintImg" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fingerprint_id, fingerprint_img, is_delete, create_by, create_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_fingerprint
+    where fingerprint_id = #{fingerprintId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_fingerprint
+    where fingerprint_id = #{fingerprintId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.Fingerprint">
+    insert into t_fingerprint (fingerprint_id, fingerprint_img, is_delete, 
+      create_by, create_at)
+    values (#{fingerprintId,jdbcType=INTEGER}, #{fingerprintImg,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
+      #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.Fingerprint">
+    insert into t_fingerprint
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fingerprintId != null">
+        fingerprint_id,
+      </if>
+      <if test="fingerprintImg != null">
+        fingerprint_img,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fingerprintId != null">
+        #{fingerprintId,jdbcType=INTEGER},
+      </if>
+      <if test="fingerprintImg != null">
+        #{fingerprintImg,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.Fingerprint">
+    update t_fingerprint
+    <set>
+      <if test="fingerprintImg != null">
+        fingerprint_img = #{fingerprintImg,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fingerprint_id = #{fingerprintId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.Fingerprint">
+    update t_fingerprint
+    set fingerprint_img = #{fingerprintImg,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where fingerprint_id = #{fingerprintId,jdbcType=INTEGER}
+  </update>
+</mapper>

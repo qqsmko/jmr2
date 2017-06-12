@@ -12,10 +12,11 @@ public interface IInstitutionsService {
 	Map<String,Object> getInstitutionsData(int draw,int start,int length);
 	Map<String,Object> InstitutionReject(int id);
 	Map<String,Object> InstitutionConfirm(int id);
-	List<Institutions> list();
-	Map<String,Object> getData(int draw,int start,int length);
-	void deleteOne(int num);
-	void updateOne(Institutions institutions);
-	void insertOne(Institutions institutions);
-	void setOnesState(int id,int num);
+	
+//	List<Institutions> list();
+//	Map<String,Object> getData(int draw,int start,int length);
+//	void deleteOne(int num);
+//	void updateOne(Institutions institutions);
+//	void insertOne(Institutions institutions);
+//	void setOnesState(int id,int num);
 }

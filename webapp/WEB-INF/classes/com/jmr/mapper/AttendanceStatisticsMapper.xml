@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jmr.IDao.AttendanceStatisticsMapper">
+  <resultMap id="BaseResultMap" type="com.jmr.model.AttendanceStatistics">
+    <id column="statistics_id" jdbcType="INTEGER" property="statisticsId" />
+    <result column="statistics_name" jdbcType="VARCHAR" property="statisticsName" />
+    <result column="statisics_value" jdbcType="VARCHAR" property="statisicsValue" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    statistics_id, statistics_name, statisics_value, is_delete, create_by, create_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_attendance_statistics
+    where statistics_id = #{statisticsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_attendance_statistics
+    where statistics_id = #{statisticsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.AttendanceStatistics">
+    insert into t_attendance_statistics (statistics_id, statistics_name, statisics_value, 
+      is_delete, create_by, create_at
+      )
+    values (#{statisticsId,jdbcType=INTEGER}, #{statisticsName,jdbcType=VARCHAR}, #{statisicsValue,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.AttendanceStatistics">
+    insert into t_attendance_statistics
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="statisticsId != null">
+        statistics_id,
+      </if>
+      <if test="statisticsName != null">
+        statistics_name,
+      </if>
+      <if test="statisicsValue != null">
+        statisics_value,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="statisticsId != null">
+        #{statisticsId,jdbcType=INTEGER},
+      </if>
+      <if test="statisticsName != null">
+        #{statisticsName,jdbcType=VARCHAR},
+      </if>
+      <if test="statisicsValue != null">
+        #{statisicsValue,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.AttendanceStatistics">
+    update t_attendance_statistics
+    <set>
+      <if test="statisticsName != null">
+        statistics_name = #{statisticsName,jdbcType=VARCHAR},
+      </if>
+      <if test="statisicsValue != null">
+        statisics_value = #{statisicsValue,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where statistics_id = #{statisticsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.AttendanceStatistics">
+    update t_attendance_statistics
+    set statistics_name = #{statisticsName,jdbcType=VARCHAR},
+      statisics_value = #{statisicsValue,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where statistics_id = #{statisticsId,jdbcType=INTEGER}
+  </update>
+</mapper>

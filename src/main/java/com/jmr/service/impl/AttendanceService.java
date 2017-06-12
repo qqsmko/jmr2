@@ -11,14 +11,14 @@ import com.jmr.service.IAttendanceService;
 
 @Service
 public class AttendanceService implements IAttendanceService {
-	@Autowired
-    AttendanceMapper t;
-	
-    public List<Attendance> list(){
-        return t.selectAll();
-    };
-    
-    public void insertOne(Attendance attendance){
-    	t.insertSelective(attendance);
-    }
+//	@Autowired
+//    AttendanceMapper t;
+//	
+//    public List<Attendance> list(){
+//        return t.selectAll();
+//    };
+//    
+//    public void insertOne(Attendance attendance){
+//    	t.insertSelective(attendance);
+//    }
 }
