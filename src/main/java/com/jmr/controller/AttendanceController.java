@@ -20,15 +20,15 @@ import com.jmr.service.IStudentService;
 @Controller
 @RequestMapping("")
 public class AttendanceController {
-//	@Autowired
-//	IAttendanceService t;
-//	@Autowired
-//	IStudentService studentService;
-//	
-//	@RequestMapping("attendance-list")
-//    public ModelAndView listStudent(){
-//        ModelAndView mav = new ModelAndView();
-//        List<Attendance> sl = t.list();
+	@Autowired
+	IAttendanceService attendanceService;
+	@Autowired
+	IStudentService studentService;
+	
+	@RequestMapping("attendance-list")
+    public ModelAndView listStudent(){
+        ModelAndView mav = new ModelAndView();
+//        List<Attendance> sl = attendanceService.list();
 //        List<String> sid = new ArrayList();
 //        int lens = sl.size();
 //		for(int i=0;i<lens;i++){
@@ -39,28 +39,28 @@ public class AttendanceController {
 //        // 放入转发参数
 //        mav.addObject("sl", sl);
 //        mav.addObject("sid",sid);
-//        // 放入jsp路径
-//        mav.setViewName("attendance-list");
-//        return mav;
-//    }
-//	
-//	@RequestMapping(value="attendance-submit",method=RequestMethod.POST)
-//	@ResponseBody
-//	public String doAttendanceSubmit(@RequestBody Attendance attendance){
-//		attendance.setDatatime(new Date(new Date().getTime()));
-//		t.insertOne(attendance);
-//		return "{\"success\":true}";
-//	}
-//	
-//	@RequestMapping("attendance-get")
-//    public ModelAndView attendanceGet(){
-//        ModelAndView mav = new ModelAndView();
+        // 放入jsp路径
+        mav.setViewName("attendance-list");
+        return mav;
+    }
+	
+	@RequestMapping(value="attendance-submit",method=RequestMethod.POST)
+	@ResponseBody
+	public String doAttendanceSubmit(@RequestBody Attendance attendance){
+		attendance.setDatatime(new Date(new Date().getTime()));
+//		attendanceService.insertOne(attendance);
+		return "{\"success\":true}";
+	}
+	
+	@RequestMapping("attendance-get")
+    public ModelAndView attendanceGet(){
+        ModelAndView mav = new ModelAndView();
 //        List<Student> sl = studentService.list();
 //        
 //        // 放入转发参数
 //        mav.addObject("sl", sl);
-//        // 放入jsp路径
-//        mav.setViewName("attendance-get");
-//        return mav;
-//    }
+        // 放入jsp路径
+        mav.setViewName("attendance-get");
+        return mav;
+    }
 }

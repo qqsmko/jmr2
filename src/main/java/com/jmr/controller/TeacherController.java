@@ -23,17 +23,12 @@ public class TeacherController {
 	@Autowired
 	ITeacherService teacherService;
 	
-//	@RequestMapping(value="teacher-list",method=RequestMethod.GET)
-//    public ModelAndView listTeacher(){
-//        ModelAndView mav = new ModelAndView();
-//        List<Teacher> sl = teacherService.list();
-//        
-//        // 放入转发参数
-//        mav.addObject("sl", sl);
-//        // 放入jsp路径
-//        mav.setViewName("teacher-list");
-//        return mav;
-//    }
+	@RequestMapping(value="teacher-list",method=RequestMethod.GET)
+    public ModelAndView listTeacher(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("teacher-list");
+        return mav;
+    }
 //	
 //	@RequestMapping(value="teacher-list/delete",method=RequestMethod.POST)
 //	@ResponseBody
@@ -104,10 +99,10 @@ public class TeacherController {
 //		teacherService.insertOne(name);
 //		return "{\"success\":true}";
 //	}
-//	
-//	@RequestMapping(value="teacher-list/data-source",method=RequestMethod.POST)
-//	@ResponseBody
-//	public Map<String,Object> doDataTestPOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-//		return teacherService.getData(draw,start,length);
-//	}
+	
+	@RequestMapping(value="teacher-list/data-source",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doDataTestPOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+		return teacherService.getData(draw, start, length);
+	}
 }

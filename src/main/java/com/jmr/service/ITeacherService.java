@@ -13,7 +13,7 @@ public interface ITeacherService {
 //	
 //	List<Teacher> list();
 //	
-//	Map<String,Object> getData(int draw,int start,int length);
+	Map<String,Object> getData(int draw,int start,int length);
 //    
 //	void deleteOne(int num);
 //	
