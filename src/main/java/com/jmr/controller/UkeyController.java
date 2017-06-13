@@ -25,6 +25,15 @@ public class UkeyController {
         return mav;
     }
 	
+	@RequestMapping("ukey-add")
+    public ModelAndView UkeyAdd(){
+        ModelAndView mav = new ModelAndView();
+
+        // 放入jsp路径
+        mav.setViewName("ukey-add");
+        return mav;
+    }
+	
 	@RequestMapping("ukey-check")
     public ModelAndView UkeyCheck(){
         ModelAndView mav = new ModelAndView();

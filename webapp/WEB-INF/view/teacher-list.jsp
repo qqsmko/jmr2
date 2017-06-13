@@ -96,12 +96,8 @@ $(function(){
         			}
     			}
 			},
+			{"data":"nation"},
 	        {"data":"birthday"},
-	        {
-	        	"render":function(data, type, row, meta) {
-        			return '点击查看'
-    			}
-    		},
     		{
     			"data":"education",
 	        	"render":function(data, type, row, meta) {

@@ -30,7 +30,7 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> Ukey管理 <span class="c-gray en">&gt;</span> Ukey管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加用户" data-href="student-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新建Ukey签名</a></span></span> <!-- <span class="r">共有数据：<strong>88</strong> 条</span> --> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加用户" data-href="student-add.html" onclick="member_show('新建ukey','ukey-add.html','10001','960','600')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新建Ukey</a></span></span></div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
@@ -38,7 +38,6 @@
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="80">ID</th>
 				<th width="100">用户名</th>
-				<th width="100">Ukey图片</th>
 				<th width="40">标识码</th>
 				<th width="20">信息绑定</th>
 				<th width="20">签证绑定</th>
@@ -50,7 +49,6 @@
 				<td><input type="checkbox" value="1" name="items"></td>
 				<td width="80">1</td>
 				<td width="100">qqsmko</td>
-				<td width="100"><img src="img/timg.jpg"  alt="timg" height="100" width="150"/></td>
 				<td width="40">10785cf86bb7e09e73071cce3d3c06d7</td>
 				<td><span class="label label-success radius">已绑定</span></td>
 				<td><span class="label label-success radius">已绑定</span></td>

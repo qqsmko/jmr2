@@ -20,21 +20,21 @@ public class CompletionController {
 //	@Autowired
 //	IClassService t;
 //	
-//	@RequestMapping("completion-set")
-//    public ModelAndView listStudent(){
-//        ModelAndView mav = new ModelAndView();
+	@RequestMapping("completion-set")
+    public ModelAndView listStudent(){
+        ModelAndView mav = new ModelAndView();
 //        List<Class> sl = t.listFinishied();
 //        
 //        // 放入转发参数
 //        mav.addObject("sl", sl);
 //        // 放入jsp路径
-//        mav.setViewName("completion-set");
-//        return mav;
-//    }
-//	
-//	@RequestMapping("completion-check")
-//    public ModelAndView completionCheck(@RequestParam int checkstate){
-//        ModelAndView mav = new ModelAndView();
+        mav.setViewName("completion-set");
+        return mav;
+    }
+	
+	@RequestMapping("completion-check")
+    public ModelAndView completionCheck(@RequestParam int checkstate){
+        ModelAndView mav = new ModelAndView();
 //        List<Class> sl = t.listFinishied();
 //        
 //        // 放入转发参数
@@ -42,28 +42,28 @@ public class CompletionController {
 //        mav.addObject("checkState", checkstate);
 //        System.out.println(checkstate);
 //        // 放入jsp路径
-//        mav.setViewName("completion-check");
-//        return mav;
-//    }
-//	
-//	@RequestMapping("completion-detail")
-//    public ModelAndView completionDetail(){
-//        ModelAndView mav = new ModelAndView();
-//        mav.setViewName("completion-detail");
-//        return mav;
-//    }
-//	
-//	@RequestMapping("completion-info")
-//    public ModelAndView completionInfo(){
-//        ModelAndView mav = new ModelAndView();
-//        mav.setViewName("completion-info");
-//        return mav;
-//    }
-//	
-//	@RequestMapping("completion-checking")
-//    public ModelAndView completionChecking(){
-//        ModelAndView mav = new ModelAndView();
-//        mav.setViewName("completion-checking");
-//        return mav;
-//    }
+        mav.setViewName("completion-check");
+        return mav;
+    }
+	
+	@RequestMapping("completion-detail")
+    public ModelAndView completionDetail(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("completion-detail");
+        return mav;
+    }
+	
+	@RequestMapping("completion-info")
+    public ModelAndView completionInfo(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("completion-info");
+        return mav;
+    }
+	
+	@RequestMapping("completion-checking")
+    public ModelAndView completionChecking(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("completion-checking");
+        return mav;
+    }
 }
