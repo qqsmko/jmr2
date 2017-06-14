@@ -31,7 +31,7 @@
     where dev_hao = #{devHao,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.jmr.model.Ip_device" >
-    insert into Ip_device (dev_hao, ip, http_port, 
+    insert into ip_device (dev_hao, ip, http_port, 
       dev_port, username, password, 
       dev_stype, dev_adr, dev_description, 
       institution, inst_route, dev_effect, 

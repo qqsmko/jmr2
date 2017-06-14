@@ -26,21 +26,19 @@
 <meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
-<input type="hidden" id="TenantId" name="TenantId" value="" />
-<div class="header"></div>
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
-    <form class="form form-horizontal" action="index.html" method="post">
+    <form class="form form-horizontal" id="loginForm" name="loginForm" action="index.html" method="post">
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
-          <input id="" name="" type="text" placeholder="账户" class="input-text size-L">
+          <input id="username" name="username" type="text" placeholder="账户" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-xs-8">
-          <input id="" name="" type="password" placeholder="密码" class="input-text size-L">
+          <input id="password" name="password" type="password" placeholder="密码" class="input-text size-L">
         </div>
       </div>
       <!--  <div class="row cl">
@@ -50,14 +48,14 @@
       </div> -->
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-          <label for="online">
+          <!-- <label for="online">
             <input type="checkbox" name="online" id="online" value="">
-            使我保持登录状态</label>
+            使我保持登录状态</label> -->
         </div>
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-          <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+          <input name="" type="button" onClick="loginSubmit();" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
           <input name="" type="button" class="btn btn-default radius size-L" value="&nbsp;机构申请人口&nbsp;" onClick="window.location.href='institutions-new'">
           <input name="" type="button" class="btn btn-default radius size-L" value="&nbsp;已开班级公示&nbsp;">
         </div>
@@ -70,13 +68,16 @@
 <script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
 <!--此乃百度统计代码，请自行删除-->
 <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
+
+function loginSubmit(){
+  if(document.getElementById("username").value==''){
+    alert('请输入用户名');
+  }else if(document.getElementById("password").value==''){
+    alert('请输入密码');
+  }else{
+    document.getElementById("loginForm").submit();
+  }
+}
 </script>
 <!--/此乃百度统计代码，请自行删除
 </body>

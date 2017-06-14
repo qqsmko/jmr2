@@ -21,4 +21,5 @@ public class AttendanceService implements IAttendanceService {
 //    public void insertOne(Attendance attendance){
 //    	t.insertSelective(attendance);
 //    }
+	
 }

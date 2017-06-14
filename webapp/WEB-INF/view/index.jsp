@@ -1,21 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 
 <!DOCTYPE HTML>
 <html>
 
 	<jsp:include page="head_.jsp">
-		<jsp:param name="title_name" value="管理系统首页" />
+		<jsp:param name="title_name" value="荆门市就业局公共就业信息化系统" />
 	</jsp:include>
 
 <body>
 
 	<jsp:include page="nav_.jsp">
-		<jsp:param name="nav_name" value="荆州人社局公共就业信息化系统" />
+		<jsp:param name="nav_name" value="荆门市就业局公共就业信息化系统" />
 		<jsp:param name="nav_version" value="V0.9" />
 	</jsp:include>
 
-	<jsp:include page="left_.jsp" />
+	<c:if test='${type=="root"}'>
+		<jsp:include page="left_.jsp" />
+	</c:if>
+	<c:if test='${type=="teacher"}'>
+		<jsp:include page="left_teacher.jsp" />
+	</c:if>
+	<c:if test='${type=="admin"}'>
+		<jsp:include page="left_admin.jsp" />
+	</c:if>
 
 	<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
 	<section class="Hui-article-box">
