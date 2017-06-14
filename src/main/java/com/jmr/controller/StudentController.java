@@ -78,8 +78,21 @@ public class StudentController {
 	
 	@RequestMapping(value="student-idcard-list/data-source",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> doListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+	public Map<String,Object> doIdcardDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
 		return studentService.getIdCardData(draw,start,length);
+	}
+	
+	@RequestMapping(value="student-list",method=RequestMethod.GET)
+	public ModelAndView listStudent(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("student-list");
+		return mav;
+	}
+	
+	@RequestMapping(value="student-list/data-source",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+		return studentService.getStudentData(draw, start, length);
 	}
 	
 //	@RequestMapping(value="student-list",method=RequestMethod.POST)

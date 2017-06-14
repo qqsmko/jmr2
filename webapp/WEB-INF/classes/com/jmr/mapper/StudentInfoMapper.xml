@@ -25,6 +25,26 @@
       and fingerprint_id = #{fingerprintId,jdbcType=INTEGER}
       and avatar_id = #{avatarId,jdbcType=INTEGER}
   </select>
+  <select id="selectByPageSQL" parameterType="int" resultType="java.util.HashMap">
+	SELECT
+		t_student_info.student_id,avatar_img,fingerprint_img,card_name,gender,t_student.telephone,email,nation,birthday,education,insured_state
+	FROM
+		t_student_info
+	LEFT JOIN t_student ON t_student_info.student_id = t_student.student_id
+	LEFT JOIN t_idcard ON t_student_info.card_id = t_idcard.card_id
+	LEFT JOIN t_avatar ON t_student_info.avatar_id = t_avatar.avatar_id
+	LEFT JOIN t_fingerprint ON t_student_info.fingerprint_id = t_fingerprint.fingerprint_id
+	WHERE
+		t_student_info.is_delete = 0
+	<if test="start!=null and length!=null">
+    	limit #{length} offset #{start}
+    </if>
+   </select>
+  <select id="selectCount" resultType="int">
+    select count(*)
+    from t_class
+    where is_delete = 0
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.jmr.model.StudentInfoKey">
     delete from t_student_info
     where student_id = #{studentId,jdbcType=INTEGER}

@@ -8,14 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jmr.IDao.IdcardMapper;
+import com.jmr.IDao.StudentInfoMapper;
 import com.jmr.model.Idcard;
 import com.jmr.service.IStudentService;
 
 @Service
 public class StudentService implements IStudentService{
 
-//	@Autowired
-//    StudentMapper t;
+	@Autowired
+    StudentInfoMapper studentInfoMapper;
 	@Autowired
 	IdcardMapper idcardMapper;
 	
@@ -31,8 +32,8 @@ public class StudentService implements IStudentService{
 	}
 
 	public Map<String,Object> getStudentData(int draw,int start,int length){
-		int totalNum = idcardMapper.selectCount();
-		List<Idcard> data = idcardMapper.selectByPage(start, length);
+		int totalNum = studentInfoMapper.selectCount();
+		List<Map<String,Object>> data = studentInfoMapper.selectByPageSQL(start, length);
 		Map<String,Object> ansMap = new HashMap<String,Object>();
     	ansMap.put("draw",draw);
     	ansMap.put("recordsTotal",totalNum);

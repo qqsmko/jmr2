@@ -43,39 +43,20 @@
 		<thead>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
-				<th width="80">ID</th>
-				<th width="100">用户名</th>
-				<th width="100">出生日期</th>
+				<th width="80">学生编号</th>
+				<th width="100">学生照片</th>
+				<th width="100">学生指纹</th>
+				<th width="100">学生姓名</th>
 				<th width="40">性别</th>
-				<th width="90">手机</th>
-				<th width="150">邮箱</th>
-				<th width="">地址</th>
-				<th width="50">民族</th>
+				<th width="">手机</th>
+				<th width="">邮箱</th>
+				<th width="">民族</th>
+				<th width="">生日</th>
 				<th width="50">学历</th>
 				<th width="50">参保状态</th>
-				<th width="50">学员状态</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
-		<tbody>
-			<c:forEach items="${sl}" var="s" varStatus="st">
-				<tr class="text-c">
-					<td><input type="checkbox" value="${s.studentid}" name="items"></td>
-					<td>${s.studentid}</td>
-					<td><u style="cursor:pointer" class="text-primary" onclick="member_show('${s.name}','student-show.html?id=${s.studentid}','10001','360','400')">${s.name}</u></td>
-					<td><fmt:formatDate value="${s.birthday}" pattern="yyyy年MM月dd日"/></td>
-					<td> <c:if test="${s.gender==1}"> 男 </c:if> <c:if test="${s.gender==2}"> 女 </c:if> </td>
-					<td>${s.telephone}</td>
-					<td>${s.email}</td>
-					<td class="text-l">${s.address}</td>
-					<td>${s.nation}</td>
-					<td><c:if test="${s.education==1}">本科</c:if><c:if test="${s.education==2}">研究生</c:if></td>
-					<td class=""><c:if test="${s.insuredstate==1}"><span class="label label-success radius">已参保</span></c:if><c:if test="${s.insuredstate==2}"><span class="label label-defaunt radius">未参保</span></c:if></td>
-					<td class="td-status"><c:if test="${s.state==1}"><span class="label label-success radius">已启用</span></c:if><c:if test="${s.state==2}"><span class="label label-defaunt radius">未启用</span></c:if></td>
-					<td class="td-manage"><c:if test="${s.state==1}"><a style="text-decoration:none" onClick="member_stop(this,${s.studentid})" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a></c:if><c:if test="${s.state==2}"><a style="text-decoration:none" onClick="member_start(this,${s.studentid})" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a></c:if> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','student-update.html?id=${s.studentid}','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a><a title="删除" href="javascript:;" onclick="member_del(this,${s.studentid})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-				</tr>
-			</c:forEach>
-		</tbody>
 	</table>
 	</div>
 </div>
@@ -95,10 +76,89 @@ $(function(){
 	$('.table-sort').dataTable({
 		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
-		"aoColumnDefs": [
-		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-		  {"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
-		]
+		"searching": false,
+		"ordering": false,
+		"serverSide": true,
+		"ajax": {
+			"url":"student-list/data-source",
+			"type":"POST",
+		},
+		"columns":[
+			{
+				"data":"student_id",
+				"render":function(data, type, row, meta) {
+        			return '<td><input type="checkbox" value="'+data+'" name="items"></td>'
+    			}
+			},
+			{"data":"student_id"},
+			{
+				"data":"avatar_img",
+				"render":function(data, type, row, meta) {
+        			return '<img src="img/'+data+'"  alt="'+data+'" height="130" width="100"/>'
+    			}
+			},
+			{
+				"data":"fingerprint_img",
+				"render":function(data, type, row, meta) {
+        			return '<img src="img/'+data+'"  alt="'+data+'" height="130" width="100"/>'
+    			}
+			},
+			{"data":"card_name"},
+	        {
+				"data":"gender",
+				"render":function(data, type, row, meta) {
+        			if(data == 1){
+        				return '<td>男</td>'
+        			}else if(data ==2){
+        				return '<td>女</td>'
+        			}else{
+        				return '<td>错误</td>'
+        			}
+    			}
+			},
+	        {"data":"telephone"},
+	        {"data":"email"},
+	        {"data":"nation"},
+	        {"data":"birthday"},
+	        {
+				"data":"education",
+				"render":function(data, type, row, meta) {
+        			if(data == 1){
+        				return '<td>本科</td>'
+        			}else if(data ==2){
+        				return '<td>硕士</td>'
+        			}else if(data ==3){
+        				return '<td>博士</td>'
+        			}else if(data ==4){
+        				return '<td>博士后</td>'
+        			}else if(data ==5){
+        				return '<td>大专</td>'
+        			}else if(data ==6){
+        				return '<td>高中及以下</td>'
+        			}else{
+        				return '<td>错误</td>'
+        			}
+    			}
+			},
+			{
+				"data":"insured_state",
+				"render":function(data, type, row, meta) {
+        			if(data == 1){
+        				return '<span class="label label-success radius">已参保</span>'
+        			}else if(data ==0){
+        				return '<span class="label label-danger radius">未参保</span>'
+        			}else{
+        				return '<td>错误</td>'
+        			}
+    			}
+			},
+    		{
+    			"data":"student_id",
+	        	"render":function(data, type, row, meta) {
+        			return '<td class="td-manage"><a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'teacher-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>'
+    			}
+    		}
+    	]
 	});
 	
 });
