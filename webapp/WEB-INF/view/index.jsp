@@ -11,18 +11,32 @@
 
 <body>
 
-	<jsp:include page="nav_.jsp">
-		<jsp:param name="nav_name" value="荆门市就业局公共就业信息化系统" />
-		<jsp:param name="nav_version" value="V0.9" />
-	</jsp:include>
 
-	<c:if test='${type=="root"}'>
-		<jsp:include page="left_.jsp" />
-	</c:if>
 	<c:if test='${type=="teacher"}'>
+		<jsp:include page="nav_.jsp">
+			<jsp:param name="nav_name" value="荆门市就业局公共就业信息化系统" />
+			<jsp:param name="nav_version" value="V0.9" />
+			<jsp:param name="nav_type" value="机构负责人" />
+			<jsp:param name="nav_id" value="teacher" />
+		</jsp:include>
 		<jsp:include page="left_teacher.jsp" />
 	</c:if>
+	<c:if test='${type=="root"}'>
+		<jsp:include page="nav_.jsp">
+			<jsp:param name="nav_name" value="荆门市就业局公共就业信息化系统" />
+			<jsp:param name="nav_version" value="V0.9" />
+			<jsp:param name="nav_type" value="超级管理员" />
+			<jsp:param name="nav_id" value="root" />
+		</jsp:include>
+		<jsp:include page="left_.jsp" />
+	</c:if>
 	<c:if test='${type=="admin"}'>
+		<jsp:include page="nav_.jsp">
+			<jsp:param name="nav_name" value="荆门市就业局公共就业信息化系统" />
+			<jsp:param name="nav_version" value="V0.9" />
+			<jsp:param name="nav_type" value="就业局管理员" />
+			<jsp:param name="nav_id" value="admin" />
+		</jsp:include>
 		<jsp:include page="left_admin.jsp" />
 	</c:if>
 

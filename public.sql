@@ -11,9 +11,21 @@ Target Server Type    : PGSQL
 Target Server Version : 90602
 File Encoding         : 65001
 
-Date: 2017-06-11 23:29:49
+Date: 2017-06-14 21:25:08
 */
 
+
+-- ----------------------------
+-- Sequence structure for t_account_account_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."t_account_account_id_seq";
+CREATE SEQUENCE "public"."t_account_account_id_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 5
+ CACHE 1;
+SELECT setval('"public"."t_account_account_id_seq"', 5, true);
 
 -- ----------------------------
 -- Sequence structure for t_ukey_id_seq
@@ -48,6 +60,7 @@ CREATE SEQUENCE "public"."tbl_account_id_seq"
  MAXVALUE 9223372036854775807
  START 1
  CACHE 1;
+SELECT setval('"public"."tbl_account_id_seq"', 1, true);
 
 -- ----------------------------
 -- Sequence structure for tbl_account_role_id_seq
@@ -116,6 +129,34 @@ CREATE SEQUENCE "public"."tbl_role_id_seq"
  CACHE 1;
 
 -- ----------------------------
+-- Table structure for t_account
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_account";
+CREATE TABLE "public"."t_account" (
+"account_id" int4 DEFAULT nextval('t_account_account_id_seq'::regclass) NOT NULL,
+"account" varchar(32) COLLATE "default" NOT NULL,
+"password" varchar(128) COLLATE "default" NOT NULL,
+"create_at" timestamp(6) NOT NULL,
+"institutions_id" int4,
+"account_type" int4 NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+COMMENT ON COLUMN "public"."t_account"."account_type" IS '1=超管 2=机构老师 3=人社科管理员';
+
+-- ----------------------------
+-- Records of t_account
+-- ----------------------------
+INSERT INTO "public"."t_account" VALUES ('5', 'admin', '21232f297a57a5a743894a0e4a801fc3
+', '2017-06-14 16:58:12', null, '3');
+INSERT INTO "public"."t_account" VALUES ('2', 'root', '63a9f0ea7bb98050796b649e85481845
+', '2017-06-14 16:56:28', null, '1');
+INSERT INTO "public"."t_account" VALUES ('3', 'teacher1', '41c8949aa55b8cb5dbec662f34b62df3', '2017-06-14 16:57:20', '229677', '2');
+INSERT INTO "public"."t_account" VALUES ('4', 'teacher2', 'ccffb0bb993eeb79059b31e1611ec353
+', '2017-06-09 16:57:46', '381790', '2');
+
+-- ----------------------------
 -- Table structure for t_attendance
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_attendance";
@@ -133,7 +174,7 @@ CREATE TABLE "public"."t_attendance" (
 WITH (OIDS=FALSE)
 
 ;
-COMMENT ON COLUMN "public"."t_attendance"."attendance_type" IS '打卡类型';
+COMMENT ON COLUMN "public"."t_attendance"."attendance_type" IS '打卡类型（指纹、摄像头）';
 COMMENT ON COLUMN "public"."t_attendance"."datatime" IS '打卡时间';
 COMMENT ON COLUMN "public"."t_attendance"."attendance_state" IS '打卡状态（迟到，早退，正常）';
 
@@ -199,6 +240,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_avatar
 -- ----------------------------
+INSERT INTO "public"."t_avatar" VALUES ('312634', 'mayun.jpg', '0', 'test', '2017-06-02 11:41:19');
+INSERT INTO "public"."t_avatar" VALUES ('321567', 'dilireba.jpg', '0', 'test', '2017-06-06 11:39:30');
+INSERT INTO "public"."t_avatar" VALUES ('512446', 'wanglihong.jpg', '0', 'test', '2017-06-02 11:41:40');
 
 -- ----------------------------
 -- Table structure for t_class
@@ -492,7 +536,8 @@ CREATE TABLE "public"."t_fingerprint" (
 "fingerprint_img" varchar(50) COLLATE "default",
 "is_delete" int4,
 "create_by" varchar(20) COLLATE "default",
-"create_at" timestamp(6)
+"create_at" timestamp(6),
+"fingerprint_code" varchar(50) COLLATE "default"
 )
 WITH (OIDS=FALSE)
 
@@ -501,6 +546,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_fingerprint
 -- ----------------------------
+INSERT INTO "public"."t_fingerprint" VALUES ('175382', 'wanglihong_f.jpg', '0', 'test', '2017-06-02 11:54:18', '4d1224acfa1ea71f256c73bc34d104b4');
+INSERT INTO "public"."t_fingerprint" VALUES ('231423', 'dilireba_f.jpg', '0', 'test', '2017-06-03 11:52:29', 'e73f43bfa2d7598a3b048cc11a0b1b29');
+INSERT INTO "public"."t_fingerprint" VALUES ('234112', 'mayun_f.jpg', '0', 'test', '2017-06-03 11:48:07', '01fd6df0f81ee0491eb32d4c05babeef');
 
 -- ----------------------------
 -- Table structure for t_idcard
@@ -573,6 +621,7 @@ WITH (OIDS=FALSE)
 -- Records of t_institutions
 -- ----------------------------
 INSERT INTO "public"."t_institutions" VALUES ('229677', '通过机构', '阿米', '19463331233', '鸭子路10号', '113', '0', 'test', '2017-06-05 10:54:18');
+INSERT INTO "public"."t_institutions" VALUES ('381790', '通过机构2', '小花', '13419990000', '小花路10号', '23', '0', 'test', '2017-06-03 16:46:56');
 
 -- ----------------------------
 -- Table structure for t_institutions_apply
@@ -646,6 +695,25 @@ INSERT INTO "public"."t_institutions_prepare" VALUES ('188426', '测试机构', 
 INSERT INTO "public"."t_institutions_prepare" VALUES ('321142', '测试机构2', '小老师', '32311112222', '小猫路10号', '24', '0', 'test', '2017-06-06 01:13:51');
 
 -- ----------------------------
+-- Table structure for t_institutions_teacher
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_institutions_teacher";
+CREATE TABLE "public"."t_institutions_teacher" (
+"institutions_id" int4 NOT NULL,
+"teacher_id" int4 NOT NULL,
+"is_delete" int4,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_institutions_teacher
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for t_institutions_verify
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_institutions_verify";
@@ -672,6 +740,33 @@ COMMENT ON COLUMN "public"."t_institutions_verify"."apply_state" IS '申请状�
 -- ----------------------------
 INSERT INTO "public"."t_institutions_verify" VALUES ('ff@123.com', '321142', null, '0', 'test', '2017-06-13 01:17:24', '2017-06-24 01:17:28', '0');
 INSERT INTO "public"."t_institutions_verify" VALUES ('test@123.com', '188426', '2017-06-11 11:04:20.698', '0', 'test', '2017-06-07 16:18:16', '2017-06-07 16:18:16', '1');
+
+-- ----------------------------
+-- Table structure for t_ip_device
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_ip_device";
+CREATE TABLE "public"."t_ip_device" (
+"dev_hao" int4 NOT NULL,
+"ip" varchar(30) COLLATE "default",
+"http_port" int2,
+"dev_port" int2,
+"username" varchar(30) COLLATE "default",
+"password" varchar(128) COLLATE "default",
+"dev_stype" varchar(50) COLLATE "default",
+"dev_adr" varchar(50) COLLATE "default",
+"dev_description" varchar(255) COLLATE "default",
+"institution" varchar(50) COLLATE "default",
+"inst_route" varchar(50) COLLATE "default",
+"dev_effect" bool,
+"inst_route_port" int2
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_ip_device
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for t_operation_record
@@ -716,6 +811,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_student
 -- ----------------------------
+INSERT INTO "public"."t_student" VALUES ('324516', '18822228888', 'mayun@123.com', '3', '1', '1', '0', 'test', '2017-06-02 11:47:28');
+INSERT INTO "public"."t_student" VALUES ('617821', '13266664545', 'dilireba@qq.com', '1', '1', '1', '0', 'test', '2017-06-11 11:58:58');
+INSERT INTO "public"."t_student" VALUES ('713213', '19866667777', 'wanglihong@234.com', '2', '0', '1', '0', 'test', '2017-06-10 11:58:27');
 
 -- ----------------------------
 -- Table structure for t_student_info
@@ -739,6 +837,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_student_info
 -- ----------------------------
+INSERT INTO "public"."t_student_info" VALUES ('324516', '420108199506063316', '234112', '312634', '马老师', '13944165512', '0', 'test', '2017-06-02 11:34:51');
+INSERT INTO "public"."t_student_info" VALUES ('617821', '420107199406031123', '231423', '321567', '马老师', '13944165112', '0', 'test', '2017-06-01 12:03:16');
+INSERT INTO "public"."t_student_info" VALUES ('713213', '420107199408217719', '175382', '512446', '马老师', '13944165112', '0', 'test', '2017-06-03 12:01:25');
 
 -- ----------------------------
 -- Table structure for t_teacher
@@ -924,6 +1025,7 @@ COMMENT ON COLUMN "public"."tbl_account"."update_time" IS '更新时间';
 -- ----------------------------
 -- Records of tbl_account
 -- ----------------------------
+INSERT INTO "public"."tbl_account" VALUES ('1', '', 'root', '63a9f0ea7bb98050796b649e85481845', '112.74.35.167', '2017-06-09 15:40:47', '1', '0', '0', '2017-06-30 15:39:24', '2017-06-03 15:39:39', '2017-06-16 15:39:36');
 
 -- ----------------------------
 -- Table structure for tbl_account_role
@@ -1080,6 +1182,7 @@ COMMENT ON COLUMN "public"."tbl_role_authority"."authority_id" IS '权限Id';
 -- ----------------------------
 -- Alter Sequences Owned By 
 -- ----------------------------
+ALTER SEQUENCE "public"."t_account_account_id_seq" OWNED BY "t_account"."account_id";
 ALTER SEQUENCE "public"."t_ukey_id_seq" OWNED BY "t_ukey"."id";
 ALTER SEQUENCE "public"."tbl_accessResource_id_seq" OWNED BY "tbl_accessResource"."id";
 ALTER SEQUENCE "public"."tbl_account_id_seq" OWNED BY "tbl_account"."id";
@@ -1089,6 +1192,16 @@ ALTER SEQUENCE "public"."tbl_authority_resource_id_seq" OWNED BY "tbl_authority_
 ALTER SEQUENCE "public"."tbl_indicator_statistics_id_seq" OWNED BY "tbl_indicator_statistics"."id";
 ALTER SEQUENCE "public"."tbl_role_authority_id_seq" OWNED BY "tbl_role_authority"."id";
 ALTER SEQUENCE "public"."tbl_role_id_seq" OWNED BY "tbl_role"."id";
+
+-- ----------------------------
+-- Uniques structure for table t_account
+-- ----------------------------
+ALTER TABLE "public"."t_account" ADD UNIQUE ("account");
+
+-- ----------------------------
+-- Primary Key structure for table t_account
+-- ----------------------------
+ALTER TABLE "public"."t_account" ADD PRIMARY KEY ("account");
 
 -- ----------------------------
 -- Primary Key structure for table t_attendance
@@ -1211,9 +1324,19 @@ ALTER TABLE "public"."t_institutions_filed" ADD PRIMARY KEY ("institutions_id");
 ALTER TABLE "public"."t_institutions_prepare" ADD PRIMARY KEY ("institutions_id");
 
 -- ----------------------------
+-- Primary Key structure for table t_institutions_teacher
+-- ----------------------------
+ALTER TABLE "public"."t_institutions_teacher" ADD PRIMARY KEY ("institutions_id", "teacher_id");
+
+-- ----------------------------
 -- Primary Key structure for table t_institutions_verify
 -- ----------------------------
 ALTER TABLE "public"."t_institutions_verify" ADD PRIMARY KEY ("apply_email", "institutions_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_ip_device
+-- ----------------------------
+ALTER TABLE "public"."t_ip_device" ADD PRIMARY KEY ("dev_hao");
 
 -- ----------------------------
 -- Primary Key structure for table t_operation_record
@@ -1356,5 +1479,5 @@ ALTER TABLE "public"."tbl_role_authority" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Foreign Key structure for table "public"."t_institutions_verify"
 -- ----------------------------
-ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("institutions_id") REFERENCES "public"."t_institutions_prepare" ("institutions_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("apply_email") REFERENCES "public"."t_institutions_apply" ("apply_email") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("institutions_id") REFERENCES "public"."t_institutions_prepare" ("institutions_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
