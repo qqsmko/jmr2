@@ -11,7 +11,7 @@ Target Server Type    : PGSQL
 Target Server Version : 90602
 File Encoding         : 65001
 
-Date: 2017-06-15 14:05:38
+Date: 2017-06-15 21:37:55
 */
 
 
@@ -181,6 +181,9 @@ COMMENT ON COLUMN "public"."t_attendance"."attendance_state" IS '打卡状态（
 -- ----------------------------
 -- Records of t_attendance
 -- ----------------------------
+INSERT INTO "public"."t_attendance" VALUES ('312345', '718293', '223123', '0', '2017-06-06 20:57:02', '1', '0', 'test', '2017-06-03 20:57:18');
+INSERT INTO "public"."t_attendance" VALUES ('312346', '978310', '223124', '1', '2017-06-20 21:00:42', '2', '0', 'test', '2017-06-16 21:01:01');
+INSERT INTO "public"."t_attendance" VALUES ('312347', '234233', '223125', '0', '2017-06-08 21:02:01', '0', '0', 'test', '2017-06-06 21:02:14');
 
 -- ----------------------------
 -- Table structure for t_attendance_detail
@@ -201,6 +204,29 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_attendance_detail
 -- ----------------------------
+INSERT INTO "public"."t_attendance_detail" VALUES ('223123', '175382', '321567', '0', 'test', '2017-06-06 21:05:07');
+INSERT INTO "public"."t_attendance_detail" VALUES ('223124', '234112', '312634', '0', 'test', '2017-06-07 21:06:19');
+
+-- ----------------------------
+-- Table structure for t_attendance_institutions
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_attendance_institutions";
+CREATE TABLE "public"."t_attendance_institutions" (
+"attendance_id" int4 NOT NULL,
+"institutions_id" int4 NOT NULL,
+"is_delete" int4 NOT NULL,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_attendance_institutions
+-- ----------------------------
+INSERT INTO "public"."t_attendance_institutions" VALUES ('312345', '229677', '0', 'test', '2017-06-06 21:07:31');
+INSERT INTO "public"."t_attendance_institutions" VALUES ('312346', '381790', '0', 'test', '2017-06-27 21:08:05');
 
 -- ----------------------------
 -- Table structure for t_attendance_statistics
@@ -259,7 +285,9 @@ CREATE TABLE "public"."t_class" (
 "is_delete" int4,
 "create_by" varchar(20) COLLATE "default",
 "create_at" timestamp(6),
-"institutions_id" int4
+"institutions_id" int4,
+"start_time" date,
+"end_time" date
 )
 WITH (OIDS=FALSE)
 
@@ -268,9 +296,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_class
 -- ----------------------------
-INSERT INTO "public"."t_class" VALUES ('575288', '市场价格调查1班', '32', '0', '小王', '17733333333', '0', 'test', '2017-06-06 13:23:09', null);
-INSERT INTO "public"."t_class" VALUES ('575289', '市场价格调查2班', '18', '0', '小李', '18833333333', '0', 'test', '2017-06-07 13:23:13', null);
-INSERT INTO "public"."t_class" VALUES ('575290', '市场价格调查3班', '6', '0', '小猪', '19933333333', '0', 'test', '2017-06-15 13:23:17', null);
+INSERT INTO "public"."t_class" VALUES ('575288', '市场价格调查1班', '32', '0', '小王', '17733333333', '0', 'test', '2017-06-06 13:23:09', null, null, null);
+INSERT INTO "public"."t_class" VALUES ('575289', '市场价格调查2班', '18', '0', '小李', '18833333333', '0', 'test', '2017-06-07 13:23:13', null, null, null);
+INSERT INTO "public"."t_class" VALUES ('575290', '市场价格调查3班', '6', '0', '小猪', '19933333333', '0', 'test', '2017-06-15 13:23:17', null, null, null);
 
 -- ----------------------------
 -- Table structure for t_class_class_series
@@ -293,6 +321,25 @@ WITH (OIDS=FALSE)
 INSERT INTO "public"."t_class_class_series" VALUES ('769024', '575288', '0', 'test', '2017-06-14 12:19:55');
 INSERT INTO "public"."t_class_class_series" VALUES ('769024', '575289', '0', 'test', '2017-06-14 12:20:21');
 INSERT INTO "public"."t_class_class_series" VALUES ('769024', '575290', '0', 'test', '2017-06-19 12:20:49');
+
+-- ----------------------------
+-- Table structure for t_class_institutions
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_class_institutions";
+CREATE TABLE "public"."t_class_institutions" (
+"institutions_id" int4 NOT NULL,
+"class_id" int4 NOT NULL,
+"is_delete" int4 NOT NULL,
+"create_by" varchar(20) COLLATE "default",
+"create_at" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of t_class_institutions
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for t_class_series
@@ -402,6 +449,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_class_student
 -- ----------------------------
+INSERT INTO "public"."t_class_student" VALUES ('324516', '575288', '0', 'test', '2017-06-05 21:13:09');
+INSERT INTO "public"."t_class_student" VALUES ('617821', '575290', '0', 'test', '2017-06-16 21:14:45');
+INSERT INTO "public"."t_class_student" VALUES ('713213', '575289', '0', 'test', '2017-06-07 21:14:07');
 
 -- ----------------------------
 -- Table structure for t_class_teacher
@@ -422,6 +472,8 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_class_teacher
 -- ----------------------------
+INSERT INTO "public"."t_class_teacher" VALUES ('371890', '575288', '0', '0', 'test', '2017-06-28 21:16:22');
+INSERT INTO "public"."t_class_teacher" VALUES ('728391', '575289', '1', '0', 'test', '2017-06-13 21:17:12');
 
 -- ----------------------------
 -- Table structure for t_class_verify
@@ -486,7 +538,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_course_institutions
 -- ----------------------------
-INSERT INTO "public"."t_course_institutions" VALUES ('229677', '328765', null, 'test', '2017-06-14 12:17:22');
+INSERT INTO "public"."t_course_institutions" VALUES ('229677', '328765', '0', 'test', '2017-06-14 12:17:22');
 
 -- ----------------------------
 -- Table structure for t_device
@@ -509,6 +561,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_device
 -- ----------------------------
+INSERT INTO "public"."t_device" VALUES ('234233', '698670', '打卡机', '2017-06-14', '0', '0', 'test', '2017-06-21 21:23:43');
+INSERT INTO "public"."t_device" VALUES ('718293', '698668', '打卡机', '2017-06-01', '0', '0', 'test', '2017-06-16 21:20:51');
+INSERT INTO "public"."t_device" VALUES ('978310', '698669', '打卡机', '2017-06-08', '0', '0', 'test', '2017-06-14 21:21:58');
 
 -- ----------------------------
 -- Table structure for t_device_institutions
@@ -528,6 +583,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_device_institutions
 -- ----------------------------
+INSERT INTO "public"."t_device_institutions" VALUES ('718293', '229677', '0', 'test', '2017-06-05 21:26:16');
 
 -- ----------------------------
 -- Table structure for t_fingerprint
@@ -716,6 +772,8 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_institutions_teacher
 -- ----------------------------
+INSERT INTO "public"."t_institutions_teacher" VALUES ('229677', '371890', '0', 'test', '2017-06-06 21:31:36');
+INSERT INTO "public"."t_institutions_teacher" VALUES ('381790', '728391', '0', 'test', '2017-06-21 21:32:06');
 
 -- ----------------------------
 -- Table structure for t_institutions_verify
@@ -1219,6 +1277,11 @@ ALTER TABLE "public"."t_attendance" ADD PRIMARY KEY ("attendance_id", "deviceid"
 ALTER TABLE "public"."t_attendance_detail" ADD PRIMARY KEY ("detail_id");
 
 -- ----------------------------
+-- Primary Key structure for table t_attendance_institutions
+-- ----------------------------
+ALTER TABLE "public"."t_attendance_institutions" ADD PRIMARY KEY ("institutions_id");
+
+-- ----------------------------
 -- Primary Key structure for table t_attendance_statistics
 -- ----------------------------
 ALTER TABLE "public"."t_attendance_statistics" ADD PRIMARY KEY ("statistics_id");
@@ -1247,6 +1310,16 @@ ALTER TABLE "public"."t_class" ADD PRIMARY KEY ("class_id");
 -- Primary Key structure for table t_class_class_series
 -- ----------------------------
 ALTER TABLE "public"."t_class_class_series" ADD PRIMARY KEY ("class_series_id", "class_id");
+
+-- ----------------------------
+-- Uniques structure for table t_class_institutions
+-- ----------------------------
+ALTER TABLE "public"."t_class_institutions" ADD UNIQUE ("class_id");
+
+-- ----------------------------
+-- Primary Key structure for table t_class_institutions
+-- ----------------------------
+ALTER TABLE "public"."t_class_institutions" ADD PRIMARY KEY ("institutions_id");
 
 -- ----------------------------
 -- Primary Key structure for table t_class_series
@@ -1509,5 +1582,5 @@ ALTER TABLE "public"."tbl_role_authority" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Foreign Key structure for table "public"."t_institutions_verify"
 -- ----------------------------
-ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("apply_email") REFERENCES "public"."t_institutions_apply" ("apply_email") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("institutions_id") REFERENCES "public"."t_institutions_prepare" ("institutions_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("apply_email") REFERENCES "public"."t_institutions_apply" ("apply_email") ON DELETE NO ACTION ON UPDATE NO ACTION;
