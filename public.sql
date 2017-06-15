@@ -11,7 +11,7 @@ Target Server Type    : PGSQL
 Target Server Version : 90602
 File Encoding         : 65001
 
-Date: 2017-06-14 21:25:08
+Date: 2017-06-15 14:05:38
 */
 
 
@@ -231,7 +231,8 @@ CREATE TABLE "public"."t_avatar" (
 "avatar_img" varchar(50) COLLATE "default",
 "is_delete" int4,
 "create_by" varchar(20) COLLATE "default",
-"create_at" timestamp(6)
+"create_at" timestamp(6),
+"institutions_id" int4
 )
 WITH (OIDS=FALSE)
 
@@ -240,9 +241,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_avatar
 -- ----------------------------
-INSERT INTO "public"."t_avatar" VALUES ('312634', 'mayun.jpg', '0', 'test', '2017-06-02 11:41:19');
-INSERT INTO "public"."t_avatar" VALUES ('321567', 'dilireba.jpg', '0', 'test', '2017-06-06 11:39:30');
-INSERT INTO "public"."t_avatar" VALUES ('512446', 'wanglihong.jpg', '0', 'test', '2017-06-02 11:41:40');
+INSERT INTO "public"."t_avatar" VALUES ('312634', 'mayun.jpg', '0', 'test', '2017-06-02 11:41:19', null);
+INSERT INTO "public"."t_avatar" VALUES ('321567', 'dilireba.jpg', '0', 'test', '2017-06-06 11:39:30', null);
+INSERT INTO "public"."t_avatar" VALUES ('512446', 'wanglihong.jpg', '0', 'test', '2017-06-02 11:41:40', null);
 
 -- ----------------------------
 -- Table structure for t_class
@@ -257,7 +258,8 @@ CREATE TABLE "public"."t_class" (
 "telephone" varchar(20) COLLATE "default",
 "is_delete" int4,
 "create_by" varchar(20) COLLATE "default",
-"create_at" timestamp(6)
+"create_at" timestamp(6),
+"institutions_id" int4
 )
 WITH (OIDS=FALSE)
 
@@ -266,9 +268,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_class
 -- ----------------------------
-INSERT INTO "public"."t_class" VALUES ('575288', '市场价格调查1班', '32', '0', '小王', '17733333333', '0', 'test', '2017-06-06 13:23:09');
-INSERT INTO "public"."t_class" VALUES ('575289', '市场价格调查2班', '18', '0', '小李', '18833333333', '0', 'test', '2017-06-07 13:23:13');
-INSERT INTO "public"."t_class" VALUES ('575290', '市场价格调查3班', '6', '0', '小猪', '19933333333', '0', 'test', '2017-06-15 13:23:17');
+INSERT INTO "public"."t_class" VALUES ('575288', '市场价格调查1班', '32', '0', '小王', '17733333333', '0', 'test', '2017-06-06 13:23:09', null);
+INSERT INTO "public"."t_class" VALUES ('575289', '市场价格调查2班', '18', '0', '小李', '18833333333', '0', 'test', '2017-06-07 13:23:13', null);
+INSERT INTO "public"."t_class" VALUES ('575290', '市场价格调查3班', '6', '0', '小猪', '19933333333', '0', 'test', '2017-06-15 13:23:17', null);
 
 -- ----------------------------
 -- Table structure for t_class_class_series
@@ -537,7 +539,8 @@ CREATE TABLE "public"."t_fingerprint" (
 "is_delete" int4,
 "create_by" varchar(20) COLLATE "default",
 "create_at" timestamp(6),
-"fingerprint_code" varchar(50) COLLATE "default"
+"fingerprint_code" varchar(50) COLLATE "default",
+"institutions_id" int4
 )
 WITH (OIDS=FALSE)
 
@@ -546,9 +549,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_fingerprint
 -- ----------------------------
-INSERT INTO "public"."t_fingerprint" VALUES ('175382', 'wanglihong_f.jpg', '0', 'test', '2017-06-02 11:54:18', '4d1224acfa1ea71f256c73bc34d104b4');
-INSERT INTO "public"."t_fingerprint" VALUES ('231423', 'dilireba_f.jpg', '0', 'test', '2017-06-03 11:52:29', 'e73f43bfa2d7598a3b048cc11a0b1b29');
-INSERT INTO "public"."t_fingerprint" VALUES ('234112', 'mayun_f.jpg', '0', 'test', '2017-06-03 11:48:07', '01fd6df0f81ee0491eb32d4c05babeef');
+INSERT INTO "public"."t_fingerprint" VALUES ('175382', 'wanglihong_f.jpg', '0', 'test', '2017-06-02 11:54:18', '4d1224acfa1ea71f256c73bc34d104b4', null);
+INSERT INTO "public"."t_fingerprint" VALUES ('231423', 'dilireba_f.jpg', '0', 'test', '2017-06-03 11:52:29', 'e73f43bfa2d7598a3b048cc11a0b1b29', null);
+INSERT INTO "public"."t_fingerprint" VALUES ('234112', 'mayun_f.jpg', '0', 'test', '2017-06-03 11:48:07', '01fd6df0f81ee0491eb32d4c05babeef', null);
 
 -- ----------------------------
 -- Table structure for t_idcard
@@ -563,7 +566,8 @@ CREATE TABLE "public"."t_idcard" (
 "address" varchar(50) COLLATE "default",
 "is_delete" int4,
 "create_by" varchar(20) COLLATE "default",
-"create_at" timestamp(6)
+"create_at" timestamp(6),
+"institutions_id" int4
 )
 WITH (OIDS=FALSE)
 
@@ -572,11 +576,11 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_idcard
 -- ----------------------------
-INSERT INTO "public"."t_idcard" VALUES ('420103892813989899', '刘老师', '2', '壮族', '2011-05-19', '北京海淀区牡丹园108号', '0', 'test', '2016-02-18 16:02:16');
-INSERT INTO "public"."t_idcard" VALUES ('420107199406031123', '迪丽热巴', '2', '维吾尔族', '2014-06-20', '北京海淀区牡丹园88号', '0', 'test', '2017-04-11 05:00:06');
-INSERT INTO "public"."t_idcard" VALUES ('420107199408217719', '王力宏', '1', '汉族', '2017-05-03', '北京海淀区牡丹园20号', '0', 'test', '2017-05-10 15:54:46');
-INSERT INTO "public"."t_idcard" VALUES ('420108199506063316', '马云', '1', '汉族', '2017-04-12', '北京海淀区牡丹园6号', '0', 'test', '2017-05-09 15:53:36');
-INSERT INTO "public"."t_idcard" VALUES ('420331637817283871', '王老师', '1', '汉族', '2017-06-06', '北京海淀区牡丹园88号', '0', 'test', '2017-04-12 16:01:24');
+INSERT INTO "public"."t_idcard" VALUES ('420103892813989899', '刘老师', '2', '壮族', '2011-05-19', '北京海淀区牡丹园108号', '0', 'test', '2016-02-18 16:02:16', null);
+INSERT INTO "public"."t_idcard" VALUES ('420107199406031123', '迪丽热巴', '2', '维吾尔族', '2014-06-20', '北京海淀区牡丹园88号', '0', 'test', '2017-04-11 05:00:06', null);
+INSERT INTO "public"."t_idcard" VALUES ('420107199408217719', '王力宏', '1', '汉族', '2017-05-03', '北京海淀区牡丹园20号', '0', 'test', '2017-05-10 15:54:46', null);
+INSERT INTO "public"."t_idcard" VALUES ('420108199506063316', '马云', '1', '汉族', '2017-04-12', '北京海淀区牡丹园6号', '0', 'test', '2017-05-09 15:53:36', null);
+INSERT INTO "public"."t_idcard" VALUES ('420331637817283871', '王老师', '1', '汉族', '2017-06-06', '北京海淀区牡丹园88号', '0', 'test', '2017-04-12 16:01:24', null);
 
 -- ----------------------------
 -- Table structure for t_idcard_latest
@@ -853,7 +857,8 @@ CREATE TABLE "public"."t_teacher" (
 "state" int4,
 "is_delete" int4,
 "create_by" varchar(20) COLLATE "default",
-"create_at" timestamp(6)
+"create_at" timestamp(6),
+"institutions_id" int4
 )
 WITH (OIDS=FALSE)
 
@@ -862,8 +867,8 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_teacher
 -- ----------------------------
-INSERT INTO "public"."t_teacher" VALUES ('371890', '13877774444', 'test@abc.com', '1', '0', '0', 'test', '2015-05-13 16:13:49');
-INSERT INTO "public"."t_teacher" VALUES ('728391', '14912536712', 'good@ddc.net', '2', '0', '0', 'test', '2013-03-11 16:14:41');
+INSERT INTO "public"."t_teacher" VALUES ('371890', '13877774444', 'test@abc.com', '1', '0', '0', 'test', '2015-05-13 16:13:49', null);
+INSERT INTO "public"."t_teacher" VALUES ('728391', '14912536712', 'good@ddc.net', '2', '0', '0', 'test', '2013-03-11 16:14:41', null);
 
 -- ----------------------------
 -- Table structure for t_teacher_info
@@ -1219,9 +1224,19 @@ ALTER TABLE "public"."t_attendance_detail" ADD PRIMARY KEY ("detail_id");
 ALTER TABLE "public"."t_attendance_statistics" ADD PRIMARY KEY ("statistics_id");
 
 -- ----------------------------
+-- Uniques structure for table t_avatar
+-- ----------------------------
+ALTER TABLE "public"."t_avatar" ADD UNIQUE ("institutions_id");
+
+-- ----------------------------
 -- Primary Key structure for table t_avatar
 -- ----------------------------
 ALTER TABLE "public"."t_avatar" ADD PRIMARY KEY ("avatar_id");
+
+-- ----------------------------
+-- Uniques structure for table t_class
+-- ----------------------------
+ALTER TABLE "public"."t_class" ADD UNIQUE ("institutions_id");
 
 -- ----------------------------
 -- Primary Key structure for table t_class
@@ -1289,9 +1304,19 @@ ALTER TABLE "public"."t_device" ADD PRIMARY KEY ("device_id");
 ALTER TABLE "public"."t_device_institutions" ADD PRIMARY KEY ("device_id", "institutions_id");
 
 -- ----------------------------
+-- Uniques structure for table t_fingerprint
+-- ----------------------------
+ALTER TABLE "public"."t_fingerprint" ADD UNIQUE ("institutions_id");
+
+-- ----------------------------
 -- Primary Key structure for table t_fingerprint
 -- ----------------------------
 ALTER TABLE "public"."t_fingerprint" ADD PRIMARY KEY ("fingerprint_id");
+
+-- ----------------------------
+-- Uniques structure for table t_idcard
+-- ----------------------------
+ALTER TABLE "public"."t_idcard" ADD UNIQUE ("institutions_id");
 
 -- ----------------------------
 -- Primary Key structure for table t_idcard
@@ -1352,6 +1377,11 @@ ALTER TABLE "public"."t_student" ADD PRIMARY KEY ("student_id");
 -- Primary Key structure for table t_student_info
 -- ----------------------------
 ALTER TABLE "public"."t_student_info" ADD PRIMARY KEY ("student_id", "card_id", "fingerprint_id", "avatar_id");
+
+-- ----------------------------
+-- Uniques structure for table t_teacher
+-- ----------------------------
+ALTER TABLE "public"."t_teacher" ADD UNIQUE ("institutions_id");
 
 -- ----------------------------
 -- Primary Key structure for table t_teacher

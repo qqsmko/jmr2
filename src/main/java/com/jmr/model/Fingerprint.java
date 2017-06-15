@@ -13,6 +13,10 @@ public class Fingerprint {
 
     private Date createAt;
 
+    private String fingerprintCode;
+
+    private Integer institutionsId;
+
     public Integer getFingerprintId() {
         return fingerprintId;
     }
@@ -51,5 +55,21 @@ public class Fingerprint {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public String getFingerprintCode() {
+        return fingerprintCode;
+    }
+
+    public void setFingerprintCode(String fingerprintCode) {
+        this.fingerprintCode = fingerprintCode == null ? null : fingerprintCode.trim();
+    }
+
+    public Integer getInstitutionsId() {
+        return institutionsId;
+    }
+
+    public void setInstitutionsId(Integer institutionsId) {
+        this.institutionsId = institutionsId;
     }
 }

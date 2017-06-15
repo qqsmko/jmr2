@@ -19,6 +19,8 @@ public class Teacher {
 
     private Date createAt;
 
+    private Integer institutionsId;
+
     public Integer getTeacherId() {
         return teacherId;
     }
@@ -81,5 +83,13 @@ public class Teacher {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public Integer getInstitutionsId() {
+        return institutionsId;
+    }
+
+    public void setInstitutionsId(Integer institutionsId) {
+        this.institutionsId = institutionsId;
     }
 }

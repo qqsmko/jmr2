@@ -13,6 +13,8 @@ public class Avatar {
 
     private Date createAt;
 
+    private Integer institutionsId;
+
     public Integer getAvatarId() {
         return avatarId;
     }
@@ -51,5 +53,13 @@ public class Avatar {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public Integer getInstitutionsId() {
+        return institutionsId;
+    }
+
+    public void setInstitutionsId(Integer institutionsId) {
+        this.institutionsId = institutionsId;
     }
 }

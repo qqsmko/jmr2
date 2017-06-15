@@ -21,6 +21,8 @@ public class Class {
 
     private Date createAt;
 
+    private Integer institutionsId;
+
     public Integer getClassId() {
         return classId;
     }
@@ -91,5 +93,13 @@ public class Class {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public Integer getInstitutionsId() {
+        return institutionsId;
+    }
+
+    public void setInstitutionsId(Integer institutionsId) {
+        this.institutionsId = institutionsId;
     }
 }
