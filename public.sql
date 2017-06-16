@@ -11,7 +11,7 @@ Target Server Type    : PGSQL
 Target Server Version : 90602
 File Encoding         : 65001
 
-Date: 2017-06-15 21:37:55
+Date: 2017-06-16 13:27:22
 */
 
 
@@ -296,9 +296,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_class
 -- ----------------------------
-INSERT INTO "public"."t_class" VALUES ('575288', '市场价格调查1班', '32', '0', '小王', '17733333333', '0', 'test', '2017-06-06 13:23:09', null, null, null);
-INSERT INTO "public"."t_class" VALUES ('575289', '市场价格调查2班', '18', '0', '小李', '18833333333', '0', 'test', '2017-06-07 13:23:13', null, null, null);
-INSERT INTO "public"."t_class" VALUES ('575290', '市场价格调查3班', '6', '0', '小猪', '19933333333', '0', 'test', '2017-06-15 13:23:17', null, null, null);
+INSERT INTO "public"."t_class" VALUES ('575288', '市场价格调查1班', '32', '0', '小王', '17733333333', '0', 'test', '2017-06-06 13:23:09', null, '2017-06-06', '2017-06-24');
+INSERT INTO "public"."t_class" VALUES ('575289', '市场价格调查2班', '18', '0', '小李', '18833333333', '0', 'test', '2017-06-07 13:23:13', null, '2017-06-20', '2017-06-25');
+INSERT INTO "public"."t_class" VALUES ('575290', '市场价格调查3班', '6', '0', '小猪', '19933333333', '0', 'test', '2017-06-15 13:23:17', null, '2017-06-05', '2017-06-24');
 
 -- ----------------------------
 -- Table structure for t_class_class_series
@@ -340,6 +340,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_class_institutions
 -- ----------------------------
+INSERT INTO "public"."t_class_institutions" VALUES ('229677', '575288', '0', 'test', '2017-06-14 09:49:27');
+INSERT INTO "public"."t_class_institutions" VALUES ('381790', '575289', '0', 'test', '2017-06-08 09:49:51');
+INSERT INTO "public"."t_class_institutions" VALUES ('381790', '575290', '0', 'test', '2017-06-08 09:49:51');
 
 -- ----------------------------
 -- Table structure for t_class_series
@@ -1312,14 +1315,9 @@ ALTER TABLE "public"."t_class" ADD PRIMARY KEY ("class_id");
 ALTER TABLE "public"."t_class_class_series" ADD PRIMARY KEY ("class_series_id", "class_id");
 
 -- ----------------------------
--- Uniques structure for table t_class_institutions
--- ----------------------------
-ALTER TABLE "public"."t_class_institutions" ADD UNIQUE ("class_id");
-
--- ----------------------------
 -- Primary Key structure for table t_class_institutions
 -- ----------------------------
-ALTER TABLE "public"."t_class_institutions" ADD PRIMARY KEY ("institutions_id");
+ALTER TABLE "public"."t_class_institutions" ADD PRIMARY KEY ("class_id");
 
 -- ----------------------------
 -- Primary Key structure for table t_class_series

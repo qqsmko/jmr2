@@ -38,7 +38,7 @@
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="80">班级编号</th>
 				<th width="">班级名称</th>
-				<th width="100">所属班次</th>
+				<th width="100">所属机构</th>
 				<th width="80">班级人数</th>
 				<th width="80">班级负责人</th>
 				<th width="80">负责人手机</th>
@@ -64,14 +64,36 @@
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
+// 		initComplete: function () {
+//             var api = this.api();
+//             api.columns().indexes().flatten().each( function ( i ) {
+//                 var column = api.column( i );
+//                 var select = $('<select><option value=""></option></select>')
+//                     .appendTo( $(column.footer()).empty() )
+//                     .on( 'change', function () {
+//                         var val = $.fn.dataTable.util.escapeRegex(
+//                             $(this).val()
+//                         );
+//                         column
+//                             .search( val ? '^'+val+'$' : '', true, false )
+//                             .draw();
+//                     } );
+//                 column.data().unique().sort().each( function ( d, j ) {
+//                     select.append( '<option value="'+d+'">'+d+'</option>' )
+//                 } );
+//             } );
+//         },
 		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"searching": false,
 		"ordering": false,
 		"serverSide": true,
 		"ajax": {
-			"url":"class-list/data-source",
+			"url":"class-list2/data-source",
 			"type":"POST",
+			"data":{
+				"institutions_id":"222"
+			}
 		},
 		"columns":[
 			{
@@ -82,7 +104,7 @@ $(function(){
 			},
 	        {"data":"class_id"},
 	        {"data":"class_name"},
-	        {"data":"class_series_name"},
+	        {"data":"institutions_name"},
 	        {"data":"student_count"},
 	        {"data":"responsible"},
 	        {"data":"telephone"},

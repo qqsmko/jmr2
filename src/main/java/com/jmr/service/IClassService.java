@@ -11,6 +11,7 @@ public interface IClassService {
 	Map<String,Object> getClassSeriesData(int draw,int start,int length);
 	Map<String,Object> getClassesData(int draw,int start,int length);
 	Map<String,Object> getClassesDataTest(int draw,int start,int length);
+	Map<String,Object> getClassesDataWithId(int draw,int start,int length,int id);
 	Map<String,Object> getClassSeriesVerifyData(int draw,int start,int length);
 	Map<String,Object> getClassSeriesCompletionData(int draw,int start,int length);
 

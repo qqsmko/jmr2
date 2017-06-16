@@ -20,6 +20,8 @@ public interface ClassMapper {
     
     List<Map<String, Object>> selectByPageSQL(@Param("start")int start,@Param("length")int length);
     
+    List<Map<String, Object>> selectByPageWithId(@Param("start")int start,@Param("length")int length,@Param("id")int id);
+    
     int selectCount();
 
     int updateByPrimaryKeySelective(Class record);

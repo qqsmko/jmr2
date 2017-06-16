@@ -115,6 +115,17 @@ public class ClassService implements IClassService {
     	return ansMap;
 	}
 	
+	public Map<String,Object> getClassesDataWithId(int draw,int start,int length,int id){
+		int totalNum = classMapper.selectCount();
+		List<Map<String,Object>> data = classMapper.selectByPageWithId(start, length, id);
+		Map<String,Object> ansMap = new HashMap<String,Object>();
+		ansMap.put("draw",draw);
+    	ansMap.put("recordsTotal",totalNum);
+		ansMap.put("recordsFiltered",totalNum);
+		ansMap.put("data",data);
+    	return ansMap;
+	}
+	
 	public Map<String,Object> getClassSeriesVerifyData(int draw,int start,int length){
 		int totalNum = classSeriesVerifyMapper.selectCount();
 		List<ClassSeriesVerify> data = classSeriesVerifyMapper.selectByPage(start, length);
