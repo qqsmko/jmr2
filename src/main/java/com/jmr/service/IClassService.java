@@ -1,20 +1,25 @@
 package com.jmr.service;
 
-import java.util.List;
 import java.util.Map;
 
-import com.jmr.model.Class;
+import com.jmr.model.Course;
 
 public interface IClassService {
 
 	Map<String,Object> getCourseData(int draw,int start,int length);
 	Map<String,Object> getClassSeriesData(int draw,int start,int length);
 	Map<String,Object> getClassesData(int draw,int start,int length);
-	Map<String,Object> getClassesDataTest(int draw,int start,int length);
+	Map<String,Object> getClassesDataTest(int draw,int start,int length,String search);
 	Map<String,Object> getClassesDataWithId(int draw,int start,int length,int id);
 	Map<String,Object> getClassSeriesVerifyData(int draw,int start,int length);
 	Map<String,Object> getClassSeriesCompletionData(int draw,int start,int length);
 
+	Map<String,Object> insertCourse(Course course);
+	
+	Map<String,Object> deleteCourse(int id);
+	
+	Course getCourseById(int id);
+	Map<String,Object> updateCourse(Course course);
 //	List<Class> list();
 //	List<Class> listApplication();
 //	List<Class> listFinishied();

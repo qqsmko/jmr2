@@ -11,7 +11,7 @@ Target Server Type    : PGSQL
 Target Server Version : 90602
 File Encoding         : 65001
 
-Date: 2017-06-16 13:27:22
+Date: 2017-06-17 13:15:56
 */
 
 
@@ -127,6 +127,18 @@ CREATE SEQUENCE "public"."tbl_role_id_seq"
  MAXVALUE 9223372036854775807
  START 1
  CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for temp_123_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."temp_123_seq";
+CREATE SEQUENCE "public"."temp_123_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 9
+ CACHE 1;
+SELECT setval('"public"."temp_123_seq"', 9, true);
 
 -- ----------------------------
 -- Table structure for t_account
@@ -505,7 +517,7 @@ INSERT INTO "public"."t_class_verify" VALUES ('769024', '马老师', '1886666333
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_course";
 CREATE TABLE "public"."t_course" (
-"course_id" int4 NOT NULL,
+"course_id" int4 DEFAULT nextval('temp_123_seq'::regclass) NOT NULL,
 "course_name" varchar(255) COLLATE "default",
 "major_name" varchar(255) COLLATE "default",
 "describe" varchar(255) COLLATE "default",
@@ -521,6 +533,11 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_course
 -- ----------------------------
+INSERT INTO "public"."t_course" VALUES ('5', '123', '123', '123', '123', '0', 'test', '2017-06-17 09:44:29.006');
+INSERT INTO "public"."t_course" VALUES ('6', '123', '123', '123', '123', '0', 'test', '2017-06-17 09:51:06.642');
+INSERT INTO "public"."t_course" VALUES ('7', '123', '123', null, '123', '1', 'test', '2017-06-17 09:52:36.237');
+INSERT INTO "public"."t_course" VALUES ('8', '小猫', '1221321', '123231', '1233', '0', 'test', '2017-06-17 09:54:15.006');
+INSERT INTO "public"."t_course" VALUES ('9', '231', '14243', '235235', '235', '1', 'test', '2017-06-17 10:31:41.799');
 INSERT INTO "public"."t_course" VALUES ('328765', '市场价格调查', '市场学', '调查市场的价格', '48', '0', 'test', '2017-05-04 12:15:37');
 
 -- ----------------------------
@@ -684,7 +701,7 @@ WITH (OIDS=FALSE)
 -- Records of t_institutions
 -- ----------------------------
 INSERT INTO "public"."t_institutions" VALUES ('229677', '通过机构', '阿米', '19463331233', '鸭子路10号', '113', '0', 'test', '2017-06-05 10:54:18');
-INSERT INTO "public"."t_institutions" VALUES ('381790', '通过机构2', '小花', '13419990000', '小花路10号', '23', '0', 'test', '2017-06-03 16:46:56');
+INSERT INTO "public"."t_institutions" VALUES ('381790', '测试机构2', '小花', '13419990000', '小花路10号', '23', '0', 'test', '2017-06-03 16:46:56');
 
 -- ----------------------------
 -- Table structure for t_institutions_apply
@@ -1246,6 +1263,21 @@ COMMENT ON COLUMN "public"."tbl_role_authority"."authority_id" IS '权限Id';
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for temp
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."temp";
+CREATE TABLE "public"."temp" (
+"123" int4 DEFAULT nextval('temp_123_seq'::regclass) NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of temp
+-- ----------------------------
+
+-- ----------------------------
 -- Alter Sequences Owned By 
 -- ----------------------------
 ALTER SEQUENCE "public"."t_account_account_id_seq" OWNED BY "t_account"."account_id";
@@ -1258,6 +1290,7 @@ ALTER SEQUENCE "public"."tbl_authority_resource_id_seq" OWNED BY "tbl_authority_
 ALTER SEQUENCE "public"."tbl_indicator_statistics_id_seq" OWNED BY "tbl_indicator_statistics"."id";
 ALTER SEQUENCE "public"."tbl_role_authority_id_seq" OWNED BY "tbl_role_authority"."id";
 ALTER SEQUENCE "public"."tbl_role_id_seq" OWNED BY "tbl_role"."id";
+ALTER SEQUENCE "public"."temp_123_seq" OWNED BY "temp"."123";
 
 -- ----------------------------
 -- Uniques structure for table t_account

@@ -25,60 +25,39 @@
 <![endif]-->
 <!--/meta 作为公共模版分离出去-->
 
-<title>新增机构</title>
+<title>新增课程</title>
 </head>
 <body>
 <article class="page-container">
 	<form class="form form-horizontal" id="form-article-add">
 		<div class="row cl">
-			<label class="form-label col-xs-12 col-sm-6"><span class="c-red"><h3>请在机器上放置身份证</h3></span></label>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-12 col-sm-6"><button onClick="getMockData();" type="button">模拟读取身份证</button></span></label>
-		</div>
-		<div class="row cl"></br></div>
-		<div class="row cl"></br></div>
-		<div class="row cl"></br></div>
-		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">读取到的信息</span></span></div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>身份证号：</label>
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>课程名称：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="cardId" name="cardId" readonly="true">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="courseName" name="courseName">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>姓名：</label>
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>所属专业：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="cardName" name="cardName" readonly="true">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="majorName" name="majorName">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>性别：</label>
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>课程描述：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="gender" name="gender" readonly="true">
+				<input type="text" maxlength="50" class="input-text" value="" placeholder="" id="describe" name="describe">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>民族：</label>
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>课程学时：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="nation" name="nation" readonly="true">
+				<input type="number" maxlength="20" class="input-text" value="" placeholder="" id="studyTime" name="studyTime">
 			</div>
 		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>生日：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="birthday" name="birthday" readonly="true">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>地址：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="address" name="address" readonly="true">
-			</div>
-		</div>		
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button onClick="article_save_submit();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 确认信息并下一步</button>
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 提交</button>
+				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 			</div>
 		</div>
 	</form>
@@ -130,57 +109,46 @@ $(function(){
 	//表单验证
 	$("#form-article-add").validate({
 		rules:{
-			responsible:{
-			},
-			regionid:{
-				number:true,
-			},
-			employeecount:{
-				number:true,
+			name:{
+				required:true,
 			},
 		},
 		onkeyup:false,
 		focusCleanup:true,
 		success:"valid",
-	// 	submitHandler:function(form){
-	// 		var options={
-	// 	  		type: 'GET',//提交方式  
- //                url:  'institutions-update/submit',
- //                data:{
- //                	institutionsid:${id},
- //                },
- //                contentType:'application/json;charset=UTF-8',
- //                success: function() {
- //                	layer.msg('已修改成功!',{icon: 6,time:1000});
-	// 				var index = parent.layer.getFrameIndex(window.name);
-	// 				parent.location.replace(parent.location.href)
- //                }   
- //            };
-	// 		$(form).ajaxSubmit(options);
-	// 	}
+		// submitHandler:function(form){
+		//   	var options = {  
+  //               type: 'POST',//提交方式  
+  //               url:  'teacher-add/submit',
+  //               contentType:'application/json;charset=UTF-8',
+  //               success: function() {
+  //               	var index = parent.layer.getFrameIndex(window.name);
+		// 			parent.location.replace(parent.location.href)
+		// 			parent.layer.close(index);
+		// 			removeIframe();
+  //               }   
+  //           };
+		// 	$(form).ajaxSubmit(options);
+		// }
 	});
 	
 });
 
-function getMockData(){
-	//$("#form-article-add").cardnum.value = '203203199303030303';
-	document.getElementById("cardId").value=parseInt(Math.random()*800000000000000000+100000000000000000, 1);
-	document.getElementById("cardName").value='马云';
-	document.getElementById("gender").value='男';
-	document.getElementById("nation").value='汉族';
-	document.getElementById("birthday").value='1986-08-08';
-	document.getElementById("address").value='北京海淀区牡丹园6号';
-}
-
 function article_save_submit(){
-	//alert('dianji!');
-	var data = $("#form-article-add").serializeObject(); //自动将form表单封装成json  
+	var data = $("#form-article-add").serializeObject(); //自动将form表单封装成json 
     alert(JSON.stringify(data));
-    if(data.cardId!=null){
-		window.location.href="student-fingerprint"
-	}else{
-		alert("没有读取到数据，请重试！");
-	}
+    $.ajax({
+        type: "POST",   //访问WebService使用Post方式请求
+        contentType: "application/json", //WebService 会返回Json类型
+        url: "course-add/submit", //调用WebService的地址和方法名称组合 ---- WsURL/方法名
+        data: JSON.stringify(data),         //这里是要传递的参数，格式为 data: "{paraName:paraValue}",下面将会看到      
+        dataType: 'json',
+       	success: function (result) {     //回调函数，result，返回值
+            layer.msg('已修改成功!',{icon: 6,time:1000});
+			var index = parent.layer.getFrameIndex(window.name);
+			parent.location.replace(parent.location.href)
+        }
+    }); 
 }
 
 </script>

@@ -73,32 +73,32 @@ public class TeacherController {
 //        return mav;
 //	}
 //	
-//	@RequestMapping(value="teacher-update/submit",method=RequestMethod.GET)
-//	@ResponseBody
-//	public String doUpdate(HttpServletRequest request, HttpServletResponse response){
-//		String teacherid = request.getParameter("teacherid");
-//		String name = request.getParameter("name");
-//		teacherService.updateOne(teacherid, name);
-//		return "{\"success\":true}";
-//	}
-//	
-//	@RequestMapping(value="teacher-add",method=RequestMethod.GET)
-//    public ModelAndView teacherAdd(HttpServletRequest request, HttpServletResponse response){
-//		ModelAndView mav = new ModelAndView();
-//		
-//        // ����jsp·��
-//        mav.setViewName("teacher-add");
-//        return mav;
-//	}
-//	
-//	@RequestMapping(value="teacher-add/submit",method=RequestMethod.GET)
-//	@ResponseBody
-//	public String doAdd(HttpServletRequest request, HttpServletResponse response){
-//		
+	@RequestMapping(value="teacher-update/submit",method=RequestMethod.POST)
+	@ResponseBody
+	public String doUpdate(HttpServletRequest request, HttpServletResponse response){
+		//String teacherid = request.getParameter("teacherid");
+		//String name = request.getParameter("name");
+		//teacherService.updateOne(teacherid, name);
+		return "{\"success\":true}";
+	}
+	
+	@RequestMapping(value="teacher-add",method=RequestMethod.GET)
+    public ModelAndView teacherAdd(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView mav = new ModelAndView();
+		
+        // ����jsp·��
+        mav.setViewName("teacher-add");
+        return mav;
+	}
+	
+	@RequestMapping(value="teacher-add/submit",method=RequestMethod.POST)
+	@ResponseBody
+	public String doAdd(HttpServletRequest request, HttpServletResponse response){
+		
 //		String name = request.getParameter("name");
 //		teacherService.insertOne(name);
-//		return "{\"success\":true}";
-//	}
+		return "{\"success\":true}";
+	}
 	
 	@RequestMapping(value="teacher-list/data-source",method=RequestMethod.POST)
 	@ResponseBody

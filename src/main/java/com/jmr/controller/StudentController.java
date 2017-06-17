@@ -186,14 +186,14 @@ public class StudentController {
 //        return mav;
 //	}
 //	
-//	@RequestMapping(value="student-add",method=RequestMethod.GET)
-//    public ModelAndView studentAdd(HttpServletRequest request, HttpServletResponse response){
-//		ModelAndView mav = new ModelAndView();
-//		
-//        // ����jsp·��
-//        mav.setViewName("student-add");
-//        return mav;
-//	}
+	@RequestMapping(value="student-add",method=RequestMethod.GET)
+    public ModelAndView studentAdd(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView mav = new ModelAndView();
+		
+        // ����jsp·��
+        mav.setViewName("student-add");
+        return mav;
+	}
 //	
 //	@RequestMapping(value="student-add/submit",method=RequestMethod.GET)
 //	@ResponseBody

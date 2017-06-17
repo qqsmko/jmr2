@@ -54,10 +54,29 @@
     	limit #{length} offset #{start}
     </if>
   </select>
+  <select id="selectByPageWithName" parameterType="String" resultType="java.util.HashMap">
+    select 
+    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name 
+    from t_class_institutions 
+    	LEFT JOIN t_class ON t_class.class_id = t_class_institutions.class_id
+    	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id
+    where t_class.is_delete = 0
+	and t_institutions.institutions_name like #{search}
+    <if test="start!=null and length!=null">
+    	limit #{length} offset #{start}
+    </if>
+  </select>
   <select id="selectCount" resultType="int">
     select count(*)
-    from t_class
+    from t_class_institutions
     where is_delete = 0
+  </select>
+  <select id="selectFilteredCount" parameterType="String" resultType="int">
+    select count(*)
+    from t_class_institutions 
+    	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id
+    where t_institutions.is_delete = 0
+    and t_institutions.institutions_name like #{search}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_class

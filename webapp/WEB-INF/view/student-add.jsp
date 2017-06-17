@@ -28,8 +28,70 @@
 <title>新增学生</title>
 </head>
 <body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 学员登记 <span class="c-gray en">&gt;</span> 学员信息登记 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <article class="page-container">
 	<form class="form form-horizontal" id="form-article-add">
+		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">第一步：读取身份证</span></div>
+		<div class="row cl">
+			<label class="form-label col-xs-12 col-sm-6"><span class="c-red"><h3>请在机器上放置身份证</h3></span></label>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>身份证号：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="cardId" name="cardId" readonly="true">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>姓名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="cardName" name="cardName" readonly="true">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>性别：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="gender" name="gender" readonly="true">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>民族：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="nation" name="nation" readonly="true">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>生日：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="birthday" name="birthday" readonly="true">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>地址：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="address" name="address" readonly="true">
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button onClick="getMockData();" class="btn btn-primary radius" type="button">&nbsp;&nbsp;读取&nbsp;&nbsp;</button>
+			</div>
+		</div>
+
+		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">第二步：采集指纹</span></div>
+		<div class="row cl">
+			<label class="form-label col-xs-12 col-sm-6"><span class="c-red"><h3>请在机器上按下指纹</h3></span></label>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>指纹标示码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="fingernum" name="fingernum" readonly="true">
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button onClick="getMockData2();" class="btn btn-primary radius" type="button">&nbsp;&nbsp;读取&nbsp;&nbsp;</button>
+			</div>
+		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>姓名：</label>
 			<div class="formControls col-xs-8 col-sm-9">
@@ -292,6 +354,21 @@ $(function(){
 	var ue = UE.getEditor('editor');
 	
 });
+
+
+function getMockData(){
+	//$("#form-article-add").cardnum.value = '203203199303030303';
+	document.getElementById("cardId").value='420108199506063316';
+	document.getElementById("cardName").value='马云';
+	document.getElementById("gender").value='男';
+	document.getElementById("nation").value='汉族';
+	document.getElementById("birthday").value='1986-08-08';
+	document.getElementById("address").value='北京海淀区牡丹园6号';
+}
+
+function getMockData2(){
+	document.getElementById("fingernum").value='A6FF63ECEFE2F27CADFACDF1494962ED';
+}
 
 /*function article_save_submit(){
 	alert(${add});

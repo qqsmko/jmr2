@@ -53,4 +53,15 @@ public class UtilService implements IUtilService {
 		}
 		return 0;
 	}
+	
+	public int getAccountInstitutionsId(String username,String password){
+		Account temp = accountMapper.selectByPrimaryKey(username);
+		if(temp == null) return 0;
+		String passwdMd5 = getMd5(password);
+		String passwdSQL = temp.getPassword();
+		if(passwdMd5.equals(passwdSQL)){
+			return temp.getInstitutionsId();
+		}
+		return 0;
+	}
 }

@@ -5,21 +5,19 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.jmr.model.Class;
+import com.jmr.model.Course;
 import com.jmr.service.IClassService;
 
 @Controller
@@ -28,10 +26,17 @@ public class ClassController {
 	@Autowired
 	IClassService classService;
 	
+	@RequestMapping(value="class-list",method=RequestMethod.GET)
+	public ModelAndView doClassListGET(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("class-list");
+	    return mav;
+	}
+	
 	@RequestMapping(value="class-list/data-source",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> doClassListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-		return classService.getClassesDataTest(draw, start, length);
+	public Map<String,Object> doClassListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length,@RequestParam(value="search[value]") String search){
+		return classService.getClassesDataTest(draw, start, length, search);
 	}
 	
 	@RequestMapping(value="class-list/test",method=RequestMethod.POST)
@@ -40,16 +45,42 @@ public class ClassController {
 		return classService.getClassesDataWithId(draw, start, length, id);
 	}
 	
+	@RequestMapping(value="class-add",method=RequestMethod.GET)
+	public ModelAndView doClassAddGET(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("class-add");
+		return mav;
+	}
+	
+	@RequestMapping(value="class-add/submit",method=RequestMethod.GET)
+	public Map<String,Object> doClassAddSubmitGET(@RequestBody Class classes){
+		//return classService.insertClass(classes);
+	}
+	
 //	@RequestMapping(value="class-list/test",method=RequestMethod.POST)
 //	@ResponseBody
 //	public Map<String,Object> doClassListDataSourc(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
 //		return classService.getClassesDataTest(draw, start, length);
 //	}
 	
-	@RequestMapping(value="class-series-list/data-source",method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String,Object> doClassSeriesListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-		return classService.getClassSeriesData(draw, start, length);
+//	@RequestMapping(value="class-series-list/data-source",method=RequestMethod.POST)
+//	@ResponseBody
+//	public Map<String,Object> doClassSeriesListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+//		return classService.getClassSeriesData(draw, start, length);
+//	}
+	
+//	@RequestMapping(value="class-series-list",method=RequestMethod.GET)
+//	public ModelAndView doClassSeriesListGET(){
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("class-series-list");
+//	    return mav;
+//	}
+	
+	@RequestMapping(value="course-list",method=RequestMethod.GET)
+	public ModelAndView doCourseListGET(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("course-list");
+	    return mav;
 	}
 	
 	@RequestMapping(value="course-list/data-source",method=RequestMethod.POST)
@@ -58,25 +89,39 @@ public class ClassController {
 		return classService.getCourseData(draw, start, length);
 	}
 	
-	@RequestMapping(value="class-list",method=RequestMethod.GET)
-	public ModelAndView doClassListGET(){
+	@RequestMapping(value="course-add",method=RequestMethod.GET)
+	public ModelAndView doCourseAddGET(){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("class-list");
+		mav.setViewName("course-add");
 	    return mav;
 	}
 	
-	@RequestMapping(value="class-series-list",method=RequestMethod.GET)
-	public ModelAndView doClassSeriesListGET(){
+	@RequestMapping(value="course-add/submit",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doCourseAddSubmitPOST(@RequestBody Course course){
+	    return classService.insertCourse(course);
+	}
+	
+	@RequestMapping(value="course-list/delete",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doDelete(@RequestParam int id){
+		return classService.deleteCourse(id);
+	}
+	
+	@RequestMapping(value="course-update",method=RequestMethod.GET)
+	public ModelAndView doCourseUpdateGET(@RequestParam int id){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("class-series-list");
+		Course course = classService.getCourseById(id);
+		mav.addObject("course",course);
+		mav.setViewName("course-update");
 	    return mav;
 	}
 	
-	@RequestMapping(value="course-list",method=RequestMethod.GET)
-	public ModelAndView doCourseListGET(){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("course-list");
-	    return mav;
+	@RequestMapping(value="course-update/submit",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doCourseUpdateSubmitPOST(@RequestBody Course course){
+		System.out.println(course.getCourseName());
+		return classService.updateCourse(course);
 	}
 	
 //	@RequestMapping(value="class-list",method=RequestMethod.GET)
@@ -91,19 +136,19 @@ public class ClassController {
 //        return mav;
 //    }
 //	
-//	@RequestMapping(value="class-application",method=RequestMethod.POST)
-//	@ResponseBody
-//	public String doPost(@RequestParam int cid){
-//		t.updateOnesState(cid, 2);
-//		return "{\"success\":false}";
-//	}
-//	
-//	@RequestMapping(value="class-application-plus",method=RequestMethod.POST)
-//	@ResponseBody
-//	public String doPostPlus(@RequestParam int cid){
-//		t.updateOnesState(cid, 3);
-//		return "{\"success\":false}";
-//	}
+	@RequestMapping(value="class-application",method=RequestMethod.POST)
+	@ResponseBody
+	public String doPost(@RequestParam int cid){
+		//t.updateOnesState(cid, 2);
+		return "{\"success\":false}";
+	}
+	
+	@RequestMapping(value="class-application-plus",method=RequestMethod.POST)
+	@ResponseBody
+	public String doPostPlus(@RequestParam int cid){
+		//t.updateOnesState(cid, 3);
+		return "{\"success\":false}";
+	}
 //	
 //	@RequestMapping(value="class-list/delete",method=RequestMethod.POST)
 //	@ResponseBody
@@ -135,33 +180,33 @@ public class ClassController {
 //		return "{\"success\":true}";
 //	}
 //	
-//	@RequestMapping("class-application")
-//    public ModelAndView classApplication(){
-//        ModelAndView mav = new ModelAndView();
-//        
+	@RequestMapping("class-application")
+    public ModelAndView classApplication(){
+        ModelAndView mav = new ModelAndView();
+        
 //        List<Class> sl = t.list();
 //        
 //        // 放入转发参数
 //        mav.addObject("sl", sl);
-//        
-//        // 放入jsp路径
-//        mav.setViewName("class-application");
-//        return mav;
-//    }
-//	
-//	@RequestMapping("class-application-plus")
-//    public ModelAndView classApplicationPlus(){
-//        ModelAndView mav = new ModelAndView();
-//        
+        
+        // 放入jsp路径
+        mav.setViewName("class-application");
+        return mav;
+    }
+	
+	@RequestMapping("class-application-plus")
+    public ModelAndView classApplicationPlus(){
+        ModelAndView mav = new ModelAndView();
+        
 //        List<Class> sl = t.listApplication();
 //        
 //        // 放入转发参数
 //        mav.addObject("sl", sl);
-//        
-//        // 放入jsp路径
-//        mav.setViewName("class-application-plus");
-//        return mav;
-//    }
+        
+        // 放入jsp路径
+        mav.setViewName("class-application-plus");
+        return mav;
+    }
 //	
 //	@RequestMapping(value="class-update",method=RequestMethod.GET)
 //    public ModelAndView classUpdate(HttpServletRequest request, HttpServletResponse response){
@@ -190,14 +235,7 @@ public class ClassController {
 //		return "{\"success\":true}";
 //	}
 //	
-//	@RequestMapping(value="class-add",method=RequestMethod.GET)
-//    public ModelAndView classAdd(HttpServletRequest request, HttpServletResponse response){
-//		ModelAndView mav = new ModelAndView();
-//		
-//        // ����jsp·��
-//        mav.setViewName("class-add");
-//        return mav;
-//	}
+
 //	
 //	@RequestMapping(value="class-add/submit",method=RequestMethod.GET)
 //	@ResponseBody
