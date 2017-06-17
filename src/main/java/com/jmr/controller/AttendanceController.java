@@ -2,7 +2,9 @@ package com.jmr.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jmr.model.Attendance;
 import com.jmr.model.Student;
+import com.jmr.model.Teacher;
 import com.jmr.service.IAttendanceService;
 import com.jmr.service.IStudentService;
 
@@ -63,4 +66,14 @@ public class AttendanceController {
         mav.setViewName("attendance-get");
         return mav;
     }
+	
+	@RequestMapping(value="attendance-add/submit",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doAttendanceAddSubmitPOST(@RequestBody Attendance attendance){
+		Map<String,Object> ansMap = new HashMap<String,Object>();
+		ansMap.put("successhahahah",true);
+		return ansMap;
+		//return attendanceService.InsertAttendance(attendance);
+	}
+	
 }

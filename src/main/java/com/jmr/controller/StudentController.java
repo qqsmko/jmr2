@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jmr.model.Student;
+import com.jmr.model.Teacher;
 import com.jmr.model.Class;
 import com.jmr.service.IStudentService;
 import com.jmr.service.IClassService;
@@ -94,7 +96,7 @@ public class StudentController {
 	public Map<String,Object> doListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
 		return studentService.getStudentData(draw, start, length);
 	}
-	
+
 //	@RequestMapping(value="student-list",method=RequestMethod.POST)
 //	@ResponseBody
 //	public String doPost(HttpServletRequest request, HttpServletResponse response){
@@ -193,6 +195,12 @@ public class StudentController {
         // ����jsp·��
         mav.setViewName("student-add");
         return mav;
+	}
+	
+	@RequestMapping(value="student-add/submit",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doTeacherAddSubmitPOST(@RequestBody Student student){
+	    return studentService.InsertStudent(student);
 	}
 //	
 //	@RequestMapping(value="student-add/submit",method=RequestMethod.GET)
