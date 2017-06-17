@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.jmr.model.Course;
 import com.jmr.model.Teacher;
 
 public interface ITeacherService {
@@ -14,6 +15,7 @@ public interface ITeacherService {
 //	List<Teacher> list();
 //	
 	Map<String,Object> getData(int draw,int start,int length);
+	Map<String,Object> InsertTeacher(Teacher teacher);
 //    
 //	void deleteOne(int num);
 //	

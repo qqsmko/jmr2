@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.jmr.model.Student;
+import com.jmr.model.Teacher;
 
 public interface IStudentService {
 
 	Map<String,Object> getIdCardData(int draw,int start,int length);
 	Map<String,Object> getStudentData(int draw,int start,int length);
-	
+	Map<String,Object> InsertStudent(Student student);
 //	List<Student> list();
 //	Student getOne(int num);
 //	void setOnesState(int num);

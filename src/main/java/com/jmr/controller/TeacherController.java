@@ -1,5 +1,6 @@
 package com.jmr.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,12 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jmr.model.Course;
 import com.jmr.model.Teacher;
 import com.jmr.service.ITeacherService;
 
@@ -85,20 +88,20 @@ public class TeacherController {
 	@RequestMapping(value="teacher-add",method=RequestMethod.GET)
     public ModelAndView teacherAdd(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView mav = new ModelAndView();
-		
-        // ����jsp·��
         mav.setViewName("teacher-add");
         return mav;
 	}
 	
 	@RequestMapping(value="teacher-add/submit",method=RequestMethod.POST)
 	@ResponseBody
-	public String doAdd(HttpServletRequest request, HttpServletResponse response){
-		
-//		String name = request.getParameter("name");
-//		teacherService.insertOne(name);
-		return "{\"success\":true}";
+	public Map<String,Object> doTeacherAddSubmitPOST(@RequestBody Teacher teacher){
+	    return teacherService.InsertTeacher(teacher);
 	}
+//	public String doAdd(HttpServletRequest request, HttpServletResponse response){
+////		String name = request.getParameter("name");
+////		teacherService.insertOne(name);
+//		return "{\"success\":true}";
+//	}
 	
 	@RequestMapping(value="teacher-list/data-source",method=RequestMethod.POST)
 	@ResponseBody
