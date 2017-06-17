@@ -40,6 +40,7 @@
 				<th width="100">课程名称</th>
 				<th width="100">所属专业</th>
 				<th width="">课程描述</th>
+				<th width="80">所属机构</th>
 				<th width="80">课程学时</th>
 				<th width="100">操作</th>
 			</tr>
@@ -63,7 +64,7 @@ $(function(){
 	$('.table-sort').dataTable({
 		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
-		"searching": false,
+		"searching": true,
 		"ordering": false,
 		"serverSide": true,
 		"ajax": {
@@ -72,18 +73,19 @@ $(function(){
 		},
 		"columns":[
 			{
-				"data":"courseId",
+				"data":"course_id",
 				"render":function(data, type, row, meta) {
         			return '<td><input type="checkbox" value="'+data+'" name="items"></td>'
     			}
 			},
-			{"data":"courseId"},
-	        {"data":"courseName"},
-	        {"data":"majorName"},
+			{"data":"course_id"},
+	        {"data":"course_name"},
+	        {"data":"major_name"},
 	        {"data":"describe"},
-	        {"data":"studyTime"},
+	        {"data":"institutions_name"},
+	        {"data":"study_time"},
     		{
-    			"data":"courseId",
+    			"data":"course_id",
 	        	"render":function(data, type, row, meta) {
         			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'course-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
     			}

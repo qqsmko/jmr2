@@ -30,19 +30,19 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 学员登记 <span class="c-gray en">&gt;</span> 身份证管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加用户" data-href="class-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增身份证</a></span></span></div>
+<!-- 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加用户" data-href="class-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增身份证</a></span></span></div> -->
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
-				<th width="25"><input type="checkbox" name="" value=""></th>
+<!-- 				<th width="25"><input type="checkbox" name="" value=""></th> -->
 				<th width="80">身份证号</th>
 				<th width="">姓名</th>
 				<th width="100">性别</th>
 				<th width="80">民族</th>
 				<th width="80">生日</th>
 				<th width="80">地址</th>
-				<th width="100">操作</th>
+<!-- 				<th width="100">操作</th> -->
 			</tr>
 		</thead>
 	</table>
@@ -72,12 +72,12 @@ $(function(){
 			"type":"POST",
 		},
 		"columns":[
-			{
-				"data":"cardId",
-				"render":function(data, type, row, meta) {
-        			return '<td><input type="checkbox" value="'+data+'" name="items"></td>'
-    			}
-			},
+			// {
+			// 	"data":"cardId",
+			// 	"render":function(data, type, row, meta) {
+   //      			return '<td><input type="checkbox" value="'+data+'" name="items"></td>'
+   //  			}
+			// },
 			{"data":"cardId"},
 	        {"data":"cardName"},
 	        {
@@ -95,12 +95,12 @@ $(function(){
 	        {"data":"nation"},
 	        {"data":"birthday"},
 	        {"data":"address"},
-    		{
-    			"data":"institutionsid",
-	        	"render":function(data, type, row, meta) {
-        			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'institutions-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
-    			}
-    		}
+    		// {
+    		// 	"data":"institutionsid",
+	     //    	"render":function(data, type, row, meta) {
+      //   			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'institutions-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
+    		// 	}
+    		// }
     	]
 	});
 	

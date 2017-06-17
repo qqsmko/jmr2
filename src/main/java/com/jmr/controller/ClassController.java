@@ -26,6 +26,9 @@ public class ClassController {
 	@Autowired
 	IClassService classService;
 	
+	/*--------------------------------------------------------*/
+	//                         Class
+	/*--------------------------------------------------------*/
 	@RequestMapping(value="class-list",method=RequestMethod.GET)
 	public ModelAndView doClassListGET(){
 		ModelAndView mav = new ModelAndView();
@@ -63,6 +66,9 @@ public class ClassController {
 //		return classService.getClassesDataTest(draw, start, length);
 //	}
 	
+	/*--------------------------------------------------------*/
+	//                       Class-Series
+	/*--------------------------------------------------------*/
 //	@RequestMapping(value="class-series-list/data-source",method=RequestMethod.POST)
 //	@ResponseBody
 //	public Map<String,Object> doClassSeriesListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
@@ -76,6 +82,9 @@ public class ClassController {
 //	    return mav;
 //	}
 	
+	/*--------------------------------------------------------*/
+	//                         Course
+	/*--------------------------------------------------------*/
 	@RequestMapping(value="course-list",method=RequestMethod.GET)
 	public ModelAndView doCourseListGET(){
 		ModelAndView mav = new ModelAndView();
@@ -85,8 +94,8 @@ public class ClassController {
 	
 	@RequestMapping(value="course-list/data-source",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> doCourseListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-		return classService.getCourseData(draw, start, length);
+	public Map<String,Object> doCourseListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length,@RequestParam(value="search[value]") String search){
+		return classService.getCourseData(draw, start, length, search);
 	}
 	
 	@RequestMapping(value="course-add",method=RequestMethod.GET)
@@ -122,6 +131,9 @@ public class ClassController {
 	public Map<String,Object> doCourseUpdateSubmitPOST(@RequestBody Course course){
 		return classService.updateCourse(course);
 	}
+	
+	
+	
 	
 //	@RequestMapping(value="class-list",method=RequestMethod.GET)
 //    public ModelAndView listClass(){

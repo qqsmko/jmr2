@@ -31,6 +31,7 @@ import com.jmr.model.ClassSeries;
 import com.jmr.model.ClassSeriesCompletion;
 import com.jmr.model.ClassSeriesVerify;
 import com.jmr.model.Course;
+import com.jmr.model.CourseInstitutions;
 import com.jmr.service.IClassService;
 
 @Service
@@ -58,15 +59,28 @@ public class ClassService implements IClassService {
 	@Autowired
 	CourseMapper courseMapper;
 	
-	public Map<String,Object> getCourseData(int draw,int start,int length){
-		int totalNum = courseMapper.selectCount();
-		List<Course> data = courseMapper.selectByPage(start, length);
-		Map<String,Object> ansMap = new HashMap<String,Object>();
-    	ansMap.put("draw",draw);
-    	ansMap.put("recordsTotal",totalNum);
-		ansMap.put("recordsFiltered",totalNum);
-		ansMap.put("data",data);
-    	return ansMap;
+	public Map<String,Object> getCourseData(int draw,int start,int length,String search){
+		if(search==""){
+			int totalNum = courseMapper.selectCount();
+			List<Map<String,Object>> data = courseMapper.selectByPageSQL(start, length);
+			Map<String,Object> ansMap = new HashMap<String,Object>();
+	    	ansMap.put("draw",draw);
+	    	ansMap.put("recordsTotal",totalNum);
+			ansMap.put("recordsFiltered",totalNum);
+			ansMap.put("data",data);
+	    	return ansMap;
+	    }else{
+	    	int totalNum = courseMapper.selectCount();
+			int totalFiltered = courseMapper.selectFilteredCount("%"+search+"%");
+			List<Map<String,Object>> data = courseMapper.selectByPageWithName(start, length, "%"+search+"%");
+			Map<String,Object> ansMap = new HashMap<String,Object>();
+			ansMap.put("draw",draw);
+	    	ansMap.put("recordsTotal",totalNum);
+			ansMap.put("recordsFiltered",totalFiltered);
+			ansMap.put("data",data);
+	    	return ansMap;
+	    }
+		
 	}
 	
 	public Map<String,Object> getClassSeriesData(int draw,int start,int length){

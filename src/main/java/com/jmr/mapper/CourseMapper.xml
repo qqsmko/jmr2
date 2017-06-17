@@ -29,10 +29,40 @@
     	limit #{length} offset #{start}
     </if>
   </select>
+  <select id="selectByPageSQL" parameterType="int" resultType="java.util.HashMap">
+    select 
+	 t_course.course_id, t_course.course_name, t_course.major_name, t_course.describe, t_course.study_time,t_institutions.institutions_name
+	from t_course_institutions 
+	 LEFT JOIN t_course ON t_course.course_id = t_course_institutions.course_id
+	 LEFT JOIN t_institutions on t_course_institutions.institutions_id = t_institutions.institutions_id
+	where t_course.is_delete = 0
+    <if test="start!=null and length!=null">
+    	limit #{length} offset #{start}
+    </if>
+  </select>
+  <select id="selectByPageWithName" parameterType="String" resultType="java.util.HashMap">
+	select 
+	 t_course.course_id, t_course.course_name, t_course.major_name, t_course.describe, t_course.study_time,t_institutions.institutions_name
+	from t_course_institutions 
+	 LEFT JOIN t_course ON t_course.course_id = t_course_institutions.course_id
+	 LEFT JOIN t_institutions on t_course_institutions.institutions_id = t_institutions.institutions_id
+	where t_course.is_delete = 0
+	and t_institutions.institutions_name like  #{search}
+    <if test="start!=null and length!=null">
+    	limit #{length} offset #{start}
+    </if>
+  </select>
   <select id="selectCount" resultType="int">
     select count(*)
     from t_course
     where is_delete = 0
+  </select>
+  <select id="selectFilteredCount" parameterType="String" resultType="int">
+    select count(*)
+    from t_course_institutions 
+    	LEFT JOIN t_institutions on t_course_institutions.institutions_id = t_institutions.institutions_id
+    where t_institutions.is_delete = 0
+    and t_institutions.institutions_name like #{search}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_course

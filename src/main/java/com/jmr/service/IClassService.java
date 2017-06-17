@@ -6,7 +6,7 @@ import com.jmr.model.Course;
 
 public interface IClassService {
 
-	Map<String,Object> getCourseData(int draw,int start,int length);
+	Map<String,Object> getCourseData(int draw,int start,int length,String search);
 	Map<String,Object> getClassSeriesData(int draw,int start,int length);
 	Map<String,Object> getClassesData(int draw,int start,int length);
 	Map<String,Object> getClassesDataTest(int draw,int start,int length,String search);

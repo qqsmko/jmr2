@@ -43,7 +43,6 @@
 				<th width="80">班级负责人</th>
 				<th width="80">负责人手机</th>
 				<th width="80">本班学生详情</th>
-				<th width="80">本班教师详情</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
@@ -108,11 +107,6 @@ $(function(){
 	        {"data":"student_count"},
 	        {"data":"responsible"},
 	        {"data":"telephone"},
-	        {
-	        	"render":function(data, type, row, meta) {
-        			return '点击查看'
-    			}
-    		},
 	        {
 	        	"render":function(data, type, row, meta) {
         			return '点击查看'

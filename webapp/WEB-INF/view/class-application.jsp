@@ -38,41 +38,11 @@
 				<th width="80">id</th>
 				<th width="100">所属机构</th>
 				<th width="">班级名称</th>
+				<th width="80">所属机构</th>
 				<th width="80">申请状态</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
-		<tbody>
-			<c:forEach items="${sl}" var="s" varStatus="st">
-			<tr class="text-c">
-				<td><input type="checkbox" value="1" name=""></td>
-				<td>${s.classid}</td>
-				<td>${s.classseriesid}</td>
-				<td>${s.classname}</td>
-				<td>${s.applyperson}</td>
-				<c:if test="${s.applystate==1}">
-					<td class="td-status"><span class="label label-default radius">未审核</span></td>
-				</c:if>
-				<c:if test="${s.applystate==2}">
-					<td class="td-status"><span class="label label-primary radius">等待审核</span></td>
-				</c:if>
-				<c:if test="${s.applystate>=3}">
-					<td class="td-status"><span class="label label-success radius">审核成功</span></td>
-				</c:if>
-				<td class="td-manage">
-					<c:if test="${s.applystate==1}">
-						<a style="text-decoration:none" onClick="member_start(this,${s.classid})" href="javascript:;" title="启用">提交审核</a>
-					</c:if>
-					<c:if test="${s.applystate==2}">
-						<a>等待审核</a>
-					</c:if>
-					<c:if test="${s.applystate>=3}">
-						<a>审核完成</a>
-					</c:if>
-				</td>
-			</tr>
-			</c:forEach>
-		</tbody>
 	</table>
 	</div>
 </div>
@@ -92,10 +62,47 @@ $(function(){
 	$('.table-sort').dataTable({
 		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
-		"aoColumnDefs": [
-		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-		  //{"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
-		]
+		"searching": true,
+		"ordering": false,
+		"serverSide": true,
+		"ajax": {
+			"url":"class-list/data-source",
+			"type":"POST",
+		},
+		"columns":[
+			{
+				"data":"class_id",
+				"render":function(data, type, row, meta) {
+        			return '<td><input type="checkbox" value="'+data+'" name="items"></td>'
+    			}
+			},
+			{"data":"class_id"},
+	        {"data":"institutions_name"},
+	        {"data":"class_name"},
+	        {"data":"institutions_name"},
+	        {
+				"data":"state",
+				"render":function(data, type, row, meta) {
+        			if(data == 0){
+        				return '<td><span class="label label-defaunt radius">未申请</span></td>'
+        			}else if(data ==1){
+        				return '<td><span class="label label-primary radius">待审核</span></td>'
+        			}else if(data ==2){
+        				return '<td><span class="label label-danger radius">已驳回</span></td>'
+        			}else if(data ==3){
+        				return '<td><span class="label label-success radius">已通过</span></td>'
+        			}else{
+        				return '<td>错误</td>'
+        			}
+    			}
+			},
+	        {
+    			"data":"class_id",
+	        	"render":function(data, type, row, meta) {
+        			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'course-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
+    			}
+    		}
+    	]
 	});
 	
 });
