@@ -1,5 +1,6 @@
 package com.jmr.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.jmr.IDao.IdcardMapper;
 import com.jmr.IDao.StudentInfoMapper;
+import com.jmr.IDao.StudentMapper;
 import com.jmr.model.Idcard;
+import com.jmr.model.Student;
 import com.jmr.service.IStudentService;
 
 @Service
@@ -19,7 +22,8 @@ public class StudentService implements IStudentService{
     StudentInfoMapper studentInfoMapper;
 	@Autowired
 	IdcardMapper idcardMapper;
-	
+	@Autowired
+	StudentMapper studentMapper;
 	public Map<String,Object> getIdCardData(int draw,int start,int length){
 		int totalNum = idcardMapper.selectCount();
 		List<Idcard> data = idcardMapper.selectByPage(start, length);
@@ -40,6 +44,20 @@ public class StudentService implements IStudentService{
 		ansMap.put("recordsFiltered",totalNum);
 		ansMap.put("data",data);
     	return ansMap;
+	}
+	
+	public Map<String,Object> InsertStudent(Student student){
+		Map<String,Object> ansMap = new HashMap<String,Object>();
+		student.setIsDelete(0);
+		student.setCreateBy("test"); //TODO:cookie
+		student.setCreateAt(new Date());
+		if(studentMapper.insertSelective(student) == 0){
+			System.out.println(studentMapper.insertSelective(student));
+			ansMap.put("error","写入失败");
+			return ansMap;
+		}
+		ansMap.put("success",true);
+		return ansMap;
 	}
 	
 //    public Student getOne(int num){
