@@ -33,7 +33,7 @@
   </select>
   <select id="selectByPageSQL" parameterType="int" resultType="java.util.HashMap">
     select 
-    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name 
+    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name,t_class.state
     from t_class_institutions 
     	LEFT JOIN t_class ON t_class.class_id = t_class_institutions.class_id
     	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id
@@ -44,7 +44,7 @@
   </select>
   <select id="selectByPageWithId" parameterType="int" resultType="java.util.HashMap">
     select 
-    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name 
+    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name,t_class.state 
     from t_class_institutions 
     	LEFT JOIN t_class ON t_class.class_id = t_class_institutions.class_id
     	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id
@@ -56,7 +56,7 @@
   </select>
   <select id="selectByPageWithName" parameterType="String" resultType="java.util.HashMap">
     select 
-    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name 
+    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name,t_class.state
     from t_class_institutions 
     	LEFT JOIN t_class ON t_class.class_id = t_class_institutions.class_id
     	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id

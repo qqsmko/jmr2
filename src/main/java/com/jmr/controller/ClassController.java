@@ -120,7 +120,6 @@ public class ClassController {
 	@RequestMapping(value="course-update/submit",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> doCourseUpdateSubmitPOST(@RequestBody Course course){
-		System.out.println(course.getCourseName());
 		return classService.updateCourse(course);
 	}
 	

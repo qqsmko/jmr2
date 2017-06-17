@@ -11,14 +11,14 @@ Target Server Type    : PGSQL
 Target Server Version : 90602
 File Encoding         : 65001
 
-Date: 2017-06-17 13:15:56
+Date: 2017-06-17 15:43:16
 */
 
 
 -- ----------------------------
 -- Sequence structure for t_account_account_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."t_account_account_id_seq";
+DROP SEQUENCE "public"."t_account_account_id_seq";
 CREATE SEQUENCE "public"."t_account_account_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -30,7 +30,7 @@ SELECT setval('"public"."t_account_account_id_seq"', 5, true);
 -- ----------------------------
 -- Sequence structure for t_ukey_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."t_ukey_id_seq";
+DROP SEQUENCE "public"."t_ukey_id_seq";
 CREATE SEQUENCE "public"."t_ukey_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -42,7 +42,7 @@ SELECT setval('"public"."t_ukey_id_seq"', 1, true);
 -- ----------------------------
 -- Sequence structure for tbl_accessResource_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."tbl_accessResource_id_seq";
+DROP SEQUENCE "public"."tbl_accessResource_id_seq";
 CREATE SEQUENCE "public"."tbl_accessResource_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -53,7 +53,7 @@ CREATE SEQUENCE "public"."tbl_accessResource_id_seq"
 -- ----------------------------
 -- Sequence structure for tbl_account_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."tbl_account_id_seq";
+DROP SEQUENCE "public"."tbl_account_id_seq";
 CREATE SEQUENCE "public"."tbl_account_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -65,7 +65,7 @@ SELECT setval('"public"."tbl_account_id_seq"', 1, true);
 -- ----------------------------
 -- Sequence structure for tbl_account_role_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."tbl_account_role_id_seq";
+DROP SEQUENCE "public"."tbl_account_role_id_seq";
 CREATE SEQUENCE "public"."tbl_account_role_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -76,7 +76,7 @@ CREATE SEQUENCE "public"."tbl_account_role_id_seq"
 -- ----------------------------
 -- Sequence structure for tbl_authority_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."tbl_authority_id_seq";
+DROP SEQUENCE "public"."tbl_authority_id_seq";
 CREATE SEQUENCE "public"."tbl_authority_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -87,7 +87,7 @@ CREATE SEQUENCE "public"."tbl_authority_id_seq"
 -- ----------------------------
 -- Sequence structure for tbl_authority_resource_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."tbl_authority_resource_id_seq";
+DROP SEQUENCE "public"."tbl_authority_resource_id_seq";
 CREATE SEQUENCE "public"."tbl_authority_resource_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -98,7 +98,7 @@ CREATE SEQUENCE "public"."tbl_authority_resource_id_seq"
 -- ----------------------------
 -- Sequence structure for tbl_indicator_statistics_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."tbl_indicator_statistics_id_seq";
+DROP SEQUENCE "public"."tbl_indicator_statistics_id_seq";
 CREATE SEQUENCE "public"."tbl_indicator_statistics_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -109,7 +109,7 @@ CREATE SEQUENCE "public"."tbl_indicator_statistics_id_seq"
 -- ----------------------------
 -- Sequence structure for tbl_role_authority_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."tbl_role_authority_id_seq";
+DROP SEQUENCE "public"."tbl_role_authority_id_seq";
 CREATE SEQUENCE "public"."tbl_role_authority_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -120,7 +120,7 @@ CREATE SEQUENCE "public"."tbl_role_authority_id_seq"
 -- ----------------------------
 -- Sequence structure for tbl_role_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."tbl_role_id_seq";
+DROP SEQUENCE "public"."tbl_role_id_seq";
 CREATE SEQUENCE "public"."tbl_role_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -131,14 +131,14 @@ CREATE SEQUENCE "public"."tbl_role_id_seq"
 -- ----------------------------
 -- Sequence structure for temp_123_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."temp_123_seq";
+DROP SEQUENCE "public"."temp_123_seq";
 CREATE SEQUENCE "public"."temp_123_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 9
+ START 11
  CACHE 1;
-SELECT setval('"public"."temp_123_seq"', 9, true);
+SELECT setval('"public"."temp_123_seq"', 11, true);
 
 -- ----------------------------
 -- Table structure for t_account
@@ -536,8 +536,10 @@ WITH (OIDS=FALSE)
 INSERT INTO "public"."t_course" VALUES ('5', '123', '123', '123', '123', '0', 'test', '2017-06-17 09:44:29.006');
 INSERT INTO "public"."t_course" VALUES ('6', '123', '123', '123', '123', '0', 'test', '2017-06-17 09:51:06.642');
 INSERT INTO "public"."t_course" VALUES ('7', '123', '123', null, '123', '1', 'test', '2017-06-17 09:52:36.237');
-INSERT INTO "public"."t_course" VALUES ('8', '小猫', '1221321', '123231', '1233', '0', 'test', '2017-06-17 09:54:15.006');
+INSERT INTO "public"."t_course" VALUES ('8', '小猫咪', '1221321', '123231', '22', '0', 'test', '2017-06-17 09:54:15.006');
 INSERT INTO "public"."t_course" VALUES ('9', '231', '14243', '235235', '235', '1', 'test', '2017-06-17 10:31:41.799');
+INSERT INTO "public"."t_course" VALUES ('10', '4321', '1234', '1234', '1234', '0', 'test', '2017-06-17 15:00:12.479');
+INSERT INTO "public"."t_course" VALUES ('11', '教美涵写代码', '计算机', '啦啦啦啦啦', '999', '0', 'test', '2017-06-17 15:33:57.333');
 INSERT INTO "public"."t_course" VALUES ('328765', '市场价格调查', '市场学', '调查市场的价格', '48', '0', 'test', '2017-05-04 12:15:37');
 
 -- ----------------------------
@@ -1525,7 +1527,7 @@ ALTER TABLE "public"."tbl_accessResource" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Indexes structure for table tbl_account
 -- ----------------------------
-CREATE INDEX "idx_user_id" ON "public"."tbl_account" USING btree ("user_id");
+CREATE INDEX "idx_user_id" ON "public"."tbl_account" USING btree (user_id);
 
 -- ----------------------------
 -- Uniques structure for table tbl_account
@@ -1540,8 +1542,8 @@ ALTER TABLE "public"."tbl_account" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Indexes structure for table tbl_account_role
 -- ----------------------------
-CREATE INDEX "tbl_account_role_role_id_idx" ON "public"."tbl_account_role" USING btree ("role_id");
-CREATE INDEX "tbl_account_role_user_id_idx" ON "public"."tbl_account_role" USING btree ("user_id");
+CREATE INDEX "tbl_account_role_role_id_idx" ON "public"."tbl_account_role" USING btree (role_id);
+CREATE INDEX "tbl_account_role_user_id_idx" ON "public"."tbl_account_role" USING btree (user_id);
 
 -- ----------------------------
 -- Primary Key structure for table tbl_account_role
@@ -1551,7 +1553,7 @@ ALTER TABLE "public"."tbl_account_role" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Indexes structure for table tbl_authority
 -- ----------------------------
-CREATE INDEX "idx_authority_id" ON "public"."tbl_authority" USING btree ("authority_id");
+CREATE INDEX "idx_authority_id" ON "public"."tbl_authority" USING btree (authority_id);
 
 -- ----------------------------
 -- Uniques structure for table tbl_authority
@@ -1566,8 +1568,8 @@ ALTER TABLE "public"."tbl_authority" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Indexes structure for table tbl_authority_resource
 -- ----------------------------
-CREATE INDEX "tbl_authority_resource_authority_id_idx" ON "public"."tbl_authority_resource" USING btree ("authority_id");
-CREATE INDEX "tbl_authority_resource_resource_id_idx" ON "public"."tbl_authority_resource" USING btree ("resource_id");
+CREATE INDEX "tbl_authority_resource_authority_id_idx" ON "public"."tbl_authority_resource" USING btree (authority_id);
+CREATE INDEX "tbl_authority_resource_resource_id_idx" ON "public"."tbl_authority_resource" USING btree (resource_id);
 
 -- ----------------------------
 -- Primary Key structure for table tbl_authority_resource
@@ -1587,7 +1589,7 @@ ALTER TABLE "public"."tbl_indicator_statistics" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Indexes structure for table tbl_role
 -- ----------------------------
-CREATE INDEX "tbl_role_role_id_idx" ON "public"."tbl_role" USING btree ("role_id");
+CREATE INDEX "tbl_role_role_id_idx" ON "public"."tbl_role" USING btree (role_id);
 
 -- ----------------------------
 -- Uniques structure for table tbl_role
@@ -1602,8 +1604,8 @@ ALTER TABLE "public"."tbl_role" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Indexes structure for table tbl_role_authority
 -- ----------------------------
-CREATE INDEX "tbl_role_authority_role_id_idx" ON "public"."tbl_role_authority" USING btree ("role_id");
-CREATE INDEX "tbl_role_authority_authority_id_idx" ON "public"."tbl_role_authority" USING btree ("authority_id");
+CREATE INDEX "tbl_role_authority_authority_id_idx" ON "public"."tbl_role_authority" USING btree (authority_id);
+CREATE INDEX "tbl_role_authority_role_id_idx" ON "public"."tbl_role_authority" USING btree (role_id);
 
 -- ----------------------------
 -- Primary Key structure for table tbl_role_authority
@@ -1613,5 +1615,5 @@ ALTER TABLE "public"."tbl_role_authority" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Foreign Key structure for table "public"."t_institutions_verify"
 -- ----------------------------
-ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("institutions_id") REFERENCES "public"."t_institutions_prepare" ("institutions_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("apply_email") REFERENCES "public"."t_institutions_apply" ("apply_email") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("institutions_id") REFERENCES "public"."t_institutions_prepare" ("institutions_id") ON DELETE NO ACTION ON UPDATE NO ACTION;

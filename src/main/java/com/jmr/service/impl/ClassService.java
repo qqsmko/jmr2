@@ -196,7 +196,6 @@ public class ClassService implements IClassService {
 	}
 	
 	public Map<String,Object> updateCourse(Course course){
-		System.out.println("caonima"+course.getCourseId());
 		Map<String,Object> ansMap = new HashMap<String,Object>();
 		if(courseMapper.updateByPrimaryKeySelective(course) == 0){
 			ansMap.put("error","写入失败");

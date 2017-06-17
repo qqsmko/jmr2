@@ -36,9 +36,8 @@
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="80">id</th>
-				<th width="100">所属班次</th>
+				<th width="100">所属机构</th>
 				<th width="">班级名称</th>
-				<th width="80">申请人</th>
 				<th width="80">申请状态</th>
 				<th width="100">操作</th>
 			</tr>
