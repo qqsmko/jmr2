@@ -52,10 +52,10 @@ public class ClassController {
 		return mav;
 	}
 	
-	@RequestMapping(value="class-add/submit",method=RequestMethod.GET)
-	public Map<String,Object> doClassAddSubmitGET(@RequestBody Class classes){
-		//return classService.insertClass(classes);
-	}
+//	@RequestMapping(value="class-add/submit",method=RequestMethod.GET)
+//	public Map<String,Object> doClassAddSubmitGET(@RequestBody Class classes){
+//		//return classService.insertClass(classes);
+//	}
 	
 //	@RequestMapping(value="class-list/test",method=RequestMethod.POST)
 //	@ResponseBody
