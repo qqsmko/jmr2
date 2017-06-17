@@ -1,7 +1,5 @@
 package com.jmr.controller;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.jmr.model.Course;
+import com.jmr.model.Idcard;
 import com.jmr.model.Teacher;
+import com.jmr.model.TeacherInfo;
 import com.jmr.service.ITeacherService;
 
 @Controller
@@ -94,7 +93,13 @@ public class TeacherController {
 	
 	@RequestMapping(value="teacher-add/submit",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> doTeacherAddSubmitPOST(@RequestBody Teacher teacher){
+	public Map<String,Object> doTeacherAddSubmitPOST(@RequestBody Map<String,Object> stringObject){
+		Teacher teacher = new Teacher();
+		Idcard idcard = new Idcard();
+		TeacherInfo teacherinfo = new TeacherInfo();
+		idcard.setCardId(stringObject.get("cardId").toString());
+		idcard.setCardName(stringObject.get("cardName").toString());
+		//idcard.setGender( Integer.praseInt(o==null?"":o.toString());
 	    return teacherService.InsertTeacher(teacher);
 	}
 //	public String doAdd(HttpServletRequest request, HttpServletResponse response){

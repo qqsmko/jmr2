@@ -173,7 +173,7 @@ INSERT INTO "public"."t_account" VALUES ('4', 'teacher2', 'ccffb0bb993eeb79059b3
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_attendance";
 CREATE TABLE "public"."t_attendance" (
-"attendance_id" int4 NOT NULL,
+"attendance_id" SERIAL primary key,
 "deviceid" int4 NOT NULL,
 "detail_id" int4 NOT NULL,
 "attendance_type" int4 NOT NULL,
@@ -193,16 +193,16 @@ COMMENT ON COLUMN "public"."t_attendance"."attendance_state" IS '打卡状态（
 -- ----------------------------
 -- Records of t_attendance
 -- ----------------------------
-INSERT INTO "public"."t_attendance" VALUES ('312345', '718293', '223123', '0', '2017-06-06 20:57:02', '1', '0', 'test', '2017-06-03 20:57:18');
-INSERT INTO "public"."t_attendance" VALUES ('312346', '978310', '223124', '1', '2017-06-20 21:00:42', '2', '0', 'test', '2017-06-16 21:01:01');
-INSERT INTO "public"."t_attendance" VALUES ('312347', '234233', '223125', '0', '2017-06-08 21:02:01', '0', '0', 'test', '2017-06-06 21:02:14');
+INSERT INTO "public"."t_attendance" (deviceid,detail_id,attendance_type,datatime,attendance_state,is_delete,create_by,create_at) VALUES ('718293', '223123', '0', '2017-06-06 20:57:02', '1', '0', 'test', '2017-06-03 20:57:18');
+INSERT INTO "public"."t_attendance" (deviceid,detail_id,attendance_type,datatime,attendance_state,is_delete,create_by,create_at) VALUES ('978310', '223124', '1', '2017-06-20 21:00:42', '2', '0', 'test', '2017-06-16 21:01:01');
+INSERT INTO "public"."t_attendance" (deviceid,detail_id,attendance_type,datatime,attendance_state,is_delete,create_by,create_at) VALUES ('234233', '223125', '0', '2017-06-08 21:02:01', '0', '0', 'test', '2017-06-06 21:02:14');
 
 -- ----------------------------
 -- Table structure for t_attendance_detail
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_attendance_detail";
 CREATE TABLE "public"."t_attendance_detail" (
-"detail_id" int4 NOT NULL,
+"detail_id" SERIAL primary key,
 "fingerprint_id" int4,
 "avatar_id" int4,
 "is_delete" int4,
@@ -216,15 +216,15 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_attendance_detail
 -- ----------------------------
-INSERT INTO "public"."t_attendance_detail" VALUES ('223123', '175382', '321567', '0', 'test', '2017-06-06 21:05:07');
-INSERT INTO "public"."t_attendance_detail" VALUES ('223124', '234112', '312634', '0', 'test', '2017-06-07 21:06:19');
+INSERT INTO "public"."t_attendance_detail"(fingerprint_id,avatar_id,is_delete,create_by,create_at) VALUES ('175382', '321567', '0', 'test', '2017-06-06 21:05:07');
+INSERT INTO "public"."t_attendance_detail"(fingerprint_id,avatar_id,is_delete,create_by,create_at) VALUES ('234112', '312634', '0', 'test', '2017-06-07 21:06:19');
 
 -- ----------------------------
 -- Table structure for t_attendance_institutions
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_attendance_institutions";
 CREATE TABLE "public"."t_attendance_institutions" (
-"attendance_id" int4 NOT NULL,
+"attendance_id" SERIAL primary key,
 "institutions_id" int4 NOT NULL,
 "is_delete" int4 NOT NULL,
 "create_by" varchar(20) COLLATE "default",
@@ -237,15 +237,15 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_attendance_institutions
 -- ----------------------------
-INSERT INTO "public"."t_attendance_institutions" VALUES ('312345', '229677', '0', 'test', '2017-06-06 21:07:31');
-INSERT INTO "public"."t_attendance_institutions" VALUES ('312346', '381790', '0', 'test', '2017-06-27 21:08:05');
+INSERT INTO "public"."t_attendance_institutions"(institutions_id,is_delete,create_by,create_at) VALUES ('229677', '0', 'test', '2017-06-06 21:07:31');
+INSERT INTO "public"."t_attendance_institutions"(institutions_id,is_delete,create_by,create_at) VALUES ('381790', '0', 'test', '2017-06-27 21:08:05');
 
 -- ----------------------------
 -- Table structure for t_attendance_statistics
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_attendance_statistics";
 CREATE TABLE "public"."t_attendance_statistics" (
-"statistics_id" int4 NOT NULL,
+"statistics_id" SERIAL primary key,
 "statistics_name" varchar(255) COLLATE "default",
 "statisics_value" varchar(255) COLLATE "default",
 "is_delete" int4,
@@ -265,7 +265,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_avatar";
 CREATE TABLE "public"."t_avatar" (
-"avatar_id" int4 NOT NULL,
+"avatar_id" SERIAL primary key,
 "avatar_img" varchar(50) COLLATE "default",
 "is_delete" int4,
 "create_by" varchar(20) COLLATE "default",
@@ -279,16 +279,16 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_avatar
 -- ----------------------------
-INSERT INTO "public"."t_avatar" VALUES ('312634', 'mayun.jpg', '0', 'test', '2017-06-02 11:41:19', null);
-INSERT INTO "public"."t_avatar" VALUES ('321567', 'dilireba.jpg', '0', 'test', '2017-06-06 11:39:30', null);
-INSERT INTO "public"."t_avatar" VALUES ('512446', 'wanglihong.jpg', '0', 'test', '2017-06-02 11:41:40', null);
+INSERT INTO "public"."t_avatar"(avatar_img,is_delete,create_by,create_at,institutions_id) VALUES ('mayun.jpg', '0', 'test', '2017-06-02 11:41:19', null);
+INSERT INTO "public"."t_avatar"(avatar_img,is_delete,create_by,create_at,institutions_id) VALUES ('dilireba.jpg', '0', 'test', '2017-06-06 11:39:30', null);
+INSERT INTO "public"."t_avatar"(avatar_img,is_delete,create_by,create_at,institutions_id) VALUES ('wanglihong.jpg', '0', 'test', '2017-06-02 11:41:40', null);
 
 -- ----------------------------
 -- Table structure for t_class
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_class";
 CREATE TABLE "public"."t_class" (
-"class_id" int4 NOT NULL,
+"class_id" SERIAL primary key,
 "class_name" varchar(255) COLLATE "default",
 "student_count" int4,
 "state" int4,
@@ -308,9 +308,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_class
 -- ----------------------------
-INSERT INTO "public"."t_class" VALUES ('575288', '市场价格调查1班', '32', '0', '小王', '17733333333', '0', 'test', '2017-06-06 13:23:09', null, '2017-06-06', '2017-06-24');
-INSERT INTO "public"."t_class" VALUES ('575289', '市场价格调查2班', '18', '0', '小李', '18833333333', '0', 'test', '2017-06-07 13:23:13', null, '2017-06-20', '2017-06-25');
-INSERT INTO "public"."t_class" VALUES ('575290', '市场价格调查3班', '6', '0', '小猪', '19933333333', '0', 'test', '2017-06-15 13:23:17', null, '2017-06-05', '2017-06-24');
+INSERT INTO "public"."t_class"(class_name,student_count,state,responsible,telephone,is_delete,create_by,create_at,institutions_id,start_time,end_time) VALUES ('市场价格调查1班', '32', '0', '小王', '17733333333', '0', 'test', '2017-06-06 13:23:09', null, '2017-06-06', '2017-06-24');
+INSERT INTO "public"."t_class"(class_name,student_count,state,responsible,telephone,is_delete,create_by,create_at,institutions_id,start_time,end_time) VALUES ('市场价格调查2班', '18', '0', '小李', '18833333333', '0', 'test', '2017-06-07 13:23:13', null, '2017-06-20', '2017-06-25');
+INSERT INTO "public"."t_class"(class_name,student_count,state,responsible,telephone,is_delete,create_by,create_at,institutions_id,start_time,end_time) VALUES ('市场价格调查3班', '6', '0', '小猪', '19933333333', '0', 'test', '2017-06-15 13:23:17', null, '2017-06-05', '2017-06-24');
 
 -- ----------------------------
 -- Table structure for t_class_class_series
@@ -930,7 +930,7 @@ INSERT INTO "public"."t_student_info" VALUES ('713213', '420107199408217719', '1
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_teacher";
 CREATE TABLE "public"."t_teacher" (
-"teacher_id" int4 NOT NULL,
+"teacher_id" SERIAL primary key,
 "telephone" varchar(20) COLLATE "default",
 "email" varchar(30) COLLATE "default",
 "education" int4,
@@ -947,15 +947,15 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_teacher
 -- ----------------------------
-INSERT INTO "public"."t_teacher" VALUES ('371890', '13877774444', 'test@abc.com', '1', '0', '0', 'test', '2015-05-13 16:13:49', null);
-INSERT INTO "public"."t_teacher" VALUES ('728391', '14912536712', 'good@ddc.net', '2', '0', '0', 'test', '2013-03-11 16:14:41', null);
+INSERT INTO "public"."t_teacher"(telephone,email,education,state,is_delete,create_by,create_at,institutions_id) VALUES ('13877774444', 'test@abc.com', '1', '0', '0', 'test', '2015-05-13 16:13:49', null);
+INSERT INTO "public"."t_teacher"(telephone,email,education,state,is_delete,create_by,create_at,institutions_id) VALUES ('14912536712', 'good@ddc.net', '2', '0', '0', 'test', '2013-03-11 16:14:41', null);
 
 -- ----------------------------
 -- Table structure for t_teacher_info
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_teacher_info";
 CREATE TABLE "public"."t_teacher_info" (
-"teacher_id" int4 NOT NULL,
+"teacher_id" SERIAL primary key,
 "card_id" varchar(32) COLLATE "default" NOT NULL,
 "responsible" varchar(20) COLLATE "default",
 "telephone" varchar(20) COLLATE "default",
@@ -970,8 +970,8 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_teacher_info
 -- ----------------------------
-INSERT INTO "public"."t_teacher_info" VALUES ('371890', '420331637817283871', '审核员', '13766663333', '0', 'test', '2017-06-06 16:20:07');
-INSERT INTO "public"."t_teacher_info" VALUES ('728391', '420103892813989899', 'check', '13966627789', '0', 'good', '2017-04-13 16:20:46');
+INSERT INTO "public"."t_teacher_info"(card_id,responsible,telephone,is_delete,create_by,create_at) VALUES ('420331637817283871', '审核员', '13766663333', '0', 'test', '2017-06-06 16:20:07');
+INSERT INTO "public"."t_teacher_info"(card_id,responsible,telephone,is_delete,create_by,create_at) VALUES ('420103892813989899', 'check', '13966627789', '0', 'good', '2017-04-13 16:20:46');
 
 -- ----------------------------
 -- Table structure for t_ukey

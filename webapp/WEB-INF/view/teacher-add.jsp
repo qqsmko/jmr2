@@ -172,6 +172,23 @@ function getMockData(){
 	document.getElementById("address").value='北京海淀区牡丹园6号';
 }
 
+function article_save_submit(){
+	var data = $("#form-article-add").serializeObject(); //自动将form表单封装成json 
+    alert(JSON.stringify(data));
+    $.ajax({
+        type: "POST",   //访问WebService使用Post方式请求
+        contentType: "application/json", //WebService 会返回Json类型
+        url: "teacher-add/submit", //调用WebService的地址和方法名称组合 ---- WsURL/方法名
+        data: JSON.stringify(data),         //这里是要传递的参数，格式为 data: "{paraName:paraValue}",下面将会看到      
+        dataType: 'json',
+       	success: function (result) {     //回调函数，result，返回值
+            layer.msg('已修改成功!',{icon: 6,time:1000});
+			var index = parent.layer.getFrameIndex(window.name);
+			parent.location.replace(parent.location.href)
+        }
+    }); 
+}
+
 /*function article_save_submit(){
 	alert(${add});
 	removeIframe();
