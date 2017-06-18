@@ -89,7 +89,7 @@ $(function(){
         				return '<td class="td-status"><span class="label label-primary radius">待审核</span></td>'
         			}else if(data ==2){
         				return '<td class="td-status"><span class="label label-danger radius">已驳回</span></td>'
-        			}else if(data ==3){
+        			}else if(data >=3){
         				return '<td class="td-status"><span class="label label-success radius">已通过</span></td>'
         			}else{
         				return '<td>错误</td>'

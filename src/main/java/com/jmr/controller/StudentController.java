@@ -50,6 +50,38 @@ public class StudentController {
 //        return mav;
 //    }
 	
+	/*--------------------------------------------------------*/
+	//                         Student
+	/*--------------------------------------------------------*/
+	@RequestMapping(value="student-list",method=RequestMethod.GET)
+	public ModelAndView listStudent(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("student-list");
+		return mav;
+	}
+	
+	@RequestMapping(value="student-list/data-source",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
+		return studentService.getStudentData(draw, start, length);
+	}
+	
+	@RequestMapping(value="student-add",method=RequestMethod.GET)
+    public ModelAndView studentAdd(){
+		ModelAndView mav = new ModelAndView();
+        mav.setViewName("student-add");
+        return mav;
+	}
+	
+	@RequestMapping(value="student-add/submit",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doTeacherAddSubmitPOST(@RequestBody Map<String,Object> json){
+	    return studentService.InsertStudent(json);
+	}
+	
+	/*--------------------------------------------------------*/
+	//                      Student-Util
+	/*--------------------------------------------------------*/
 	@RequestMapping(value="student-fingerprint",method=RequestMethod.GET)
     public ModelAndView doStudentFingerPrintGET(){
         ModelAndView mav = new ModelAndView();
@@ -71,6 +103,9 @@ public class StudentController {
         return mav;
     }
 	
+	/*--------------------------------------------------------*/
+	//                      Idcard-List
+	/*--------------------------------------------------------*/
 	@RequestMapping(value="student-idcard-list",method=RequestMethod.GET)
     public ModelAndView doStudentIdcardListGET(){
         ModelAndView mav = new ModelAndView();
@@ -82,19 +117,6 @@ public class StudentController {
 	@ResponseBody
 	public Map<String,Object> doIdcardDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
 		return studentService.getIdCardData(draw,start,length);
-	}
-	
-	@RequestMapping(value="student-list",method=RequestMethod.GET)
-	public ModelAndView listStudent(){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("student-list");
-		return mav;
-	}
-	
-	@RequestMapping(value="student-list/data-source",method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String,Object> doListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-		return studentService.getStudentData(draw, start, length);
 	}
 
 //	@RequestMapping(value="student-list",method=RequestMethod.POST)
@@ -188,20 +210,6 @@ public class StudentController {
 //        return mav;
 //	}
 //	
-	@RequestMapping(value="student-add",method=RequestMethod.GET)
-    public ModelAndView studentAdd(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView mav = new ModelAndView();
-		
-        // ����jsp·��
-        mav.setViewName("student-add");
-        return mav;
-	}
-	
-	@RequestMapping(value="student-add/submit",method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String,Object> doTeacherAddSubmitPOST(@RequestBody Student student){
-	    return studentService.InsertStudent(student);
-	}
 //	
 //	@RequestMapping(value="student-add/submit",method=RequestMethod.GET)
 //	@ResponseBody

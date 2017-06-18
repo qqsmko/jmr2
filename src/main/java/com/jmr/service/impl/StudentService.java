@@ -15,6 +15,7 @@ import com.jmr.IDao.StudentInfoMapper;
 import com.jmr.IDao.StudentMapper;
 import com.jmr.model.Idcard;
 import com.jmr.model.Student;
+import com.jmr.model.StudentInfo;
 import com.jmr.service.IStudentService;
 
 @Service
@@ -26,6 +27,11 @@ public class StudentService implements IStudentService{
 	IdcardMapper idcardMapper;
 	@Autowired
 	StudentMapper studentMapper;
+	
+	/*--------------------------------------------------------*/
+	//                         Get
+	/*--------------------------------------------------------*/
+	
 	public Map<String,Object> getIdCardData(int draw,int start,int length){
 		int totalNum = idcardMapper.selectCount();
 		List<Idcard> data = idcardMapper.selectByPage(start, length);
@@ -48,19 +54,84 @@ public class StudentService implements IStudentService{
     	return ansMap;
 	}
 	
-	public Map<String,Object> InsertStudent(Student student){
+	
+	
+	/*--------------------------------------------------------*/
+	//                         Insert
+	/*--------------------------------------------------------*/
+	
+	public Map<String,Object> InsertStudent(Map<String,Object> json){
 		Map<String,Object> ansMap = new HashMap<String,Object>();
-		student.setIsDelete(0);
-		student.setCreateBy("test"); //TODO:cookie
-		student.setCreateAt(new Date());
-		if(studentMapper.insertSelective(student) == 0){
-			System.out.println(studentMapper.insertSelective(student));
-			ansMap.put("error","å†™å…¥å¤±è´¥");
+		if(json.containsKey("cardId")
+			&& json.containsKey("cardName")
+			&& json.containsKey("gender")
+			&& json.containsKey("nation")
+			&& json.containsKey("birthday")
+			&& json.containsKey("address")
+			&& json.containsKey("telephone")
+			&& json.containsKey("email")
+			&& json.containsKey("education")
+			&& json.containsKey("insuredstate")
+			){
+			
+			Idcard idcard = new Idcard();
+			idcard.setCardId(json.get("cardId").toString());
+			idcard.setCardName(json.get("cardName").toString());
+			idcard.setGender(Integer.parseInt(json.get("gender").toString()));
+			idcard.setNation(json.get("nation").toString());
+			Date date = null;
+			try{
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		    	date = sdf.parse(json.get("birthday").toString());
+		    }catch(ParseException e){
+		    	System.out.println(e.getMessage());
+		    }
+			idcard.setBirthday(date);
+			idcard.setNation(json.get("nation").toString());
+			idcard.setAddress(json.get("address").toString());
+			idcard.setIsDelete(0);
+			idcard.setCreateBy("test"); //TODO:cookie
+			idcard.setCreateAt(new Date());
+			if(idcardMapper.insertSelective(idcard) == 0){
+				ansMap.put("error","²åÈëÊ§°Ü");
+				return ansMap;
+			}
+			
+			Student student = new Student();
+			student.setEmail(json.get("email").toString());
+			student.setTelephone(json.get("telephone").toString());
+			student.setEducation(Integer.parseInt(json.get("education").toString()));
+			student.setInsuredState(Integer.parseInt(json.get("insuredstate").toString()));
+			student.setState(1);
+			student.setIsDelete(0);
+			student.setCreateBy("test"); //TODO:cookie
+			student.setCreateAt(new Date());
+			if(studentMapper.insertSelective(student) == 0){
+				System.out.println(studentMapper.insertSelective(student));
+				ansMap.put("error","å†™å…¥å¤±è´¥");
+				return ansMap;
+			}
+			
+			int studentId = student.getStudentId();
+			
+			StudentInfo temp = new StudentInfo();
+			temp.setCardId(json.get("cardId").toString());
+			temp.setStudentId(studentId);
+			temp.setIsDelete(0);
+			temp.setCreateBy("test"); //TODO:cookie
+			temp.setCreateAt(new Date());
+			if(studentInfoMapper.insertSelective(temp) == 0){
+				ansMap.put("error","Ð´Èë¹ØÁª±íÊ§°Ü");
+				return ansMap;
+			}
+			
+			ansMap.put("success",true);
 			return ansMap;
 		}
-		ansMap.put("success",true);
+		ansMap.put("error","²ÎÊý²»·û");
 		return ansMap;
 	}
+	
 	
 //    public Student getOne(int num){
 //    	return t.selectByPrimaryKey(num);

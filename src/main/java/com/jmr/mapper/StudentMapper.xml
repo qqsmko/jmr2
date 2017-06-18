@@ -37,6 +37,10 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jmr.model.Student">
+    <selectKey keyProperty="studentId"
+        resultType="java.lang.Integer" order="BEFORE">
+    	SELECT nextval('temp_123_seq'::regclass)
+    </selectKey> 
     insert into t_student
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="studentId != null">

@@ -116,7 +116,6 @@ public class TeacherService implements ITeacherService {
 				return ansMap;
 			}
 			int teacherId = teacher.getTeacherId();
-			System.out.println(teacherId);
 			
 			IntsitutionsTeacher temp = new IntsitutionsTeacher();
 			temp.setInstitutionsId(999999999);
@@ -129,7 +128,6 @@ public class TeacherService implements ITeacherService {
 				return ansMap;
 			}
 			
-			System.out.println(teacherId);
 			TeacherInfo temp2 = new TeacherInfo();
 			temp2.setCardId(json.get("cardId").toString());
 			temp2.setTeacherId(teacherId);
@@ -141,7 +139,6 @@ public class TeacherService implements ITeacherService {
 				return ansMap;
 			}
 			
-			System.out.println(teacherId);
 			ansMap.put("success",true);
 			return ansMap;
 		}

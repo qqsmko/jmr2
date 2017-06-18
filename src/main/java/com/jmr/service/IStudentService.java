@@ -13,7 +13,7 @@ public interface IStudentService {
 	Map<String,Object> getStudentData(int draw,int start,int length);
 	
 	/*insert*/
-	Map<String,Object> InsertStudent(Student student);
+	Map<String,Object> InsertStudent(Map<String,Object> json);
 
 	
 //	List<Student> list();

@@ -3,7 +3,7 @@ package com.jmr.model;
 public class StudentInfoKey {
     private Integer studentId;
 
-    private Integer cardId;
+    private String cardId;
 
     private Integer fingerprintId;
 
@@ -17,12 +17,12 @@ public class StudentInfoKey {
         this.studentId = studentId;
     }
 
-    public Integer getCardId() {
+    public String getCardId() {
         return cardId;
     }
 
-    public void setCardId(Integer cardId) {
-        this.cardId = cardId;
+    public void setCardId(String cardId) {
+        this.cardId = cardId == null ? null : cardId.trim();
     }
 
     public Integer getFingerprintId() {
