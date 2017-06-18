@@ -13,7 +13,7 @@ public interface IdcardMapper {
 
     int insertSelective(Idcard record);
 
-    Idcard selectByPrimaryKey(Integer cardId);
+    Idcard selectByPrimaryKey(String cardId);
     
     List<Idcard> selectByPage(@Param("start")int start,@Param("length")int length);
     

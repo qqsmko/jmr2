@@ -3,7 +3,7 @@ package com.jmr.model;
 public class TeacherInfoKey {
     private Integer teacherId;
 
-    private Integer cardId;
+    private String cardId;
 
     public Integer getTeacherId() {
         return teacherId;
@@ -13,11 +13,11 @@ public class TeacherInfoKey {
         this.teacherId = teacherId;
     }
 
-    public Integer getCardId() {
+    public String getCardId() {
         return cardId;
     }
 
-    public void setCardId(Integer cardId) {
-        this.cardId = cardId;
+    public void setCardId(String cardId) {
+        this.cardId = cardId == null ? null : cardId.trim();
     }
 }

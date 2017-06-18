@@ -18,28 +18,59 @@
     <include refid="Base_Column_List" />
     from t_teacher_info
     where teacher_id = #{teacherId,jdbcType=INTEGER}
-      and card_id = #{cardId,jdbcType=INTEGER}
   </select>
   <select id="selectByPageSQL" parameterType="int" resultType="java.util.HashMap">
-  	select 
-    t_teacher_info.teacher_id,t_idcard.card_id,t_idcard.card_name,t_idcard.gender,t_idcard.nation,t_idcard.birthday,t_teacher.telephone,t_teacher.email,t_teacher.education,t_teacher."state"
+	select 
+    t_teacher_info.teacher_id,t_idcard.card_id,t_idcard.card_name,t_idcard.gender,t_idcard.nation,t_idcard.birthday,t_teacher.telephone,t_teacher.email,t_teacher.education,t_teacher."state",t_institutions.institutions_name
     from t_teacher_info 
     	LEFT JOIN t_teacher ON t_teacher_info.teacher_id = t_teacher.teacher_id
     	LEFT JOIN t_idcard on t_teacher_info.card_id = t_idcard.card_id
+    	LEFT JOIN t_institutions_teacher on t_teacher_info.teacher_id = t_institutions_teacher.teacher_id
+    	LEFT JOIN t_institutions on t_institutions_teacher.institutions_id = t_institutions.institutions_id
     where t_teacher.is_delete = 0
+    and t_idcard.is_delete = 0
+    and t_institutions.is_delete = 0
     <if test="start!=null and length!=null">
     	limit #{length} offset #{start}
     </if>
    </select>
+   <select id="selectByPageWithName" parameterType="String" resultType="java.util.HashMap">
+    select 
+    t_teacher_info.teacher_id,t_idcard.card_id,t_idcard.card_name,t_idcard.gender,t_idcard.nation,t_idcard.birthday,t_teacher.telephone,t_teacher.email,t_teacher.education,t_teacher."state",t_institutions.institutions_name
+    from t_teacher_info 
+    	LEFT JOIN t_teacher ON t_teacher_info.teacher_id = t_teacher.teacher_id
+    	LEFT JOIN t_idcard on t_teacher_info.card_id = t_idcard.card_id
+    	LEFT JOIN t_institutions_teacher on t_teacher_info.teacher_id = t_institutions_teacher.teacher_id
+    	LEFT JOIN t_institutions on t_institutions_teacher.institutions_id = t_institutions.institutions_id
+    where t_teacher.is_delete = 0
+    and t_idcard.is_delete = 0
+    and t_institutions.is_delete = 0
+	and t_institutions.institutions_name like #{search}
+    <if test="start!=null and length!=null">
+    	limit #{length} offset #{start}
+    </if>
+  </select>
    <select id="selectCount" resultType="int">
     select count(*)
-    from t_class
+    from t_teacher
     where is_delete = 0
+  </select>
+  <select id="selectFilteredCount" parameterType="String" resultType="int">
+    select count(*)
+    from t_teacher_info 
+    	LEFT JOIN t_teacher ON t_teacher_info.teacher_id = t_teacher.teacher_id
+    	LEFT JOIN t_idcard on t_teacher_info.card_id = t_idcard.card_id
+    	LEFT JOIN t_institutions_teacher on t_teacher_info.teacher_id = t_institutions_teacher.teacher_id
+    	LEFT JOIN t_institutions on t_institutions_teacher.institutions_id = t_institutions.institutions_id
+    where t_teacher.is_delete = 0
+    and t_idcard.is_delete = 0
+    and t_institutions.is_delete = 0
+	and t_institutions.institutions_name like #{search}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.jmr.model.TeacherInfoKey">
     delete from t_teacher_info
     where teacher_id = #{teacherId,jdbcType=INTEGER}
-      and card_id = #{cardId,jdbcType=INTEGER}
+    and card_id = #{cardId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.jmr.model.TeacherInfo">
     insert into t_teacher_info (teacher_id, card_id, responsible, 
@@ -79,7 +110,7 @@
         #{teacherId,jdbcType=INTEGER},
       </if>
       <if test="cardId != null">
-        #{cardId,jdbcType=INTEGER},
+        #{cardId,jdbcType=VARCHAR},
       </if>
       <if test="responsible != null">
         #{responsible,jdbcType=VARCHAR},

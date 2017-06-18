@@ -10,16 +10,17 @@ import com.jmr.model.Teacher;
 
 public interface ITeacherService {
 
-//	Teacher getOne(int num);
-//	
-//	List<Teacher> list();
-//	
-	Map<String,Object> getData(int draw,int start,int length);
-	Map<String,Object> InsertTeacher(Teacher teacher);
-//    
-//	void deleteOne(int num);
-//	
-//	void updateOne(String teacherid,String name);
-//	
-//	void insertOne(String name);
+	/*get*/
+	Map<String,Object> getTeacherData(int draw,int start,int length,String search);
+	
+	/*insert*/
+	Map<String,Object> InsertTeacher(Map<String,Object> json);
+
+	/*delete*/
+	Map<String,Object> deleteTeacher(int id);
+	
+	/*update*/
+	Teacher getTeacherById(int id);
+	Map<String,Object> updateTeacher(Teacher teacher);
+	
 }

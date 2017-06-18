@@ -44,6 +44,7 @@
 				<th width="80">民族</th>
 				<th width="80">生日</th>
 				<th width="80">教育情况</th>
+				<th width="80">所属机构</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
@@ -66,12 +67,15 @@ $(function(){
 	$('.table-sort').dataTable({
 		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
-		"searching": false,
+		"searching": true,
 		"ordering": false,
 		"serverSide": true,
 		"ajax": {
 			"url":"teacher-list/data-source",
 			"type":"POST",
+		},
+		"language":{
+			"search":"搜索机构名称"
 		},
 		"columns":[
 			{
@@ -118,10 +122,11 @@ $(function(){
         			}
     			}
     		},
+    		{"data":"institutions_name"},
     		{
     			"data":"teacher_id",
 	        	"render":function(data, type, row, meta) {
-        			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'institutions-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
+        			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'teacher-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
     			}
     		}
     	]
@@ -188,8 +193,11 @@ function member_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '',
+			url: 'teacher-list/delete',
 			dataType: 'json',
+			data:{
+				id:id
+			},
 			success: function(data){
 				$(obj).parents("tr").remove();
 				layer.msg('已删除!',{icon:1,time:1000});

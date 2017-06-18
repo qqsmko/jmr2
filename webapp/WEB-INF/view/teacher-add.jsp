@@ -104,8 +104,8 @@
 		</div>
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 提交</button>
-				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 提交</button>
+				<!-- <button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button> -->
 			</div>
 		</div>
 	</form>
@@ -129,6 +129,25 @@
 <script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
 $(function(){
+	$.fn.serializeObject = function()    
+	{    
+	   var o = {};    
+	   var a = this.serializeArray();    
+	   $.each(a, function() {    
+	       if (o[this.name]) {    
+	           if (!o[this.name].push) {    
+	               o[this.name] = [o[this.name]];    
+	           }    
+	           o[this.name].push(this.value || '');    
+	       } else {
+	       	   if (this.value != ""){    
+	           		o[this.name] = this.value || '';    
+	       	   }
+	       }    
+	   });    
+	   return o;    
+	};
+
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
 		radioClass: 'iradio-blue',
@@ -145,20 +164,20 @@ $(function(){
 		onkeyup:false,
 		focusCleanup:true,
 		success:"valid",
-		submitHandler:function(form){
-		  	var options = {  
-                type: 'GET',//提交方式  
-                url:  'teacher-add/submit',
-                contentType:'application/json;charset=UTF-8',
-                success: function() {
-                	var index = parent.layer.getFrameIndex(window.name);
-					parent.location.replace(parent.location.href)
-					parent.layer.close(index);
-					removeIframe();
-                }   
-            };
-			$(form).ajaxSubmit(options);
-		}
+		// submitHandler:function(form){
+		//   	var options = {  
+  //               type: 'GET',//提交方式  
+  //               url:  'teacher-add/submit',
+  //               contentType:'application/json;charset=UTF-8',
+  //               success: function() {
+  //               	var index = parent.layer.getFrameIndex(window.name);
+		// 			parent.location.replace(parent.location.href)
+		// 			parent.layer.close(index);
+		// 			removeIframe();
+  //               }   
+  //           };
+		// 	$(form).ajaxSubmit(options);
+		// }
 	});
 	
 });
@@ -166,16 +185,28 @@ $(function(){
 function getMockData(){
 	document.getElementById("cardId").value=parseInt(Math.random()*800000000000000000+100000000000000000, 10);
 	document.getElementById("cardName").value='马云';
-	document.getElementById("gender").value='男';
+	document.getElementById("gender").value='1';
 	document.getElementById("nation").value='汉族';
 	document.getElementById("birthday").value='1986-08-08';
 	document.getElementById("address").value='北京海淀区牡丹园6号';
 }
 
-/*function article_save_submit(){
-	alert(${add});
-	removeIframe();
-}*/
+function article_save_submit(){
+	var data = $("#form-article-add").serializeObject(); //自动将form表单封装成json 
+    alert(JSON.stringify(data));
+    $.ajax({
+        type: "POST",   //访问WebService使用Post方式请求
+        contentType: "application/json", //WebService 会返回Json类型
+        url: "teacher-add/submit", //调用WebService的地址和方法名称组合 ---- WsURL/方法名
+        data: JSON.stringify(data),         //这里是要传递的参数，格式为 data: "{paraName:paraValue}",下面将会看到      
+        dataType: 'json',
+       	success: function (result) {     //回调函数，result，返回值
+            layer.msg('已修改成功!',{icon: 6,time:1000});
+			var index = parent.layer.getFrameIndex(window.name);
+			parent.location.replace(parent.location.href)
+        }
+    }); 
+}
 
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

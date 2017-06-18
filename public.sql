@@ -11,14 +11,14 @@ Target Server Type    : PGSQL
 Target Server Version : 90602
 File Encoding         : 65001
 
-Date: 2017-06-17 15:43:16
+Date: 2017-06-18 11:25:18
 */
 
 
 -- ----------------------------
 -- Sequence structure for t_account_account_id_seq
 -- ----------------------------
-DROP SEQUENCE "public"."t_account_account_id_seq";
+DROP SEQUENCE IF EXISTS "public"."t_account_account_id_seq";
 CREATE SEQUENCE "public"."t_account_account_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -30,7 +30,7 @@ SELECT setval('"public"."t_account_account_id_seq"', 5, true);
 -- ----------------------------
 -- Sequence structure for t_ukey_id_seq
 -- ----------------------------
-DROP SEQUENCE "public"."t_ukey_id_seq";
+DROP SEQUENCE IF EXISTS "public"."t_ukey_id_seq";
 CREATE SEQUENCE "public"."t_ukey_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -42,7 +42,7 @@ SELECT setval('"public"."t_ukey_id_seq"', 1, true);
 -- ----------------------------
 -- Sequence structure for tbl_accessResource_id_seq
 -- ----------------------------
-DROP SEQUENCE "public"."tbl_accessResource_id_seq";
+DROP SEQUENCE IF EXISTS "public"."tbl_accessResource_id_seq";
 CREATE SEQUENCE "public"."tbl_accessResource_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -53,7 +53,7 @@ CREATE SEQUENCE "public"."tbl_accessResource_id_seq"
 -- ----------------------------
 -- Sequence structure for tbl_account_id_seq
 -- ----------------------------
-DROP SEQUENCE "public"."tbl_account_id_seq";
+DROP SEQUENCE IF EXISTS "public"."tbl_account_id_seq";
 CREATE SEQUENCE "public"."tbl_account_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -65,7 +65,7 @@ SELECT setval('"public"."tbl_account_id_seq"', 1, true);
 -- ----------------------------
 -- Sequence structure for tbl_account_role_id_seq
 -- ----------------------------
-DROP SEQUENCE "public"."tbl_account_role_id_seq";
+DROP SEQUENCE IF EXISTS "public"."tbl_account_role_id_seq";
 CREATE SEQUENCE "public"."tbl_account_role_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -76,7 +76,7 @@ CREATE SEQUENCE "public"."tbl_account_role_id_seq"
 -- ----------------------------
 -- Sequence structure for tbl_authority_id_seq
 -- ----------------------------
-DROP SEQUENCE "public"."tbl_authority_id_seq";
+DROP SEQUENCE IF EXISTS "public"."tbl_authority_id_seq";
 CREATE SEQUENCE "public"."tbl_authority_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -87,7 +87,7 @@ CREATE SEQUENCE "public"."tbl_authority_id_seq"
 -- ----------------------------
 -- Sequence structure for tbl_authority_resource_id_seq
 -- ----------------------------
-DROP SEQUENCE "public"."tbl_authority_resource_id_seq";
+DROP SEQUENCE IF EXISTS "public"."tbl_authority_resource_id_seq";
 CREATE SEQUENCE "public"."tbl_authority_resource_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -98,7 +98,7 @@ CREATE SEQUENCE "public"."tbl_authority_resource_id_seq"
 -- ----------------------------
 -- Sequence structure for tbl_indicator_statistics_id_seq
 -- ----------------------------
-DROP SEQUENCE "public"."tbl_indicator_statistics_id_seq";
+DROP SEQUENCE IF EXISTS "public"."tbl_indicator_statistics_id_seq";
 CREATE SEQUENCE "public"."tbl_indicator_statistics_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -109,7 +109,7 @@ CREATE SEQUENCE "public"."tbl_indicator_statistics_id_seq"
 -- ----------------------------
 -- Sequence structure for tbl_role_authority_id_seq
 -- ----------------------------
-DROP SEQUENCE "public"."tbl_role_authority_id_seq";
+DROP SEQUENCE IF EXISTS "public"."tbl_role_authority_id_seq";
 CREATE SEQUENCE "public"."tbl_role_authority_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -120,7 +120,7 @@ CREATE SEQUENCE "public"."tbl_role_authority_id_seq"
 -- ----------------------------
 -- Sequence structure for tbl_role_id_seq
 -- ----------------------------
-DROP SEQUENCE "public"."tbl_role_id_seq";
+DROP SEQUENCE IF EXISTS "public"."tbl_role_id_seq";
 CREATE SEQUENCE "public"."tbl_role_id_seq"
  INCREMENT 1
  MINVALUE 1
@@ -131,14 +131,14 @@ CREATE SEQUENCE "public"."tbl_role_id_seq"
 -- ----------------------------
 -- Sequence structure for temp_123_seq
 -- ----------------------------
-DROP SEQUENCE "public"."temp_123_seq";
+DROP SEQUENCE IF EXISTS "public"."temp_123_seq";
 CREATE SEQUENCE "public"."temp_123_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 11
+ START 29
  CACHE 1;
-SELECT setval('"public"."temp_123_seq"', 11, true);
+SELECT setval('"public"."temp_123_seq"', 29, true);
 
 -- ----------------------------
 -- Table structure for t_account
@@ -161,9 +161,9 @@ COMMENT ON COLUMN "public"."t_account"."account_type" IS '1=超管 2=机构老�
 -- Records of t_account
 -- ----------------------------
 INSERT INTO "public"."t_account" VALUES ('5', 'admin', '21232f297a57a5a743894a0e4a801fc3
-', '2017-06-14 16:58:12', null, '3');
+', '2017-06-14 16:58:12', '999999998', '3');
 INSERT INTO "public"."t_account" VALUES ('2', 'root', '63a9f0ea7bb98050796b649e85481845
-', '2017-06-14 16:56:28', null, '1');
+', '2017-06-14 16:56:28', '999999999', '1');
 INSERT INTO "public"."t_account" VALUES ('3', 'teacher1', '41c8949aa55b8cb5dbec662f34b62df3', '2017-06-14 16:57:20', '229677', '2');
 INSERT INTO "public"."t_account" VALUES ('4', 'teacher2', 'ccffb0bb993eeb79059b31e1611ec353
 ', '2017-06-09 16:57:46', '381790', '2');
@@ -288,7 +288,7 @@ INSERT INTO "public"."t_avatar" VALUES ('512446', 'wanglihong.jpg', '0', 'test',
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_class";
 CREATE TABLE "public"."t_class" (
-"class_id" int4 NOT NULL,
+"class_id" int4 DEFAULT nextval('temp_123_seq'::regclass) NOT NULL,
 "class_name" varchar(255) COLLATE "default",
 "student_count" int4,
 "state" int4,
@@ -308,9 +308,17 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_class
 -- ----------------------------
+INSERT INTO "public"."t_class" VALUES ('20', 'java1班', '20', '1', '小王', '13871772214', '0', 'test', '2017-06-18 08:10:35.447', null, '2017-06-18', '2017-06-18');
+INSERT INTO "public"."t_class" VALUES ('21', 'java2班', '18', '2', '小王', '13421147177', '0', 'test', '2017-06-18 08:20:09.906', null, '2017-06-01', '2017-06-02');
+INSERT INTO "public"."t_class" VALUES ('22', '123', '123', '0', '123', '123', '1', 'test', '2017-06-18 08:22:14.042', null, '2017-06-06', '2017-06-27');
+INSERT INTO "public"."t_class" VALUES ('23', '123', '123', '0', '123', '123', '1', 'test', '2017-06-18 08:22:32.024', null, '2017-06-07', '2017-06-02');
+INSERT INTO "public"."t_class" VALUES ('24', '233', '233', '0', '233', '233', '1', 'test', '2017-06-18 08:27:28.329', null, '2017-06-07', '2017-06-27');
+INSERT INTO "public"."t_class" VALUES ('25', '电商1班', '40', '3', '牛强', '13877774545', '0', 'test', '2017-06-18 08:51:48.395', null, '2017-05-28', '2017-05-29');
+INSERT INTO "public"."t_class" VALUES ('26', '123', '123', '0', '123', '123', '1', 'test', '2017-06-18 08:53:42.32', null, '2017-06-07', '2017-06-07');
+INSERT INTO "public"."t_class" VALUES ('27', '123', '123', '0', '123', '123', '1', 'test', '2017-06-18 08:53:51.288', null, '2017-06-20', '2017-06-05');
 INSERT INTO "public"."t_class" VALUES ('575288', '市场价格调查1班', '32', '0', '小王', '17733333333', '0', 'test', '2017-06-06 13:23:09', null, '2017-06-06', '2017-06-24');
 INSERT INTO "public"."t_class" VALUES ('575289', '市场价格调查2班', '18', '0', '小李', '18833333333', '0', 'test', '2017-06-07 13:23:13', null, '2017-06-20', '2017-06-25');
-INSERT INTO "public"."t_class" VALUES ('575290', '市场价格调查3班', '6', '0', '小猪', '19933333333', '0', 'test', '2017-06-15 13:23:17', null, '2017-06-05', '2017-06-24');
+INSERT INTO "public"."t_class" VALUES ('575290', '市场价格调查3班', '6', '3', '小猪', '19933333333', '0', 'test', '2017-06-15 13:23:17', null, '2017-06-05', '2017-06-24');
 
 -- ----------------------------
 -- Table structure for t_class_class_series
@@ -352,6 +360,14 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_class_institutions
 -- ----------------------------
+INSERT INTO "public"."t_class_institutions" VALUES ('999999999', '20', '0', 'test', '2017-06-18 08:10:35.463');
+INSERT INTO "public"."t_class_institutions" VALUES ('999999999', '21', '0', 'test', '2017-06-18 08:20:09.912');
+INSERT INTO "public"."t_class_institutions" VALUES ('999999999', '22', '0', 'test', '2017-06-18 08:22:14.242');
+INSERT INTO "public"."t_class_institutions" VALUES ('999999999', '23', '0', 'test', '2017-06-18 08:22:32.028');
+INSERT INTO "public"."t_class_institutions" VALUES ('999999999', '24', '0', 'test', '2017-06-18 08:27:28.336');
+INSERT INTO "public"."t_class_institutions" VALUES ('999999999', '25', '0', 'test', '2017-06-18 08:51:48.407');
+INSERT INTO "public"."t_class_institutions" VALUES ('999999999', '26', '0', 'test', '2017-06-18 08:53:42.324');
+INSERT INTO "public"."t_class_institutions" VALUES ('999999999', '27', '0', 'test', '2017-06-18 08:53:51.293');
 INSERT INTO "public"."t_class_institutions" VALUES ('229677', '575288', '0', 'test', '2017-06-14 09:49:27');
 INSERT INTO "public"."t_class_institutions" VALUES ('381790', '575289', '0', 'test', '2017-06-08 09:49:51');
 INSERT INTO "public"."t_class_institutions" VALUES ('381790', '575290', '0', 'test', '2017-06-08 09:49:51');
@@ -533,13 +549,9 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_course
 -- ----------------------------
-INSERT INTO "public"."t_course" VALUES ('5', '123', '123', '123', '123', '0', 'test', '2017-06-17 09:44:29.006');
-INSERT INTO "public"."t_course" VALUES ('6', '123', '123', '123', '123', '0', 'test', '2017-06-17 09:51:06.642');
-INSERT INTO "public"."t_course" VALUES ('7', '123', '123', null, '123', '1', 'test', '2017-06-17 09:52:36.237');
-INSERT INTO "public"."t_course" VALUES ('8', '小猫咪', '1221321', '123231', '22', '0', 'test', '2017-06-17 09:54:15.006');
-INSERT INTO "public"."t_course" VALUES ('9', '231', '14243', '235235', '235', '1', 'test', '2017-06-17 10:31:41.799');
-INSERT INTO "public"."t_course" VALUES ('10', '4321', '1234', '1234', '1234', '0', 'test', '2017-06-17 15:00:12.479');
-INSERT INTO "public"."t_course" VALUES ('11', '教美涵写代码', '计算机', '啦啦啦啦啦', '999', '0', 'test', '2017-06-17 15:33:57.333');
+INSERT INTO "public"."t_course" VALUES ('19', 'JAVA开发', '计算机', 'JAVA的编程实战', '48', '0', 'test', '2017-06-18 07:45:47.182');
+INSERT INTO "public"."t_course" VALUES ('28', '12312', '31231', '12312', '1231', '1', 'test', '2017-06-18 09:01:02.349');
+INSERT INTO "public"."t_course" VALUES ('29', '1231', '2312312', '312312', '3123', '1', 'test', '2017-06-18 09:01:07.537');
 INSERT INTO "public"."t_course" VALUES ('328765', '市场价格调查', '市场学', '调查市场的价格', '48', '0', 'test', '2017-05-04 12:15:37');
 
 -- ----------------------------
@@ -561,6 +573,9 @@ WITH (OIDS=FALSE)
 -- Records of t_course_institutions
 -- ----------------------------
 INSERT INTO "public"."t_course_institutions" VALUES ('229677', '328765', '0', 'test', '2017-06-14 12:17:22');
+INSERT INTO "public"."t_course_institutions" VALUES ('999999999', '19', '0', 'test', '2017-06-18 07:45:47.394');
+INSERT INTO "public"."t_course_institutions" VALUES ('999999999', '28', '0', 'test', '2017-06-18 09:01:02.354');
+INSERT INTO "public"."t_course_institutions" VALUES ('999999999', '29', '0', 'test', '2017-06-18 09:01:07.542');
 
 -- ----------------------------
 -- Table structure for t_device
@@ -702,8 +717,10 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_institutions
 -- ----------------------------
-INSERT INTO "public"."t_institutions" VALUES ('229677', '通过机构', '阿米', '19463331233', '鸭子路10号', '113', '0', 'test', '2017-06-05 10:54:18');
+INSERT INTO "public"."t_institutions" VALUES ('229677', '通过机构', '阿米', '19463331233', '鸭子路10号', '113', '1', 'test', '2017-06-05 10:54:18');
 INSERT INTO "public"."t_institutions" VALUES ('381790', '测试机构2', '小花', '13419990000', '小花路10号', '23', '0', 'test', '2017-06-03 16:46:56');
+INSERT INTO "public"."t_institutions" VALUES ('999999998', 'admin创建', 'admin', '00000000000', 'admin', '0', '0', 'test', '2017-06-18 07:47:43');
+INSERT INTO "public"."t_institutions" VALUES ('999999999', 'root创建', 'root', '00000000000', 'root', '0', '0', 'test', '2017-06-18 07:47:08');
 
 -- ----------------------------
 -- Table structure for t_institutions_apply
@@ -1527,7 +1544,7 @@ ALTER TABLE "public"."tbl_accessResource" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Indexes structure for table tbl_account
 -- ----------------------------
-CREATE INDEX "idx_user_id" ON "public"."tbl_account" USING btree (user_id);
+CREATE INDEX "idx_user_id" ON "public"."tbl_account" USING btree ("user_id");
 
 -- ----------------------------
 -- Uniques structure for table tbl_account
@@ -1542,8 +1559,8 @@ ALTER TABLE "public"."tbl_account" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Indexes structure for table tbl_account_role
 -- ----------------------------
-CREATE INDEX "tbl_account_role_role_id_idx" ON "public"."tbl_account_role" USING btree (role_id);
-CREATE INDEX "tbl_account_role_user_id_idx" ON "public"."tbl_account_role" USING btree (user_id);
+CREATE INDEX "tbl_account_role_role_id_idx" ON "public"."tbl_account_role" USING btree ("role_id");
+CREATE INDEX "tbl_account_role_user_id_idx" ON "public"."tbl_account_role" USING btree ("user_id");
 
 -- ----------------------------
 -- Primary Key structure for table tbl_account_role
@@ -1553,7 +1570,7 @@ ALTER TABLE "public"."tbl_account_role" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Indexes structure for table tbl_authority
 -- ----------------------------
-CREATE INDEX "idx_authority_id" ON "public"."tbl_authority" USING btree (authority_id);
+CREATE INDEX "idx_authority_id" ON "public"."tbl_authority" USING btree ("authority_id");
 
 -- ----------------------------
 -- Uniques structure for table tbl_authority
@@ -1568,8 +1585,8 @@ ALTER TABLE "public"."tbl_authority" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Indexes structure for table tbl_authority_resource
 -- ----------------------------
-CREATE INDEX "tbl_authority_resource_authority_id_idx" ON "public"."tbl_authority_resource" USING btree (authority_id);
-CREATE INDEX "tbl_authority_resource_resource_id_idx" ON "public"."tbl_authority_resource" USING btree (resource_id);
+CREATE INDEX "tbl_authority_resource_authority_id_idx" ON "public"."tbl_authority_resource" USING btree ("authority_id");
+CREATE INDEX "tbl_authority_resource_resource_id_idx" ON "public"."tbl_authority_resource" USING btree ("resource_id");
 
 -- ----------------------------
 -- Primary Key structure for table tbl_authority_resource
@@ -1589,7 +1606,7 @@ ALTER TABLE "public"."tbl_indicator_statistics" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Indexes structure for table tbl_role
 -- ----------------------------
-CREATE INDEX "tbl_role_role_id_idx" ON "public"."tbl_role" USING btree (role_id);
+CREATE INDEX "tbl_role_role_id_idx" ON "public"."tbl_role" USING btree ("role_id");
 
 -- ----------------------------
 -- Uniques structure for table tbl_role
@@ -1604,8 +1621,8 @@ ALTER TABLE "public"."tbl_role" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Indexes structure for table tbl_role_authority
 -- ----------------------------
-CREATE INDEX "tbl_role_authority_authority_id_idx" ON "public"."tbl_role_authority" USING btree (authority_id);
-CREATE INDEX "tbl_role_authority_role_id_idx" ON "public"."tbl_role_authority" USING btree (role_id);
+CREATE INDEX "tbl_role_authority_authority_id_idx" ON "public"."tbl_role_authority" USING btree ("authority_id");
+CREATE INDEX "tbl_role_authority_role_id_idx" ON "public"."tbl_role_authority" USING btree ("role_id");
 
 -- ----------------------------
 -- Primary Key structure for table tbl_role_authority
@@ -1615,5 +1632,5 @@ ALTER TABLE "public"."tbl_role_authority" ADD PRIMARY KEY ("id");
 -- ----------------------------
 -- Foreign Key structure for table "public"."t_institutions_verify"
 -- ----------------------------
-ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("apply_email") REFERENCES "public"."t_institutions_apply" ("apply_email") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("institutions_id") REFERENCES "public"."t_institutions_prepare" ("institutions_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."t_institutions_verify" ADD FOREIGN KEY ("apply_email") REFERENCES "public"."t_institutions_apply" ("apply_email") ON DELETE NO ACTION ON UPDATE NO ACTION;

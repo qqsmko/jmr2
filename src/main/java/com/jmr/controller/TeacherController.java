@@ -32,57 +32,11 @@ public class TeacherController {
         mav.setViewName("teacher-list");
         return mav;
     }
-//	
-//	@RequestMapping(value="teacher-list/delete",method=RequestMethod.POST)
-//	@ResponseBody
-//	public String doDelete(HttpServletRequest request, HttpServletResponse response){
-//		String s = request.getParameter("id");
-//		try {
-//		    int b = Integer.valueOf(s).intValue();
-//		    teacherService.deleteOne(b);
-//		    return "{\"success\":true}";
-//		} catch (NumberFormatException e) {
-//		    e.printStackTrace();
-//		}
-//		return "{\"success\":false}";
-//	}
-//	
-//	@RequestMapping(value="teacher-list/deleteall",method=RequestMethod.POST)
-//	@ResponseBody
-//	public String doDeleteAll( @RequestParam (value = "ids[]",required = false,defaultValue = "") String[] ids){
-//		int lens = ids.length;
-//		for(int i=0;i<lens;i++){
-//			try {
-//			    int b = Integer.valueOf(ids[i]).intValue();
-//			    teacherService.deleteOne(b);
-//			} catch (NumberFormatException e) {
-//			    e.printStackTrace();
-//			    return "{\"success\":false}";
-//			}
-//		}
-//		return "{\"success\":true}";
-//	}
-//	
-//	@RequestMapping(value="teacher-update",method=RequestMethod.GET)
-//    public ModelAndView teacherUpdate(@RequestParam int id){
-//		ModelAndView mav = new ModelAndView();
-//		
-//		Teacher teacher = teacherService.getOne(id);
-//		mav.addObject("id",id);
-//		mav.addObject("teacher",teacher);
-//		
-//        // ����jsp·��
-//        mav.setViewName("teacher-update");
-//        return mav;
-//	}
-//	
-	@RequestMapping(value="teacher-update/submit",method=RequestMethod.POST)
+	
+	@RequestMapping(value="teacher-list/data-source",method=RequestMethod.POST)
 	@ResponseBody
-	public String doUpdate(HttpServletRequest request, HttpServletResponse response){
-		//String teacherid = request.getParameter("teacherid");
-		//String name = request.getParameter("name");
-		//teacherService.updateOne(teacherid, name);
-		return "{\"success\":true}";
+	public Map<String,Object> doDataTestPOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length,@RequestParam(value="search[value]") String search){
+		return teacherService.getTeacherData(draw, start, length,search);
 	}
 	
 	@RequestMapping(value="teacher-add",method=RequestMethod.GET)
@@ -94,18 +48,44 @@ public class TeacherController {
 	
 	@RequestMapping(value="teacher-add/submit",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> doTeacherAddSubmitPOST(@RequestBody Teacher teacher){
-	    return teacherService.InsertTeacher(teacher);
+	public Map<String,Object> doTeacherAddSubmitPOST(@RequestBody Map<String,Object> json){
+	    return teacherService.InsertTeacher(json);
 	}
-//	public String doAdd(HttpServletRequest request, HttpServletResponse response){
-////		String name = request.getParameter("name");
-////		teacherService.insertOne(name);
-//		return "{\"success\":true}";
-//	}
 	
-	@RequestMapping(value="teacher-list/data-source",method=RequestMethod.POST)
+	@RequestMapping(value="teacher-list/delete",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> doDataTestPOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-		return teacherService.getData(draw, start, length);
+	public Map<String,Object> doDelete(@RequestParam int id){
+		return teacherService.deleteTeacher(id);
+	}
+	
+	@RequestMapping(value="teacher-list/deleteall",method=RequestMethod.POST)
+	@ResponseBody
+	public String doDeleteAll( @RequestParam (value = "ids[]",required = false,defaultValue = "") String[] ids){
+		int lens = ids.length;
+		for(int i=0;i<lens;i++){
+			try {
+			    int b = Integer.valueOf(ids[i]).intValue();
+			    teacherService.deleteTeacher(b);
+			} catch (NumberFormatException e) {
+			    e.printStackTrace();
+			    return "{\"success\":false}";
+			}
+		}
+		return "{\"success\":true}";
+	}
+	
+	@RequestMapping(value="teacher-update",method=RequestMethod.GET)
+    public ModelAndView teacherUpdate(@RequestParam int id){
+		ModelAndView mav = new ModelAndView();
+		Teacher teacher = teacherService.getTeacherById(id);
+		mav.addObject("teacher",teacher);
+        mav.setViewName("teacher-update");
+        return mav;
+	}
+	
+	@RequestMapping(value="teacher-update/submit",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doUpdate(@RequestBody Teacher teacher){
+		return teacherService.updateTeacher(teacher);
 	}
 }
