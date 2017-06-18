@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jmr.model.Course;
+import com.jmr.model.Class;
 import com.jmr.service.IClassService;
 
 @Controller
@@ -55,16 +56,18 @@ public class ClassController {
 		return mav;
 	}
 	
-//	@RequestMapping(value="class-add/submit",method=RequestMethod.GET)
-//	public Map<String,Object> doClassAddSubmitGET(@RequestBody Class classes){
-//		//return classService.insertClass(classes);
-//	}
+	@RequestMapping(value="class-add/submit",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doCourseAddSubmitPOST(@RequestBody Class classes){
+	    System.out.println(classes.getStartTime());
+		return classService.insertClass(classes);
+	}
 	
-//	@RequestMapping(value="class-list/test",method=RequestMethod.POST)
-//	@ResponseBody
-//	public Map<String,Object> doClassListDataSourc(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-//		return classService.getClassesDataTest(draw, start, length);
-//	}
+	@RequestMapping(value="class-list/delete",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> doClassDelete(@RequestParam int id){
+		return classService.deleteClass(id);
+	}
 	
 	/*--------------------------------------------------------*/
 	//                       Class-Series

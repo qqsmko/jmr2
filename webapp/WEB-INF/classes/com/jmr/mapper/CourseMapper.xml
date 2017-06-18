@@ -77,6 +77,10 @@
       #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.jmr.model.Course">
+  	<selectKey keyProperty="courseId"
+        resultType="java.lang.Integer" order="BEFORE">
+    	SELECT nextval('temp_123_seq'::regclass)
+    </selectKey> 
     insert into t_course
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="courseId != null">

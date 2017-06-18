@@ -11,10 +11,13 @@
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="institutions_id" jdbcType="INTEGER" property="institutionsId" />
+    <result column="start_time" jdbcType="DATE" property="startTime" />
+    <result column="end_time" jdbcType="DATE" property="endTime" />
   </resultMap>
   <sql id="Base_Column_List">
     class_id, class_name, student_count, state, responsible, telephone, is_delete, create_by, 
-    create_at
+    create_at, start_time, end_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -33,7 +36,7 @@
   </select>
   <select id="selectByPageSQL" parameterType="int" resultType="java.util.HashMap">
     select 
-    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name,t_class.state
+    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name,t_class.state,t_class.start_time,t_class.end_time
     from t_class_institutions 
     	LEFT JOIN t_class ON t_class.class_id = t_class_institutions.class_id
     	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id
@@ -44,7 +47,7 @@
   </select>
   <select id="selectByPageWithId" parameterType="int" resultType="java.util.HashMap">
     select 
-    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name,t_class.state 
+    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name,t_class.state,t_class.start_time,t_class.end_time
     from t_class_institutions 
     	LEFT JOIN t_class ON t_class.class_id = t_class_institutions.class_id
     	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id
@@ -56,7 +59,7 @@
   </select>
   <select id="selectByPageWithName" parameterType="String" resultType="java.util.HashMap">
     select 
-    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name,t_class.state
+    t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name,t_class.state,t_class.start_time,t_class.end_time
     from t_class_institutions 
     	LEFT JOIN t_class ON t_class.class_id = t_class_institutions.class_id
     	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id
@@ -85,14 +88,20 @@
   <insert id="insert" parameterType="com.jmr.model.Class">
     insert into t_class (class_id, class_name, student_count, 
       state, responsible, telephone, 
-      is_delete, create_by, create_at
+      is_delete, create_by, create_at, 
+      institutions_id, start_time, end_time
       )
     values (#{classId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{studentCount,jdbcType=INTEGER}, 
       #{state,jdbcType=INTEGER}, #{responsible,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
-      #{isDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}
+      #{isDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{institutionsId,jdbcType=INTEGER}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jmr.model.Class">
+  	<selectKey keyProperty="classId"
+        resultType="java.lang.Integer" order="BEFORE">
+    	SELECT nextval('temp_123_seq'::regclass)
+    </selectKey> 
     insert into t_class
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="classId != null">
@@ -121,6 +130,15 @@
       </if>
       <if test="createAt != null">
         create_at,
+      </if>
+      <if test="institutionsId != null">
+        institutions_id,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -151,6 +169,15 @@
       <if test="createAt != null">
         #{createAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="institutionsId != null">
+        #{institutionsId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=DATE},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.Class">
@@ -180,6 +207,15 @@
       <if test="createAt != null">
         create_at = #{createAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="institutionsId != null">
+        institutions_id = #{institutionsId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
     </set>
     where class_id = #{classId,jdbcType=INTEGER}
   </update>
@@ -192,7 +228,10 @@
       telephone = #{telephone,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER},
       create_by = #{createBy,jdbcType=VARCHAR},
-      create_at = #{createAt,jdbcType=TIMESTAMP}
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      institutions_id = #{institutionsId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=DATE},
+      end_time = #{endTime,jdbcType=DATE}
     where class_id = #{classId,jdbcType=INTEGER}
   </update>
 </mapper>

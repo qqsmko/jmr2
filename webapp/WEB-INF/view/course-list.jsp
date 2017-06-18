@@ -71,6 +71,9 @@ $(function(){
 			"url":"course-list/data-source",
 			"type":"POST",
 		},
+		"language":{
+			"search":"搜索机构名称"
+		},
 		"columns":[
 			{
 				"data":"course_id",

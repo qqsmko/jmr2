@@ -23,6 +23,10 @@ public class Class {
 
     private Integer institutionsId;
 
+    private Date startTime;
+
+    private Date endTime;
+
     public Integer getClassId() {
         return classId;
     }
@@ -101,5 +105,21 @@ public class Class {
 
     public void setInstitutionsId(Integer institutionsId) {
         this.institutionsId = institutionsId;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 }

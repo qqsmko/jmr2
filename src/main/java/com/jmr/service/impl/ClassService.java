@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jmr.IDao.ClassClassSeriesMapper;
+import com.jmr.IDao.ClassInstitutionsMapper;
 import com.jmr.IDao.ClassMapper;
 import com.jmr.IDao.ClassSeriesCompletionMapper;
 import com.jmr.IDao.ClassSeriesCourseMapper;
@@ -27,6 +28,7 @@ import com.jmr.IDao.CourseMapper;
 import com.jmr.model.Class;
 import com.jmr.model.ClassClassSeries;
 import com.jmr.model.ClassClassSeriesKey;
+import com.jmr.model.ClassInstitutions;
 import com.jmr.model.ClassSeries;
 import com.jmr.model.ClassSeriesCompletion;
 import com.jmr.model.ClassSeriesVerify;
@@ -58,6 +60,8 @@ public class ClassService implements IClassService {
 	CourseInstitutionsMapper courseInstitutionsMapper;
 	@Autowired
 	CourseMapper courseMapper;
+	@Autowired
+	ClassInstitutionsMapper classInstitutionsMapper;
 	
 	public Map<String,Object> getCourseData(int draw,int start,int length,String search){
 		if(search==""){
@@ -184,6 +188,40 @@ public class ClassService implements IClassService {
 			ansMap.put("error","写入失败");
 			return ansMap;
 		}
+		CourseInstitutions temp = new CourseInstitutions();
+		temp.setCourseId(course.getCourseId());
+		temp.setInstitutionsId(999999999);
+		temp.setIsDelete(0);
+		temp.setCreateBy("test"); //TODO:cookie
+		temp.setCreateAt(new Date());
+		if(courseInstitutionsMapper.insertSelective(temp) == 0){
+			ansMap.put("error","写入关联表失败");
+			return ansMap;
+		}
+		ansMap.put("success",true);
+		return ansMap;
+	}
+	
+	public Map<String,Object> insertClass(Class classes){
+		Map<String,Object> ansMap = new HashMap<String,Object>();
+		classes.setState(0);
+		classes.setIsDelete(0);
+		classes.setCreateBy("test"); //TODO:cookie
+		classes.setCreateAt(new Date());
+		if(classMapper.insertSelective(classes) == 0){
+			ansMap.put("error","写入失败");
+			return ansMap;
+		}
+		ClassInstitutions temp = new ClassInstitutions();
+		temp.setClassId(classes.getClassId());
+		temp.setInstitutionsId(999999999);
+		temp.setIsDelete(0);
+		temp.setCreateBy("test"); //TODO:cookie
+		temp.setCreateAt(new Date());
+		if(classInstitutionsMapper.insertSelective(temp) == 0){
+			ansMap.put("error","写入关联表失败");
+			return ansMap;
+		}
 		ansMap.put("success",true);
 		return ansMap;
 	}
@@ -197,6 +235,22 @@ public class ClassService implements IClassService {
 		}
 		temp.setIsDelete(1);
 		if(courseMapper.updateByPrimaryKeySelective(temp) == 0){
+			ansMap.put("error","写入出现异常");
+			return ansMap;
+		}
+		ansMap.put("success",true);
+		return ansMap;
+	}
+	
+	public Map<String,Object> deleteClass(int id){
+		Class temp = classMapper.selectByPrimaryKey(id);
+		Map<String,Object> ansMap = new HashMap<String,Object>();
+		if(temp == null){
+			ansMap.put("error","查无此数据");
+			return ansMap;
+		}
+		temp.setIsDelete(1);
+		if(classMapper.updateByPrimaryKeySelective(temp) == 0){
 			ansMap.put("error","写入出现异常");
 			return ansMap;
 		}

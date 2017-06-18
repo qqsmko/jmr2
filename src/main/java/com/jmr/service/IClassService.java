@@ -3,6 +3,7 @@ package com.jmr.service;
 import java.util.Map;
 
 import com.jmr.model.Course;
+import com.jmr.model.Class;
 
 public interface IClassService {
 
@@ -15,8 +16,10 @@ public interface IClassService {
 	Map<String,Object> getClassSeriesCompletionData(int draw,int start,int length);
 
 	Map<String,Object> insertCourse(Course course);
+	Map<String,Object> insertClass(Class classes);
 	
 	Map<String,Object> deleteCourse(int id);
+	Map<String,Object> deleteClass(int id);
 	
 	Course getCourseById(int id);
 	Map<String,Object> updateCourse(Course course);

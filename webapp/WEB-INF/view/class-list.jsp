@@ -30,7 +30,7 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 培训机构 <span class="c-gray en">&gt;</span> 培训班级管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加班级" data-href="class-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加班级</a></span></span></div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加班级" data-href="class-add.html" onclick="member_edit('添加','class-add.html','4','','510');" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加班级</a></span></span></div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
@@ -113,7 +113,7 @@ $(function(){
     			}
     		},
     		{
-    			"data":"institutionsid",
+    			"data":"class_id",
 	        	"render":function(data, type, row, meta) {
         			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'institutions-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
     			}
@@ -182,8 +182,11 @@ function member_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '',
+			url: 'class-list/delete',
 			dataType: 'json',
+			data:{
+				id:id,
+			},
 			success: function(data){
 				$(obj).parents("tr").remove();
 				layer.msg('已删除!',{icon:1,time:1000});
