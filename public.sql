@@ -11,7 +11,7 @@ Target Server Type    : PGSQL
 Target Server Version : 90602
 File Encoding         : 65001
 
-Date: 2017-06-18 11:25:18
+Date: 2017-06-18 23:13:39
 */
 
 
@@ -136,9 +136,9 @@ CREATE SEQUENCE "public"."temp_123_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 29
+ START 59
  CACHE 1;
-SELECT setval('"public"."temp_123_seq"', 29, true);
+SELECT setval('"public"."temp_123_seq"', 59, true);
 
 -- ----------------------------
 -- Table structure for t_account
@@ -265,7 +265,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_avatar";
 CREATE TABLE "public"."t_avatar" (
-"avatar_id" int4 NOT NULL,
+"avatar_id" int4 DEFAULT nextval('temp_123_seq'::regclass) NOT NULL,
 "avatar_img" varchar(50) COLLATE "default",
 "is_delete" int4,
 "create_by" varchar(20) COLLATE "default",
@@ -309,7 +309,7 @@ WITH (OIDS=FALSE)
 -- Records of t_class
 -- ----------------------------
 INSERT INTO "public"."t_class" VALUES ('20', 'java1班', '20', '1', '小王', '13871772214', '0', 'test', '2017-06-18 08:10:35.447', null, '2017-06-18', '2017-06-18');
-INSERT INTO "public"."t_class" VALUES ('21', 'java2班', '18', '2', '小王', '13421147177', '0', 'test', '2017-06-18 08:20:09.906', null, '2017-06-01', '2017-06-02');
+INSERT INTO "public"."t_class" VALUES ('21', 'java3班', '18', '2', '小王', '13421147177', '0', 'test', '2017-06-18 08:20:09.906', null, '2017-06-01', '2017-06-02');
 INSERT INTO "public"."t_class" VALUES ('22', '123', '123', '0', '123', '123', '1', 'test', '2017-06-18 08:22:14.042', null, '2017-06-06', '2017-06-27');
 INSERT INTO "public"."t_class" VALUES ('23', '123', '123', '0', '123', '123', '1', 'test', '2017-06-18 08:22:32.024', null, '2017-06-07', '2017-06-02');
 INSERT INTO "public"."t_class" VALUES ('24', '233', '233', '0', '233', '233', '1', 'test', '2017-06-18 08:27:28.329', null, '2017-06-07', '2017-06-27');
@@ -368,6 +368,7 @@ INSERT INTO "public"."t_class_institutions" VALUES ('999999999', '24', '0', 'tes
 INSERT INTO "public"."t_class_institutions" VALUES ('999999999', '25', '0', 'test', '2017-06-18 08:51:48.407');
 INSERT INTO "public"."t_class_institutions" VALUES ('999999999', '26', '0', 'test', '2017-06-18 08:53:42.324');
 INSERT INTO "public"."t_class_institutions" VALUES ('999999999', '27', '0', 'test', '2017-06-18 08:53:51.293');
+INSERT INTO "public"."t_class_institutions" VALUES ('999999999', '53', '0', 'test', '2017-06-18 21:06:17.587');
 INSERT INTO "public"."t_class_institutions" VALUES ('229677', '575288', '0', 'test', '2017-06-14 09:49:27');
 INSERT INTO "public"."t_class_institutions" VALUES ('381790', '575289', '0', 'test', '2017-06-08 09:49:51');
 INSERT INTO "public"."t_class_institutions" VALUES ('381790', '575290', '0', 'test', '2017-06-08 09:49:51');
@@ -549,7 +550,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_course
 -- ----------------------------
-INSERT INTO "public"."t_course" VALUES ('19', 'JAVA开发', '计算机', 'JAVA的编程实战', '48', '0', 'test', '2017-06-18 07:45:47.182');
+INSERT INTO "public"."t_course" VALUES ('19', 'java开发', '计算机', 'JAVA的编程实战', '48', '0', 'test', '2017-06-18 07:45:47.182');
 INSERT INTO "public"."t_course" VALUES ('28', '12312', '31231', '12312', '1231', '1', 'test', '2017-06-18 09:01:02.349');
 INSERT INTO "public"."t_course" VALUES ('29', '1231', '2312312', '312312', '3123', '1', 'test', '2017-06-18 09:01:07.537');
 INSERT INTO "public"."t_course" VALUES ('328765', '市场价格调查', '市场学', '调查市场的价格', '48', '0', 'test', '2017-05-04 12:15:37');
@@ -627,7 +628,7 @@ INSERT INTO "public"."t_device_institutions" VALUES ('718293', '229677', '0', 't
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_fingerprint";
 CREATE TABLE "public"."t_fingerprint" (
-"fingerprint_id" int4 NOT NULL,
+"fingerprint_id" int4 DEFAULT nextval('temp_123_seq'::regclass) NOT NULL,
 "fingerprint_img" varchar(50) COLLATE "default",
 "is_delete" int4,
 "create_by" varchar(20) COLLATE "default",
@@ -669,11 +670,13 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_idcard
 -- ----------------------------
+INSERT INTO "public"."t_idcard" VALUES ('316370748549913900', '马云', '1', '汉族', '1986-08-08', '北京海淀区牡丹园6号', '0', 'test', '2017-06-18 22:43:07.185', null);
 INSERT INTO "public"."t_idcard" VALUES ('420103892813989899', '刘老师', '2', '壮族', '2011-05-19', '北京海淀区牡丹园108号', '0', 'test', '2016-02-18 16:02:16', null);
 INSERT INTO "public"."t_idcard" VALUES ('420107199406031123', '迪丽热巴', '2', '维吾尔族', '2014-06-20', '北京海淀区牡丹园88号', '0', 'test', '2017-04-11 05:00:06', null);
 INSERT INTO "public"."t_idcard" VALUES ('420107199408217719', '王力宏', '1', '汉族', '2017-05-03', '北京海淀区牡丹园20号', '0', 'test', '2017-05-10 15:54:46', null);
 INSERT INTO "public"."t_idcard" VALUES ('420108199506063316', '马云', '1', '汉族', '2017-04-12', '北京海淀区牡丹园6号', '0', 'test', '2017-05-09 15:53:36', null);
-INSERT INTO "public"."t_idcard" VALUES ('420331637817283871', '王老师', '1', '汉族', '2017-06-06', '北京海淀区牡丹园88号', '0', 'test', '2017-04-12 16:01:24', null);
+INSERT INTO "public"."t_idcard" VALUES ('420331637817283871', '王老师', '1', '汉族', '2017-06-01', '北京海淀区牡丹园99号', '0', 'test', '2017-06-09 18:29:08', null);
+INSERT INTO "public"."t_idcard" VALUES ('616372383728905300', '马云', '1', '汉族', '1986-08-08', '北京海淀区牡丹园6号', '1', 'test', '2017-06-18 20:30:18.86', null);
 
 -- ----------------------------
 -- Table structure for t_idcard_latest
@@ -717,7 +720,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_institutions
 -- ----------------------------
-INSERT INTO "public"."t_institutions" VALUES ('229677', '通过机构', '阿米', '19463331233', '鸭子路10号', '113', '1', 'test', '2017-06-05 10:54:18');
+INSERT INTO "public"."t_institutions" VALUES ('229677', '通过机构', '阿米', '19463331233', '鸭子路10号', '113', '0', 'test', '2017-06-05 10:54:18');
 INSERT INTO "public"."t_institutions" VALUES ('381790', '测试机构2', '小花', '13419990000', '小花路10号', '23', '0', 'test', '2017-06-03 16:46:56');
 INSERT INTO "public"."t_institutions" VALUES ('999999998', 'admin创建', 'admin', '00000000000', 'admin', '0', '0', 'test', '2017-06-18 07:47:43');
 INSERT INTO "public"."t_institutions" VALUES ('999999999', 'root创建', 'root', '00000000000', 'root', '0', '0', 'test', '2017-06-18 07:47:08');
@@ -798,7 +801,7 @@ INSERT INTO "public"."t_institutions_prepare" VALUES ('321142', '测试机构2',
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_institutions_teacher";
 CREATE TABLE "public"."t_institutions_teacher" (
-"institutions_id" int4 NOT NULL,
+"institutions_id" int4 DEFAULT nextval('temp_123_seq'::regclass) NOT NULL,
 "teacher_id" int4 NOT NULL,
 "is_delete" int4,
 "create_by" varchar(20) COLLATE "default",
@@ -813,6 +816,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 INSERT INTO "public"."t_institutions_teacher" VALUES ('229677', '371890', '0', 'test', '2017-06-06 21:31:36');
 INSERT INTO "public"."t_institutions_teacher" VALUES ('381790', '728391', '0', 'test', '2017-06-21 21:32:06');
+INSERT INTO "public"."t_institutions_teacher" VALUES ('999999999', '52', '0', 'test', '2017-06-18 20:30:18.869');
 
 -- ----------------------------
 -- Table structure for t_institutions_verify
@@ -895,7 +899,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_student";
 CREATE TABLE "public"."t_student" (
-"student_id" int4 NOT NULL,
+"student_id" int4 DEFAULT nextval('temp_123_seq'::regclass) NOT NULL,
 "telephone" varchar(20) COLLATE "default",
 "email" varchar(30) COLLATE "default",
 "education" int4,
@@ -912,6 +916,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_student
 -- ----------------------------
+INSERT INTO "public"."t_student" VALUES ('59', '13971772344', 'mayun@qq.com', '3', '1', null, '0', 'test', '2017-06-18 22:43:07.187');
 INSERT INTO "public"."t_student" VALUES ('324516', '18822228888', 'mayun@123.com', '3', '1', '1', '0', 'test', '2017-06-02 11:47:28');
 INSERT INTO "public"."t_student" VALUES ('617821', '13266664545', 'dilireba@qq.com', '1', '1', '1', '0', 'test', '2017-06-11 11:58:58');
 INSERT INTO "public"."t_student" VALUES ('713213', '19866667777', 'wanglihong@234.com', '2', '0', '1', '0', 'test', '2017-06-10 11:58:27');
@@ -923,8 +928,8 @@ DROP TABLE IF EXISTS "public"."t_student_info";
 CREATE TABLE "public"."t_student_info" (
 "student_id" int4 NOT NULL,
 "card_id" varchar(32) COLLATE "default" NOT NULL,
-"fingerprint_id" int4 NOT NULL,
-"avatar_id" int4 NOT NULL,
+"fingerprint_id" int4,
+"avatar_id" int4,
 "responsible" varchar(20) COLLATE "default",
 "telephone" varchar(20) COLLATE "default",
 "is_delete" int4,
@@ -938,6 +943,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_student_info
 -- ----------------------------
+INSERT INTO "public"."t_student_info" VALUES ('59', '316370748549913900', null, null, null, null, '0', 'test', '2017-06-18 22:43:07.19');
 INSERT INTO "public"."t_student_info" VALUES ('324516', '420108199506063316', '234112', '312634', '马老师', '13944165512', '0', 'test', '2017-06-02 11:34:51');
 INSERT INTO "public"."t_student_info" VALUES ('617821', '420107199406031123', '231423', '321567', '马老师', '13944165112', '0', 'test', '2017-06-01 12:03:16');
 INSERT INTO "public"."t_student_info" VALUES ('713213', '420107199408217719', '175382', '512446', '马老师', '13944165112', '0', 'test', '2017-06-03 12:01:25');
@@ -947,7 +953,7 @@ INSERT INTO "public"."t_student_info" VALUES ('713213', '420107199408217719', '1
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_teacher";
 CREATE TABLE "public"."t_teacher" (
-"teacher_id" int4 NOT NULL,
+"teacher_id" int4 DEFAULT nextval('temp_123_seq'::regclass) NOT NULL,
 "telephone" varchar(20) COLLATE "default",
 "email" varchar(30) COLLATE "default",
 "education" int4,
@@ -964,7 +970,8 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_teacher
 -- ----------------------------
-INSERT INTO "public"."t_teacher" VALUES ('371890', '13877774444', 'test@abc.com', '1', '0', '0', 'test', '2015-05-13 16:13:49', null);
+INSERT INTO "public"."t_teacher" VALUES ('52', '123', '123@123.com', '4', '0', '1', 'test', '2017-06-18 20:30:18.865', null);
+INSERT INTO "public"."t_teacher" VALUES ('371890', '13877774444', 'test@abc.com', '3', '0', '0', 'test', '2015-05-13 16:13:49', null);
 INSERT INTO "public"."t_teacher" VALUES ('728391', '14912536712', 'good@ddc.net', '2', '0', '0', 'test', '2013-03-11 16:14:41', null);
 
 -- ----------------------------
@@ -987,6 +994,13 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of t_teacher_info
 -- ----------------------------
+INSERT INTO "public"."t_teacher_info" VALUES ('41', '628287156356715500', null, null, '0', 'test', '2017-06-18 18:22:53.278');
+INSERT INTO "public"."t_teacher_info" VALUES ('43', '100499225866329040', null, null, '0', 'test', '2017-06-18 18:27:35.412');
+INSERT INTO "public"."t_teacher_info" VALUES ('45', '752042338881100400', null, null, '0', 'test', '2017-06-18 20:08:55.918');
+INSERT INTO "public"."t_teacher_info" VALUES ('47', '577739836042705700', null, null, '0', 'test', '2017-06-18 20:10:51.403');
+INSERT INTO "public"."t_teacher_info" VALUES ('50', '673572064502396900', null, null, '0', 'test', '2017-06-18 20:13:29.761');
+INSERT INTO "public"."t_teacher_info" VALUES ('51', '275506117243524060', null, null, '0', 'test', '2017-06-18 20:15:11.733');
+INSERT INTO "public"."t_teacher_info" VALUES ('52', '616372383728905300', null, null, '0', 'test', '2017-06-18 20:30:18.871');
 INSERT INTO "public"."t_teacher_info" VALUES ('371890', '420331637817283871', '审核员', '13766663333', '0', 'test', '2017-06-06 16:20:07');
 INSERT INTO "public"."t_teacher_info" VALUES ('728391', '420103892813989899', 'check', '13966627789', '0', 'good', '2017-04-13 16:20:46');
 
@@ -1499,7 +1513,7 @@ ALTER TABLE "public"."t_student" ADD PRIMARY KEY ("student_id");
 -- ----------------------------
 -- Primary Key structure for table t_student_info
 -- ----------------------------
-ALTER TABLE "public"."t_student_info" ADD PRIMARY KEY ("student_id", "card_id", "fingerprint_id", "avatar_id");
+ALTER TABLE "public"."t_student_info" ADD PRIMARY KEY ("student_id", "card_id");
 
 -- ----------------------------
 -- Uniques structure for table t_teacher
