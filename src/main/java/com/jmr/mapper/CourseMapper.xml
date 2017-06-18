@@ -36,6 +36,7 @@
 	 LEFT JOIN t_course ON t_course.course_id = t_course_institutions.course_id
 	 LEFT JOIN t_institutions on t_course_institutions.institutions_id = t_institutions.institutions_id
 	where t_course.is_delete = 0
+	and t_institutions.is_delete = 0
     <if test="start!=null and length!=null">
     	limit #{length} offset #{start}
     </if>
@@ -47,6 +48,7 @@
 	 LEFT JOIN t_course ON t_course.course_id = t_course_institutions.course_id
 	 LEFT JOIN t_institutions on t_course_institutions.institutions_id = t_institutions.institutions_id
 	where t_course.is_delete = 0
+	and t_institutions.is_delete = 0
 	and t_institutions.institutions_name like  #{search}
     <if test="start!=null and length!=null">
     	limit #{length} offset #{start}
@@ -54,14 +56,19 @@
   </select>
   <select id="selectCount" resultType="int">
     select count(*)
-    from t_course
-    where is_delete = 0
+    from t_course_institutions 
+    	LEFT JOIN t_course ON t_course.course_id = t_course_institutions.course_id
+    	LEFT JOIN t_institutions on t_course_institutions.institutions_id = t_institutions.institutions_id
+    where t_course.is_delete = 0
+    and t_institutions.is_delete = 0
   </select>
   <select id="selectFilteredCount" parameterType="String" resultType="int">
     select count(*)
     from t_course_institutions 
+    	LEFT JOIN t_course ON t_course.course_id = t_course_institutions.course_id
     	LEFT JOIN t_institutions on t_course_institutions.institutions_id = t_institutions.institutions_id
     where t_institutions.is_delete = 0
+    and t_course.is_delete = 0
     and t_institutions.institutions_name like #{search}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

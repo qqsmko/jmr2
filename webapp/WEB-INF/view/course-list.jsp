@@ -172,6 +172,40 @@ function member_del(obj,id){
 		});		
 	});
 }
+/*用户-批量删除*/
+function datadel(){
+	var text="";  
+    $("input[name=items]").each(function() {  
+        if ($(this).is(":checked")) {  
+            text += $(this).val()+",";  
+        }
+    });
+    if(text==""){
+    	alert("请至少选择一项！");
+    	return;
+    }
+    text = text.substring(0,text.length-1);
+    data = text.split(',')
+    var urls = window.location.href;
+	urls = urls.substring(0,urls.length-5);
+	layer.confirm('确认要删除吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: urls+'/deleteall',
+			data:{
+				ids:data
+			},
+			dataType: 'json',
+			success: function(data){
+				layer.msg('已删除!',{icon:1,time:1000});
+				location.replace(location.href);
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});
+	});
+}
 </script> 
 </body>
 </html>

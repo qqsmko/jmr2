@@ -36,38 +36,13 @@
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="80">id</th>
-				<th width="100">所属班次</th>
+				<th width="100">所属机构</th>
 				<th width="">班级名称</th>
-				<th width="80">申请人</th>
+				<th width="80">所属机构</th>
 				<th width="80">申请状态</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
-		<tbody>
-			<c:forEach items="${sl}" var="s" varStatus="st">
-			<tr class="text-c">
-				<td><input type="checkbox" value="1" name=""></td>
-				<td>${s.classid}</td>
-				<td>${s.classseriesid}</td>
-				<td>${s.classname}</td>
-				<td>${s.applyperson}</td>
-				<c:if test="${s.applystate==2}">
-					<td class="td-status"><span class="label label-primary radius">等待审核</span></td>
-				</c:if>
-				<c:if test="${s.applystate>=3}">
-					<td class="td-status"><span class="label label-success radius">审核完成</span></td>
-				</c:if>
-				<td class="td-manage">
-					<c:if test="${s.applystate==2}">
-						<a style="text-decoration:none" onClick="member_start(this,${s.classid})" href="javascript:;" title="启用">通过审核</a>
-					</c:if>
-					<c:if test="${s.applystate>=3}">
-						<a>审核完成</a>
-					</c:if>
-				</td>
-			</tr>
-			</c:forEach>
-		</tbody>
 	</table>
 	</div>
 </div>
@@ -87,10 +62,51 @@ $(function(){
 	$('.table-sort').dataTable({
 		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
-		"aoColumnDefs": [
-		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-		  //{"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
-		]
+		"searching": true,
+		"ordering": false,
+		"serverSide": true,
+		"ajax": {
+			"url":"class-application-plus/data-source",
+			"type":"POST",
+		},
+		"columns":[
+			{
+				"data":"class_id",
+				"render":function(data, type, row, meta) {
+        			return '<td><input type="checkbox" value="'+data+'" name="items"></td>'
+    			}
+			},
+			{"data":"class_id"},
+	        {"data":"institutions_name"},
+	        {"data":"class_name"},
+	        {"data":"institutions_name"},
+	        {
+				"data":"state",
+				"render":function(data, type, row, meta) {
+        			if(data == 0){
+        				return '<td class="td-status"><span class="label label-defaunt radius">未申请</span></td>'
+        			}else if(data ==1){
+        				return '<td class="td-status"><span class="label label-primary radius">待审核</span></td>'
+        			}else if(data ==2){
+        				return '<td class="td-status"><span class="label label-danger radius">已驳回</span></td>'
+        			}else if(data ==3){
+        				return '<td class="td-status"><span class="label label-success radius">已通过</span></td>'
+        			}else{
+        				return '<td>错误</td>'
+        			}
+    			}
+			},
+	        {
+    			"data":null,
+	        	"render":function(data, type, row, meta) {
+	        		if(row.state == 1){
+        				return '<td class="td-manage"><a title="ti" href="javascript:;" onclick="member_start(this,'+row.class_id+')" class="ml-5" style="text-decoration:none">通过</a></td><td class="td-manage"><a title="ti" href="javascript:;" onclick="member_bad(this,'+row.class_id+')" class="ml-5" style="text-decoration:none">驳回</a></td>'
+    				}else{
+    					return '<td></td>'	
+    				}
+    			}
+    		},
+    	]
 	});
 	
 });
@@ -124,19 +140,18 @@ function member_stop(obj,id){
 
 /*用户-启用*/
 function member_start(obj,id){
-	layer.confirm('确认要审核吗？',function(index){
+	layer.confirm('确认要通过吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '',
+			url: 'class-application-plus',
 			dataType: 'json',
 			data:{
-				cid:id
+				id:id,
+				ok:true
 			},
 			success: function(data){
-				$(obj).parents("tr").find(".td-manage").prepend('<a>审核完成</a>');
-				$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">审核完成</span>');
-				$(obj).remove();
-				layer.msg('已审核!',{icon: 6,time:1000});
+				layer.msg('已通过',{icon: 6,time:1000});
+				javascript:location.replace(location.href);
 			},
 			error:function(data) {
 				console.log(data.msg);
@@ -144,6 +159,29 @@ function member_start(obj,id){
 		});
 	});
 }
+
+/*用户-驳回*/
+function member_bad(obj,id){
+	layer.confirm('确认要驳回吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: 'class-application-plus',
+			dataType: 'json',
+			data:{
+				id:id,
+				ok:false
+			},
+			success: function(data){
+				layer.msg('已通过',{icon: 6,time:1000});
+				javascript:location.replace(location.href);
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});
+	});
+}
+
 /*用户-编辑*/
 function member_edit(title,url,id,w,h){
 	layer_show(title,url,w,h);

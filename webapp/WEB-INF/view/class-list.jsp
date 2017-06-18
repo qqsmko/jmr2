@@ -40,8 +40,8 @@
 				<th width="">班级名称</th>
 				<th width="100">所属机构</th>
 				<th width="80">班级人数</th>
-				<th width="80">班级负责人</th>
-				<th width="80">负责人手机</th>
+				<th width="80">开始时间</th>
+				<th width="80">结束时间</th>
 				<th width="80">本班学生详情</th>
 				<th width="100">操作</th>
 			</tr>
@@ -105,8 +105,8 @@ $(function(){
 	        {"data":"class_name"},
 	        {"data":"institutions_name"},
 	        {"data":"student_count"},
-	        {"data":"responsible"},
-	        {"data":"telephone"},
+	        {"data":"start_time"},
+	        {"data":"end_time"},
 	        {
 	        	"render":function(data, type, row, meta) {
         			return '点击查看'
@@ -115,7 +115,7 @@ $(function(){
     		{
     			"data":"class_id",
 	        	"render":function(data, type, row, meta) {
-        			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'institutions-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
+        			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'class-update?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
     			}
     		}
     	]
@@ -195,6 +195,40 @@ function member_del(obj,id){
 				console.log(data.msg);
 			},
 		});		
+	});
+}
+/*用户-批量删除*/
+function datadel(){
+	var text="";  
+    $("input[name=items]").each(function() {  
+        if ($(this).is(":checked")) {  
+            text += $(this).val()+",";  
+        }
+    });
+    if(text==""){
+    	alert("请至少选择一项！");
+    	return;
+    }
+    text = text.substring(0,text.length-1);
+    data = text.split(',')
+    var urls = window.location.href;
+	urls = urls.substring(0,urls.length-5);
+	layer.confirm('确认要删除吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: urls+'/deleteall',
+			data:{
+				ids:data
+			},
+			dataType: 'json',
+			success: function(data){
+				layer.msg('已删除!',{icon:1,time:1000});
+				location.replace(location.href);
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});
 	});
 }
 </script> 

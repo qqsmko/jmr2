@@ -29,7 +29,6 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 培训机构 <span class="c-gray en">&gt;</span> 培训班级管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量撤回</a> <a class="btn btn-primary radius" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 批量申请</a></div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
@@ -84,24 +83,28 @@ $(function(){
 				"data":"state",
 				"render":function(data, type, row, meta) {
         			if(data == 0){
-        				return '<td><span class="label label-defaunt radius">未申请</span></td>'
+        				return '<td class="td-status"><span class="label label-defaunt radius">未申请</span></td>'
         			}else if(data ==1){
-        				return '<td><span class="label label-primary radius">待审核</span></td>'
+        				return '<td class="td-status"><span class="label label-primary radius">待审核</span></td>'
         			}else if(data ==2){
-        				return '<td><span class="label label-danger radius">已驳回</span></td>'
+        				return '<td class="td-status"><span class="label label-danger radius">已驳回</span></td>'
         			}else if(data ==3){
-        				return '<td><span class="label label-success radius">已通过</span></td>'
+        				return '<td class="td-status"><span class="label label-success radius">已通过</span></td>'
         			}else{
         				return '<td>错误</td>'
         			}
     			}
 			},
 	        {
-    			"data":"class_id",
+    			"data":null,
 	        	"render":function(data, type, row, meta) {
-        			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'course-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
+	        		if(row.state == 0){
+        				return '<td class="td-manage"><a title="ti" href="javascript:;" onclick="member_start(this,'+row.class_id+')" class="ml-5" style="text-decoration:none">提交审核</a></td>'
+    				}else{
+    					return '<td></td>'	
+    				}
     			}
-    		}
+    		},
     	]
 	});
 	
@@ -139,16 +142,14 @@ function member_start(obj,id){
 	layer.confirm('确认要审核吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '',
+			url: 'class-application',
 			dataType: 'json',
 			data:{
-				cid:id
+				id:id
 			},
 			success: function(data){
-				$(obj).parents("tr").find(".td-manage").prepend('<a>等待审核</a>');
-				$(obj).parents("tr").find(".td-status").html('<span class="label label-primary radius">等待审核</span>');
-				$(obj).remove();
-				layer.msg('已审核!',{icon: 6,time:1000});
+				layer.msg('已提交',{icon: 6,time:1000});
+				javascript:location.replace(location.href);
 			},
 			error:function(data) {
 				console.log(data.msg);

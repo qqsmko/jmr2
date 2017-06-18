@@ -63,6 +63,10 @@ public class ClassService implements IClassService {
 	@Autowired
 	ClassInstitutionsMapper classInstitutionsMapper;
 	
+	/*--------------------------------------------------------*/
+	//                         Get
+	/*--------------------------------------------------------*/
+	
 	public Map<String,Object> getCourseData(int draw,int start,int length,String search){
 		if(search==""){
 			int totalNum = courseMapper.selectCount();
@@ -126,7 +130,7 @@ public class ClassService implements IClassService {
 	public Map<String,Object> getClassesDataTest(int draw,int start,int length,String search){
 		if(search==""){
 			int totalNum = classMapper.selectCount();
-			List<Map<String,Object>> data = classMapper.selectByPageSQL(start, length);
+			List<Map<String,Object>> data = classMapper.selectByPageSQL(start, length, 0);
 			Map<String,Object> ansMap = new HashMap<String,Object>();
 			ansMap.put("draw",draw);
 	    	ansMap.put("recordsTotal",totalNum);
@@ -136,7 +140,30 @@ public class ClassService implements IClassService {
 	    }else{
 	    	int totalNum = classMapper.selectCount();
 			int totalFiltered = classMapper.selectFilteredCount("%"+search+"%");
-			List<Map<String,Object>> data = classMapper.selectByPageWithName(start, length, "%"+search+"%");
+			List<Map<String,Object>> data = classMapper.selectByPageWithName(start, length, "%"+search+"%", 0);
+			Map<String,Object> ansMap = new HashMap<String,Object>();
+			ansMap.put("draw",draw);
+	    	ansMap.put("recordsTotal",totalNum);
+			ansMap.put("recordsFiltered",totalFiltered);
+			ansMap.put("data",data);
+	    	return ansMap;
+	    }
+	}
+	
+	public Map<String,Object> getClassesDataWithState(int draw,int start,int length,String search,int state){
+		if(search==""){
+			int totalNum = classMapper.selectCount();
+			List<Map<String,Object>> data = classMapper.selectByPageSQL(start, length, state);
+			Map<String,Object> ansMap = new HashMap<String,Object>();
+			ansMap.put("draw",draw);
+	    	ansMap.put("recordsTotal",totalNum);
+			ansMap.put("recordsFiltered",totalNum);
+			ansMap.put("data",data);
+	    	return ansMap;
+	    }else{
+	    	int totalNum = classMapper.selectCount();
+			int totalFiltered = classMapper.selectFilteredCount("%"+search+"%");
+			List<Map<String,Object>> data = classMapper.selectByPageWithName(start, length, "%"+search+"%",state);
 			Map<String,Object> ansMap = new HashMap<String,Object>();
 			ansMap.put("draw",draw);
 	    	ansMap.put("recordsTotal",totalNum);
@@ -178,6 +205,13 @@ public class ClassService implements IClassService {
 		ansMap.put("data",data);
     	return ansMap;
 	}
+	
+	
+	
+	
+	/*--------------------------------------------------------*/
+	//                         Insert
+	/*--------------------------------------------------------*/
 	
 	public Map<String,Object> insertCourse(Course course){
 		Map<String,Object> ansMap = new HashMap<String,Object>();
@@ -226,6 +260,13 @@ public class ClassService implements IClassService {
 		return ansMap;
 	}
 	
+	
+	
+	
+	/*--------------------------------------------------------*/
+	//                         Delete
+	/*--------------------------------------------------------*/
+	
 	public Map<String,Object> deleteCourse(int id){
 		Course temp = courseMapper.selectByPrimaryKey(id);
 		Map<String,Object> ansMap = new HashMap<String,Object>();
@@ -258,8 +299,19 @@ public class ClassService implements IClassService {
 		return ansMap;
 	}
 	
+	
+	
+	/*--------------------------------------------------------*/
+	//                         Update
+	/*--------------------------------------------------------*/
+	
 	public Course getCourseById(int id){
 		Course temp = courseMapper.selectByPrimaryKey(id);
+		return temp;
+	}
+	
+	public Class getClassById(int id){
+		Class temp = classMapper.selectByPrimaryKey(id);
 		return temp;
 	}
 	
@@ -273,102 +325,85 @@ public class ClassService implements IClassService {
 		return ansMap;
 	}
 	
-//    public List<Class> list(){
-//        return t.selectAll();
-//    };
-//    
-//    public List<Class> listApplication(){
-//        return t.selectApplication();
-//    };
-//    
-//    public List<Class> listFinishied(){
-//        return t.selectFinishied();
-//    };
-//    
-//    public void deleteOne(int num){
-//    	t.deleteByPrimaryKey(num);
-//    }
-//    
-//    public void updateOne(String classid,String classname,String applynumber,String startdate,String enddate,String remark,String applyperson){
-//    	
-//    	Class temp = new Class();
-//    	Integer id = Integer.parseInt(classid);
-//    	temp.setClassid(id);
-//    	if(classname==""){
-//    		temp.setClassname(null);
-//    	}else{
-//    		temp.setClassname(classname);
-//    	}
-//    	if(applynumber==""){
-//    		temp.setApplynumber(null);
-//    	}else{
-//    		Integer applynumberb = Integer.parseInt(applynumber);
-//    		temp.setApplynumber(applynumberb);
-//    	}
-//    		try{
-//	    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//	    		Date startdateb = sdf.parse(startdate);
-//	    		temp.setStartdate(startdateb);
-//	    	}catch(ParseException e){
-//	    		temp.setStartdate(null);
-//	    		System.out.println(e.getMessage());
-//	    	}
-//    		try{
-//	    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//	    		Date enddateb = sdf.parse(enddate);
-//	    		temp.setEnddate(enddateb);
-//	    	}catch(ParseException e){
-//	    		temp.setEnddate(null);
-//	    		System.out.println(e.getMessage());
-//	    	}
-//    	if(remark==""){
-//    		temp.setRemark(null);
-//    	}else{
-//    		temp.setRemark(remark);
-//    	}
-//    	if(applyperson==""){
-//    		temp.setApplyperson(null);
-//    	}else{
-//    		temp.setApplyperson(applyperson);
-//    	}
-//    	t.updateByPrimaryKeySelective(temp);
-//    }
-//    
-//    public void insertOne(String classname,String applynumber,String startdate,String enddate,String remark,String applyperson){
-//    	
-//    	Class temp = new Class();
-//    	
-//    	temp.setClassid(null);
-//    	temp.setClassname(classname);
-//    	Integer applynumberb = Integer.parseInt(applynumber);
-//    	temp.setApplynumber(applynumberb);
-//    	try{
-//	    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//	    		Date startdateb = sdf.parse(startdate);
-//	    		temp.setStartdate(startdateb);
-//	    	}catch(ParseException e){
-//	    		temp.setStartdate(null);
-//	    		System.out.println(e.getMessage());
-//	    	}
-//    		try{
-//	    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//	    		Date enddateb = sdf.parse(enddate);
-//	    		temp.setEnddate(enddateb);
-//	    	}catch(ParseException e){
-//	    		temp.setEnddate(null);
-//	    		System.out.println(e.getMessage());
-//	    	}
-//    		temp.setRemark(remark);
-//    		temp.setApplyperson(applyperson);
-//    	t.insertSelective(temp);
-//    }
-//    
-//    public void updateOnesState(int id, int num){
-//    	Class temp = new Class();
-//    	temp.setClassid(id);
-//    	temp.setApplystate(num);
-//    	t.updateState(temp);
-//    }
+	public Map<String,Object> updateClass(Class classes){
+		Map<String,Object> ansMap = new HashMap<String,Object>();
+		if(classMapper.updateByPrimaryKeySelective(classes) == 0){
+			ansMap.put("error","写入失败");
+			return ansMap;
+		}
+		ansMap.put("success",true);
+		return ansMap;
+	}
+	
+	
+	
+	/*--------------------------------------------------------*/
+	//                         Other
+	/*--------------------------------------------------------*/
+	public Map<String,Object> submitApplyClass(int id){
+		Map<String,Object> ansMap = new HashMap<String,Object>();
+		Class temp = classMapper.selectByPrimaryKey(id);
+		if(temp == null){
+			ansMap.put("error","查无此数据");
+			return ansMap;
+		}
+		System.out.println(temp.getState());
+		if(temp.getState() != 0){
+			ansMap.put("error","状态流程错误");
+			return ansMap;
+		}
+		temp.setState(1);
+		if(classMapper.updateByPrimaryKeySelective(temp) == 0){
+			ansMap.put("error","写入失败");
+			return ansMap;
+		}
+		ansMap.put("success",true);
+		return ansMap;
+	}
+	
+	public Map<String,Object> checkApplyClass(int id){
+		Map<String,Object> ansMap = new HashMap<String,Object>();
+		Class temp = classMapper.selectByPrimaryKey(id);
+		if(temp == null){
+			ansMap.put("error","查无此数据");
+			return ansMap;
+		}
+		if(temp.getState() != 1){
+			ansMap.put("error","状态流程错误");
+			return ansMap;
+		}
+		temp.setState(3);
+		if(classMapper.updateByPrimaryKeySelective(temp) == 0){
+			ansMap.put("error","写入失败");
+			return ansMap;
+		}
+		ansMap.put("success",true);
+		return ansMap;
+	}
+	
+	public Map<String,Object> rejectApplyClass(int id){
+		Map<String,Object> ansMap = new HashMap<String,Object>();
+		Class temp = classMapper.selectByPrimaryKey(id);
+		if(temp == null){
+			ansMap.put("error","查无此数据");
+			return ansMap;
+		}
+		if(temp.getState() != 1){
+			ansMap.put("error","状态流程错误");
+			return ansMap;
+		}
+		temp.setState(2);
+		if(classMapper.updateByPrimaryKeySelective(temp) == 0){
+			ansMap.put("error","写入失败");
+			return ansMap;
+		}
+		ansMap.put("success",true);
+		return ansMap;
+	}
+	
+	/*--------------------------------------------------------*/
+	//                          Util
+	/*--------------------------------------------------------*/
 	
 	public static Map<String, Object> transBean2Map(Object obj) {  
 		  

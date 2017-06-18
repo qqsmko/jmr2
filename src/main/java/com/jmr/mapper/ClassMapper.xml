@@ -41,6 +41,8 @@
     	LEFT JOIN t_class ON t_class.class_id = t_class_institutions.class_id
     	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id
     where t_class.is_delete = 0
+    and t_institutions.is_delete = 0
+    and t_class.state >= #{state}
     <if test="start!=null and length!=null">
     	limit #{length} offset #{start}
     </if>
@@ -52,6 +54,7 @@
     	LEFT JOIN t_class ON t_class.class_id = t_class_institutions.class_id
     	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id
     where t_class.is_delete = 0
+    and t_institutions.is_delete = 0
 	and t_class_institutions.institutions_id = #{id}
     <if test="start!=null and length!=null">
     	limit #{length} offset #{start}
@@ -64,21 +67,28 @@
     	LEFT JOIN t_class ON t_class.class_id = t_class_institutions.class_id
     	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id
     where t_class.is_delete = 0
+    and t_institutions.is_delete = 0
 	and t_institutions.institutions_name like #{search}
+	and t_class.state >= #{state}
     <if test="start!=null and length!=null">
     	limit #{length} offset #{start}
     </if>
   </select>
   <select id="selectCount" resultType="int">
     select count(*)
-    from t_class_institutions
-    where is_delete = 0
+    from t_class_institutions 
+    	LEFT JOIN t_class ON t_class.class_id = t_class_institutions.class_id
+    	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id
+    where t_class.is_delete = 0
+    and t_institutions.is_delete = 0
   </select>
   <select id="selectFilteredCount" parameterType="String" resultType="int">
     select count(*)
     from t_class_institutions 
+    	LEFT JOIN t_class ON t_class.class_id = t_class_institutions.class_id
     	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id
-    where t_institutions.is_delete = 0
+    where t_class.is_delete = 0
+    and t_institutions.is_delete = 0
     and t_institutions.institutions_name like #{search}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
