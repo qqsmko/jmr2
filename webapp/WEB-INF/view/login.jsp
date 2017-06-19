@@ -21,9 +21,10 @@
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>后台登录</title>
+<title>荆门市就业局公共就业信息化系统</title>
 </head>
 <body>
+<div class="header"></div>
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" id="loginForm" name="loginForm" action="login.html" method="post">
@@ -61,7 +62,7 @@
     </form>
   </div>
 </div>
-<div class="footer">Copyright 你的公司名称 by H-ui.admin v3.0</div>
+<div class="footer">Copyright 荆门市就业局</div>
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
 <!--此乃百度统计代码，请自行删除-->
