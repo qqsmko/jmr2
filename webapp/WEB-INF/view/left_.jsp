@@ -21,7 +21,7 @@
 					<li><a data-href="student-image.html" data-title="学员照片采集" href="javascript:void(0)">学员照片采集(3)</a></li>
 					<li><a data-href="student-classinfo.html" data-title="培训信息采集" href="javascript:void(0)">培训信息采集(4)</a></li> -->
 					<li><a data-href="student-add.html" data-title="学员信息登记" href="javascript:void(0)">学员信息登记</a></li>
-					<li><a data-href="student-add.html" data-title="信息完整度管理" href="javascript:void(0)">信息完整度管理</a></li>
+					<!-- <li><a data-href="student-add.html" data-title="信息完整度管理" href="javascript:void(0)">信息完整度管理</a></li> -->
 					<li><a data-href="student-list.html" data-title="学员信息管理" href="javascript:void(0)">学员信息管理</a></li>
 					<li><a data-href="student-idcard-list.html" data-title="身份证查看" href="javascript:void(0)">身份证查看</a></li>
 					<li><a data-href="teacher-list.html" data-title="教师管理" href="javascript:void(0)">教师管理</a></li>

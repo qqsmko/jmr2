@@ -55,8 +55,9 @@
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
           <input name="" type="button" onClick="loginSubmit();" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
-          <input name="" type="button" class="btn btn-default radius size-L" value="&nbsp;机构申请人口&nbsp;" onClick="window.location.href='institutions-new'">
-          <input name="" type="button" class="btn btn-default radius size-L" value="&nbsp;已开班级公示&nbsp;">
+          <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;重&nbsp;&nbsp;&nbsp;&nbsp;置&nbsp;">
+<!--           <input name="" type="button" class="btn btn-default radius size-L" value="&nbsp;机构申请人口&nbsp;" onClick="window.location.href='institutions-new'">
+          <input name="" type="button" class="btn btn-default radius size-L" value="&nbsp;已开班级公示&nbsp;"> -->
         </div>
       </div>
     </form>
