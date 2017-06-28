@@ -22,8 +22,8 @@ public class LoginController {
 	
 	@RequestMapping(value="logout",method=RequestMethod.GET)
     public ModelAndView doLogoutGET(){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("login");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/login");
         return mav;
     }
 	
