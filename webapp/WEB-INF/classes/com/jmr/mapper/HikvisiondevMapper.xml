@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jmr.IDao.HikvisiondevMapper" >
+  <resultMap id="BaseResultMap" type="com.jmr.model.Hikvisiondev" >
+    <id column="dev_hao" property="devHao" jdbcType="VARCHAR" />
+    <result column="iinstut_hao" property="iinstutHao" jdbcType="VARCHAR" />
+    <result column="class_hao" property="classHao" jdbcType="VARCHAR" />
+    <result column="ip_adr" property="ipAdr" jdbcType="VARCHAR" />
+    <result column="s_port" property="sPort" jdbcType="INTEGER" />
+    <result column="sub_smask" property="subSmask" jdbcType="VARCHAR" />
+    <result column="gate_ip" property="gateIp" jdbcType="VARCHAR" />
+    <result column="http_port" property="httpPort" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_pwd" property="userPwd" jdbcType="VARCHAR" />
+    <result column="dev_scipt" property="devScipt" jdbcType="VARCHAR" />
+    <result column="stat_v" property="statV" jdbcType="INTEGER" />
+    <result column="save_adr" property="saveAdr" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dev_hao, iinstut_hao, class_hao, ip_adr, s_port, sub_smask, gate_ip, http_port, user_name, 
+    user_pwd, dev_scipt, stat_v, save_adr
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from hikvision_dev
+    where dev_hao = #{devHao,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from hikvision_dev
+    where dev_hao = #{devHao,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.Hikvisiondev" >
+    insert into hikvision_dev (dev_hao, iinstut_hao, class_hao, 
+      ip_adr, s_port, sub_smask, 
+      gate_ip, http_port, user_name, 
+      user_pwd, dev_scipt, stat_v, 
+      save_adr)
+    values (#{devHao,jdbcType=VARCHAR}, #{iinstutHao,jdbcType=VARCHAR}, #{classHao,jdbcType=VARCHAR}, 
+      #{ipAdr,jdbcType=VARCHAR}, #{sPort,jdbcType=INTEGER}, #{subSmask,jdbcType=VARCHAR}, 
+      #{gateIp,jdbcType=VARCHAR}, #{httpPort,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{userPwd,jdbcType=VARCHAR}, #{devScipt,jdbcType=VARCHAR}, #{statV,jdbcType=INTEGER}, 
+      #{saveAdr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.Hikvisiondev" >
+    insert into hikvision_dev
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="devHao != null" >
+        dev_hao,
+      </if>
+      <if test="iinstutHao != null" >
+        iinstut_hao,
+      </if>
+      <if test="classHao != null" >
+        class_hao,
+      </if>
+      <if test="ipAdr != null" >
+        ip_adr,
+      </if>
+      <if test="sPort != null" >
+        s_port,
+      </if>
+      <if test="subSmask != null" >
+        sub_smask,
+      </if>
+      <if test="gateIp != null" >
+        gate_ip,
+      </if>
+      <if test="httpPort != null" >
+        http_port,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPwd != null" >
+        user_pwd,
+      </if>
+      <if test="devScipt != null" >
+        dev_scipt,
+      </if>
+      <if test="statV != null" >
+        stat_v,
+      </if>
+      <if test="saveAdr != null" >
+        save_adr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="devHao != null" >
+        #{devHao,jdbcType=VARCHAR},
+      </if>
+      <if test="iinstutHao != null" >
+        #{iinstutHao,jdbcType=VARCHAR},
+      </if>
+      <if test="classHao != null" >
+        #{classHao,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAdr != null" >
+        #{ipAdr,jdbcType=VARCHAR},
+      </if>
+      <if test="sPort != null" >
+        #{sPort,jdbcType=INTEGER},
+      </if>
+      <if test="subSmask != null" >
+        #{subSmask,jdbcType=VARCHAR},
+      </if>
+      <if test="gateIp != null" >
+        #{gateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="httpPort != null" >
+        #{httpPort,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="devScipt != null" >
+        #{devScipt,jdbcType=VARCHAR},
+      </if>
+      <if test="statV != null" >
+        #{statV,jdbcType=INTEGER},
+      </if>
+      <if test="saveAdr != null" >
+        #{saveAdr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.Hikvisiondev" >
+    update hikvision_dev
+    <set >
+      <if test="iinstutHao != null" >
+        iinstut_hao = #{iinstutHao,jdbcType=VARCHAR},
+      </if>
+      <if test="classHao != null" >
+        class_hao = #{classHao,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAdr != null" >
+        ip_adr = #{ipAdr,jdbcType=VARCHAR},
+      </if>
+      <if test="sPort != null" >
+        s_port = #{sPort,jdbcType=INTEGER},
+      </if>
+      <if test="subSmask != null" >
+        sub_smask = #{subSmask,jdbcType=VARCHAR},
+      </if>
+      <if test="gateIp != null" >
+        gate_ip = #{gateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="httpPort != null" >
+        http_port = #{httpPort,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="devScipt != null" >
+        dev_scipt = #{devScipt,jdbcType=VARCHAR},
+      </if>
+      <if test="statV != null" >
+        stat_v = #{statV,jdbcType=INTEGER},
+      </if>
+      <if test="saveAdr != null" >
+        save_adr = #{saveAdr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dev_hao = #{devHao,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.Hikvisiondev" >
+    update hikvision_dev
+    set iinstut_hao = #{iinstutHao,jdbcType=VARCHAR},
+      class_hao = #{classHao,jdbcType=VARCHAR},
+      ip_adr = #{ipAdr,jdbcType=VARCHAR},
+      s_port = #{sPort,jdbcType=INTEGER},
+      sub_smask = #{subSmask,jdbcType=VARCHAR},
+      gate_ip = #{gateIp,jdbcType=VARCHAR},
+      http_port = #{httpPort,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_pwd = #{userPwd,jdbcType=VARCHAR},
+      dev_scipt = #{devScipt,jdbcType=VARCHAR},
+      stat_v = #{statV,jdbcType=INTEGER},
+      save_adr = #{saveAdr,jdbcType=VARCHAR}
+    where dev_hao = #{devHao,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hikvision_dev
+  </select>
+  
+</mapper>

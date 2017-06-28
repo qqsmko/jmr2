@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jmr.IDao.InstitutionsMapper">
+  <resultMap id="BaseResultMap" type="com.jmr.model.Institutions">
+    <id column="institutions_id" jdbcType="INTEGER" property="institutionsId" />
+    <result column="institutions_name" jdbcType="VARCHAR" property="institutionsName" />
+    <result column="responsible" jdbcType="VARCHAR" property="responsible" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="employee_count" jdbcType="INTEGER" property="employeeCount" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    institutions_id, institutions_name, responsible, telephone, address, employee_count, 
+    is_delete, create_by, create_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_institutions
+    where institutions_id = #{institutionsId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPage" parameterType="int" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_institutions
+    where is_delete = 0
+    <if test="start!=null and length!=null">
+    	limit #{length} offset #{start}
+    </if>
+  </select>
+  <select id="selectCount" resultType="int">
+    select count(*)
+    from t_institutions
+    where is_delete = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_institutions
+    where institutions_id = #{institutionsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.Institutions">
+    insert into t_institutions (institutions_id, institutions_name, 
+      responsible, telephone, address, 
+      employee_count, is_delete, create_by, 
+      create_at)
+    values (#{institutionsId,jdbcType=INTEGER}, #{institutionsName,jdbcType=VARCHAR}, 
+      #{responsible,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{employeeCount,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, 
+      #{createAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.Institutions">
+    insert into t_institutions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="institutionsId != null">
+        institutions_id,
+      </if>
+      <if test="institutionsName != null">
+        institutions_name,
+      </if>
+      <if test="responsible != null">
+        responsible,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="employeeCount != null">
+        employee_count,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="institutionsId != null">
+        #{institutionsId,jdbcType=INTEGER},
+      </if>
+      <if test="institutionsName != null">
+        #{institutionsName,jdbcType=VARCHAR},
+      </if>
+      <if test="responsible != null">
+        #{responsible,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCount != null">
+        #{employeeCount,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.Institutions">
+    update t_institutions
+    <set>
+      <if test="institutionsName != null">
+        institutions_name = #{institutionsName,jdbcType=VARCHAR},
+      </if>
+      <if test="responsible != null">
+        responsible = #{responsible,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCount != null">
+        employee_count = #{employeeCount,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where institutions_id = #{institutionsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.Institutions">
+    update t_institutions
+    set institutions_name = #{institutionsName,jdbcType=VARCHAR},
+      responsible = #{responsible,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      employee_count = #{employeeCount,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where institutions_id = #{institutionsId,jdbcType=INTEGER}
+  </update>
+   <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_institutions
+  </select>
+</mapper>

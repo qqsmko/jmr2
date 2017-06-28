@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jmr.IDao.IdcardLatestMapper">
+  <resultMap id="BaseResultMap" type="com.jmr.model.IdcardLatest">
+    <id column="card_id" jdbcType="INTEGER" property="cardId" />
+    <result column="latest_class" jdbcType="TIMESTAMP" property="latestClass" />
+    <result column="is_ok" jdbcType="INTEGER" property="isOk" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    card_id, latest_class, is_ok, is_delete, create_by, create_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_idcard_latest
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_idcard_latest
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.IdcardLatest">
+    insert into t_idcard_latest (card_id, latest_class, is_ok, 
+      is_delete, create_by, create_at
+      )
+    values (#{cardId,jdbcType=INTEGER}, #{latestClass,jdbcType=TIMESTAMP}, #{isOk,jdbcType=INTEGER}, 
+      #{isDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.IdcardLatest">
+    insert into t_idcard_latest
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        card_id,
+      </if>
+      <if test="latestClass != null">
+        latest_class,
+      </if>
+      <if test="isOk != null">
+        is_ok,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        #{cardId,jdbcType=INTEGER},
+      </if>
+      <if test="latestClass != null">
+        #{latestClass,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isOk != null">
+        #{isOk,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.IdcardLatest">
+    update t_idcard_latest
+    <set>
+      <if test="latestClass != null">
+        latest_class = #{latestClass,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isOk != null">
+        is_ok = #{isOk,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.IdcardLatest">
+    update t_idcard_latest
+    set latest_class = #{latestClass,jdbcType=TIMESTAMP},
+      is_ok = #{isOk,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </update>
+</mapper>

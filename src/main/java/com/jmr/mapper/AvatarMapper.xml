@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jmr.IDao.AvatarMapper">
+  <resultMap id="BaseResultMap" type="com.jmr.model.Avatar">
+    <id column="avatar_id" jdbcType="INTEGER" property="avatarId" />
+    <result column="avatar_img" jdbcType="VARCHAR" property="avatarImg" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    avatar_id, avatar_img, is_delete, create_by, create_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_avatar
+    where avatar_id = #{avatarId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_avatar
+    where avatar_id = #{avatarId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.Avatar">
+    insert into t_avatar (avatar_id, avatar_img, is_delete, 
+      create_by, create_at)
+    values (#{avatarId,jdbcType=INTEGER}, #{avatarImg,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
+      #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.Avatar">
+    insert into t_avatar
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="avatarId != null">
+        avatar_id,
+      </if>
+      <if test="avatarImg != null">
+        avatar_img,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="avatarId != null">
+        #{avatarId,jdbcType=INTEGER},
+      </if>
+      <if test="avatarImg != null">
+        #{avatarImg,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.Avatar">
+    update t_avatar
+    <set>
+      <if test="avatarImg != null">
+        avatar_img = #{avatarImg,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where avatar_id = #{avatarId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.Avatar">
+    update t_avatar
+    set avatar_img = #{avatarImg,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where avatar_id = #{avatarId,jdbcType=INTEGER}
+  </update>
+</mapper>

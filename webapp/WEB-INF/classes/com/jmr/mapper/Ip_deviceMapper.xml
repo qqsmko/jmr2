@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jmr.IDao.Ip_deviceMapper" >
+  <resultMap id="BaseResultMap" type="com.jmr.model.Ip_device" >
+    <id column="dev_hao" property="devHao" jdbcType="INTEGER" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="http_port" property="httpPort" jdbcType="INTEGER" />
+    <result column="dev_port" property="devPort" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="dev_stype" property="devStype" jdbcType="VARCHAR" />
+    <result column="dev_adr" property="devAdr" jdbcType="VARCHAR" />
+    <result column="dev_description" property="devDescription" jdbcType="VARCHAR" />
+    <result column="institution" property="institution" jdbcType="VARCHAR" />
+    <result column="inst_route" property="instRoute" jdbcType="VARCHAR" />
+    <result column="dev_effect" property="devEffect" jdbcType="BIT" />
+    <result column="inst_route_port" property="instRoutePort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dev_hao, ip, http_port, dev_port, username, password, dev_stype, dev_adr, dev_description, 
+    institution, inst_route, dev_effect, inst_route_port
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ip_device
+    where dev_hao = #{devHao,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ip_device
+    where dev_hao = #{devHao,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.Ip_device" >
+    insert into ip_device (dev_hao, ip, http_port, 
+      dev_port, username, password, 
+      dev_stype, dev_adr, dev_description, 
+      institution, inst_route, dev_effect, 
+      inst_route_port)
+    values (#{devHao,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{httpPort,jdbcType=INTEGER}, 
+      #{devPort,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{devStype,jdbcType=VARCHAR}, #{devAdr,jdbcType=VARCHAR}, #{devDescription,jdbcType=VARCHAR}, 
+      #{institution,jdbcType=VARCHAR}, #{instRoute,jdbcType=VARCHAR}, #{devEffect,jdbcType=BIT}, 
+      #{instRoutePort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.Ip_device" >
+    insert into ip_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="devHao != null" >
+        dev_hao,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="httpPort != null" >
+        http_port,
+      </if>
+      <if test="devPort != null" >
+        dev_port,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="devStype != null" >
+        dev_stype,
+      </if>
+      <if test="devAdr != null" >
+        dev_adr,
+      </if>
+      <if test="devDescription != null" >
+        dev_description,
+      </if>
+      <if test="institution != null" >
+        institution,
+      </if>
+      <if test="instRoute != null" >
+        inst_route,
+      </if>
+      <if test="devEffect != null" >
+        dev_effect,
+      </if>
+      <if test="instRoutePort != null" >
+        inst_route_port,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="devHao != null" >
+        #{devHao,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="httpPort != null" >
+        #{httpPort,jdbcType=INTEGER},
+      </if>
+      <if test="devPort != null" >
+        #{devPort,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="devStype != null" >
+        #{devStype,jdbcType=VARCHAR},
+      </if>
+      <if test="devAdr != null" >
+        #{devAdr,jdbcType=VARCHAR},
+      </if>
+      <if test="devDescription != null" >
+        #{devDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="institution != null" >
+        #{institution,jdbcType=VARCHAR},
+      </if>
+      <if test="instRoute != null" >
+        #{instRoute,jdbcType=VARCHAR},
+      </if>
+      <if test="devEffect != null" >
+        #{devEffect,jdbcType=BIT},
+      </if>
+      <if test="instRoutePort != null" >
+        #{instRoutePort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.Ip_device" >
+    update ip_device
+    <set >
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="httpPort != null" >
+        http_port = #{httpPort,jdbcType=INTEGER},
+      </if>
+      <if test="devPort != null" >
+        dev_port = #{devPort,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="devStype != null" >
+        dev_stype = #{devStype,jdbcType=VARCHAR},
+      </if>
+      <if test="devAdr != null" >
+        dev_adr = #{devAdr,jdbcType=VARCHAR},
+      </if>
+      <if test="devDescription != null" >
+        dev_description = #{devDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="institution != null" >
+        institution = #{institution,jdbcType=VARCHAR},
+      </if>
+      <if test="instRoute != null" >
+        inst_route = #{instRoute,jdbcType=VARCHAR},
+      </if>
+      <if test="devEffect != null" >
+        dev_effect = #{devEffect,jdbcType=BIT},
+      </if>
+      <if test="instRoutePort != null" >
+        inst_route_port = #{instRoutePort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where dev_hao = #{devHao,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.Ip_device" >
+    update ip_device
+    set ip = #{ip,jdbcType=VARCHAR},
+      http_port = #{httpPort,jdbcType=INTEGER},
+      dev_port = #{devPort,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      dev_stype = #{devStype,jdbcType=VARCHAR},
+      dev_adr = #{devAdr,jdbcType=VARCHAR},
+      dev_description = #{devDescription,jdbcType=VARCHAR},
+      institution = #{institution,jdbcType=VARCHAR},
+      inst_route = #{instRoute,jdbcType=VARCHAR},
+      dev_effect = #{devEffect,jdbcType=BIT},
+      inst_route_port = #{instRoutePort,jdbcType=INTEGER}
+    where dev_hao = #{devHao,jdbcType=INTEGER}
+  </update>
+</mapper>

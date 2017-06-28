@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jmr.IDao.ClassSeriesVerifyMapper">
+  <resultMap id="BaseResultMap" type="com.jmr.model.ClassSeriesVerify">
+    <id column="class_series_id" jdbcType="INTEGER" property="classSeriesId" />
+    <result column="apply_name" jdbcType="VARCHAR" property="applyName" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="apply_state" jdbcType="VARCHAR" property="applyState" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    class_series_id, apply_name, telephone, apply_state, is_delete, create_by, create_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_class_verify
+    where class_series_id = #{classSeriesId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPage" parameterType="int" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_class_verify
+    where is_delete = 0
+    <if test="start!=null and length!=null">
+    	limit #{length} offset #{start}
+    </if>
+  </select>
+  <select id="selectCount" resultType="int">
+    select count(*)
+    from t_class_verify
+    where is_delete = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_class_verify
+    where class_series_id = #{classSeriesId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.ClassSeriesVerify">
+    insert into t_class_verify (class_series_id, apply_name, telephone, 
+      apply_state, is_delete, create_by, 
+      create_at)
+    values (#{classSeriesId,jdbcType=INTEGER}, #{applyName,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{applyState,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, 
+      #{createAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.ClassSeriesVerify">
+    insert into t_class_verify
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="classSeriesId != null">
+        class_series_id,
+      </if>
+      <if test="applyName != null">
+        apply_name,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="applyState != null">
+        apply_state,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="classSeriesId != null">
+        #{classSeriesId,jdbcType=INTEGER},
+      </if>
+      <if test="applyName != null">
+        #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="applyState != null">
+        #{applyState,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.ClassSeriesVerify">
+    update t_class_verify
+    <set>
+      <if test="applyName != null">
+        apply_name = #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="applyState != null">
+        apply_state = #{applyState,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where class_series_id = #{classSeriesId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.ClassSeriesVerify">
+    update t_class_verify
+    set apply_name = #{applyName,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      apply_state = #{applyState,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where class_series_id = #{classSeriesId,jdbcType=INTEGER}
+  </update>
+</mapper>

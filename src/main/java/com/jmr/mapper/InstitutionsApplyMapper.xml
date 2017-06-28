@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jmr.IDao.InstitutionsApplyMapper">
+  <resultMap id="BaseResultMap" type="com.jmr.model.InstitutionsApply">
+    <id column="apply_email" jdbcType="VARCHAR" property="applyEmail" />
+    <result column="apply_name" jdbcType="VARCHAR" property="applyName" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    apply_email, apply_name, telephone, is_delete, create_by, create_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_institutions_apply
+    where apply_email = #{applyEmail,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_institutions_apply
+    where apply_email = #{applyEmail,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.InstitutionsApply">
+    insert into t_institutions_apply (apply_email, apply_name, telephone, 
+      is_delete, create_by, create_at
+      )
+    values (#{applyEmail,jdbcType=VARCHAR}, #{applyName,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.InstitutionsApply">
+    insert into t_institutions_apply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="applyEmail != null">
+        apply_email,
+      </if>
+      <if test="applyName != null">
+        apply_name,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="applyEmail != null">
+        #{applyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="applyName != null">
+        #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.InstitutionsApply">
+    update t_institutions_apply
+    <set>
+      <if test="applyName != null">
+        apply_name = #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where apply_email = #{applyEmail,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.InstitutionsApply">
+    update t_institutions_apply
+    set apply_name = #{applyName,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where apply_email = #{applyEmail,jdbcType=VARCHAR}
+  </update>
+</mapper>

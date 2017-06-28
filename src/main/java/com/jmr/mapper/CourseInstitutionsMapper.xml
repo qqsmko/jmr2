@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jmr.IDao.CourseInstitutionsMapper">
+  <resultMap id="BaseResultMap" type="com.jmr.model.CourseInstitutions">
+    <id column="institutions_id" jdbcType="INTEGER" property="institutionsId" />
+    <id column="course_id" jdbcType="INTEGER" property="courseId" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    institutions_id, course_id, is_delete, create_by, create_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.jmr.model.CourseInstitutionsKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_course_institutions
+    where institutions_id = #{institutionsId,jdbcType=INTEGER}
+      and course_id = #{courseId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPage" parameterType="int" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_course_institutions
+    where is_delete = 0
+    <if test="start!=null and length!=null">
+    	limit #{length} offset #{start}
+    </if>
+  </select>
+  <select id="selectCount" resultType="int">
+    select count(*)
+    from t_course_institutions
+    where is_delete = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.jmr.model.CourseInstitutionsKey">
+    delete from t_course_institutions
+    where institutions_id = #{institutionsId,jdbcType=INTEGER}
+      and course_id = #{courseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.CourseInstitutions">
+    insert into t_course_institutions (institutions_id, course_id, is_delete, 
+      create_by, create_at)
+    values (#{institutionsId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.CourseInstitutions">
+    insert into t_course_institutions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="institutionsId != null">
+        institutions_id,
+      </if>
+      <if test="courseId != null">
+        course_id,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="institutionsId != null">
+        #{institutionsId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.CourseInstitutions">
+    update t_course_institutions
+    <set>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where institutions_id = #{institutionsId,jdbcType=INTEGER}
+      and course_id = #{courseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.CourseInstitutions">
+    update t_course_institutions
+    set is_delete = #{isDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where institutions_id = #{institutionsId,jdbcType=INTEGER}
+      and course_id = #{courseId,jdbcType=INTEGER}
+  </update>
+</mapper>

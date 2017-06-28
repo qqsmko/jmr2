@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jmr.IDao.DeviceInstitutionsMapper">
+  <resultMap id="BaseResultMap" type="com.jmr.model.DeviceInstitutions">
+    <id column="device_id" jdbcType="INTEGER" property="deviceId" />
+    <id column="institutions_id" jdbcType="INTEGER" property="institutionsId" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    device_id, institutions_id, is_delete, create_by, create_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.jmr.model.DeviceInstitutionsKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_device_institutions
+    where device_id = #{deviceId,jdbcType=INTEGER}
+      and institutions_id = #{institutionsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.jmr.model.DeviceInstitutionsKey">
+    delete from t_device_institutions
+    where device_id = #{deviceId,jdbcType=INTEGER}
+      and institutions_id = #{institutionsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.DeviceInstitutions">
+    insert into t_device_institutions (device_id, institutions_id, is_delete, 
+      create_by, create_at)
+    values (#{deviceId,jdbcType=INTEGER}, #{institutionsId,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.DeviceInstitutions">
+    insert into t_device_institutions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="institutionsId != null">
+        institutions_id,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=INTEGER},
+      </if>
+      <if test="institutionsId != null">
+        #{institutionsId,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.DeviceInstitutions">
+    update t_device_institutions
+    <set>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where device_id = #{deviceId,jdbcType=INTEGER}
+      and institutions_id = #{institutionsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.DeviceInstitutions">
+    update t_device_institutions
+    set is_delete = #{isDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where device_id = #{deviceId,jdbcType=INTEGER}
+      and institutions_id = #{institutionsId,jdbcType=INTEGER}
+  </update>
+</mapper>

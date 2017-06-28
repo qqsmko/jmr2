@@ -1,0 +1,158 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+
+<!DOCTYPE HTML>
+<html>
+
+	<jsp:include page="head_.jsp">
+		<jsp:param name="title_name" value="荆门市就业创业培训管理系统" />
+	</jsp:include>
+
+<body>
+
+
+	<c:if test='${type=="teacher"}'>
+		<jsp:include page="nav_teacher.jsp">
+			<jsp:param name="nav_name" value="荆门市就业创业培训管理系统" />
+			<jsp:param name="nav_version" value="V0.9" />
+			<jsp:param name="nav_type" value="机构负责人" />
+			<jsp:param name="nav_id" value="teacher" />
+		</jsp:include>
+		<c:if test='${nav=="page1"}'>
+			<jsp:include page="left_teacher.jsp" />
+		</c:if>
+		<c:if test='${nav=="page2"}'>
+			<jsp:include page="left_setting.jsp" />
+		</c:if>
+	</c:if>
+	<c:if test='${type=="root"}'>
+		<jsp:include page="nav_.jsp">
+			<jsp:param name="nav_name" value="荆门市就业创业培训管理系统" />
+			<jsp:param name="nav_version" value="V0.9" />
+			<jsp:param name="nav_type" value="超级管理员" />  
+			<jsp:param name="nav_id" value="root" />
+		</jsp:include>
+		<c:if test='${nav=="page1"}'>
+			<jsp:include page="left_teacher.jsp" />
+		</c:if>
+		<c:if test='${nav=="page2"}'>
+			<jsp:include page="left_admin.jsp" />
+		</c:if>
+		<c:if test='${nav=="page3"}'>
+			<jsp:include page="left_setting.jsp" />
+		</c:if>
+	</c:if>
+	<c:if test='${type=="admin"}'>
+		<jsp:include page="nav_admin.jsp">
+			<jsp:param name="nav_name" value="荆门市就业创业培训管理系统" />
+			<jsp:param name="nav_version" value="V0.9" />
+			<jsp:param name="nav_type" value="就业局管理员" />
+			<jsp:param name="nav_id" value="admin" />
+		</jsp:include>
+		<c:if test='${nav=="page1"}'>
+			<jsp:include page="left_admin.jsp" />
+		</c:if>
+		<c:if test='${nav=="page2"}'>
+			<jsp:include page="left_setting.jsp" />
+		</c:if>
+	</c:if>
+
+	<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+	<section class="Hui-article-box">
+		<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
+			<div class="Hui-tabNav-wp">
+				<ul id="min_title_list" class="acrossTab cl">
+					<li class="active">
+						<span title="我的桌面" data-href="welcome.html">我的桌面</span>
+						<em></em></li>
+			</ul>
+		</div>
+			<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
+	</div>
+		<div id="iframe_box" class="Hui-article">
+			<div class="show_iframe">
+				<div style="display:none" class="loading"></div>
+				<iframe scrolling="yes" frameborder="0" src="welcome.html"></iframe>
+		</div>
+	</div>
+	</section>
+
+
+	<div class="contextMenu" id="Huiadminmenu">
+		<ul>
+			<li id="closethis">关闭当前 </li>
+			<li id="closeall">关闭全部 </li>
+	</ul>
+	</div>
+
+<jsp:include page="foot_.jsp" />
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
+<script type="text/javascript">
+$(function(){
+	/*$("#min_title_list li").contextMenu('Huiadminmenu', {
+		bindings: {
+			'closethis': function(t) {
+				console.log(t);
+				if(t.find("i")){
+					t.find("i").trigger("click");
+				}		
+			},
+			'closeall': function(t) {
+				alert('Trigger was '+t.id+'\nAction was Email');
+			},
+		}
+	});*/
+});
+/*个人信息*/
+function myselfinfo(){
+	layer.open({
+		type: 1,
+		area: ['300px','200px'],
+		fix: false, //不固定
+		maxmin: true,
+		shade:0.4,
+		title: '查看信息',
+		content: '<div>管理员信息</div>'
+	});
+}
+
+/*资讯-添加*/
+function article_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*图片-添加*/
+function picture_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*产品-添加*/
+function product_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*用户-添加*/
+function member_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jmr.IDao.HanvondeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.jmr.model.Hanvondevice" >
+    <id column="sn" property="sn" jdbcType="VARCHAR" />
+    <result column="institut_hao" property="institutHao" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="subnetmask" property="subnetmask" jdbcType="VARCHAR" />
+    <result column="gateip" property="gateip" jdbcType="VARCHAR" />
+    <result column="class_id" property="classId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sn, institut_hao, ip, subnetmask, gateip, class_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from hanvon_dev
+    where sn = #{sn,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from hanvon_dev
+    where sn = #{sn,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jmr.model.Hanvondevice" >
+    insert into hanvon_dev (sn, institut_hao, ip, 
+      subnetmask, gateip, class_id
+      )
+    values (#{sn,jdbcType=VARCHAR}, #{institutHao,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{subnetmask,jdbcType=VARCHAR}, #{gateip,jdbcType=VARCHAR}, #{classId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jmr.model.Hanvondevice" >
+    insert into hanvon_dev
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sn != null" >
+        sn,
+      </if>
+      <if test="institutHao != null" >
+        institut_hao,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="subnetmask != null" >
+        subnetmask,
+      </if>
+      <if test="gateip != null" >
+        gateip,
+      </if>
+      <if test="classId != null" >
+        class_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sn != null" >
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="institutHao != null" >
+        #{institutHao,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="subnetmask != null" >
+        #{subnetmask,jdbcType=VARCHAR},
+      </if>
+      <if test="gateip != null" >
+        #{gateip,jdbcType=VARCHAR},
+      </if>
+      <if test="classId != null" >
+        #{classId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.Hanvondevice" >
+    update hanvon_dev
+    <set >
+      <if test="institutHao != null" >
+        institut_hao = #{institutHao,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="subnetmask != null" >
+        subnetmask = #{subnetmask,jdbcType=VARCHAR},
+      </if>
+      <if test="gateip != null" >
+        gateip = #{gateip,jdbcType=VARCHAR},
+      </if>
+      <if test="classId != null" >
+        class_id = #{classId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sn = #{sn,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jmr.model.Hanvondevice" >
+    update hanvon_dev
+    set institut_hao = #{institutHao,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      subnetmask = #{subnetmask,jdbcType=VARCHAR},
+      gateip = #{gateip,jdbcType=VARCHAR},
+      class_id = #{classId,jdbcType=VARCHAR}
+    where sn = #{sn,jdbcType=VARCHAR}
+  </update>
+  
+   <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,
+    (SELECT institutions_name FROM t_institutions where institutions_id=d.institut_hao::int) aaa
+    from hanvon_dev d
+  </select>
+</mapper>
