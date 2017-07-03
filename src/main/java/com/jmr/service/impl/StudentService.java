@@ -43,15 +43,27 @@ public class StudentService implements IStudentService{
     	return ansMap;
 	}
 
-	public Map<String,Object> getStudentData(int draw,int start,int length){
-		int totalNum = studentInfoMapper.selectCount();
-		List<Map<String,Object>> data = studentInfoMapper.selectByPageSQL(start, length);
-		Map<String,Object> ansMap = new HashMap<String,Object>();
-    	ansMap.put("draw",draw);
-    	ansMap.put("recordsTotal",totalNum);
-		ansMap.put("recordsFiltered",totalNum);
-		ansMap.put("data",data);
-    	return ansMap;
+	public Map<String,Object> getStudentData(int draw,int start,int length,String search){
+		if(search==""){
+			int totalNum = studentInfoMapper.selectCount();
+			List<Map<String,Object>> data = studentInfoMapper.selectByPageSQL(start, length);
+			Map<String,Object> ansMap = new HashMap<String,Object>();
+	    	ansMap.put("draw",draw);
+	    	ansMap.put("recordsTotal",totalNum);
+			ansMap.put("recordsFiltered",totalNum);
+			ansMap.put("data",data);
+	    	return ansMap;
+		}else{
+			int totalNum = studentInfoMapper.selectCount();
+			int totalFiltered = studentInfoMapper.selectFilteredCount(search);
+			List<Map<String,Object>> data = studentInfoMapper.selectByPageWithName(start, length, "%"+search+"%");
+			Map<String,Object> ansMap = new HashMap<String,Object>();
+			ansMap.put("draw",draw);
+	    	ansMap.put("recordsTotal",totalNum);
+			ansMap.put("recordsFiltered",totalFiltered);
+			ansMap.put("data",data);
+	    	return ansMap;
+		}
 	}
 	
 	

@@ -10,7 +10,7 @@ public interface IStudentService {
 
 	/*get*/
 	Map<String,Object> getIdCardData(int draw,int start,int length);
-	Map<String,Object> getStudentData(int draw,int start,int length);
+	Map<String,Object> getStudentData(int draw,int start,int length,String search);
 	
 	/*insert*/
 	Map<String,Object> InsertStudent(Map<String,Object> json);

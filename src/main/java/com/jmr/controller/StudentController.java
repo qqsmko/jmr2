@@ -62,8 +62,8 @@ public class StudentController {
 	
 	@RequestMapping(value="student-list/data-source",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> doListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length){
-		return studentService.getStudentData(draw, start, length);
+	public Map<String,Object> doListDataSourcePOST(@RequestParam int draw,@RequestParam int start,@RequestParam int length,@RequestParam(value="search[value]") String search){
+		return studentService.getStudentData(draw, start, length,search);
 	}
 	
 	@RequestMapping(value="student-add",method=RequestMethod.GET)

@@ -27,43 +27,102 @@
   </select>
   <select id="selectByPageSQL" parameterType="int" resultType="java.util.HashMap">
 	SELECT
-		t_student_info.student_id,avatar_img,fingerprint_img,card_name,gender,t_student.telephone,email,nation,birthday,education,insured_state
+		t_student_info.student_id,avatar_img,fingerprint_img,card_name,gender,t_student.telephone,email,nation,birthday,education,insured_state,t_class.class_id,t_class_institutions.institutions_id,institutions_name
 	FROM
 		t_student_info
 	LEFT JOIN t_student ON t_student_info.student_id = t_student.student_id
 	LEFT JOIN t_idcard ON t_student_info.card_id = t_idcard.card_id
 	LEFT JOIN t_avatar ON t_student_info.avatar_id = t_avatar.avatar_id
 	LEFT JOIN t_fingerprint ON t_student_info.fingerprint_id = t_fingerprint.fingerprint_id
+	LEFT JOIN t_class_student ON t_class_student.student_id = t_student.student_id
+	LEFT JOIN t_class ON t_class.class_id = t_class_student.class_id
+	LEFT JOIN t_class_institutions ON t_class_institutions.class_id = t_class.class_id
+	LEFT JOIN t_institutions ON t_institutions.institutions_id = t_class_institutions.institutions_id
 	WHERE
 		t_student_info.is_delete = 0
 	and t_student.is_delete = 0
 	and t_idcard.is_delete = 0
+	and t_avatar.is_delete = 0
+	and t_fingerprint.is_delete = 0
+	and t_institutions.is_delete = 0 
 	<if test="start!=null and length!=null">
     	limit #{length} offset #{start}
     </if>
    </select>
    <select id="selectByPage" parameterType="int" resultType="java.util.HashMap">
 	SELECT
-		t_student_info.student_id,avatar_img,fingerprint_img,card_name,gender,t_student.telephone,email,nation,birthday,education,insured_state
+		t_student_info.student_id,avatar_img,fingerprint_img,card_name,gender,t_student.telephone,email,nation,birthday,education,insured_state,t_class.class_id,t_class_institutions.institutions_id,institutions_name
 	FROM
 		t_student_info
 	LEFT JOIN t_student ON t_student_info.student_id = t_student.student_id
 	LEFT JOIN t_idcard ON t_student_info.card_id = t_idcard.card_id
 	LEFT JOIN t_avatar ON t_student_info.avatar_id = t_avatar.avatar_id
 	LEFT JOIN t_fingerprint ON t_student_info.fingerprint_id = t_fingerprint.fingerprint_id
-	LEFT JOIN t_
+	LEFT JOIN t_class_student ON t_class_student.student_id = t_student.student_id
+	LEFT JOIN t_class ON t_class.class_id = t_class_student.class_id
+	LEFT JOIN t_class_institutions ON t_class_institutions.class_id = t_class.class_id
+	LEFT JOIN t_institutions ON t_institutions.institutions_id = t_class_institutions.institutions_id
 	WHERE
 		t_student_info.is_delete = 0
 	and t_student.is_delete = 0
 	and t_idcard.is_delete = 0
+	and t_avatar.is_delete = 0
+	and t_fingerprint.is_delete = 0
+	and t_institutions.is_delete = 0 
+	<if test="start!=null and length!=null">
+    	limit #{length} offset #{start}
+    </if>
+   </select>
+   <select id="selectByPageWithName" parameterType="int" resultType="java.util.HashMap">
+	SELECT
+		t_student_info.student_id,avatar_img,fingerprint_img,card_name,gender,t_student.telephone,email,nation,birthday,education,insured_state,t_class.class_id,t_class_institutions.institutions_id,institutions_name
+	FROM
+		t_student_info
+	LEFT JOIN t_student ON t_student_info.student_id = t_student.student_id
+	LEFT JOIN t_idcard ON t_student_info.card_id = t_idcard.card_id
+	LEFT JOIN t_avatar ON t_student_info.avatar_id = t_avatar.avatar_id
+	LEFT JOIN t_fingerprint ON t_student_info.fingerprint_id = t_fingerprint.fingerprint_id
+	LEFT JOIN t_class_student ON t_class_student.student_id = t_student.student_id
+	LEFT JOIN t_class ON t_class.class_id = t_class_student.class_id
+	LEFT JOIN t_class_institutions ON t_class_institutions.class_id = t_class.class_id
+	LEFT JOIN t_institutions ON t_institutions.institutions_id = t_class_institutions.institutions_id
+	WHERE
+		t_student_info.is_delete = 0
+	and t_student.is_delete = 0
+	and t_idcard.is_delete = 0
+	and t_avatar.is_delete = 0
+	and t_fingerprint.is_delete = 0
+	and t_institutions.is_delete = 0
+	and t_institutions.institutions_name like #{search}
 	<if test="start!=null and length!=null">
     	limit #{length} offset #{start}
     </if>
    </select>
   <select id="selectCount" resultType="int">
     select count(*)
-    from t_class
+    from t_student
     where is_delete = 0
+  </select>
+  <select id="selectFilteredCount" parameterType="String" resultType="int">
+    select count(*)
+    FROM
+		t_student_info
+	LEFT JOIN t_student ON t_student_info.student_id = t_student.student_id
+	LEFT JOIN t_idcard ON t_student_info.card_id = t_idcard.card_id
+	LEFT JOIN t_avatar ON t_student_info.avatar_id = t_avatar.avatar_id
+	LEFT JOIN t_fingerprint ON t_student_info.fingerprint_id = t_fingerprint.fingerprint_id
+	LEFT JOIN t_class_student ON t_class_student.student_id = t_student.student_id
+	LEFT JOIN t_class ON t_class.class_id = t_class_student.class_id
+	LEFT JOIN t_class_institutions ON t_class_institutions.class_id = t_class.class_id
+	LEFT JOIN t_institutions ON t_institutions.institutions_id = t_class_institutions.institutions_id
+	WHERE
+		t_student_info.is_delete = 0
+	and t_student.is_delete = 0
+	and t_idcard.is_delete = 0
+	and t_avatar.is_delete = 0
+	and t_fingerprint.is_delete = 0
+	and t_institutions.is_delete = 0
+	and t_institutions.institutions_name like #{search}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.jmr.model.StudentInfoKey">
     delete from t_student_info

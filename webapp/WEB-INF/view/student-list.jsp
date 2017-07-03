@@ -54,6 +54,7 @@
 				<th width="">生日</th>
 				<th width="50">学历</th>
 				<th width="50">参保状态</th>
+				<th width="50">所属机构</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
@@ -76,12 +77,15 @@ $(function(){
 	$('.table-sort').dataTable({
 		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
-		"searching": false,
+		"searching": true,
 		"ordering": false,
 		"serverSide": true,
 		"ajax": {
 			"url":"student-list/data-source",
 			"type":"POST",
+		},
+		"language":{
+			"search":"搜索机构名称"
 		},
 		"columns":[
 			{
@@ -152,6 +156,7 @@ $(function(){
         			}
     			}
 			},
+			{"data":"institutions_name"},
     		{
     			"data":"student_id",
 	        	"render":function(data, type, row, meta) {

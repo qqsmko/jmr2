@@ -19,7 +19,11 @@ public interface StudentInfoMapper {
 
     List<Map<String, Object>> selectByPageSQL(@Param("start")int start,@Param("length")int length);
 
+    List<Map<String, Object>> selectByPageWithName(@Param("start")int start,@Param("length")int length,@Param("search")String search);
+    
     int selectCount();
+    
+    int selectFilteredCount(String search);
     
     int updateByPrimaryKeySelective(StudentInfo record);
 
