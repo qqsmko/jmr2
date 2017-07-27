@@ -10,9 +10,13 @@
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="teachering_book" jdbcType="VARCHAR" property="teacheringBook" />
+    <result column="class_id" jdbcType="INTEGER" property="classId" />
   </resultMap>
   <sql id="Base_Column_List">
-    course_id, course_name, major_name, describe, study_time, is_delete, create_by, create_at
+    course_id, course_name, major_name, describe, study_time, is_delete, create_by, create_at, 
+    teacher_name, teachering_book, class_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -31,7 +35,7 @@
   </select>
   <select id="selectByPageSQL" parameterType="int" resultType="java.util.HashMap">
     select 
-	 t_course.course_id, t_course.course_name, t_course.major_name, t_course.describe, t_course.study_time,t_institutions.institutions_name
+	 t_course.course_id, t_course.course_name, t_course.major_name, t_course.describe, t_course.study_time,t_institutions.institutions_name, t_course.teacher_name, t_course.teachering_book, t_course.class_id
 	from t_course_institutions 
 	 LEFT JOIN t_course ON t_course.course_id = t_course_institutions.course_id
 	 LEFT JOIN t_institutions on t_course_institutions.institutions_id = t_institutions.institutions_id
@@ -43,7 +47,7 @@
   </select>
   <select id="selectByPageWithName" parameterType="String" resultType="java.util.HashMap">
 	select 
-	 t_course.course_id, t_course.course_name, t_course.major_name, t_course.describe, t_course.study_time,t_institutions.institutions_name
+	 t_course.course_id, t_course.course_name, t_course.major_name, t_course.describe, t_course.study_time,t_institutions.institutions_name, t_course.teacher_name, t_course.teachering_book, t_course.class_id
 	from t_course_institutions 
 	 LEFT JOIN t_course ON t_course.course_id = t_course_institutions.course_id
 	 LEFT JOIN t_institutions on t_course_institutions.institutions_id = t_institutions.institutions_id
@@ -78,10 +82,12 @@
   <insert id="insert" parameterType="com.jmr.model.Course">
     insert into t_course (course_id, course_name, major_name, 
       describe, study_time, is_delete, 
-      create_by, create_at)
+      create_by, create_at, teacher_name, 
+      teachering_book)
     values (#{courseId,jdbcType=INTEGER}, #{courseName,jdbcType=VARCHAR}, #{majorName,jdbcType=VARCHAR}, 
       #{describe,jdbcType=VARCHAR}, #{studyTime,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
-      #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP})
+      #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{teacherName,jdbcType=VARCHAR}, 
+      #{teacheringBook,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jmr.model.Course">
   	<selectKey keyProperty="courseId"
@@ -114,6 +120,12 @@
       <if test="createAt != null">
         create_at,
       </if>
+      <if test="teacherName != null">
+        teacher_name,
+      </if>
+      <if test="teacheringBook != null">
+        teachering_book,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="courseId != null">
@@ -139,6 +151,12 @@
       </if>
       <if test="createAt != null">
         #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teacherName != null">
+        #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacheringBook != null">
+        #{teacheringBook,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +184,12 @@
       <if test="createAt != null">
         create_at = #{createAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="teacherName != null">
+        teacher_name = #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacheringBook != null">
+        teachering_book = #{teacheringBook,jdbcType=VARCHAR},
+      </if>
     </set>
     where course_id = #{courseId,jdbcType=INTEGER}
   </update>
@@ -177,7 +201,9 @@
       study_time = #{studyTime,jdbcType=INTEGER},
       is_delete = #{isDelete,jdbcType=INTEGER},
       create_by = #{createBy,jdbcType=VARCHAR},
-      create_at = #{createAt,jdbcType=TIMESTAMP}
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      teacher_name = #{teacherName,jdbcType=VARCHAR},
+      teachering_book = #{teacheringBook,jdbcType=VARCHAR}
     where course_id = #{courseId,jdbcType=INTEGER}
   </update>
 </mapper>

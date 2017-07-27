@@ -33,27 +33,39 @@
 <article class="page-container">
 	<form class="form form-horizontal" id="form-article-add">
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>课程名称：</label>
+			<label class="form-label col-xs-4 col-sm-2">课程名称：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" maxlength="20" class="input-text" value="" placeholder="${course.courseName}" id="courseName" name="courseName">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>所属专业：</label>
+			<label class="form-label col-xs-4 col-sm-2">所属专业：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" maxlength="20" class="input-text" value="" placeholder="${course.majorName}" id="majorName" name="majorName">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>课程描述：</label>
+			<label class="form-label col-xs-4 col-sm-2">课程描述：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" maxlength="50" class="input-text" value="" placeholder="${course.describe}" id="describe" name="describe">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>课程学时：</label>
+			<label class="form-label col-xs-4 col-sm-2">课程学时：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="number" maxlength="20" class="input-text" value="" placeholder="${course.studyTime}" id="studyTime" name="studyTime">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">教师姓名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="${course.teacherName}" id="teacherName" name="teacherName">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">所用教材：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="${course.teacheringBook}" id="teacheringBook" name="teacheringBook">
 			</div>
 		</div>
 		<div class="row cl">
@@ -111,9 +123,6 @@ $(function(){
 	//表单验证
 	$("#form-article-add").validate({
 		rules:{
-			name:{
-				required:true,
-			},
 		},
 		onkeyup:false,
 		focusCleanup:true,

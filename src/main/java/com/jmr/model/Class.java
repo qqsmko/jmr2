@@ -27,6 +27,30 @@ public class Class {
 
     private Date endTime;
 
+    private String hangyeType;
+
+    private String workType;
+
+    private String trainingMode;
+
+    private Integer fee;
+
+    private String isSubsidy;
+
+    private Integer subsidyNumber;
+
+    private String trainingType;
+
+    private String certificate;
+
+    private String trainingLevel;
+
+    private String perfectionStandard;
+
+    private String employmentIntention;
+
+    private String trainingPos;
+
     public Integer getClassId() {
         return classId;
     }
@@ -121,5 +145,101 @@ public class Class {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public String getHangyeType() {
+        return hangyeType;
+    }
+
+    public void setHangyeType(String hangyeType) {
+        this.hangyeType = hangyeType == null ? null : hangyeType.trim();
+    }
+
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType == null ? null : workType.trim();
+    }
+
+    public String getTrainingMode() {
+        return trainingMode;
+    }
+
+    public void setTrainingMode(String trainingMode) {
+        this.trainingMode = trainingMode == null ? null : trainingMode.trim();
+    }
+
+    public Integer getFee() {
+        return fee;
+    }
+
+    public void setFee(Integer fee) {
+        this.fee = fee;
+    }
+
+    public String getIsSubsidy() {
+        return isSubsidy;
+    }
+
+    public void setIsSubsidy(String isSubsidy) {
+        this.isSubsidy = isSubsidy == null ? null : isSubsidy.trim();
+    }
+
+    public Integer getSubsidyNumber() {
+        return subsidyNumber;
+    }
+
+    public void setSubsidyNumber(Integer subsidyNumber) {
+        this.subsidyNumber = subsidyNumber;
+    }
+
+    public String getTrainingType() {
+        return trainingType;
+    }
+
+    public void setTrainingType(String trainingType) {
+        this.trainingType = trainingType == null ? null : trainingType.trim();
+    }
+
+    public String getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(String certificate) {
+        this.certificate = certificate == null ? null : certificate.trim();
+    }
+
+    public String getTrainingLevel() {
+        return trainingLevel;
+    }
+
+    public void setTrainingLevel(String trainingLevel) {
+        this.trainingLevel = trainingLevel == null ? null : trainingLevel.trim();
+    }
+
+    public String getPerfectionStandard() {
+        return perfectionStandard;
+    }
+
+    public void setPerfectionStandard(String perfectionStandard) {
+        this.perfectionStandard = perfectionStandard == null ? null : perfectionStandard.trim();
+    }
+
+    public String getEmploymentIntention() {
+        return employmentIntention;
+    }
+
+    public void setEmploymentIntention(String employmentIntention) {
+        this.employmentIntention = employmentIntention == null ? null : employmentIntention.trim();
+    }
+
+    public String getTrainingPos() {
+        return trainingPos;
+    }
+
+    public void setTrainingPos(String trainingPos) {
+        this.trainingPos = trainingPos == null ? null : trainingPos.trim();
     }
 }

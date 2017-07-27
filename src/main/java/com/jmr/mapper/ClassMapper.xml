@@ -14,10 +14,24 @@
     <result column="institutions_id" jdbcType="INTEGER" property="institutionsId" />
     <result column="start_time" jdbcType="DATE" property="startTime" />
     <result column="end_time" jdbcType="DATE" property="endTime" />
+    <result column="hangye_type" jdbcType="VARCHAR" property="hangyeType" />
+    <result column="work_type" jdbcType="VARCHAR" property="workType" />
+    <result column="training_mode" jdbcType="VARCHAR" property="trainingMode" />
+    <result column="fee" jdbcType="INTEGER" property="fee" />
+    <result column="is_subsidy" jdbcType="VARCHAR" property="isSubsidy" />
+    <result column="subsidy_number" jdbcType="INTEGER" property="subsidyNumber" />
+    <result column="training_type" jdbcType="VARCHAR" property="trainingType" />
+    <result column="certificate" jdbcType="VARCHAR" property="certificate" />
+    <result column="training_level" jdbcType="VARCHAR" property="trainingLevel" />
+    <result column="perfection_standard" jdbcType="VARCHAR" property="perfectionStandard" />
+    <result column="employment_intention" jdbcType="VARCHAR" property="employmentIntention" />
+    <result column="training_pos" jdbcType="VARCHAR" property="trainingPos" />
   </resultMap>
   <sql id="Base_Column_List">
     class_id, class_name, student_count, state, responsible, telephone, is_delete, create_by, 
-    create_at, start_time, end_time
+    create_at, institutions_id, start_time, end_time, hangye_type, work_type, training_mode, 
+    fee, is_subsidy, subsidy_number, training_type, certificate, training_level, perfection_standard, 
+    employment_intention, training_pos
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -99,18 +113,26 @@
     insert into t_class (class_id, class_name, student_count, 
       state, responsible, telephone, 
       is_delete, create_by, create_at, 
-      institutions_id, start_time, end_time
-      )
+      institutions_id, start_time, end_time, 
+      hangye_type, work_type, training_mode, 
+      fee, is_subsidy, subsidy_number, 
+      training_type, certificate, training_level, 
+      perfection_standard, employment_intention, 
+      training_pos)
     values (#{classId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{studentCount,jdbcType=INTEGER}, 
       #{state,jdbcType=INTEGER}, #{responsible,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
       #{isDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, 
-      #{institutionsId,jdbcType=INTEGER}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}
-      )
+      #{institutionsId,jdbcType=INTEGER}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, 
+      #{hangyeType,jdbcType=VARCHAR}, #{workType,jdbcType=VARCHAR}, #{trainingMode,jdbcType=VARCHAR}, 
+      #{fee,jdbcType=INTEGER}, #{isSubsidy,jdbcType=VARCHAR}, #{subsidyNumber,jdbcType=INTEGER}, 
+      #{trainingType,jdbcType=VARCHAR}, #{certificate,jdbcType=VARCHAR}, #{trainingLevel,jdbcType=VARCHAR}, 
+      #{perfectionStandard,jdbcType=VARCHAR}, #{employmentIntention,jdbcType=VARCHAR}, 
+      #{trainingPos,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jmr.model.Class">
-  	<selectKey keyProperty="classId"
+    <selectKey keyProperty="classId"
         resultType="java.lang.Integer" order="BEFORE">
-    	SELECT nextval('temp_123_seq'::regclass)
+      SELECT nextval('temp_123_seq'::regclass)
     </selectKey> 
     insert into t_class
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -150,6 +172,42 @@
       <if test="endTime != null">
         end_time,
       </if>
+      <if test="hangyeType != null">
+        hangye_type,
+      </if>
+      <if test="workType != null">
+        work_type,
+      </if>
+      <if test="trainingMode != null">
+        training_mode,
+      </if>
+      <if test="fee != null">
+        fee,
+      </if>
+      <if test="isSubsidy != null">
+        is_subsidy,
+      </if>
+      <if test="subsidyNumber != null">
+        subsidy_number,
+      </if>
+      <if test="trainingType != null">
+        training_type,
+      </if>
+      <if test="certificate != null">
+        certificate,
+      </if>
+      <if test="trainingLevel != null">
+        training_level,
+      </if>
+      <if test="perfectionStandard != null">
+        perfection_standard,
+      </if>
+      <if test="employmentIntention != null">
+        employment_intention,
+      </if>
+      <if test="trainingPos != null">
+        training_pos,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="classId != null">
@@ -187,6 +245,42 @@
       </if>
       <if test="endTime != null">
         #{endTime,jdbcType=DATE},
+      </if>
+      <if test="hangyeType != null">
+        #{hangyeType,jdbcType=VARCHAR},
+      </if>
+      <if test="workType != null">
+        #{workType,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingMode != null">
+        #{trainingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null">
+        #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="isSubsidy != null">
+        #{isSubsidy,jdbcType=VARCHAR},
+      </if>
+      <if test="subsidyNumber != null">
+        #{subsidyNumber,jdbcType=INTEGER},
+      </if>
+      <if test="trainingType != null">
+        #{trainingType,jdbcType=VARCHAR},
+      </if>
+      <if test="certificate != null">
+        #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingLevel != null">
+        #{trainingLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="perfectionStandard != null">
+        #{perfectionStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="employmentIntention != null">
+        #{employmentIntention,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingPos != null">
+        #{trainingPos,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -226,6 +320,42 @@
       <if test="endTime != null">
         end_time = #{endTime,jdbcType=DATE},
       </if>
+      <if test="hangyeType != null">
+        hangye_type = #{hangyeType,jdbcType=VARCHAR},
+      </if>
+      <if test="workType != null">
+        work_type = #{workType,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingMode != null">
+        training_mode = #{trainingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null">
+        fee = #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="isSubsidy != null">
+        is_subsidy = #{isSubsidy,jdbcType=VARCHAR},
+      </if>
+      <if test="subsidyNumber != null">
+        subsidy_number = #{subsidyNumber,jdbcType=INTEGER},
+      </if>
+      <if test="trainingType != null">
+        training_type = #{trainingType,jdbcType=VARCHAR},
+      </if>
+      <if test="certificate != null">
+        certificate = #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingLevel != null">
+        training_level = #{trainingLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="perfectionStandard != null">
+        perfection_standard = #{perfectionStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="employmentIntention != null">
+        employment_intention = #{employmentIntention,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingPos != null">
+        training_pos = #{trainingPos,jdbcType=VARCHAR},
+      </if>
     </set>
     where class_id = #{classId,jdbcType=INTEGER}
   </update>
@@ -241,7 +371,19 @@
       create_at = #{createAt,jdbcType=TIMESTAMP},
       institutions_id = #{institutionsId,jdbcType=INTEGER},
       start_time = #{startTime,jdbcType=DATE},
-      end_time = #{endTime,jdbcType=DATE}
+      end_time = #{endTime,jdbcType=DATE},
+      hangye_type = #{hangyeType,jdbcType=VARCHAR},
+      work_type = #{workType,jdbcType=VARCHAR},
+      training_mode = #{trainingMode,jdbcType=VARCHAR},
+      fee = #{fee,jdbcType=INTEGER},
+      is_subsidy = #{isSubsidy,jdbcType=VARCHAR},
+      subsidy_number = #{subsidyNumber,jdbcType=INTEGER},
+      training_type = #{trainingType,jdbcType=VARCHAR},
+      certificate = #{certificate,jdbcType=VARCHAR},
+      training_level = #{trainingLevel,jdbcType=VARCHAR},
+      perfection_standard = #{perfectionStandard,jdbcType=VARCHAR},
+      employment_intention = #{employmentIntention,jdbcType=VARCHAR},
+      training_pos = #{trainingPos,jdbcType=VARCHAR}
     where class_id = #{classId,jdbcType=INTEGER}
   </update>
 </mapper>

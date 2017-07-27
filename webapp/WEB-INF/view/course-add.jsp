@@ -55,9 +55,21 @@
 			</div>
 		</div>
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>教师姓名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="teacherName" name="teacherName">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>所用教材：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="teacheringBook" name="teacheringBook">
+			</div>
+		</div>
+		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
 				<button onClick="article_save_submit();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 提交</button>
-				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+				<!-- <button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button> -->
 			</div>
 		</div>
 	</form>
@@ -109,7 +121,25 @@ $(function(){
 	//表单验证
 	$("#form-article-add").validate({
 		rules:{
-			name:{
+			courseName:{
+				required:true,
+			},
+			majorName:{
+				required:true,
+			},
+			describe:{
+				required:true,
+			},
+			studyTime:{
+				required:true,
+			},
+			studyTime:{
+				required:true,
+			},
+			teacherName:{
+				required:true,
+			},
+			teacheringBook:{
 				required:true,
 			},
 		},

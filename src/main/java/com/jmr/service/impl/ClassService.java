@@ -127,6 +127,11 @@ public class ClassService implements IClassService {
     	return ansMap;
 	}
 	
+	public Class getClassesShow(int id){
+		Map<String,Object> ansMap = new HashMap<String,Object>();
+		return classMapper.selectByPrimaryKey(id);
+	}
+	
 	public Map<String,Object> getClassesDataTest(int draw,int start,int length,String search){
 		if(search==""){
 			int totalNum = classMapper.selectCount();
@@ -215,6 +220,7 @@ public class ClassService implements IClassService {
 	
 	public Map<String,Object> insertCourse(Course course){
 		Map<String,Object> ansMap = new HashMap<String,Object>();
+		//System.out.println(course.getTeacherName());
 		course.setIsDelete(0);
 		course.setCreateBy("test"); //TODO:cookie
 		course.setCreateAt(new Date());

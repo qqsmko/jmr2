@@ -1,4 +1,4 @@
-package com.jmr.model;
+    package com.jmr.model;
 
 public class StudentInfoKey {
     private Integer studentId;

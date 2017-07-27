@@ -1,16 +1,15 @@
 package com.jmr.service;
 
-import java.util.List;
 import java.util.Map;
 
-import com.jmr.model.Student;
-import com.jmr.model.Teacher;
+import com.jmr.model.StudentInfo;
 
 public interface IStudentService {
 
 	/*get*/
 	Map<String,Object> getIdCardData(int draw,int start,int length);
 	Map<String,Object> getStudentData(int draw,int start,int length,String search);
+	StudentInfo getStudentById(int id);
 	
 	/*insert*/
 	Map<String,Object> InsertStudent(Map<String,Object> json);

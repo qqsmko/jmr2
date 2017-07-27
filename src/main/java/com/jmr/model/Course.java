@@ -19,6 +19,12 @@ public class Course {
 
     private Date createAt;
 
+    private String teacherName;
+
+    private String teacheringBook;
+
+    private Integer classId;
+
     public Integer getCourseId() {
         return courseId;
     }
@@ -81,5 +87,29 @@ public class Course {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName == null ? null : teacherName.trim();
+    }
+
+    public String getTeacheringBook() {
+        return teacheringBook;
+    }
+
+    public void setTeacheringBook(String teacheringBook) {
+        this.teacheringBook = teacheringBook == null ? null : teacheringBook.trim();
+    }
+
+    public Integer getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Integer classId) {
+        this.classId = classId;
     }
 }

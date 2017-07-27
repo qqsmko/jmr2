@@ -42,7 +42,7 @@
 				<th width="80">班级人数</th>
 				<th width="80">开始时间</th>
 				<th width="80">结束时间</th>
-				<th width="80">本班学生详情</th>
+<!-- 				<th width="80">本班学生详情</th> -->
 				<th width="100">操作</th>
 			</tr>
 		</thead>
@@ -107,15 +107,15 @@ $(function(){
 	        {"data":"student_count"},
 	        {"data":"start_time"},
 	        {"data":"end_time"},
-	        {
-	        	"render":function(data, type, row, meta) {
-        			return '点击查看'
-    			}
-    		},
+	     //    {
+	     //    	"render":function(data, type, row, meta) {
+      //   			return '点击查看'
+    		// 	}
+    		// },
     		{
     			"data":"class_id",
 	        	"render":function(data, type, row, meta) {
-        			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'class-update?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
+        			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'class-update?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a><a title="详情" href="javascript:;" onclick="member_show(\'详情\',\'class-show?id='+data+'\',0,1000,600)" class="ml-5" style="text-decoration:none">详情</a>'
     			}
     		}
     	]

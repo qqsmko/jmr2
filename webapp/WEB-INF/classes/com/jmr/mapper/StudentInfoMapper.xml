@@ -3,7 +3,7 @@
 <mapper namespace="com.jmr.IDao.StudentInfoMapper">
   <resultMap id="BaseResultMap" type="com.jmr.model.StudentInfo">
     <id column="student_id" jdbcType="INTEGER" property="studentId" />
-    <id column="card_id" jdbcType="INTEGER" property="cardId" />
+    <id column="card_id" jdbcType="VARCHAR" property="cardId" />
     <id column="fingerprint_id" jdbcType="INTEGER" property="fingerprintId" />
     <id column="avatar_id" jdbcType="INTEGER" property="avatarId" />
     <result column="responsible" jdbcType="VARCHAR" property="responsible" />
@@ -11,19 +11,56 @@
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+    <result column="account_back" jdbcType="VARCHAR" property="accountBack" />
+    <result column="account_number" jdbcType="VARCHAR" property="accountNumber" />
+    <result column="people_type" jdbcType="INTEGER" property="peopleType" />
+    <result column="tuition" jdbcType="INTEGER" property="tuition" />
+    <result column="subsidy" jdbcType="INTEGER" property="subsidy" />
+    <result column="subsidy_type" jdbcType="INTEGER" property="subsidyType" />
+    <result column="is_refund" jdbcType="INTEGER" property="isRefund" />
+    <result column="residence_type" jdbcType="INTEGER" property="residenceType" />
+    <result column="residence" jdbcType="INTEGER" property="residence" />
+    <result column="is_discontinue" jdbcType="INTEGER" property="isDiscontinue" />
+    <result column="discontinue_date" jdbcType="INTEGER" property="discontinueDate" />
+    <result column="has_certificate" jdbcType="INTEGER" property="hasCertificate" />
+    <result column="certificate_level" jdbcType="INTEGER" property="certificateLevel" />
+    <result column="certificate_name" jdbcType="VARCHAR" property="certificateName" />
+    <result column="has_training_vouchers" jdbcType="INTEGER" property="hasTrainingVouchers" />
+    <result column="training_vouchers_number" jdbcType="VARCHAR" property="trainingVouchersNumber" />
+    <result column="is_new_employees" jdbcType="INTEGER" property="isNewEmployees" />
+    <result column="contract_period" jdbcType="INTEGER" property="contractPeriod" />
+    <result column="people_name" jdbcType="VARCHAR" property="peopleName" />
+    <result column="absent_days" jdbcType="INTEGER" property="absentDays" />
+    <result column="theoretical_mark" jdbcType="INTEGER" property="theoreticalMark" />
+    <result column="practical_mark" jdbcType="INTEGER" property="practicalMark" />
+    <result column="certificate_number" jdbcType="INTEGER" property="certificateNumber" />
+    <result column="fee" jdbcType="INTEGER" property="fee" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="has_subsidy" jdbcType="INTEGER" property="hasSubsidy" />
+    <result column="is_ok" jdbcType="INTEGER" property="isOk" />
+    <result column="is_appraisal" jdbcType="INTEGER" property="isAppraisal" />
+    <result column="appraisal_type" jdbcType="INTEGER" property="appraisalType" />
+    <result column="appraisal_date" jdbcType="DATE" property="appraisalDate" />
+    <result column="appraisal_level" jdbcType="INTEGER" property="appraisalLevel" />
+    <result column="appraisal_number" jdbcType="VARCHAR" property="appraisalNumber" />
+    <result column="appraisal_name" jdbcType="VARCHAR" property="appraisalName" />
+    <result column="appraisal_office" jdbcType="VARCHAR" property="appraisalOffice" />
   </resultMap>
   <sql id="Base_Column_List">
     student_id, card_id, fingerprint_id, avatar_id, responsible, telephone, is_delete, 
-    create_by, create_at
+    create_by, create_at, account_name, account_back, account_number, people_type, tuition, 
+    subsidy, subsidy_type, is_refund, residence_type, residence, is_discontinue, discontinue_date, 
+    has_certificate, certificate_level, certificate_name, has_training_vouchers, training_vouchers_number, 
+    is_new_employees, contract_period, people_name, absent_days, theoretical_mark, practical_mark, 
+    certificate_number, fee, sex, has_subsidy, is_ok, is_appraisal, appraisal_type, appraisal_date, 
+    appraisal_level, appraisal_number, appraisal_name, appraisal_office
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.jmr.model.StudentInfoKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_student_info
     where student_id = #{studentId,jdbcType=INTEGER}
-      and card_id = #{cardId,jdbcType=INTEGER}
-      and fingerprint_id = #{fingerprintId,jdbcType=INTEGER}
-      and avatar_id = #{avatarId,jdbcType=INTEGER}
   </select>
   <select id="selectByPageSQL" parameterType="int" resultType="java.util.HashMap">
 	SELECT
@@ -134,11 +171,35 @@
   <insert id="insert" parameterType="com.jmr.model.StudentInfo">
     insert into t_student_info (student_id, card_id, fingerprint_id, 
       avatar_id, responsible, telephone, 
-      is_delete, create_by, create_at
+      is_delete, create_by, create_at, 
+      account_name, account_back, account_number, 
+      people_type, tuition, subsidy, 
+      subsidy_type, is_refund, residence_type, 
+      residence, is_discontinue, discontinue_date, 
+      has_certificate, certificate_level, certificate_name, 
+      has_training_vouchers, training_vouchers_number, 
+      is_new_employees, contract_period, people_name, 
+      absent_days, theoretical_mark, practical_mark, 
+      certificate_number, fee, sex, 
+      has_subsidy, is_ok, is_appraisal, 
+      appraisal_type, appraisal_date, appraisal_level, 
+      appraisal_number, appraisal_name, appraisal_office
       )
-    values (#{studentId,jdbcType=INTEGER}, #{cardId,jdbcType=INTEGER}, #{fingerprintId,jdbcType=INTEGER}, 
+    values (#{studentId,jdbcType=INTEGER}, #{cardId,jdbcType=VARCHAR}, #{fingerprintId,jdbcType=INTEGER}, 
       #{avatarId,jdbcType=INTEGER}, #{responsible,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
-      #{isDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}
+      #{isDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{accountName,jdbcType=VARCHAR}, #{accountBack,jdbcType=VARCHAR}, #{accountNumber,jdbcType=VARCHAR}, 
+      #{peopleType,jdbcType=INTEGER}, #{tuition,jdbcType=INTEGER}, #{subsidy,jdbcType=INTEGER}, 
+      #{subsidyType,jdbcType=INTEGER}, #{isRefund,jdbcType=INTEGER}, #{residenceType,jdbcType=INTEGER}, 
+      #{residence,jdbcType=INTEGER}, #{isDiscontinue,jdbcType=INTEGER}, #{discontinueDate,jdbcType=INTEGER}, 
+      #{hasCertificate,jdbcType=INTEGER}, #{certificateLevel,jdbcType=INTEGER}, #{certificateName,jdbcType=VARCHAR}, 
+      #{hasTrainingVouchers,jdbcType=INTEGER}, #{trainingVouchersNumber,jdbcType=VARCHAR}, 
+      #{isNewEmployees,jdbcType=INTEGER}, #{contractPeriod,jdbcType=INTEGER}, #{peopleName,jdbcType=VARCHAR}, 
+      #{absentDays,jdbcType=INTEGER}, #{theoreticalMark,jdbcType=INTEGER}, #{practicalMark,jdbcType=INTEGER}, 
+      #{certificateNumber,jdbcType=INTEGER}, #{fee,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, 
+      #{hasSubsidy,jdbcType=INTEGER}, #{isOk,jdbcType=INTEGER}, #{isAppraisal,jdbcType=INTEGER}, 
+      #{appraisalType,jdbcType=INTEGER}, #{appraisalDate,jdbcType=DATE}, #{appraisalLevel,jdbcType=INTEGER}, 
+      #{appraisalNumber,jdbcType=VARCHAR}, #{appraisalName,jdbcType=VARCHAR}, #{appraisalOffice,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jmr.model.StudentInfo">
@@ -171,6 +232,111 @@
       <if test="createAt != null">
         create_at,
       </if>
+      <if test="accountName != null">
+        account_name,
+      </if>
+      <if test="accountBack != null">
+        account_back,
+      </if>
+      <if test="accountNumber != null">
+        account_number,
+      </if>
+      <if test="peopleType != null">
+        people_type,
+      </if>
+      <if test="tuition != null">
+        tuition,
+      </if>
+      <if test="subsidy != null">
+        subsidy,
+      </if>
+      <if test="subsidyType != null">
+        subsidy_type,
+      </if>
+      <if test="isRefund != null">
+        is_refund,
+      </if>
+      <if test="residenceType != null">
+        residence_type,
+      </if>
+      <if test="residence != null">
+        residence,
+      </if>
+      <if test="isDiscontinue != null">
+        is_discontinue,
+      </if>
+      <if test="discontinueDate != null">
+        discontinue_date,
+      </if>
+      <if test="hasCertificate != null">
+        has_certificate,
+      </if>
+      <if test="certificateLevel != null">
+        certificate_level,
+      </if>
+      <if test="certificateName != null">
+        certificate_name,
+      </if>
+      <if test="hasTrainingVouchers != null">
+        has_training_vouchers,
+      </if>
+      <if test="trainingVouchersNumber != null">
+        training_vouchers_number,
+      </if>
+      <if test="isNewEmployees != null">
+        is_new_employees,
+      </if>
+      <if test="contractPeriod != null">
+        contract_period,
+      </if>
+      <if test="peopleName != null">
+        people_name,
+      </if>
+      <if test="absentDays != null">
+        absent_days,
+      </if>
+      <if test="theoreticalMark != null">
+        theoretical_mark,
+      </if>
+      <if test="practicalMark != null">
+        practical_mark,
+      </if>
+      <if test="certificateNumber != null">
+        certificate_number,
+      </if>
+      <if test="fee != null">
+        fee,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="hasSubsidy != null">
+        has_subsidy,
+      </if>
+      <if test="isOk != null">
+        is_ok,
+      </if>
+      <if test="isAppraisal != null">
+        is_appraisal,
+      </if>
+      <if test="appraisalType != null">
+        appraisal_type,
+      </if>
+      <if test="appraisalDate != null">
+        appraisal_date,
+      </if>
+      <if test="appraisalLevel != null">
+        appraisal_level,
+      </if>
+      <if test="appraisalNumber != null">
+        appraisal_number,
+      </if>
+      <if test="appraisalName != null">
+        appraisal_name,
+      </if>
+      <if test="appraisalOffice != null">
+        appraisal_office,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="studentId != null">
@@ -200,6 +366,111 @@
       <if test="createAt != null">
         #{createAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="accountName != null">
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBack != null">
+        #{accountBack,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNumber != null">
+        #{accountNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleType != null">
+        #{peopleType,jdbcType=INTEGER},
+      </if>
+      <if test="tuition != null">
+        #{tuition,jdbcType=INTEGER},
+      </if>
+      <if test="subsidy != null">
+        #{subsidy,jdbcType=INTEGER},
+      </if>
+      <if test="subsidyType != null">
+        #{subsidyType,jdbcType=INTEGER},
+      </if>
+      <if test="isRefund != null">
+        #{isRefund,jdbcType=INTEGER},
+      </if>
+      <if test="residenceType != null">
+        #{residenceType,jdbcType=INTEGER},
+      </if>
+      <if test="residence != null">
+        #{residence,jdbcType=INTEGER},
+      </if>
+      <if test="isDiscontinue != null">
+        #{isDiscontinue,jdbcType=INTEGER},
+      </if>
+      <if test="discontinueDate != null">
+        #{discontinueDate,jdbcType=INTEGER},
+      </if>
+      <if test="hasCertificate != null">
+        #{hasCertificate,jdbcType=INTEGER},
+      </if>
+      <if test="certificateLevel != null">
+        #{certificateLevel,jdbcType=INTEGER},
+      </if>
+      <if test="certificateName != null">
+        #{certificateName,jdbcType=VARCHAR},
+      </if>
+      <if test="hasTrainingVouchers != null">
+        #{hasTrainingVouchers,jdbcType=INTEGER},
+      </if>
+      <if test="trainingVouchersNumber != null">
+        #{trainingVouchersNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isNewEmployees != null">
+        #{isNewEmployees,jdbcType=INTEGER},
+      </if>
+      <if test="contractPeriod != null">
+        #{contractPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="peopleName != null">
+        #{peopleName,jdbcType=VARCHAR},
+      </if>
+      <if test="absentDays != null">
+        #{absentDays,jdbcType=INTEGER},
+      </if>
+      <if test="theoreticalMark != null">
+        #{theoreticalMark,jdbcType=INTEGER},
+      </if>
+      <if test="practicalMark != null">
+        #{practicalMark,jdbcType=INTEGER},
+      </if>
+      <if test="certificateNumber != null">
+        #{certificateNumber,jdbcType=INTEGER},
+      </if>
+      <if test="fee != null">
+        #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="hasSubsidy != null">
+        #{hasSubsidy,jdbcType=INTEGER},
+      </if>
+      <if test="isOk != null">
+        #{isOk,jdbcType=INTEGER},
+      </if>
+      <if test="isAppraisal != null">
+        #{isAppraisal,jdbcType=INTEGER},
+      </if>
+      <if test="appraisalType != null">
+        #{appraisalType,jdbcType=INTEGER},
+      </if>
+      <if test="appraisalDate != null">
+        #{appraisalDate,jdbcType=DATE},
+      </if>
+      <if test="appraisalLevel != null">
+        #{appraisalLevel,jdbcType=INTEGER},
+      </if>
+      <if test="appraisalNumber != null">
+        #{appraisalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="appraisalName != null">
+        #{appraisalName,jdbcType=VARCHAR},
+      </if>
+      <if test="appraisalOffice != null">
+        #{appraisalOffice,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jmr.model.StudentInfo">
@@ -220,9 +491,114 @@
       <if test="createAt != null">
         create_at = #{createAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="accountName != null">
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBack != null">
+        account_back = #{accountBack,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNumber != null">
+        account_number = #{accountNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleType != null">
+        people_type = #{peopleType,jdbcType=INTEGER},
+      </if>
+      <if test="tuition != null">
+        tuition = #{tuition,jdbcType=INTEGER},
+      </if>
+      <if test="subsidy != null">
+        subsidy = #{subsidy,jdbcType=INTEGER},
+      </if>
+      <if test="subsidyType != null">
+        subsidy_type = #{subsidyType,jdbcType=INTEGER},
+      </if>
+      <if test="isRefund != null">
+        is_refund = #{isRefund,jdbcType=INTEGER},
+      </if>
+      <if test="residenceType != null">
+        residence_type = #{residenceType,jdbcType=INTEGER},
+      </if>
+      <if test="residence != null">
+        residence = #{residence,jdbcType=INTEGER},
+      </if>
+      <if test="isDiscontinue != null">
+        is_discontinue = #{isDiscontinue,jdbcType=INTEGER},
+      </if>
+      <if test="discontinueDate != null">
+        discontinue_date = #{discontinueDate,jdbcType=INTEGER},
+      </if>
+      <if test="hasCertificate != null">
+        has_certificate = #{hasCertificate,jdbcType=INTEGER},
+      </if>
+      <if test="certificateLevel != null">
+        certificate_level = #{certificateLevel,jdbcType=INTEGER},
+      </if>
+      <if test="certificateName != null">
+        certificate_name = #{certificateName,jdbcType=VARCHAR},
+      </if>
+      <if test="hasTrainingVouchers != null">
+        has_training_vouchers = #{hasTrainingVouchers,jdbcType=INTEGER},
+      </if>
+      <if test="trainingVouchersNumber != null">
+        training_vouchers_number = #{trainingVouchersNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isNewEmployees != null">
+        is_new_employees = #{isNewEmployees,jdbcType=INTEGER},
+      </if>
+      <if test="contractPeriod != null">
+        contract_period = #{contractPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="peopleName != null">
+        people_name = #{peopleName,jdbcType=VARCHAR},
+      </if>
+      <if test="absentDays != null">
+        absent_days = #{absentDays,jdbcType=INTEGER},
+      </if>
+      <if test="theoreticalMark != null">
+        theoretical_mark = #{theoreticalMark,jdbcType=INTEGER},
+      </if>
+      <if test="practicalMark != null">
+        practical_mark = #{practicalMark,jdbcType=INTEGER},
+      </if>
+      <if test="certificateNumber != null">
+        certificate_number = #{certificateNumber,jdbcType=INTEGER},
+      </if>
+      <if test="fee != null">
+        fee = #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="hasSubsidy != null">
+        has_subsidy = #{hasSubsidy,jdbcType=INTEGER},
+      </if>
+      <if test="isOk != null">
+        is_ok = #{isOk,jdbcType=INTEGER},
+      </if>
+      <if test="isAppraisal != null">
+        is_appraisal = #{isAppraisal,jdbcType=INTEGER},
+      </if>
+      <if test="appraisalType != null">
+        appraisal_type = #{appraisalType,jdbcType=INTEGER},
+      </if>
+      <if test="appraisalDate != null">
+        appraisal_date = #{appraisalDate,jdbcType=DATE},
+      </if>
+      <if test="appraisalLevel != null">
+        appraisal_level = #{appraisalLevel,jdbcType=INTEGER},
+      </if>
+      <if test="appraisalNumber != null">
+        appraisal_number = #{appraisalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="appraisalName != null">
+        appraisal_name = #{appraisalName,jdbcType=VARCHAR},
+      </if>
+      <if test="appraisalOffice != null">
+        appraisal_office = #{appraisalOffice,jdbcType=VARCHAR},
+      </if>
     </set>
     where student_id = #{studentId,jdbcType=INTEGER}
-      and card_id = #{cardId,jdbcType=INTEGER}
+      and card_id = #{cardId,jdbcType=VARCHAR}
       and fingerprint_id = #{fingerprintId,jdbcType=INTEGER}
       and avatar_id = #{avatarId,jdbcType=INTEGER}
   </update>
@@ -232,9 +608,44 @@
       telephone = #{telephone,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER},
       create_by = #{createBy,jdbcType=VARCHAR},
-      create_at = #{createAt,jdbcType=TIMESTAMP}
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      account_back = #{accountBack,jdbcType=VARCHAR},
+      account_number = #{accountNumber,jdbcType=VARCHAR},
+      people_type = #{peopleType,jdbcType=INTEGER},
+      tuition = #{tuition,jdbcType=INTEGER},
+      subsidy = #{subsidy,jdbcType=INTEGER},
+      subsidy_type = #{subsidyType,jdbcType=INTEGER},
+      is_refund = #{isRefund,jdbcType=INTEGER},
+      residence_type = #{residenceType,jdbcType=INTEGER},
+      residence = #{residence,jdbcType=INTEGER},
+      is_discontinue = #{isDiscontinue,jdbcType=INTEGER},
+      discontinue_date = #{discontinueDate,jdbcType=INTEGER},
+      has_certificate = #{hasCertificate,jdbcType=INTEGER},
+      certificate_level = #{certificateLevel,jdbcType=INTEGER},
+      certificate_name = #{certificateName,jdbcType=VARCHAR},
+      has_training_vouchers = #{hasTrainingVouchers,jdbcType=INTEGER},
+      training_vouchers_number = #{trainingVouchersNumber,jdbcType=VARCHAR},
+      is_new_employees = #{isNewEmployees,jdbcType=INTEGER},
+      contract_period = #{contractPeriod,jdbcType=INTEGER},
+      people_name = #{peopleName,jdbcType=VARCHAR},
+      absent_days = #{absentDays,jdbcType=INTEGER},
+      theoretical_mark = #{theoreticalMark,jdbcType=INTEGER},
+      practical_mark = #{practicalMark,jdbcType=INTEGER},
+      certificate_number = #{certificateNumber,jdbcType=INTEGER},
+      fee = #{fee,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      has_subsidy = #{hasSubsidy,jdbcType=INTEGER},
+      is_ok = #{isOk,jdbcType=INTEGER},
+      is_appraisal = #{isAppraisal,jdbcType=INTEGER},
+      appraisal_type = #{appraisalType,jdbcType=INTEGER},
+      appraisal_date = #{appraisalDate,jdbcType=DATE},
+      appraisal_level = #{appraisalLevel,jdbcType=INTEGER},
+      appraisal_number = #{appraisalNumber,jdbcType=VARCHAR},
+      appraisal_name = #{appraisalName,jdbcType=VARCHAR},
+      appraisal_office = #{appraisalOffice,jdbcType=VARCHAR}
     where student_id = #{studentId,jdbcType=INTEGER}
-      and card_id = #{cardId,jdbcType=INTEGER}
+      and card_id = #{cardId,jdbcType=VARCHAR}
       and fingerprint_id = #{fingerprintId,jdbcType=INTEGER}
       and avatar_id = #{avatarId,jdbcType=INTEGER}
   </update>

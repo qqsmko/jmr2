@@ -42,6 +42,8 @@
 				<th width="">课程描述</th>
 				<th width="80">所属机构</th>
 				<th width="80">课程学时</th>
+				<th width="80">教师姓名</th>
+				<th width="80">所用教材</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
@@ -87,6 +89,8 @@ $(function(){
 	        {"data":"describe"},
 	        {"data":"institutions_name"},
 	        {"data":"study_time"},
+	        {"data":"teacher_name"},
+	        {"data":"teachering_book"},
     		{
     			"data":"course_id",
 	        	"render":function(data, type, row, meta) {

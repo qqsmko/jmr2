@@ -16,6 +16,7 @@ import com.jmr.IDao.StudentMapper;
 import com.jmr.model.Idcard;
 import com.jmr.model.Student;
 import com.jmr.model.StudentInfo;
+import com.jmr.model.StudentInfoKey;
 import com.jmr.service.IStudentService;
 
 @Service
@@ -66,7 +67,11 @@ public class StudentService implements IStudentService{
 		}
 	}
 	
-	
+	public StudentInfo getStudentById(int id){
+		StudentInfoKey key = new StudentInfoKey();
+		key.setStudentId(id);
+		return studentInfoMapper.selectByPrimaryKey(key);
+	}
 	
 	/*--------------------------------------------------------*/
 	//                         Insert

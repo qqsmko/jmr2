@@ -160,7 +160,7 @@ $(function(){
     		{
     			"data":"student_id",
 	        	"render":function(data, type, row, meta) {
-        			return '<td class="td-manage"><a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'teacher-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>'
+        			return '<td class="td-manage"><a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'teacher-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a></td><a title="详情" href="javascript:;" onclick="member_show(\'详情\',\'student-show?id='+data+'\',0,1000,600)" class="ml-5" style="text-decoration:none">详情</a>'
     			}
     		}
     	]

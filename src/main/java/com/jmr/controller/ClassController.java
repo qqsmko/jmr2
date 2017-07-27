@@ -43,6 +43,15 @@ public class ClassController {
 		return classService.getClassesDataTest(draw, start, length, search);
 	}
 	
+	@RequestMapping(value="class-show",method=RequestMethod.GET)
+	public ModelAndView doClassListShowPOST(@RequestParam int id){
+		ModelAndView mav = new ModelAndView();
+		Class detail = classService.getClassesShow(id);
+		mav.addObject("classes",detail);
+		mav.setViewName("class-show");
+		return mav;
+	}
+	
 //	@RequestMapping(value="class-list/test",method=RequestMethod.POST)
 //	@ResponseBody
 //	public Map<String,Object> doClassListDataSourceTest(@RequestParam int draw,@RequestParam int start,@RequestParam int length,@RequestParam int id){
