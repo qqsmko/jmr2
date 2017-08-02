@@ -32,147 +32,100 @@
 	<form class="form form-horizontal" id="form-article-add">
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">户口性质：</label>
-			<div class="formControls col-xs-8 col-sm-4">
+			<div class="formControls col-xs-8 col-sm-3">
 				<input type="text" maxlength="20" class="input-text" value="${stu.cardId}" placeholder="" id="courseName" name="courseName" readonly="true">
 			</div>
 			<label class="form-label col-xs-4 col-sm-2">户口所在区域：</label>
-			<div class="formControls col-xs-8 col-sm-4">
+			<div class="formControls col-xs-8 col-sm-3">
 				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="majorName" name="majorName">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">银行户名：</label>
-			<div class="formControls col-xs-8 col-sm-2">
+			<div class="formControls col-xs-8 col-sm-3">
 				<input type="text" maxlength="20" class="input-text" value="${classes.hangyeType}" placeholder="" id="courseName" name="courseName">
 			</div>
 			<label class="form-label col-xs-4 col-sm-2">开户银行：</label>
-			<div class="formControls col-xs-8 col-sm-2">
-				<input type="text" maxlength="20" class="input-text" value="${classes.trainingMode}" placeholder="" id="majorName" name="majorName">
-			</div>
-			<label class="form-label col-xs-4 col-sm-2">银行账号：</label>
-			<div class="formControls col-xs-8 col-sm-2">
+			<div class="formControls col-xs-8 col-sm-3">
 				<input type="text" maxlength="20" class="input-text" value="${classes.trainingMode}" placeholder="" id="majorName" name="majorName">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">培训专业名称：</label>
-			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="courseName" name="courseName">
+			<label class="form-label col-xs-4 col-sm-2">银行账号：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="text" maxlength="20" class="input-text" value="${classes.trainingMode}" placeholder="" id="majorName" name="majorName">
 			</div>
-		<!-- </div>
-		<div class="row cl"> -->
-			<label class="form-label col-xs-4 col-sm-2">培训工种名称：</label>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">入学日期：</label>
+			<div class="formControls col-xs-8 col-sm-3">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="courseName" name="courseName" readonly="true">
+			</div>
+			<label class="form-label col-xs-4 col-sm-2">人员类别：</label>
 			<div class="formControls col-xs-8 col-sm-3">
 				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="majorName" name="majorName">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">班期开始时间：</label>
+		<label class="form-label col-xs-4 col-sm-2">缴纳学费：</label>
 			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="${classes.startTime}" placeholder="" id="courseName" name="courseName">
-			</div>
-		<!-- </div>
-		<div class="row cl"> -->
-			<label class="form-label col-xs-4 col-sm-2">班期结束时间：</label>
-			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="${classes.endTime}" placeholder="" id="majorName" name="majorName">
-			</div>
-		</div>
-		
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">收费金额：</label>
-			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="${classes.fee}" placeholder="" id="courseName" name="courseName">
-			</div>
-		<!-- </div>
-		<div class="row cl"> -->
-			<label class="form-label col-xs-4 col-sm-2">是否申请职业培训补贴：</label>
-			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="${classes.isSubsidy}" placeholder="" id="majorName" name="majorName">
+				<input type="text" maxlength="20" class="input-text" value="${classes.hangyeType}" placeholder="" id="courseName" name="courseName">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">补贴标准：</label>
 			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="${classes.subsidyNumber}" placeholder="" id="courseName" name="courseName">
+				<input type="text" maxlength="20" class="input-text" value="${classes.trainingMode}" placeholder="" id="majorName" name="majorName">
 			</div>
-		<!-- </div>
-		<div class="row cl"> -->
-			<label class="form-label col-xs-4 col-sm-2">培训课时：</label>
+			<label class="form-label col-xs-4 col-sm-2">补贴支付对象：</label>
+			<div class="formControls col-xs-8 col-sm-3">
+				<input type="text" maxlength="20" class="input-text" value="${classes.trainingMode}" placeholder="" id="majorName" name="majorName">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">是否中途退学：</label>
+			<div class="formControls col-xs-8 col-sm-3">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="courseName" name="courseName" readonly="true">
+			</div>
+			<label class="form-label col-xs-4 col-sm-2">退学日期：</label>
 			<div class="formControls col-xs-8 col-sm-3">
 				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="majorName" name="majorName">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">理论课时：</label>
+			<label class="form-label col-xs-4 col-sm-2">是否有证书前培训：</label>
 			<div class="formControls col-xs-8 col-sm-3">
 				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="courseName" name="courseName">
 			</div>
-		<!-- </div>
-		<div class="row cl"> -->
-			<label class="form-label col-xs-4 col-sm-2">实操课时：</label>
+			<label class="form-label col-xs-4 col-sm-2">培训前证书等级：</label>
 			<div class="formControls col-xs-8 col-sm-3">
 				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="majorName" name="majorName">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">培训人数：</label>
-			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="courseName" name="courseName">
-			</div>
-		<!-- </div>
-		<div class="row cl"> -->
-			<label class="form-label col-xs-4 col-sm-2">培训类别：</label>
-			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="${classes.trainingType}" placeholder="" id="majorName" name="majorName">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">证书类型：</label>
-			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="certificate" placeholder="" id="courseName" name="courseName">
-			</div>
-		<!-- </div>
-		<div class="row cl"> -->
-			<label class="form-label col-xs-4 col-sm-2">培训等级：</label>
-			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="majorName" name="majorName">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">鉴定标准：</label>
-			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="courseName" name="courseName">
-			</div>
-		<!-- </div>
-		<div class="row cl"> -->
-			<label class="form-label col-xs-4 col-sm-2">机构负责人：</label>
-			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="majorName" name="majorName">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">机构联系电话：</label>
-			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="courseName" name="courseName">
-			</div>
-		<!-- </div>
-		<div class="row cl"> -->
-			<label class="form-label col-xs-4 col-sm-2">就业意向：</label>
-			<div class="formControls col-xs-8 col-sm-3">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="majorName" name="majorName">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">培训地点：</label>
+			<label class="form-label col-xs-4 col-sm-2">培训前证书名称：</label>
 			<div class="formControls col-xs-8 col-sm-8">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="teacheringBook" name="teacheringBook">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="majorName" name="majorName">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">备注：</label>
-			<div class="formControls col-xs-8 col-sm-8">
-				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="teacheringBook" name="teacheringBook">
+			<label class="form-label col-xs-4 col-sm-2">是否使用培训券：</label>
+			<div class="formControls col-xs-8 col-sm-3">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="courseName" name="courseName">
+			</div>
+			<label class="form-label col-xs-4 col-sm-2">培训券号码：</label>
+			<div class="formControls col-xs-8 col-sm-3">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="majorName" name="majorName">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">是否企业新员工：</label>
+			<div class="formControls col-xs-8 col-sm-3">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="courseName" name="courseName">
+			</div>
+			<label class="form-label col-xs-4 col-sm-2">合同期限（年）：</label>
+			<div class="formControls col-xs-8 col-sm-3">
+				<input type="text" maxlength="20" class="input-text" value="" placeholder="" id="majorName" name="majorName">
 			</div>
 		</div>
 	</form>

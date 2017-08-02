@@ -189,6 +189,11 @@ public class ClassService implements IClassService {
     	return ansMap;
 	}
 	
+	public List<Map<String,Object>> getClassesDataWithIdNoPage(int id){
+		List<Map<String,Object>> data = classMapper.selectWithId(id);
+    	return data;
+	}
+	
 	public Map<String,Object> getClassSeriesVerifyData(int draw,int start,int length){
 		int totalNum = classSeriesVerifyMapper.selectCount();
 		List<ClassSeriesVerify> data = classSeriesVerifyMapper.selectByPage(start, length);

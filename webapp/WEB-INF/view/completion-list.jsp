@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
- 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix='fmt' %>  
 
 <!DOCTYPE HTML>
 <html>
@@ -25,28 +22,84 @@
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>课程管理</title>
+<title>用户管理</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 培训课程 <span class="c-gray en">&gt;</span> 培训课程管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 培训机构 <span class="c-gray en">&gt;</span> 结业统计 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加用户" data-href="class-add.html" onclick="member_edit('添加','course-add.html','4','','510');" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加课程</a></span></span> </div>
+	<!-- <div class="cl pd-5 bg-1 bk-gray mt-20"><span class="r">共有数据：<strong>88</strong> 条</span> </div> -->
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
-				<th width="25"><input type="checkbox" name="" value=""></th>
-				<th width="80">课程编号</th>
-				<th width="100">课程名称</th>
-				<th width="100">所属专业</th>
-				<th width="">课程描述</th>
-				<th width="80">所属机构</th>
-				<th width="80">课程学时</th>
-				<th width="80">教师姓名</th>
-				<th width="80">所用教材</th>
-				<th width="100">操作</th>
-			</tr>
+                <th width="120"></th>
+				<th width="120">姓名</th>
+				<th width="200">公民身份证号</th>
+				<th width="120">缺课天数</th>
+				<th width="120">理论成绩</th>
+				<th width="120">实操成绩</th>
+				<th width="180">结业证书编号</th>
+                <th width="150">是否申请补贴资格</th>
+                <th width="100">是否参加鉴定</th>
+                <th width="100">鉴定日期</th>
+                <th width="100">鉴定证书类型</th>
+                <th width="100">鉴定证书等级</th>
+                <th width="100">检定证书编号</th>
+                <th width="100">鉴定证书名称</th>
+                <th width="100">发证机关</th>
+                <th width="100">鉴定发证日期</th>
+                <th width="100">备注</th>
+                <th width="100">经办人</th>
+                <th width="100">经办机构名称</th>
+                <th width="100">经办日期</th>
+            </tr>
 		</thead>
+		<tbody>
+				<tr class="text-c">
+                    <td><input type="checkbox" >1</td>
+					<td>一二三四</td>
+					<td>123456789012345678</td>
+					<td>100</td>
+					<td>100</td>
+                    <td>100</td>
+					<td>1234567890</td>
+                    <td>是</td>
+					<td>是</td>
+                    <td>2017-8-2</td>
+                    <td>国家职业资格证书</td>
+                    <td>国家职业资格证书</td>
+                    <td>2452783783673</td>
+                    <td></td>
+                    <td></td>
+                    <td>2017-8-2</td>
+                    <td></td>
+                    <td>一二三四</td>
+                    <td>一二三</td>
+                    <td>2017-8-2</td>
+				</tr>
+                <tr class="text-c">
+                    <td><input type="checkbox" > 2 </td>
+                    <td>一二三四</td>
+                    <td>123456789012345678</td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>100</td>
+                    <td>1234567890</td>
+                    <td>是</td>
+                    <td>是</td>
+                    <td>2017-8-2</td>
+                    <td>国家职业资格证书</td>
+                    <td>国家职业资格证书</td>
+                    <td>2452783783673</td>
+                    <td></td>
+                    <td></td>
+                    <td>2017-8-2</td>
+                    <td></td>
+                    <td>一二三四</td>
+                    <td>一二三</td>
+                    <td>2017-8-2</td>
+                </tr>
+		</tbody>
 	</table>
 	</div>
 </div>
@@ -64,40 +117,15 @@
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
-		"bStateSave": true,//状态保存
-		"searching": true,
-		"ordering": false,
-		"serverSide": true,
-		"ajax": {
-			"url":"course-list/data-source",
-			"type":"POST",
-		},
-		"language":{
-			"search":"搜索机构名称"
-		},
-		"columns":[
-			{
-				"data":"course_id",
-				"render":function(data, type, row, meta) {
-        			return '<td><input type="checkbox" value="'+data+'" name="items"></td>'
-    			}
-			},
-			{"data":"course_id"},
-	        {"data":"course_name"},
-	        {"data":"major_name"},
-	        {"data":"describe"},
-	        {"data":"institutions_name"},
-	        {"data":"study_time"},
-	        {"data":"teacher_name"},
-	        {"data":"teachering_book"},
-    		{
-    			"data":"course_id",
-	        	"render":function(data, type, row, meta) {
-        			return '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'course-update.html?id='+data+'\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none">编辑</a><a title="删除" href="javascript:;" onclick="member_del(this,'+data+')" class="ml-5" style="text-decoration:none">删除</a>'
-    			}
-    		}
-    	]
+      "scrollX":"2000px",
+//     "autoWidth":false,
+//		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+//		"bStateSave": true,//状态保存
+//		"aoColumnDefs": [
+//		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+//		  //{"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
+//		]
+
 	});
 	
 });
@@ -161,11 +189,8 @@ function member_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: 'course-list/delete',
+			url: '',
 			dataType: 'json',
-			data:{
-				id:id,
-			},
 			success: function(data){
 				$(obj).parents("tr").remove();
 				layer.msg('已删除!',{icon:1,time:1000});
@@ -174,40 +199,6 @@ function member_del(obj,id){
 				console.log(data.msg);
 			},
 		});		
-	});
-}
-/*用户-批量删除*/
-function datadel(){
-	var text="";  
-    $("input[name=items]").each(function() {  
-        if ($(this).is(":checked")) {  
-            text += $(this).val()+",";  
-        }
-    });
-    if(text==""){
-    	alert("请至少选择一项！");
-    	return;
-    }
-    text = text.substring(0,text.length-1);
-    data = text.split(',')
-    var urls = window.location.href;
-	urls = urls.substring(0,urls.length-5);
-	layer.confirm('确认要删除吗？',function(index){
-		$.ajax({
-			type: 'POST',
-			url: urls+'/deleteall',
-			data:{
-				ids:data
-			},
-			dataType: 'json',
-			success: function(data){
-				layer.msg('已删除!',{icon:1,time:1000});
-				location.replace(location.href);
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});
 	});
 }
 </script> 

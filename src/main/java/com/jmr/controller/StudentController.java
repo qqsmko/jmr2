@@ -1,9 +1,11 @@
 package com.jmr.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,15 +14,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jmr.model.StudentInfo;
+import com.jmr.service.IClassService;
 import com.jmr.service.IStudentService;
+import com.jmr.service.IUtilService;
 
 @Controller
 @RequestMapping("")
 public class StudentController {
 	@Autowired
 	IStudentService studentService;
-//	@Autowired
-//	IClassService classService;
+	@Autowired
+	IClassService classService;
+	@Autowired
+	IUtilService utilService;
 	
 //	@RequestMapping(value="student-list",method=RequestMethod.GET)
 //    public ModelAndView listStudent(){
@@ -60,9 +66,15 @@ public class StudentController {
 	}
 	
 	@RequestMapping(value="student-add",method=RequestMethod.GET)
-    public ModelAndView studentAdd(){
+    public ModelAndView studentAdd(@CookieValue(value = "username")String username,@CookieValue(value = "password")String password){
 		ModelAndView mav = new ModelAndView();
-        mav.setViewName("student-add");
+		int ans = utilService.checkAccount(username, password);
+    	if(ans!=0){
+    		int id = utilService.getAccountInstitutionsId(username, password);
+    		List<Map<String,Object>> cls = classService.getClassesDataWithIdNoPage(id);
+    		mav.addObject("cls",cls);
+    		mav.setViewName("student-add");
+    	}
         return mav;
 	}
 	
@@ -73,12 +85,12 @@ public class StudentController {
 	}
 	
 	@RequestMapping(value="student-show",method=RequestMethod.GET)
-    public ModelAndView studentAdd(@RequestParam int id){
+    public ModelAndView studentShow(@RequestParam int id){
 		ModelAndView mav = new ModelAndView();
-		StudentInfo stu = studentService.getStudentById(id);
-		mav.addObject("stu",stu);
-        mav.setViewName("student-show");
-        return mav;
+    	StudentInfo stu = studentService.getStudentById(id);
+    	mav.addObject("stu",stu);
+    	mav.setViewName("student-show");
+    	return mav;
 	}
 	
 	/*--------------------------------------------------------*/

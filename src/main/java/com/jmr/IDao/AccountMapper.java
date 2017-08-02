@@ -10,7 +10,7 @@ public interface AccountMapper {
     int insertSelective(Account record);
 
     Account selectByPrimaryKey(String account);
-
+    
     int updateByPrimaryKeySelective(Account record);
 
     int updateByPrimaryKey(Account record);

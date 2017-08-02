@@ -74,6 +74,16 @@
     	limit #{length} offset #{start}
     </if>
   </select>
+  <select id="selectWithId" parameterType="int" resultType="java.util.HashMap">
+    select 
+    t_class.class_id,t_class.class_name
+    from t_class_institutions 
+    	LEFT JOIN t_class ON t_class.class_id = t_class_institutions.class_id
+    	LEFT JOIN t_institutions on t_class_institutions.institutions_id = t_institutions.institutions_id
+    where t_class.is_delete = 0
+    and t_institutions.is_delete = 0
+	and t_class_institutions.institutions_id = #{id}
+  </select>
   <select id="selectByPageWithName" parameterType="String" resultType="java.util.HashMap">
     select 
     t_class.class_id,t_class.class_name,t_class.student_count,t_class.responsible,t_class.telephone,t_institutions.institutions_name,t_class.state,t_class.start_time,t_class.end_time

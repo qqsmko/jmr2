@@ -22,6 +22,8 @@ public interface ClassMapper {
     
     List<Map<String, Object>> selectByPageWithId(@Param("start")int start,@Param("length")int length,@Param("id")int id);
     
+    List<Map<String, Object>> selectWithId(int id);
+    
     List<Map<String, Object>> selectByPageWithName(@Param("start")int start,@Param("length")int length,@Param("search")String search,@Param("state")int state);
     
     int selectCount();

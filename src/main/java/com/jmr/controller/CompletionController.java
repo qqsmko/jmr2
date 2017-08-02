@@ -53,13 +53,19 @@ public class CompletionController {
         return mav;
     }
 	
+	@RequestMapping("completion-list")
+    public ModelAndView completionList(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("completion-list");
+        return mav;
+    }
+	
 	@RequestMapping("completion-info")
     public ModelAndView completionInfo(){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("completion-info");
         return mav;
     }
-	
 	@RequestMapping("completion-checking")
     public ModelAndView completionChecking(){
         ModelAndView mav = new ModelAndView();

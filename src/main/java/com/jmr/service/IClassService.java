@@ -1,9 +1,10 @@
 package com.jmr.service;
 
+import java.util.List;
 import java.util.Map;
 
-import com.jmr.model.Course;
 import com.jmr.model.Class;
+import com.jmr.model.Course;
 
 public interface IClassService {
 
@@ -15,6 +16,7 @@ public interface IClassService {
 	Map<String,Object> getClassesDataTest(int draw,int start,int length,String search);
 	Map<String,Object> getClassesDataWithState(int draw,int start,int length,String search,int state);
 	Map<String,Object> getClassesDataWithId(int draw,int start,int length,int id);
+	List<Map<String,Object>> getClassesDataWithIdNoPage(int id);
 	Map<String,Object> getClassSeriesVerifyData(int draw,int start,int length);
 	Map<String,Object> getClassSeriesCompletionData(int draw,int start,int length);
 

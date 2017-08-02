@@ -8,9 +8,9 @@
 		<li><a data-href="institutions-list.html" data-title="培训机构管理" href="javascript:void(0)"><i class="Hui-iconfont">&#xe616;</i> 培训机构管理</a></li>
 		<li><a data-href="class-application-plus.html" data-title="开班申请管理" href="javascript:void(0)"><i class="Hui-iconfont">&#xe616;</i> 开班申请管理</a></li>
 		<li><a data-href="attendance-list.html" data-title="考勤检查" href="javascript:void(0)"><i class="Hui-iconfont">&#xe616;</i> 考勤检查</a></li>
-		<li><a data-href="completion-check.html?checkstate=1" data-title="培训抽查" href="javascript:void(0)"><i class="Hui-iconfont">&#xe616;</i> 开班检查</a></li>
-		<li><a data-href="completion-check.html?checkstate=2" data-title="过程检查" href="javascript:void(0)"><i class="Hui-iconfont">&#xe616;</i> 过程检查</a></li>
-		<li><a data-href="completion-check.html?checkstate=3" data-title="结业检查" href="javascript:void(0)"><i class="Hui-iconfont">&#xe616;</i> 结业检查</a></li>
+		<li><a data-href="completion-check.html?checkstate=1" data-title="培训抽查" href="javascript:void(0)"><i class="Hui-iconfont">&#xe616;</i> 培训班级抽查</a></li>
+<!-- 		<li><a data-href="completion-check.html?checkstate=2" data-title="过程检查" href="javascript:void(0)"><i class="Hui-iconfont">&#xe616;</i> 过程检查</a></li>
+		<li><a data-href="completion-check.html?checkstate=3" data-title="结业检查" href="javascript:void(0)"><i class="Hui-iconfont">&#xe616;</i> 结业检查</a></li> -->
 		<li><a data-href="ledger-list.html" data-title="台账审核" href="javascript:void(0)"><i class="Hui-iconfont">&#xe616;</i> 台账审核</a></li>
 		<!-- <li><a data-href="ukey-check-plus.html" data-title="Ukey签字" href="javascript:void(0)"><i class="Hui-iconfont">&#xe616;</i> Ukey签字</a></li> -->
 		<li><a data-href="ukey-list.html" data-title="Ukey管理" href="javascript:void(0)"><i class="Hui-iconfont">&#xe616;</i> Ukey管理</a></li>
